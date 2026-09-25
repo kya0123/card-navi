@@ -8,8 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
-const globalMods = '/home/claude/.npm-global/lib/node_modules';
-const esbuild = require(`${globalMods}/tsx/node_modules/esbuild`);
+const esbuild = require('esbuild');
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const rules = JSON.parse(readFileSync(join(root, 'src/data/rules.json'), 'utf8'));
 

@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
-const sharp = require('/home/claude/.npm-global/lib/node_modules/sharp');
+const sharp = require('sharp');
 const out = join(dirname(fileURLToPath(import.meta.url)), '../public/icons');
 
 // カードを2枚重ねて、手前のカードにチェックマーク

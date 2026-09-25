@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { serve } from '../../scripts/serve.mjs';
 
 const require = createRequire(import.meta.url);
-const { chromium, devices } = require('/home/claude/.npm-global/lib/node_modules/playwright');
+const { chromium, devices } = require('playwright');
 
 const PORT = 4173;
 const BASE = `http://127.0.0.1:${PORT}/?today=2026-09-22`;

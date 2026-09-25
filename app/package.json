@@ -12,5 +12,13 @@
     "e2e": "node tests/e2e/e2e.mjs",
     "serve": "node scripts/serve.mjs",
     "check-links": "node scripts/check_affiliates.mjs --online"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "esbuild": "^0.28.2",
+    "playwright": "1.56.1",
+    "sharp": "^0.35.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }

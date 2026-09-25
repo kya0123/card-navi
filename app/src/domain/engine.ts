@@ -11,7 +11,9 @@ const round6 = (x: number) => Math.round(x * 1e6) / 1e6;
 const pct = (x: number) => `${+(x * 100).toFixed(2)}%`;
 const yen = (x: number) => `${x.toLocaleString('ja-JP')}円`;
 
-export interface RecommendQuery { storeId?: Id; categoryId?: Id; amountYen?: number }
+/** owned＝持っているカードだけ（既定）／all＝登録カード全体（持っていないカードは経路のある支払い方法をすべて使う） */
+export type RecommendScope = 'owned' | 'all';
+export interface RecommendQuery { storeId?: Id; categoryId?: Id; amountYen?: number; scope?: RecommendScope }
 
 function ruleValid(r: RateRule, today: YMD): boolean {
   return (r.validFrom == null || cmpYMD(r.validFrom, today) <= 0) && (r.validTo == null || cmpYMD(today, r.validTo) <= 0);
@@ -57,6 +59,8 @@ export function recommend(
 
   const owned = new Map(user.ownedCards.map((c) => [c.cardId, c]));
   const goals = new Map(user.bonusGoals.map((g) => [g.bonusId, g]));
+  const all = q.scope === 'all';
+  const cardOrder = new Map(mi.raw.cards.map((c, i) => [c.id, i]));
   const cands: Cand[] = [];
   const warnings = new Set<string>();
 
@@ -68,15 +72,22 @@ export function recommend(
       prio = 99;
     } else {
       const c = owned.get(route.cardId);
-      if (!c || !c.enabledMethods.includes(route.methodId)) continue;
-      prio = c.priority;
+      if (c) {
+        if (!c.enabledMethods.includes(route.methodId)) continue;
+        prio = c.priority;
+      } else {
+        // 持っていないカードは同率なら持っているカードの後ろ（マスタの定義順）
+        if (!all) continue;
+        prio = 1000 + (cardOrder.get(route.cardId) ?? 0);
+      }
     }
     const { rate, source, rule } = resolveRate(mi, route, store, categoryId, today);
 
     let bonusRate = 0;
     let bonusReason: string | undefined;
     const bonus = route.cardId ? mi.bonusByCard.get(route.cardId) : undefined;
-    const goal = bonus ? goals.get(bonus.id) : undefined;
+    // ボーナスは持っているカードだけ加算する（外したカードの目標が残っていても使わない）
+    const goal = bonus && owned.has(bonus.cardId) ? goals.get(bonus.id) : undefined;
     if (bonus && goal?.target && route.countsTowardBonus && !bonus.excludedMethods.includes(route.methodId)) {
       const st = goalStatus(bonus, goal, owned.get(bonus.cardId), today);
       if (st.state === 'active') {
@@ -136,7 +147,10 @@ export function recommend(
     storeId: store?.id ?? null,
     categoryId,
     top,
-    pointPay: pointPayFor(mi, user, top[0], store, accepted),
+    // ポイント払いは持っているカードの1位で判定する
+    pointPay: all
+      ? recommend(mi, user, { ...q, scope: 'owned', amountYen: undefined }, today, 1).pointPay
+      : pointPayFor(mi, user, top[0], store, accepted),
     warnings: [...warnings],
   };
 }

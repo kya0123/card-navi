@@ -1,6 +1,7 @@
 import { h, mount } from '../h';
 import type { Ctx } from '../app';
-import { recommend } from '../../domain/engine';
+import { recommend, type RecommendScope } from '../../domain/engine';
+import { linkFor } from '../../domain/affiliate';
 import { searchStores } from '../../domain/search';
 import type { RecommendItem, RecommendResult } from '../../domain/types';
 import { cardName, methodShort, pct, pointName, yen } from '../format';
@@ -25,6 +26,11 @@ export function HomeScreen(ctx: Ctx): Node {
     }, 150);
   };
 
+  // 保有カードが0枚なら登録カード全体。選んだ後は切り替えられる（既定は持っているカード）
+  const noCards = state.settings.ownedCards.length === 0;
+  const scope: RecommendScope = noCards ? 'all' : state.recScope;
+  const ownedIds = new Set(state.settings.ownedCards.map((c) => c.cardId));
+  const total = mi.raw.cards.length;
   let result: RecommendResult | null = null;
   let error = '';
   if (state.selection) {
@@ -33,7 +39,7 @@ export function HomeScreen(ctx: Ctx): Node {
       error = '金額は1〜9,999,999円の整数で入力してください';
     }
     try {
-      result = recommend(mi, state.settings, { ...state.selection, amountYen: error ? undefined : amount }, ctx.today);
+      result = recommend(mi, state.settings, { ...state.selection, amountYen: error ? undefined : amount, scope }, ctx.today);
     } catch {
       state.selection = null;
     }
@@ -50,7 +56,7 @@ export function HomeScreen(ctx: Ctx): Node {
       {state.settings.ownedCards.length === 0 && (
         <div class="onboard" id="onboard" role="note">
           <strong>まず持っているカードを選んでください</strong>
-          <span>おすすめは、選んだカードの中からだけ表示します。</span>
+          <span>今は登録カード（{total}枚）全体でおすすめしています。選ぶと、持っているカードの中から表示します。</span>
           <button class="btn" onClick={() => ctx.go('cards')}>カードを選ぶ</button>
         </div>
       )}
@@ -75,6 +81,12 @@ export function HomeScreen(ctx: Ctx): Node {
             <h2 class="result-title">{title}</h2>
             <button class="btn btn-ghost btn-small" onClick={() => ctx.setState({ selection: null, amount: '' })}>クリア</button>
           </div>
+          {!noCards && (
+            <div class="segs scope-segs" role="tablist" aria-label="比べるカード">
+              {ScopeTab(ctx, 'owned', '持っているカード')}
+              {ScopeTab(ctx, 'all', `登録カード（${total}枚）`)}
+            </div>
+          )}
           {result.top.length === 0 ? (
             <div class="empty">
               <p>このお店で使える支払い方法が登録されていません。</p>
@@ -82,11 +94,15 @@ export function HomeScreen(ctx: Ctx): Node {
             </div>
           ) : (
             <ol class="ranking">
-              {result.top.map((item, i) => RankItem(ctx, item, i))}
+              {result.top.map((item, i) => RankItem(ctx, item, i, scope === 'all' ? ownedIds : null))}
             </ol>
           )}
+          {scope === 'all' && (
+            <p class="note scope-note" id="scope-note">アプリに登録している主なカード{total}枚の中での比較です。日本のすべてのカードではありません。</p>
+          )}
           {(() => {
-            const storeId = state.selection?.storeId;
+            // 登録カード表示では、未保有カードの提案ヒント（①）は出さない
+            const storeId = scope === 'owned' ? state.selection?.storeId : undefined;
             const hint = storeId ? decideHint(ctx, storeId) : null;
             return hint && Hint(ctx, hint);
           })()}
@@ -122,15 +138,31 @@ export function HomeScreen(ctx: Ctx): Node {
   );
 }
 
-function RankItem(ctx: Ctx, item: RecommendItem, i: number): Node {
+function ScopeTab(ctx: Ctx, id: RecommendScope, label: string): Node {
+  const on = ctx.state.recScope === id;
+  return (
+    <button type="button" role="tab" id={`scope-${id}`} class={`seg${on ? ' active' : ''}`} aria-selected={on ? 'true' : 'false'}
+      onClick={() => ctx.setState({ recScope: id })}>{label}</button>
+  );
+}
+
+/** ownedIds を渡すと（登録カード表示）、保有・未保有の印と未保有カードのリンクを出す */
+function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string> | null): Node {
   const { mi } = ctx;
   const name = cardName(mi, item.cardId, item.routeIds[0]);
   const methods = item.cardId ? item.methodIds.map(methodShort).join('／') : '';
+  const owned = !item.cardId || !ownedIds || ownedIds.has(item.cardId);
+  const link = ownedIds && item.cardId && !owned ? linkFor(mi, ctx.aff, item.cardId, ctx.today) : null;
   return (
     <li class={`rank rank-${i + 1}`}>
       <div class="rank-no" aria-label={`${i + 1}位`}>{i + 1}</div>
       <div class="rank-body">
-        <div class="rank-card">{name}</div>
+        <div class="rank-card">
+          {name}
+          {ownedIds && item.cardId && (owned
+            ? <span class="own-mark own-yes">保有</span>
+            : <span class="own-mark own-no">未保有</span>)}
+        </div>
         {methods && <div class="rank-method">{methods}</div>}
         <div class="rank-rate">
           <span class="rate">{pct(item.effectiveRate)}</span>
@@ -141,6 +173,12 @@ function RankItem(ctx: Ctx, item: RecommendItem, i: number): Node {
         )}
         {i === 0 && item.reasons.length > 0 && (
           <ul class="reasons">{item.reasons.map((r) => <li>{r}</li>)}</ul>
+        )}
+        {link && (
+          <div class="rank-link">
+            {link.pr && <span class="pr">PR</span>}
+            <a class="card-link" href={link.url} target="_blank" rel={`noopener noreferrer${link.pr ? ' sponsored' : ''}`}>公式サイトを見る</a>
+          </div>
         )}
       </div>
     </li>

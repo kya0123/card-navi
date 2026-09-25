@@ -1,0 +1,702 @@
+// E2E・オフライン試験（詳細設計 12.3）。先に npm run build を実行しておくこと。
+import { createRequire } from 'node:module';
+import { mkdirSync } from 'node:fs';
+import assert from 'node:assert/strict';
+import { serve } from '../../scripts/serve.mjs';
+
+const require = createRequire(import.meta.url);
+const { chromium, devices } = require('/home/claude/.npm-global/lib/node_modules/playwright');
+
+const PORT = 4173;
+const BASE = `http://127.0.0.1:${PORT}/?today=2026-09-22`;
+const SHOT = new URL('./screenshots/', import.meta.url).pathname;
+mkdirSync(SHOT, { recursive: true });
+
+const server = await serve(PORT);
+const browser = await chromium.launch();
+const results = [];
+const errors = [];
+
+/** v1.5までの初期状態に相当する保有カード（詳細設計 20.8） */
+const INITIAL_CARDS = ['smbc_gold_nl', 'rakuten', 'ana_wide_gold', 'mufg', 'paypay_gold'];
+
+/** カード一覧から保有カードを選ぶ（選択UIの試験を兼ねる） */
+async function selectCards(page, ids) {
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-catalog');
+  await page.click('#filter-all');
+  for (const id of ids) await page.check(`#own-${id}`);
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+  await page.waitForSelector('.search-input');
+}
+
+/** 新規利用者は保有0枚のため、既定では初期5枚を一覧から選んでから始める（cards=[] で選ばない） */
+async function newPage(opts = {}, url = BASE, cards = INITIAL_CARDS) {
+  const context = await browser.newContext({ ...devices['iPhone 13'], locale: 'ja-JP', ...opts });
+  const page = await context.newPage();
+  page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
+  // E25 はサーバエラーを意図的に返すため、その読み込み失敗は除く
+  page.on('console', (m) => { if (m.type() === 'error' && !/status of 504/.test(m.text())) errors.push(`console: ${m.text()}`); });
+  await page.goto(url);
+  await page.waitForSelector('.search-input');
+  if (cards.length) await selectCards(page, cards);
+  return { context, page };
+}
+
+async function run(id, name, fn) {
+  // ONLY=E10,E21 のように指定すると一部だけ実行する
+  if (process.env.ONLY && !process.env.ONLY.split(',').includes(id)) return;
+  try { await fn(); results.push(`ok   ${id} ${name}`); }
+  catch (e) { results.push(`FAIL ${id} ${name}\n     ${e.message.split('\n').slice(0, 6).join(' | ')}`); }
+}
+
+const rank1 = (page) => page.locator('.rank-1');
+
+async function contrastIssues(page) {
+  return page.evaluate(() => {
+    const parse = (c) => { const m = c.match(/[\d.]+/g).map(Number); return { rgb: m.slice(0, 3), a: m.length > 3 ? m[3] : 1 }; };
+    const lum = ([r, g, b]) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+    const bgOf = (el) => { for (let e = el; e; e = e.parentElement) { const c = parse(getComputedStyle(e).backgroundColor); if (c.a > 0.5) return c.rgb; } return [255, 255, 255]; };
+    const out = [];
+    for (const el of document.querySelectorAll('body *')) {
+      if (!el.childNodes.length || ![...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) continue;
+      const r = el.getBoundingClientRect(); if (!r.width || !r.height) continue;
+      const fg = parse(getComputedStyle(el).color).rgb; const bg = bgOf(el);
+      const [a, b] = [lum(fg), lum(bg)].sort((x, y) => y - x); const ratio = (a + 0.05) / (b + 0.05);
+      if (ratio < 4.5) out.push(`${el.className || el.tagName}「${el.textContent.trim().slice(0, 12)}」${ratio.toFixed(2)}`);
+    }
+    return out;
+  });
+}
+
+const lowContrast = contrastIssues;
+
+await run('E01', '「せぶん」→候補タップで三井住友スマホのタッチ決済が1位（3タップ以内）', async () => {
+  const { context, page } = await newPage();
+  await page.fill('#q', 'せぶん');                                   // 1: 入力
+  await page.locator('.suggest-item').first().click();               // 2: 候補タップ
+  await page.waitForSelector('.rank-1');
+  assert.match(await rank1(page).locator('.rank-card').innerText(), /三井住友カード ゴールド/);
+  assert.match(await rank1(page).locator('.rank-method').innerText(), /スマホのタッチ決済/);
+  assert.equal(await rank1(page).locator('.rate').innerText(), '7%');
+  assert.equal(await page.locator('.pointpay').count(), 0);
+  await page.screenshot({ path: `${SHOT}E01-seven.png`, fullPage: true });
+  await context.close();
+});
+
+await run('E02', 'ボーナス設定（狙う・入会年月・累計）でセブンが8.55%になる', async () => {
+  const { context, page } = await newPage();
+  await page.getByRole('button', { name: 'ボーナス' }).click();
+  await page.check('#target-smbcg_1m');
+  await page.fill('#bjoin-smbcg_1m', '2024-04');
+  await page.locator('#bjoin-smbcg_1m').dispatchEvent('change');
+  await page.fill('#progress-smbcg_1m', '300000');
+  await page.locator('#progress-smbcg_1m').dispatchEvent('change');
+  await page.waitForTimeout(100);
+  const stats = await page.locator('.stats').first().innerText();
+  assert.match(stats, /2027-03-31/);
+  assert.match(stats, /100,000円/);
+  await page.screenshot({ path: `${SHOT}E02-bonus.png`, fullPage: true });
+  await page.getByRole('button', { name: 'おすすめ' }).click();
+  await page.fill('#q', 'セブン');
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.rank-1');
+  assert.equal(await rank1(page).locator('.rate').innerText(), '8.55%');
+  // 再読込後も設定が残る（IndexedDB）
+  await page.reload();
+  await page.waitForSelector('.search-input');
+  await page.locator('.chip', { hasText: 'セブン-イレブン' }).click();
+  assert.equal(await rank1(page).locator('.rate').innerText(), '8.55%');
+  await page.screenshot({ path: `${SHOT}E02-seven-bonus.png`, fullPage: true });
+  // ファミマではボーナス込み2.05%、ポイント払い推奨なし
+  await page.fill('#q', 'ファミマ');
+  await page.keyboard.press('Enter');
+  await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
+  assert.equal(await rank1(page).locator('.rate').innerText(), '2.05%');
+  assert.equal(await page.locator('.pointpay').count(), 0);
+  await context.close();
+});
+
+await run('E03', 'バックアップの書き出し→設定変更→読み込みで元に戻る', async () => {
+  const { context, page } = await newPage({ acceptDownloads: true });
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  await page.fill('#join-rakuten', '2018-01');
+  await page.locator('#join-rakuten').dispatchEvent('change');
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#export')]);
+  const file = `${SHOT}backup.json`;
+  await dl.saveAs(file);
+  // 設定を変更（楽天の入会年月を消す）
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  await page.fill('#join-rakuten', '');
+  await page.locator('#join-rakuten').dispatchEvent('change');
+  assert.equal(await page.inputValue('#join-rakuten'), '');
+  // 読み込み
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.setInputFiles('#import', file);
+  await page.waitForSelector('.toast');
+  assert.match(await page.locator('.toast').last().innerText(), /読み込みました/);
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  assert.equal(await page.inputValue('#join-rakuten'), '2018-01');
+  await context.close();
+});
+
+await run('E04', 'オフラインで再読込しても全画面が動作する', async () => {
+  const { context, page } = await newPage();
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  await page.reload();                       // SWの制御下に入る
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller);
+  await context.setOffline(true);
+  await page.reload();
+  await page.waitForSelector('.search-input');
+  await page.fill('#q', 'すたば');
+  await page.locator('.suggest-item').first().click();
+  assert.equal(await rank1(page).locator('.rate').innerText(), '7%');
+  for (const tab of ['カード', 'ボーナス', '還元情報', '設定']) {
+    await page.getByRole('button', { name: tab, exact: true }).click();
+    await page.waitForSelector('.screen-head h1');
+  }
+  await page.getByRole('button', { name: '還元情報', exact: true }).click();
+  assert.ok(await page.locator('.src.disabled').count() > 0, 'オフライン時は出典リンクを無効表示');
+  await page.screenshot({ path: `${SHOT}E04-offline-info.png`, fullPage: true });
+  await context.close();
+});
+
+await run('E05', '該当なし→カテゴリ選択で結果が出る（ポイント払い推奨つき）', async () => {
+  const { context, page } = await newPage();
+  await page.fill('#q', 'ぜったいにないみせ');
+  await page.waitForSelector('.nohit');
+  await page.locator('.nohit .btn').click();
+  await page.locator('.tile', { hasText: '飲食チェーン' }).click();
+  await page.locator('#category-other').click();
+  await page.waitForSelector('.rank-1');
+  assert.match(await page.locator('.result-title').innerText(), /飲食チェーン/);
+  assert.match(await rank1(page).locator('.rank-card').innerText(), /楽天カード/);
+  assert.equal(await page.locator('.pointpay').count(), 1);
+  await context.close();
+});
+
+await run('E06', '金額入力で獲得ポイントを表示（セブン850円→三井住友・三菱UFJとも約59円）', async () => {
+  const { context, page } = await newPage();
+  await page.fill('#q', 'せぶん');
+  await page.keyboard.press('Enter');
+  await page.locator('.amount summary').click();
+  await page.fill('#amount', '850');
+  await page.locator('#amount').dispatchEvent('change');
+  await page.waitForSelector('.rank-earned');
+  const earned = await page.locator('.rank-earned').allInnerTexts();
+  // v1.14：三井住友系は月間合計で計算するため概算表示（旧：56円相当）
+  assert.equal(earned[0], '約59円相当');
+  assert.equal(earned[1], '約59円相当');
+  await context.close();
+});
+
+await run('E07', '端末がダークモード・幅360pxでも崩れず横スクロールしない', async () => {
+  const { context, page } = await newPage({ colorScheme: 'dark', viewport: { width: 360, height: 740 } });
+  await page.fill('#q', 'ふぁみま');
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.rank-1');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  assert.ok(overflow <= 0, `横はみ出し ${overflow}px`);
+  await page.screenshot({ path: `${SHOT}E07-dark-familymart.png`, fullPage: true });
+  await context.close();
+});
+
+await run('E08', '文字のコントラスト比4.5:1以上・1位の金色の枠は3:1以上（推奨・カード一覧・ボーナス画面）', async () => {
+  const { context, page } = await newPage();
+  await page.fill('#q', 'ふぁみま');
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.pointpay');
+  await page.waitForTimeout(400);
+  assert.deepEqual(await lowContrast(page), [], '推奨画面');
+  // 非テキスト（1位の枠・順位番号の地）：WCAG 1.4.11 の 3:1
+  const ui = await page.evaluate(() => {
+    const lum = (c) => { const [r, g, b] = c.match(/[\d.]+/g).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+    const cr = (x, y) => { const [a, b] = [lum(x), lum(y)].sort((p, q) => q - p); return (a + 0.05) / (b + 0.05); };
+    const card = document.querySelector('.rank-1');
+    const cs = getComputedStyle(card);
+    return { border: cs.borderTopColor, ratio: cr(cs.borderTopColor, cs.backgroundColor === 'rgba(0, 0, 0, 0)' ? 'rgb(255, 255, 255)' : cs.backgroundColor) };
+  });
+  assert.equal(ui.border, 'rgb(176, 141, 47)', '1位の枠は金色');
+  assert.ok(ui.ratio >= 3, `1位の枠のコントラスト ${ui.ratio.toFixed(2)}`);
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-catalog');
+  assert.deepEqual(await lowContrast(page), [], 'カード一覧');
+  await page.getByRole('button', { name: 'ボーナス', exact: true }).click();
+  assert.deepEqual(await lowContrast(page), [], 'ボーナス画面');
+  await context.close();
+});
+
+await run('E09', 'カテゴリ→店舗一覧から選ぶ（高還元ラベル付き）→結果が出る', async () => {
+  const { context, page } = await newPage();
+  await page.locator('.chip-ghost', { hasText: 'カテゴリで探す' }).click();
+  await page.locator('.tile', { hasText: 'スーパー' }).click();
+  const first = page.locator('.store-list .suggest-item').first();
+  assert.match(await first.innerText(), /三菱UFJ 7%/);             // 高還元の店が先頭に並ぶ
+  await page.screenshot({ path: `${SHOT}E09-category-list.png` });
+  await page.locator('.store-list .suggest-item', { hasText: 'オーケー' }).click();
+  await page.locator('.result-title', { hasText: 'オーケー' }).waitFor();
+  assert.match(await rank1(page).locator('.rank-card').innerText(), /三菱UFJカード/);
+  assert.equal(await rank1(page).locator('.rate').innerText(), '7%');
+  await context.close();
+});
+
+// ---- カード提案（詳細設計書（カード提案機能）8.2） ----
+const at = (d) => `http://127.0.0.1:${PORT}/?today=${d}`;
+const RAKUTEN_ONLY = JSON.stringify({ app: 'card-advisor', exportedAt: '2026-09-01', settings: {
+  schemaVersion: 1,
+  ownedCards: [{ cardId: 'rakuten', enabledMethods: ['card_physical', 'applepay_quicpay', 'smartphone_visa_touch', 'online'], priority: 1 }],
+  enabledNonCardRoutes: ['paypay_balance', 'suica_ride'], bonusGoals: [], staleWarnDays: 180 } });
+
+async function goto(page, d) { await page.goto(at(d)); await page.waitForSelector('.search-input'); }
+async function pick(page, q, title) {
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+  await page.fill('#q', q);
+  await page.keyboard.press('Enter');
+  await page.locator('.result-title', { hasText: title }).waitFor();
+}
+/** 9/1 に初回起動し、楽天のみ保有の設定を読み込んで5店を調べる */
+async function setupRakutenOnly() {
+  const { context, page } = await newPage({}, at('2026-09-01'), []);
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.fill('#paste', RAKUTEN_ONLY);
+  await page.click('#paste-import');
+  await page.locator('.toast', { hasText: '読み込みました' }).waitFor();
+  for (const [q, t] of [['せぶん', 'セブン-イレブン'], ['まくどなるど', 'マクドナルド'], ['すたば', 'スターバックス'],
+    ['ろーそんすりーえふ', 'ローソンスリーエフ'], ['ふぁみま', 'ファミリーマート']]) await pick(page, q, t);
+  return { context, page };
+}
+
+await run('E10', '楽天のみ：13日後はヒントなし→21日目はバナーの日で出ない→翌日セブンでヒント（セブンカード10%）→S07へ（1日1回・コントラスト）', async () => {
+  const { context, page } = await setupRakutenOnly();
+  assert.equal(await page.locator('#hint').count(), 0, '初日は出さない');
+  await goto(page, '2026-09-14');
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  assert.equal(await page.locator('#hint').count(), 0, '13日目は出さない');
+  await goto(page, '2026-09-22');
+  await page.locator('#promo-banner').waitFor();                   // 起動時のホームで③が出る
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  assert.equal(await page.locator('#hint').count(), 0, '③を出した日は①を出さない');
+  await goto(page, '2026-09-23');
+  assert.equal(await page.locator('#promo-banner').count(), 0, '③は7日後まで出ない');
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  const hint = page.locator('#hint');
+  await hint.waitFor();
+  assert.match(await hint.innerText(), /セブンカード・プラスで 10%/);   // v1.13：21枚から最大（旧：三菱UFJ 7%）
+  assert.equal(await page.locator('#hint .pr').count(), 0, 'アフィリエイトなしならPRなし');
+  await page.screenshot({ path: `${SHOT}E10-hint.png`, fullPage: true });
+  await pick(page, 'まくどなるど', 'マクドナルド');
+  assert.equal(await page.locator('#hint').count(), 0, '同じ日に別のお店では出さない');
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  await page.locator('#hint').waitFor();                         // 同じ日の同じお店は出し続ける
+  await page.click('#hint-more');
+  await page.locator('h1', { hasText: 'カードを見直す' }).waitFor();
+  const first = page.locator('.review-card').first();
+  // v1.15（分冊10章）：並びは年間の損得順（月5万円）。v1.17 で Olive は8%になり1位
+  assert.match(await first.locator('h2').innerText(), /Olive/);
+  assert.match(await first.locator('.review-lead').innerText(), /5件中4件/);
+  assert.match(await first.innerText(), /年間 ＋33,600円（還元＋33,600円／ボーナス＋0円／年会費−0円）/);
+  assert.match(await first.innerText(), /1万円ごとに ＋700円/);
+  // 年会費82,500円のマリオット・プレミアムは「回収できません」の下
+  const mbp = page.locator('#fee-loss .review-card', { hasText: 'Marriott Bonvoy アメリカン・エキスプレス・プレミアム' });
+  assert.match(await mbp.innerText(), /年間 −70,500円/);
+  assert.match(await mbp.innerText(), /月343,800円以上の利用で年会費を回収/);
+  assert.equal(await mbp.locator('a.btn').getAttribute('href'), 'https://www.americanexpress.com/jp/credit-cards/marriott-bonvoy-premium-card/');
+  const smbc = page.locator('.review-card', { hasText: '三井住友カード ゴールド（NL）' });
+  assert.match(await smbc.locator('.review-lead').innerText(), /5件中4件/);
+  assert.match(await smbc.innerText(), /1万円ごとに ＋600円/);
+  assert.match(await smbc.innerText(), /年間 ＋23,300円/);
+  assert.match(await smbc.innerText(), /月9,600円以上の利用で年会費を回収/);   // 旧定義（上がるお店での月額）は7,700円
+  assert.equal(await smbc.locator('a.btn').getAttribute('href'), 'https://www.smbc-card.com/nyukai/card/gold-numberless.jsp');
+  assert.match(await page.locator('.review-card').nth(1).innerText(), /年会費無料：持つだけで損はありません/);
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E10-review.png`, fullPage: true });
+  await context.close();
+});
+
+await run('E11', 'バナー：翌日ホームに表示→タップでS07→翌日は出ない→7日後に再表示', async () => {
+  const { context, page } = await setupRakutenOnly();
+  await goto(page, '2026-09-23');
+  const banner = page.locator('#promo-banner');
+  await banner.waitFor();
+  assert.match(await banner.innerText(), /あなたの使い方に合うカードが見つかりました/);
+  assert.match(await banner.innerText(), /9件/);                  // v1.13：21枚で9枚（旧：2件）
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E11-banner.png`, fullPage: true });
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  assert.equal(await page.locator('#hint').count(), 0, 'バナーを出した日はヒントを出さない');
+  await page.click('.result-head .btn');                           // クリア
+  await banner.waitFor();                                          // 同じ日は出し続ける
+  await page.locator('.promo-main').click();
+  await page.locator('h1', { hasText: 'カードを見直す' }).waitFor();
+  await goto(page, '2026-09-24');
+  assert.equal(await page.locator('#promo-banner').count(), 0, 'タップ後は7日間出さない');
+  await goto(page, '2026-09-30');
+  await page.locator('#promo-banner').waitFor();
+  await context.close();
+});
+
+await run('E12', '設定で提案をオフ：ヒントもバナーも出ない。見直すタブは開ける', async () => {
+  const { context, page } = await setupRakutenOnly();
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.uncheck('#suggest-toggle');
+  await page.waitForTimeout(300);                                  // IndexedDBへの保存を待つ
+  await goto(page, '2026-09-22');
+  assert.equal(await page.locator('#promo-banner').count(), 0);
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  assert.equal(await page.locator('#hint').count(), 0);
+  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  assert.equal(await page.locator('.review-card').count(), 9);    // v1.13：21枚で9枚（旧：2）
+  await page.click('#to-adpolicy');
+  await page.locator('h1', { hasText: '広告の方針' }).waitFor();
+  await context.close();
+});
+
+await run('E13', 'ヒントの×でそのお店では60日出なくなる', async () => {
+  const { context, page } = await setupRakutenOnly();
+  await goto(page, '2026-09-22');                                  // ③の日
+  await goto(page, '2026-09-23');
+  await pick(page, 'すたば', 'スターバックス');
+  await page.locator('#hint').waitFor();
+  await page.click('#hint-close');
+  assert.equal(await page.locator('#hint').count(), 0);
+  await goto(page, '2026-10-20');
+  await pick(page, 'すたば', 'スターバックス');
+  assert.equal(await page.locator('#hint').count(), 0);
+  await context.close();
+});
+
+await run('E14', '初回：案内バナー→カード一覧（マニア推奨・検索）でリクルートカードを選ぶ→ファミマで1.2%が1位→外すと出ない', async () => {
+  const { context, page } = await newPage({}, BASE, []);
+  // 保有カードなしでは案内を表示し、おすすめは出ない
+  await page.waitForSelector('#onboard');
+  await page.fill('#q', 'ふぁみま');
+  await page.keyboard.press('Enter');
+  await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
+  assert.equal(await page.locator('.rank-card').count(), 1, 'カード以外（PayPay残高）のみ');
+  assert.doesNotMatch(await page.locator('.ranking').innerText(), /カード/);
+  await page.locator('#onboard .btn').click();
+  // 保有0枚ではカード一覧を初期表示
+  await page.waitForSelector('#catalog-list');
+  const total = await page.locator('.catalog-item').count();
+  assert.ok(total >= 19, `一覧の件数 ${total}`);
+  await page.click('#filter-enthusiast');
+  const ent = await page.locator('.catalog-item').allInnerTexts();
+  assert.ok(ent.every((t) => t.includes('マニア推奨')), 'マニア推奨のみ');
+  assert.ok(ent.some((t) => t.includes('リクルートカード')));
+  await page.screenshot({ path: `${SHOT}E14-catalog-enthusiast.png`, fullPage: true });
+  // 日本語入力（変換中）でも入力欄が作り直されない
+  await page.click('#filter-all');
+  await page.locator('#card-q').pressSequentially('りくる');
+  assert.equal(await page.locator('.catalog-item').count(), 1);
+  assert.equal(await page.inputValue('#card-q'), 'りくる');
+  assert.equal(await page.evaluate(() => document.activeElement?.id), 'card-q');
+  await page.check('#own-recruit');
+  await page.locator('.catalog-item.is-owned').waitFor();
+  await page.locator('#view-owned', { hasText: '保有カード（1）' }).waitFor({ timeout: 3000 });
+  await page.fill('#card-q', '');
+  await page.locator('#card-q').dispatchEvent('input');
+  // おすすめ：リクルート1.2%が1位、案内は消える
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+  assert.equal(await page.locator('#onboard').count(), 0);
+  await page.fill('#q', 'ふぁみま');
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.rank-1');
+  assert.match(await rank1(page).locator('.rank-card').innerText(), /リクルートカード/);
+  assert.equal(await rank1(page).locator('.rate').innerText(), '1.2%');
+  // 外すと推奨に出なくなる（入会年月なしなので確認ダイアログなし）
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.uncheck('#own-recruit');
+  await page.locator('#view-owned', { hasText: '保有カード（0）' }).waitFor({ timeout: 3000 });
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+  await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
+  assert.doesNotMatch(await page.locator('.result').innerText(), /リクルート/);
+  await context.close();
+});
+
+await run('E15', '入会年月を設定したカードを一覧で外すときは確認し、キャンセルなら保有のまま', async () => {
+  const { context, page } = await newPage({}, BASE, ['rakuten']);
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  await page.fill('#join-rakuten', '2018-01');
+  await page.locator('#join-rakuten').dispatchEvent('change');
+  await page.click('#view-catalog');
+  page.once('dialog', (d) => d.dismiss());
+  await page.locator('#own-rakuten').click();
+  await page.waitForTimeout(100);
+  assert.equal(await page.isChecked('#own-rakuten'), true);
+  page.once('dialog', (d) => d.accept());
+  await page.locator('#own-rakuten').click();
+  await page.waitForTimeout(100);
+  assert.equal(await page.isChecked('#own-rakuten'), false);
+  // 還元情報：保有していないカードは折りたたみに入る
+  await page.getByRole('button', { name: '還元情報', exact: true }).click();
+  assert.match(await page.locator('#info-others > summary').innerText(), /保有していないカード（\d+枚）/);
+  await context.close();
+});
+
+await run('E16', '設定でティールを選ぶ→色とtheme-colorが変わる→再読み込み後も維持', async () => {
+  const { context, page } = await newPage();
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), 'navy');
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  assert.equal(await page.isChecked('#theme-navy'), true);
+  await page.check('#theme-teal');
+  await page.waitForFunction(() => document.documentElement.dataset.theme === 'teal');
+  assert.equal(await page.getAttribute('meta[name="theme-color"]', 'content'), '#006b73');
+  await page.screenshot({ path: `${SHOT}E16-theme-settings.png` });
+  await page.reload();
+  await page.waitForSelector('.search-input');
+  assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), 'teal');
+  await page.fill('#q', 'せぶん');
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.rank-1');
+  assert.equal(await page.locator('.rank-1').evaluate((e) => getComputedStyle(e).borderTopColor), 'rgb(0, 107, 115)');
+  await context.close();
+});
+
+await run('E17', '5つの配色すべてで文字4.5:1以上・1位の枠3:1以上（推奨・カード一覧・設定）', async () => {
+  const { context, page } = await newPage();
+  const lum = (c) => { const [r, g, b] = c.match(/[\d.]+/g).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  for (const id of ['navy', 'blue', 'teal', 'terra', 'green']) {
+    await page.getByRole('button', { name: '設定', exact: true }).click();
+    await page.check(`#theme-${id}`);
+    await page.waitForFunction((t) => document.documentElement.dataset.theme === t, id);
+    assert.deepEqual(await lowContrast(page), [], `${id}：設定`);
+    await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+    await page.fill('#q', 'まくど');
+    await page.keyboard.press('Enter');
+    await page.waitForSelector('.rank-1');
+    await page.waitForTimeout(400);
+    assert.deepEqual(await lowContrast(page), [], `${id}：推奨`);
+    const border = await page.locator('.rank-1').evaluate((e) => getComputedStyle(e).borderTopColor);
+    const ratio = (1.05) / (lum(border) + 0.05);
+    assert.ok(ratio >= 3, `${id}：1位の枠 ${ratio.toFixed(2)}`);
+    await page.screenshot({ path: `${SHOT}E17-${id}.png` });
+    await page.getByRole('button', { name: 'カード', exact: true }).click();
+    await page.click('#view-catalog');
+    assert.deepEqual(await lowContrast(page), [], `${id}：カード一覧`);
+  }
+  await context.close();
+});
+
+await run('E18', 'カード一覧：カード会社の見出しが英字（アルファベット順）→日本語（あいうえお順）・同じ会社はまとまる', async () => {
+  const { context, page } = await newPage({}, BASE, []);
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.waitForSelector('#catalog-list');
+  const heads = await page.locator('.catalog-company').allInnerTexts();
+  assert.deepEqual(heads.slice(0, 5), ['auフィナンシャルサービス', 'JCB', 'NTTドコモ', 'PayPayカード', 'アメリカン・エキスプレス']);
+  assert.equal(heads.at(-1), '楽天カード');
+  assert.equal(heads.length, new Set(heads).size, '会社の見出しは1回ずつ');
+  const first = await page.locator('.catalog-item').first().innerText();
+  assert.match(first, /au PAY カード/);
+  await page.screenshot({ path: `${SHOT}E18-catalog-order.png` });
+  await context.close();
+});
+
+// ---------- v1.15：見直すタブの年会費回収計算（分冊10.6） ----------
+const MARRIOTT_OWNER = JSON.stringify({ app: 'card-advisor', exportedAt: '2026-09-01', settings: {
+  schemaVersion: 1,
+  ownedCards: [
+    { cardId: 'rakuten', enabledMethods: ['card_physical', 'applepay_quicpay', 'smartphone_visa_touch', 'online'], priority: 1 },
+    { cardId: 'marriott_premium', enabledMethods: ['card_physical', 'smartphone_visa_touch', 'applepay_quicpay', 'online'], priority: 2 },
+    { cardId: 'ana_wide_gold', enabledMethods: ['card_physical', 'smartphone_visa_touch', 'applepay_id', 'online', 'paypay'], priority: 3 }],
+  enabledNonCardRoutes: [], bonusGoals: [], staleWarnDays: 180 } });
+
+await run('E19', '見直す：持っているカードの判定。月の利用額を5万→40万円にすると「回収できません」→「回収できています」、再読み込み後も残る', async () => {
+  const { context, page } = await newPage({}, at('2026-09-22'), []);
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.fill('#paste', MARRIOTT_OWNER);
+  await page.click('#paste-import');
+  await page.locator('.toast', { hasText: '読み込みました' }).waitFor();
+  for (const [q, t] of [['せぶん', 'セブン-イレブン'], ['まくどなるど', 'マクドナルド'], ['すたば', 'スターバックス'],
+    ['ろーそんすりーえふ', 'ローソンスリーエフ'], ['ふぁみま', 'ファミリーマート']]) await pick(page, q, t);
+  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  const mbp = page.locator('#fee-owned-marriott_premium');
+  const ana = page.locator('#fee-owned-ana_wide_gold');
+  assert.equal(await page.inputValue('#fee-spend'), '50000');
+  assert.match(await mbp.locator('.fee-verdict').innerText(), /回収できません（年−70,500円）。月343,800円以上で回収/);
+  assert.match(await ana.locator('.review-lead').innerText(), /ほかのカードと同じか低い率/);
+  assert.match(await ana.locator('.fee-verdict').innerText(), /回収できません（年−15,400円）/);
+  await page.fill('#fee-spend', '400000');
+  await page.locator('#fee-spend').dispatchEvent('change');
+  await page.locator('#fee-owned-marriott_premium .fee-verdict', { hasText: '回収できています' }).waitFor();
+  assert.match(await mbp.locator('.fee-verdict').innerText(), /年＋88,500円/);   // 96,000＋ボーナス75,000−82,500
+  await page.click('#fee-spend-up');
+  await page.waitForFunction(() => document.querySelector('#fee-spend')?.value === '410000');
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E19-fee.png`, fullPage: true });
+  await page.waitForTimeout(300);
+  await goto(page, '2026-09-22');
+  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  assert.equal(await page.inputValue('#fee-spend'), '410000');
+  await context.close();
+});
+
+// ---------- v1.15：近くのお店（詳細設計 27.7） ----------
+const ORIGIN = { latitude: 35.3383, longitude: 139.4476 };
+const GEO = { geolocation: { ...ORIGIN, accuracy: 20 }, permissions: ['geolocation'] };
+const OVERPASS_JSON = { elements: [
+  { type: 'node', id: 1, lat: 35.3383, lon: 139.4476, tags: { shop: 'convenience', name: 'ファミリーマート 辻堂駅前店', brand: 'ファミリーマート', branch: '辻堂駅前店' } },
+  { type: 'node', id: 2, lat: 35.3388, lon: 139.4476, tags: { shop: 'convenience', name: 'セブン-イレブン 辻堂駅北口店', 'brand:wikidata': 'Q259340' } },
+  { type: 'way', id: 3, center: { lat: 35.3393, lon: 139.4476 }, tags: { amenity: 'cafe', name: 'スターバックス' } },
+  { type: 'node', id: 4, lat: 35.3385, lon: 139.4476, tags: { amenity: 'cafe', name: '喫茶ひまわり' } },
+  { type: 'node', id: 5, lat: 35.3423, lon: 139.4476, tags: { shop: 'convenience', name: 'ローソン 辻堂元町店' } },
+] };
+
+async function mockOverpass(context, body = OVERPASS_JSON, status = 200) {
+  const calls = [];
+  await context.route('https://overpass-api.de/**', (route) => {
+    calls.push(route.request().postData() ?? '');
+    return route.fulfill({ status, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(body) });
+  });
+  return calls;
+}
+
+await run('E21', '近くのお店：初回の同意→距離順の一覧（未登録・半径外は出ない、出典）→セブンをタップで推奨', async () => {
+  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  const calls = await mockOverpass(context);
+  await page.click('#nearby-btn');
+  await page.locator('#nearby-consent-panel').waitFor();
+  assert.match(await page.locator('#nearby-consent-panel').innerText(), /OpenStreetMapのサーバに送って/);
+  assert.equal(calls.length, 0, '同意前は送らない');
+  await page.click('#nearby-consent');
+  await page.locator('.nearby-item').first().waitFor();
+  const labels = await page.locator('.nearby-item span').allInnerTexts();
+  assert.deepEqual(labels, ['ファミリーマート 辻堂駅前店', 'セブン-イレブン 辻堂駅北口店', 'スターバックス']);
+  assert.deepEqual(await page.locator('.nearby-dist').allInnerTexts(), ['約0m', '約56m', '約111m']);
+  assert.match(await page.locator('#nearby-summary').innerText(), /半径300m・3件/);
+  assert.match(await page.locator('#nearby-credit').innerText(), /© OpenStreetMap contributors/);
+  assert.match(calls[0], /around%3A300%2C35\.3383%2C139\.4476/);
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E21-nearby.png`, fullPage: true });
+  await page.locator('.nearby-item', { hasText: 'セブン-イレブン' }).click();
+  await page.locator('.result-title', { hasText: 'セブン-イレブン' }).waitFor();
+  await page.fill('#q', '');
+  assert.match(await page.locator('#suggest').innerText(), /セブン-イレブン/);      // 最近使った店に追加
+  await context.close();
+});
+
+await run('E22', '2回目は同意を聞かず、5分以内・同じ場所なら問い合わせない', async () => {
+  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  const calls = await mockOverpass(context);
+  await page.click('#nearby-btn');
+  await page.click('#nearby-consent');
+  await page.locator('.nearby-item').first().waitFor();
+  await page.click('#nearby-by-name');
+  await page.click('#nearby-btn');
+  await page.locator('.nearby-item').first().waitFor();
+  assert.equal(await page.locator('#nearby-consent-panel').count(), 0);
+  assert.equal(calls.length, 1);
+  await context.close();
+});
+
+await run('E23', '0件→「半径を広げる」で500mの問い合わせ', async () => {
+  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  const calls = await mockOverpass(context, { elements: [] });
+  await page.click('#nearby-btn');
+  await page.click('#nearby-consent');
+  await page.locator('#nearby-empty').waitFor();
+  await page.click('#nearby-wider');
+  await page.locator('#nearby-summary', { hasText: '半径500m' }).waitFor();
+  assert.match(calls[1], /around%3A500/);
+  await context.close();
+});
+
+await run('E24', '位置情報の許可なし→案内と「名前で探す」', async () => {
+  const { context, page } = await newPage({}, at('2026-09-22'), []);
+  await mockOverpass(context);
+  await page.click('#nearby-btn');
+  await page.click('#nearby-consent');
+  await page.locator('#nearby-error[data-kind="denied"]').waitFor();
+  assert.match(await page.locator('#nearby-error').innerText(), /位置情報の利用が許可されていません/);
+  await page.click('#nearby-by-name');
+  await page.locator('.search-input').waitFor();
+  await context.close();
+});
+
+await run('E25', 'サーバエラー→再試行で成功。オフライン→ネット接続が必要', async () => {
+  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  let fail = true;
+  await context.route('https://overpass-api.de/**', (route) => (fail
+    ? route.fulfill({ status: 504, body: 'timeout', headers: { 'access-control-allow-origin': '*' } })
+    : route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(OVERPASS_JSON) })));
+  await page.click('#nearby-btn');
+  await page.click('#nearby-consent');
+  await page.locator('#nearby-error[data-kind="server"]').waitFor();
+  fail = false;
+  await page.click('#nearby-retry');
+  await page.locator('.nearby-item').first().waitFor();
+  await page.click('#nearby-by-name');
+  await context.setOffline(true);
+  await page.click('#nearby-btn');
+  await page.locator('#nearby-error[data-kind="offline"]').waitFor();
+  await context.setOffline(false);
+  await context.close();
+});
+
+await run('E26', '設定でYahoo!ローカルサーチ（アプリID）に切り替え→同意をもう一度→JSONPの応答で一覧', async () => {
+  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  await mockOverpass(context);
+  let yolpUrl = '';
+  await context.route('https://map.yahooapis.jp/**', (route) => {
+    const u = new URL(route.request().url());
+    yolpUrl = u.toString();
+    const body = { ResultInfo: { Count: 2 }, Feature: [
+      { Gid: 'g1', Name: 'ローソン 辻堂駅前店', Geometry: { Coordinates: '139.4476,35.3384' } },
+      { Gid: 'g2', Name: 'まちの八百屋', Geometry: { Coordinates: '139.4476,35.3385' } }] };
+    return route.fulfill({ status: 200, contentType: 'text/javascript', body: `${u.searchParams.get('callback')}(${JSON.stringify(body)});` });
+  });
+  await page.click('#nearby-btn');
+  await page.click('#nearby-consent');                              // OSM に同意
+  await page.locator('.nearby-item').first().waitFor();
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  assert.equal(await page.isDisabled('#nearby-provider-yolp'), true, 'アプリIDがなければ選べない');
+  await page.fill('#yolp-appid', 'TEST-APPID');
+  await page.click('#yolp-appid-save');
+  await page.locator('.toast', { hasText: 'アプリIDを保存しました' }).waitFor();
+  await page.check('#nearby-provider-yolp');
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+  await page.click('#nearby-btn');
+  await page.locator('#nearby-consent-panel', { hasText: 'Yahoo! JAPANのサーバ' }).waitFor();
+  await page.click('#nearby-consent');
+  await page.locator('.nearby-item').first().waitFor();
+  assert.deepEqual(await page.locator('.nearby-item span').allInnerTexts(), ['ローソン 辻堂駅前店']);
+  assert.match(await page.locator('#nearby-credit').innerText(), /Web Services by Yahoo! JAPAN/);
+  assert.match(yolpUrl, /appid=TEST-APPID/);
+  assert.match(yolpUrl, /dist=0\.3/);
+  await context.close();
+});
+
+await run('E27', '設定でオフ→ホームに「近く」ボタンが出ない。YOLPのアプリIDはバックアップに含めない', async () => {
+  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  assert.equal(await page.locator('#nearby-btn').count(), 1);
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.fill('#yolp-appid', 'SECRET-ID');
+  await page.click('#yolp-appid-save');
+  await page.uncheck('#nearby-enabled');
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
+  assert.equal(await page.locator('#nearby-btn').count(), 0);
+  const saved = await page.evaluate(() => new Promise((res) => {
+    const r = indexedDB.open('card-advisor');
+    r.onsuccess = () => { const db = r.result; const names = [...db.objectStoreNames]; res(names); };
+  }));
+  assert.ok(Array.isArray(saved));
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  const hasJson = await page.locator('#show-json').count();
+  if (hasJson) {
+    await page.click('#show-json');
+    assert.doesNotMatch(await page.locator('body').innerText(), /SECRET-ID/);
+  }
+  await context.close();
+});
+
+await browser.close();
+server.close();
+console.log(results.join('\n'));
+if (errors.length) console.log('ブラウザのエラー:\n  ' + [...new Set(errors)].join('\n  '));
+const failed = results.filter((r) => r.startsWith('FAIL')).length;
+console.log(`\n${results.length - failed}/${results.length} passed`);
+process.exit(failed || errors.length ? 1 : 0);

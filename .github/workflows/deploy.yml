@@ -2,7 +2,7 @@ name: Deploy card-navi
 on:
   push:
     branches: [main]
-    paths: ['card-navi-pwa.zip', '.github/workflows/deploy.yml']
+    paths: ['app/dist/**', 'app/public/icons/**', '.github/workflows/deploy.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,10 +19,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: zipを展開
+      - name: dist とアイコンを配置
         run: |
           mkdir site
-          unzip -o card-navi-pwa.zip -d site
+          cp app/dist/* site/
+          cp app/public/icons/*.png site/
           touch site/.nojekyll
           ls -la site
       - uses: actions/configure-pages@v5

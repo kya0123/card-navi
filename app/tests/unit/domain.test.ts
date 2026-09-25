@@ -126,6 +126,43 @@ test('recommend: ポイント払いの表示順はマスタ定義順', () => {
   assert.deepEqual(res.pointPay, ['vpoint', 'rakuten_point', 'paypay_point']);
 });
 
+// ---------- 比較範囲（持っているカード／登録カード全体） ----------
+test('recommend: 登録カード全体では未保有カードも候補になる（既定は持っているカードだけ）', () => {
+  const owned = recommend(mi, user(), { storeId: 'seven' }, TODAY, 10);
+  assert.ok(owned.top.every((t) => t.cardId == null || INITIAL_CARDS.includes(t.cardId)));
+  const all = recommend(mi, user(), { storeId: 'seven', scope: 'all' }, TODAY, 10);
+  assert.equal(all.top[0].cardId, 'seven_plus');
+  assert.equal(all.top[0].effectiveRate, 0.1);
+});
+
+test('recommend: 登録カード全体で同率なら持っているカードが先', () => {
+  const all = recommend(mi, user(), { storeId: 'seven', scope: 'all' }, TODAY, 10);
+  const ids = all.top.map((t) => t.cardId);
+  assert.ok(ids.indexOf('smbc_gold_nl') < ids.indexOf('smbc_nl'));
+});
+
+test('recommend: 保有0枚でも登録カード全体なら候補が出る。ポイント払いは出さない', () => {
+  const s = user({ ownedCards: [], enabledNonCardRoutes: [] });
+  const res = recommend(mi, s, { storeId: 'seven', scope: 'all' }, TODAY);
+  assert.equal(res.top.length, 3);
+  assert.equal(res.pointPay, null);
+});
+
+test('recommend: 登録カード全体でもポイント払いは持っているカードで判定する', () => {
+  const owned = recommend(mi, user(), { storeId: 'familymart' }, TODAY);
+  const all = recommend(mi, user(), { storeId: 'familymart', scope: 'all' }, TODAY);
+  assert.deepEqual(all.pointPay, owned.pointPay);
+});
+
+test('recommend: 未保有カードにはボーナスを加算しない（目標が残っていても）', () => {
+  const s = user({
+    ownedCards: user().ownedCards.filter((c) => c.cardId !== 'paypay_gold'),
+    bonusGoals: [{ bonusId: 'ppg_1m', target: true, deadlineOverride: '2026-12-31' }],
+  });
+  const all = recommend(mi, s, { storeId: 'seven', scope: 'all' }, TODAY, 50);
+  assert.ok(all.top.every((t) => t.bonusRate === 0));
+});
+
 // ---------- ボーナス ----------
 test('bonusPeriod: 年またぎ', () => {
   assert.deepEqual(bonusPeriod('2023-11', 0, '2026-01-15'), { start: '2025-11-01', end: '2026-10-31' });

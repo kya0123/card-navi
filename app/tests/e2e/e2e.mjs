@@ -369,15 +369,19 @@ await run('E13', 'ヒントの×でそのお店では60日出なくなる', asyn
   await context.close();
 });
 
-await run('E14', '初回：案内バナー→カード一覧（マニア推奨・検索）でリクルートカードを選ぶ→ファミマで1.2%が1位→外すと出ない', async () => {
+await run('E14', '初回：案内バナー・登録カード全体でおすすめ→カード一覧（ポイ活向け・検索）でリクルートカードを選ぶ→ファミマで1.2%が1位→外すと登録カード全体に戻る', async () => {
   const { context, page } = await newPage({}, BASE, []);
-  // 保有カードなしでは案内を表示し、おすすめは出ない
+  // 保有カードなしでは案内を表示し、登録カード全体でおすすめする（切り替えは出さない）
   await page.waitForSelector('#onboard');
+  assert.match(await page.locator('#onboard').innerText(), /登録カード（22枚）全体/);
   await page.fill('#q', 'ふぁみま');
   await page.keyboard.press('Enter');
   await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
-  assert.equal(await page.locator('.rank-card').count(), 1, 'カード以外（PayPay残高）のみ');
-  assert.doesNotMatch(await page.locator('.ranking').innerText(), /カード/);
+  assert.equal(await page.locator('.rank').count(), 3);
+  assert.equal(await page.locator('#scope-all').count(), 0, '保有0枚では切り替えを出さない');
+  assert.equal(await page.locator('.rank .own-no').count(), 3, 'すべて未保有');
+  assert.equal(await page.locator('.rank .own-yes').count(), 0);
+  assert.match(await page.locator('#scope-note').innerText(), /主なカード22枚の中での比較です。日本のすべてのカードではありません/);
   await page.locator('#onboard .btn').click();
   // 保有0枚ではカード一覧を初期表示
   await page.waitForSelector('#catalog-list');
@@ -385,7 +389,7 @@ await run('E14', '初回：案内バナー→カード一覧（マニア推奨�
   assert.ok(total >= 19, `一覧の件数 ${total}`);
   await page.click('#filter-enthusiast');
   const ent = await page.locator('.catalog-item').allInnerTexts();
-  assert.ok(ent.every((t) => t.includes('マニア推奨')), 'マニア推奨のみ');
+  assert.ok(ent.every((t) => t.includes('ポイ活向け')), 'ポイ活向けのみ');
   assert.ok(ent.some((t) => t.includes('リクルートカード')));
   await page.screenshot({ path: `${SHOT}E14-catalog-enthusiast.png`, fullPage: true });
   // 日本語入力（変換中）でも入力欄が作り直されない
@@ -407,13 +411,19 @@ await run('E14', '初回：案内バナー→カード一覧（マニア推奨�
   await page.waitForSelector('.rank-1');
   assert.match(await rank1(page).locator('.rank-card').innerText(), /リクルートカード/);
   assert.equal(await rank1(page).locator('.rate').innerText(), '1.2%');
-  // 外すと推奨に出なくなる（入会年月なしなので確認ダイアログなし）
+  // 保有後は切り替えが出て、既定は「持っているカード」（印・注記なし）
+  assert.equal(await page.getAttribute('#scope-owned', 'aria-selected'), 'true');
+  assert.equal(await page.locator('.own-mark').count(), 0);
+  assert.equal(await page.locator('#scope-note').count(), 0);
+  // 外すと登録カード全体に戻る（入会年月なしなので確認ダイアログなし）
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.uncheck('#own-recruit');
   await page.locator('#view-owned', { hasText: '保有カード（0）' }).waitFor({ timeout: 3000 });
   await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
   await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
-  assert.doesNotMatch(await page.locator('.result').innerText(), /リクルート/);
+  assert.equal(await page.locator('#scope-all').count(), 0);
+  assert.equal(await page.locator('.rank .own-yes').count(), 0);
+  await page.locator('#scope-note').waitFor();
   await context.close();
 });
 
@@ -516,6 +526,10 @@ await run('E19', '見直す：持っているカードの判定。月の利用�
   await page.getByRole('button', { name: '見直す', exact: true }).click();
   const mbp = page.locator('#fee-owned-marriott_premium');
   const ana = page.locator('#fee-owned-ana_wide_gold');
+  // 普段は1行だけ。［変更］で入力欄を開く（A案）
+  assert.match(await page.locator('#fee-spend-line').innerText(), /月50,000円のカード利用で計算しています/);
+  assert.equal(await page.locator('#fee-spend').count(), 0);
+  await page.click('#fee-spend-edit');
   assert.equal(await page.inputValue('#fee-spend'), '50000');
   assert.match(await mbp.locator('.fee-verdict').innerText(), /回収できません（年−70,500円）。月343,800円以上で回収/);
   assert.match(await ana.locator('.review-lead').innerText(), /ほかのカードと同じか低い率/);
@@ -531,7 +545,70 @@ await run('E19', '見直す：持っているカードの判定。月の利用�
   await page.waitForTimeout(300);
   await goto(page, '2026-09-22');
   await page.getByRole('button', { name: '見直す', exact: true }).click();
+  assert.match(await page.locator('#fee-spend-line').innerText(), /月410,000円/);
+  await page.click('#fee-spend-edit');
   assert.equal(await page.inputValue('#fee-spend'), '410000');
+  await context.close();
+});
+
+await run('E28', 'おすすめの切り替え：登録カード（22枚）で保有・未保有の印と公式サイトのリンク、注記。ヒント・ポイント払いは持っているカードで判定', async () => {
+  const { context, page } = await setupRakutenOnly();
+  await goto(page, '2026-09-22');                                // ③を出す日（同じ日は①を出さない）
+  await page.locator('#promo-banner').waitFor();
+  await goto(page, '2026-09-23');
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  assert.equal(await page.getAttribute('#scope-owned', 'aria-selected'), 'true', '既定は持っているカード');
+  await page.locator('#hint').waitFor();
+  assert.equal(await page.locator('.own-mark').count(), 0);
+  await page.click('#scope-all');
+  await page.waitForSelector('#scope-note');
+  assert.equal(await page.getAttribute('#scope-all', 'aria-selected'), 'true');
+  assert.match(await page.locator('#scope-all').innerText(), /登録カード（22枚）/);
+  assert.equal(await page.locator('#hint').count(), 0, '登録カード表示ではヒントを出さない');
+  assert.match(await rank1(page).locator('.rank-card').innerText(), /セブンカード・プラス/);
+  assert.equal(await rank1(page).locator('.own-no').innerText(), '未保有');
+  const link = rank1(page).locator('.card-link');
+  assert.equal(await link.innerText(), '公式サイトを見る');
+  assert.match(await link.getAttribute('href'), /^https:\/\//);
+  assert.equal(await rank1(page).locator('.pr').count(), 0, 'アフィリエイト未登録なのでPRなし');
+  assert.match(await page.locator('#scope-note').innerText(), /主なカード22枚の中での比較です。日本のすべてのカードではありません/);
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E28-scope-all.png`, fullPage: true });
+  // 持っているカードに戻すと印・注記は消え、ヒントが出る
+  await page.click('#scope-owned');
+  await page.waitForSelector('#scope-note', { state: 'detached' });
+  assert.equal(await page.locator('.own-mark').count(), 0);
+  await page.locator('#hint').waitFor();
+  // ポイント払いは切り替えても同じ（持っているカードの1位で判定）。保有カードに印・リンクなし
+  const ppText = async () => (await page.locator('.pointpay').count() ? page.locator('.pointpay').innerText() : null);
+  for (const [q, t] of [['ふぁみま', 'ファミリーマート'], ['まくどなるど', 'マクドナルド']]) {
+    await page.click('#scope-owned');
+    await pick(page, q, t);
+    const pp = await ppText();
+    await page.click('#scope-all');
+    await page.waitForSelector('#scope-note');
+    assert.equal(await ppText(), pp, `${t}：ポイント払いは持っているカードで判定`);
+    const ownedRows = page.locator('.rank', { has: page.locator('.own-yes') });
+    assert.equal(await ownedRows.locator('.card-link').count(), 0, '保有カードにはリンクを出さない');
+  }
+  await context.close();
+});
+
+await run('E29', '見直す：提案カードも年会費のある保有カードもないときは利用額を出さない→お店を調べて提案が出ると1行で出す', async () => {
+  const { context, page } = await newPage({}, at('2026-09-22'), ['rakuten']);
+  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.waitForSelector('#review-empty');
+  assert.equal(await page.locator('#fee-spend-line').count(), 0);
+  assert.equal(await page.locator('#fee-spend-panel').count(), 0);
+  for (const [q, t] of [['せぶん', 'セブン-イレブン'], ['まくどなるど', 'マクドナルド'], ['すたば', 'スターバックス'],
+    ['ろーそんすりーえふ', 'ローソンスリーエフ'], ['ふぁみま', 'ファミリーマート']]) await pick(page, q, t);
+  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.waitForSelector('#fee-gain-head');
+  assert.match(await page.locator('#fee-spend-line').innerText(), /月50,000円のカード利用で計算しています/);
+  await page.click('#fee-spend-edit');
+  await page.waitForSelector('#fee-spend');
+  await page.click('#fee-spend-close');
+  await page.waitForSelector('#fee-spend-line');
   await context.close();
 });
 

@@ -9,6 +9,8 @@ import {
 import { cardName, pct, yen } from '../format';
 
 const SHOW_STORES = 3;
+/** 利用額の入力欄を開いているか（A案：普段は1行だけ出す） */
+let spendOpen = false;
 
 /** S07 カードを見直す（詳細設計書（カード提案機能）7.3） */
 export function ReviewScreen(ctx: Ctx): Node {
@@ -29,7 +31,14 @@ export function ReviewScreen(ctx: Ctx): Node {
     <section>
       <header class="screen-head"><h1>カードを見直す</h1></header>
       <p class="sub">最近使ったお店と月の利用額をもとに、年会費の元が取れるか・1枚追加するといくら得かを計算します。</p>
-      <div class="panel" id="fee-spend-panel">
+      {/* 利用額は、提案カードか年会費のある保有カードの計算に使うときだけ出す。普段は1行（A案） */}
+      {(items.length > 0 || owned.length > 0) && !spendOpen && (
+        <p class="spend-line" id="fee-spend-line">
+          月{yen(spend)}のカード利用で計算しています
+          <button type="button" class="link-btn" id="fee-spend-edit" onClick={() => { spendOpen = true; ctx.render(); }}>変更</button>
+        </p>
+      )}
+      {(items.length > 0 || owned.length > 0) && spendOpen && <div class="panel" id="fee-spend-panel">
         <label class="field" for="fee-spend">
           <span>月のカード利用額</span>
         </label>
@@ -48,7 +57,8 @@ export function ReviewScreen(ctx: Ctx): Node {
             onClick={() => setSpend(spend + MONTHLY_SPEND_STEP)}>＋</button>
         </div>
         <p class="note">よく行くお店に均等に使う前提の目安です（1万〜100万円、1万円単位）。</p>
-      </div>
+        <button type="button" class="link-btn" id="fee-spend-close" onClick={() => { spendOpen = false; ctx.render(); }}>閉じる</button>
+      </div>}
       {owned.length > 0 && (
         <div id="fee-owned">
           <h2 class="review-group-head">持っているカードの年会費</h2>

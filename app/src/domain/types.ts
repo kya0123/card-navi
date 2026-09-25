@@ -5,7 +5,7 @@ export type YMD = string;
 export type YM = string;
 
 // ---- マスタ ----
-/** カードの区分（詳細設計 20.3）：定番／マニア推奨 */
+/** カードの区分（詳細設計 20.3）：定番／ポイ活向け */
 export type CardSegment = 'popular' | 'enthusiast';
 export interface Card {
   id: Id; name: string; brand: string; pointId: Id; annualFee: number;

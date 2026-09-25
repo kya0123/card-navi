@@ -11,7 +11,7 @@ let view: 'owned' | 'catalog' | null = null;
 let filter: SegmentFilter = 'all';
 let query = '';
 const FILTERS: { id: SegmentFilter; label: string }[] = [
-  { id: 'all', label: 'すべて' }, { id: 'popular', label: '定番' }, { id: 'enthusiast', label: 'マニア推奨' }, { id: 'owned', label: '保有中' },
+  { id: 'all', label: 'すべて' }, { id: 'popular', label: '定番' }, { id: 'enthusiast', label: 'ポイ活向け' }, { id: 'owned', label: '保有中' },
 ];
 
 export function CardsScreen(ctx: Ctx): Node {
@@ -83,7 +83,7 @@ function CatalogList(ctx: Ctx): Node {
                 <span class="catalog-title">
                   <strong>{card.name}</strong>
                   {card.segments.includes('popular') && <span class="tag tag-popular">定番</span>}
-                  {card.segments.includes('enthusiast') && <span class="tag tag-enthusiast">マニア推奨</span>}
+                  {card.segments.includes('enthusiast') && <span class="tag tag-enthusiast">ポイ活向け</span>}
                 </span>
                 <span class="catalog-meta">
                   {card.brand}・年会費{card.annualFee === 0 ? '無料' : `${card.annualFee.toLocaleString('ja-JP')}円`}・基本{pct(baseRate)}

@@ -8,6 +8,7 @@ import { rolloverGoals } from '../domain/bonus';
 import { buildSearchIndex, type SearchIndex } from '../domain/search';
 import { daysBetween, isValidYMD, todayYMD } from '../domain/date';
 import type { Id, Master, UserSettings, YMD } from '../domain/types';
+import type { RecommendScope } from '../domain/engine';
 import { openKV } from '../storage/db';
 import { requestPersist, SettingsRepo } from '../storage/settingsRepo';
 import { HomeScreen } from './screens/home';
@@ -39,6 +40,8 @@ export interface AppState {
   armed: string | null;
   /** カード提案の表示状態（meta ストアの promo） */
   promo: PromoState;
+  /** おすすめの比較範囲（保存しない。保有カードが0枚のときは常に登録カード全体） */
+  recScope: RecommendScope;
 }
 
 export interface Ctx {
@@ -121,6 +124,7 @@ export async function startApp(root: HTMLElement): Promise<void> {
     route: initialRoute(),
     armed: null,
     promo,
+    recScope: 'owned',
   };
 
   let rendering = false;

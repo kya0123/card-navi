@@ -1,0 +1,5953 @@
+{
+  "masterVersion": "2026.09.26-1",
+  "today": "2026-09-22",
+  "cases": [
+    {
+      "id": "G01",
+      "desc": "セブン・ボーナスOFF：三井住友スマホVisaタッチ7%が1位（同率の三菱UFJより優先順で上）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G02",
+      "desc": "セブン・ボーナスON：7%+1.55%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0855,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0205,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G03",
+      "desc": "ファミマ・ボーナスOFF：楽天1%、ポイント払い推奨あり",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G04",
+      "desc": "ファミマ・ボーナスON：三井住友0.5%+1.55%が1位、ポイント払い推奨なし",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0205,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G05",
+      "desc": "ファミマ・ボーナスON・年会費無料は達成済み：0.5%+1.0%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000,
+              "oneTimeAchieved": true
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.01,
+            "effectiveRate": 0.015,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G06",
+      "desc": "ボーナスON・今期達成済み：ボーナス加算なし",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000,
+              "achieved": true
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G07",
+      "desc": "ボーナスON・累計が条件額以上：加算なし",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 1000000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G08",
+      "desc": "ボーナスON・手動期限切れ：加算なし",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000,
+              "deadlineOverride": "2026-09-21"
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G09",
+      "desc": "オーケー：三菱UFJ 7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "ok"
+      },
+      "expected": {
+        "storeId": "ok",
+        "categoryId": "supermarket",
+        "top": [
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G10",
+      "desc": "Amazon：オンライン楽天1%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "amazon"
+      },
+      "expected": {
+        "storeId": "amazon",
+        "categoryId": "ec",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "rakuten_online"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_online",
+              "smbcg_paypay"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "paypay"
+            ],
+            "routeIds": [
+              "ana_online",
+              "ana_paypay"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G11",
+      "desc": "楽天市場：楽天2%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "rakuten_ichiba"
+      },
+      "expected": {
+        "storeId": "rakuten_ichiba",
+        "categoryId": "ec",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.02,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "rakuten_online"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "smbcg_online"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "ana_online"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G12",
+      "desc": "JR東日本：モバイルSuica乗車2%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "jr_east"
+      },
+      "expected": {
+        "storeId": "jr_east",
+        "categoryId": "transport",
+        "top": [
+          {
+            "cardId": null,
+            "rate": 0.02,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "mobile_suica_ride"
+            ],
+            "routeIds": [
+              "suica_ride"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G13",
+      "desc": "マスタ未登録→カテゴリ（飲食）：楽天1%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "category_id": "restaurant"
+      },
+      "expected": {
+        "storeId": null,
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G14",
+      "desc": "セブン850円：7%で付与単位切り捨て（800円×7%=56）、三菱UFJは概算59",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "seven",
+        "amount": 850
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": 59,
+            "earnedApprox": true,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": 59,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 8,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G15",
+      "desc": "ファミマ199円：楽天100円単位で1pt",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "familymart",
+        "amount": 199
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 1,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 0,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 0,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G16",
+      "desc": "楽天・三菱UFJのみ保有でセブン：三菱UFJ 7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "paypay"
+            ],
+            "routeIds": [
+              "paypay_balance"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G17",
+      "desc": "三井住友のスマホタッチOFFでセブン：三菱UFJ 7%が1位",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G18",
+      "desc": "三井住友のみ・ボーナスOFFでファミマ：0.5%、Vポイント払い推奨",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G19",
+      "desc": "スタバ・ボーナスON：三井住友モバイルオーダー7%+1.55%（店頭は対象外）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "starbucks"
+      },
+      "expected": {
+        "storeId": "starbucks",
+        "categoryId": "cafe",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0855,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "smbcg_online"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "mufg_online"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0205,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G20",
+      "desc": "マクドナルド・ボーナスOFF：三井住友7%、ポイント払い推奨なし",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "mcdonalds"
+      },
+      "expected": {
+        "storeId": "mcdonalds",
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_online",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "online",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_online",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G22",
+      "desc": "ナチュラルローソン：三井住友スマホタッチ7%と三菱UFJ 7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "natural_lawson"
+      },
+      "expected": {
+        "storeId": "natural_lawson",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G23",
+      "desc": "ローソンスリーエフ：三井住友のみ7%（三菱UFJは対象外）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "lawson_threef"
+      },
+      "expected": {
+        "storeId": "lawson_threef",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G24",
+      "desc": "ピザハット（オンライン）：三菱UFJ 7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "pizzahut"
+      },
+      "expected": {
+        "storeId": "pizzahut",
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "mufg_online"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "rakuten_online"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "smbcg_online"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G25",
+      "desc": "コカ・コーラ自販機：三菱UFJカードのタッチ7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "cocacola_vm"
+      },
+      "expected": {
+        "storeId": "cocacola_vm",
+        "categoryId": "vending",
+        "top": [
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical"
+            ],
+            "routeIds": [
+              "mufg_card"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G26",
+      "desc": "むさしの森珈琲（すかいらーく）：三井住友7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "musashinomori"
+      },
+      "expected": {
+        "storeId": "musashinomori",
+        "categoryId": "cafe",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G27",
+      "desc": "松屋：三菱UFJ（カード/QUICPay/モバイルオーダー）7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "matsuya"
+      },
+      "expected": {
+        "storeId": "matsuya",
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "online",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_online",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "online",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_online",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "online",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_online",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G28",
+      "desc": "PayPayゴールド追加・ボーナスOFF・ファミマ：楽天とPayPayゴールドが同率1%（優先順で楽天が上）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            },
+            {
+              "cardId": "paypay_gold",
+              "joinYm": "2023-05",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 5
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            },
+            {
+              "bonusId": "ppg_1m",
+              "target": false,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "paypay_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "paypay",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ppg_card",
+              "ppg_paypay",
+              "ppg_quicpay",
+              "ppg_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point",
+          "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G29",
+      "desc": "PayPayゴールドのボーナスON（累計20万）・ファミマ：1%+1.1%=2.1%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            },
+            {
+              "cardId": "paypay_gold",
+              "joinYm": "2023-05",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 5
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            },
+            {
+              "bonusId": "ppg_1m",
+              "target": true,
+              "progressYen": 200000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "paypay_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.011,
+            "effectiveRate": 0.021,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "paypay",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ppg_card",
+              "ppg_paypay",
+              "ppg_quicpay",
+              "ppg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G30",
+      "desc": "両方のボーナスON・ファミマ：PayPayゴールド2.1% > 三井住友2.05%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            },
+            {
+              "cardId": "paypay_gold",
+              "joinYm": "2023-05",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 5
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000
+            },
+            {
+              "bonusId": "ppg_1m",
+              "target": true,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "paypay_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.011,
+            "effectiveRate": 0.021,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "paypay",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ppg_card",
+              "ppg_paypay",
+              "ppg_quicpay",
+              "ppg_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0205,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G31",
+      "desc": "PayPayゴールドのボーナスON・セブン：三井住友スマホタッチ7%が1位のまま",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            },
+            {
+              "cardId": "paypay_gold",
+              "joinYm": "2023-05",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 5
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": false,
+              "progressYen": 300000
+            },
+            {
+              "bonusId": "ppg_1m",
+              "target": true,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ]
+          },
+          {
+            "cardId": "paypay_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.011,
+            "effectiveRate": 0.021,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "paypay",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ppg_card",
+              "ppg_paypay",
+              "ppg_quicpay",
+              "ppg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G21",
+      "desc": "Yahoo!ショッピング・ボーナスON：三井住友（オンライン/PayPay）2.05%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "joinYm": "2024-04",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 1
+            },
+            {
+              "cardId": "rakuten",
+              "joinYm": "2018-01",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 2
+            },
+            {
+              "cardId": "ana_wide_gold",
+              "joinYm": "2015-06",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 3
+            },
+            {
+              "cardId": "mufg",
+              "joinYm": "2020-10",
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "priority": 4
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "smbcg_1m",
+              "target": true,
+              "progressYen": 300000
+            }
+          ]
+        },
+        "store_id": "yahoo_shopping"
+      },
+      "expected": {
+        "storeId": "yahoo_shopping",
+        "categoryId": "ec",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0155,
+            "effectiveRate": 0.0205,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_online",
+              "smbcg_paypay"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "rakuten_online"
+            ]
+          },
+          {
+            "cardId": "ana_wide_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "paypay"
+            ],
+            "routeIds": [
+              "ana_online",
+              "ana_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G32",
+      "desc": "Amazon：Amazon MC 2%とJCB W 2%が同率（優先順でAmazon MCが上）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "amazon_mc",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "jcb_w",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "amazon"
+      },
+      "expected": {
+        "storeId": "amazon",
+        "categoryId": "ec",
+        "top": [
+          {
+            "cardId": "amazon_mc",
+            "rate": 0.02,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "amzmc_online"
+            ]
+          },
+          {
+            "cardId": "jcb_w",
+            "rate": 0.02,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "jcbw_online"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "rakuten_online"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G33",
+      "desc": "ファミマ3,000円：リクルート1.2%（月間合計・概算36円）が1位",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "recruit",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "epos",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "familymart",
+        "amount": 3000
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "recruit",
+            "rate": 0.012,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.012,
+            "earnedYen": 36,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rec_card",
+              "rec_quicpay",
+              "rec_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 30,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": "epos",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 15,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ep_card",
+              "ep_quicpay",
+              "ep_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "paypay_point",
+          "rakuten_point"
+        ]
+      }
+    },
+    {
+      "id": "G34",
+      "desc": "セブン：セブンカード・プラス10%が三井住友（NL）7%より上",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "seven_plus",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "seven_plus",
+            "rate": 0.1,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.1,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "sp_card",
+              "sp_quicpay"
+            ]
+          },
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "nl_card",
+              "nl_id",
+              "nl_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G35",
+      "desc": "まいばすけっと：イオンカード1%（イオングループ2倍）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "aeon_select",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "epos",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "mybasket"
+      },
+      "expected": {
+        "storeId": "mybasket",
+        "categoryId": "supermarket",
+        "top": [
+          {
+            "cardId": "aeon_select",
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "aeon_card",
+              "aeon_quicpay",
+              "aeon_touch"
+            ]
+          },
+          {
+            "cardId": "epos",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ep_card",
+              "ep_quicpay",
+              "ep_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "paypay"
+            ],
+            "routeIds": [
+              "paypay_balance"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G36",
+      "desc": "プラチナプリファードのボーナスON・ファミマ：1%+1%=2%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_pp",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": [
+            {
+              "bonusId": "pp_1m",
+              "target": true,
+              "progressYen": 500000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_pp",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.01,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "pp_card",
+              "pp_id",
+              "pp_paypay",
+              "pp_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "paypay"
+            ],
+            "routeIds": [
+              "paypay_balance"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G37",
+      "desc": "マクドナルド：JCB W 5.5%は保有していなければ出ない（NLの7%のみ）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "mcdonalds"
+      },
+      "expected": {
+        "storeId": "mcdonalds",
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_online",
+              "nl_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "nl_card",
+              "nl_id",
+              "nl_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G38",
+      "desc": "マクドナルド：JCB W保有ならNL 7%の次にJCB W 5.5%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "jcb_w",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "mcdonalds"
+      },
+      "expected": {
+        "storeId": "mcdonalds",
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_online",
+              "nl_touch"
+            ]
+          },
+          {
+            "cardId": "jcb_w",
+            "rate": 0.055,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.055,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "jcbw_card",
+              "jcbw_quicpay",
+              "jcbw_touch"
+            ]
+          },
+          {
+            "cardId": "jcb_w",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "jcbw_online"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G39",
+      "desc": "ローソン：dポイント・Pontaポイント払い推奨（1位が通常還元のとき）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "aupay_card",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "dcard",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "epos",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "lawson"
+      },
+      "expected": {
+        "storeId": "lawson",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "aupay_card",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "au_card",
+              "au_quicpay",
+              "au_touch"
+            ]
+          },
+          {
+            "cardId": "dcard",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "dc_card",
+              "dc_id",
+              "dc_touch"
+            ]
+          },
+          {
+            "cardId": "epos",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ep_card",
+              "ep_quicpay",
+              "ep_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "d_point",
+          "ponta_point"
+        ]
+      }
+    },
+    {
+      "id": "G40",
+      "desc": "ファミマ：マリオット・プレミアム3%が楽天1%より上",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "rakuten",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "marriott_premium",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "familymart",
+        "amount": 1050
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "marriott_premium",
+            "rate": 0.03,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.03,
+            "earnedYen": 30,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mbp_card",
+              "mbp_quicpay",
+              "mbp_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 10,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "rakuten_point"
+        ]
+      }
+    },
+    {
+      "id": "G41",
+      "desc": "セブン：三井住友ゴールド7%がマリオット・プレミアム3%より上",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "marriott_premium",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_touch"
+            ]
+          },
+          {
+            "cardId": "marriott_premium",
+            "rate": 0.03,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.03,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mbp_card",
+              "mbp_quicpay",
+              "mbp_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G42",
+      "desc": "マリオット・プレミアムのボーナスON（累計100万）・ファミマ：3%+1.875%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "marriott_premium",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [
+            {
+              "bonusId": "mbp_4m",
+              "target": true,
+              "progressYen": 1000000
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "marriott_premium",
+            "rate": 0.03,
+            "rateSource": "base",
+            "bonusRate": 0.01875,
+            "effectiveRate": 0.04875,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mbp_card",
+              "mbp_quicpay",
+              "mbp_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G43",
+      "desc": "マリオット系ホテル：プレミアム6%・スタンダード5%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "marriott",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "marriott_premium",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "marriott_hotels"
+      },
+      "expected": {
+        "storeId": "marriott_hotels",
+        "categoryId": "other",
+        "top": [
+          {
+            "cardId": "marriott_premium",
+            "rate": 0.06,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.06,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "online",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mbp_card",
+              "mbp_online",
+              "mbp_quicpay",
+              "mbp_touch"
+            ]
+          },
+          {
+            "cardId": "marriott",
+            "rate": 0.05,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.05,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "online",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mb_card",
+              "mb_online",
+              "mb_quicpay",
+              "mb_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "online",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_online",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G44",
+      "desc": "PayPayゴールド入会初年度（2026-03入会）のボーナスON・ファミマ：1%+0.6%（初年度6,000pt）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "paypay_gold",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2026-03"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2026-03"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [
+            {
+              "bonusId": "ppg_1m",
+              "target": true,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "paypay_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.006,
+            "effectiveRate": 0.016,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "paypay",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ppg_card",
+              "ppg_paypay",
+              "ppg_quicpay",
+              "ppg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G45",
+      "desc": "PayPayゴールド2年目（2025-08入会）のボーナスON・ファミマ：1%+1.1%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "paypay_gold",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2025-08"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2025-08"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [
+            {
+              "bonusId": "ppg_1m",
+              "target": true,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "paypay_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.011,
+            "effectiveRate": 0.021,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "paypay",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ppg_card",
+              "ppg_paypay",
+              "ppg_quicpay",
+              "ppg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G46",
+      "desc": "dカード GOLDのボーナスON・入会年月なしでも固定期間で加算・ファミマ：1%+1%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "dcard_gold",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online"
+              ]
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ]
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [
+            {
+              "bonusId": "dg_1m",
+              "target": true,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "dcard_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.01,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "dg_card",
+              "dg_id",
+              "dg_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G47",
+      "desc": "JR東日本：ビューカードをチャージ元にしたモバイルSuica乗車3.5%がSuica乗車2%より上",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "view_std",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "rakuten",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "suica_ride"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "jr_east",
+        "amount": 1000
+      },
+      "expected": {
+        "storeId": "jr_east",
+        "categoryId": "transport",
+        "top": [
+          {
+            "cardId": "view_std",
+            "rate": 0.035,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.035,
+            "earnedYen": 35,
+            "earnedApprox": true,
+            "methodIds": [
+              "mobile_suica_ride"
+            ],
+            "routeIds": [
+              "view_suica_ride"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.025,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.025,
+            "earnedYen": 25,
+            "earnedApprox": true,
+            "methodIds": [
+              "mobile_suica_ride"
+            ],
+            "routeIds": [
+              "rakuten_suica_ride"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.02,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": 20,
+            "earnedApprox": false,
+            "methodIds": [
+              "mobile_suica_ride"
+            ],
+            "routeIds": [
+              "suica_ride"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G48",
+      "desc": "ファミマ1,050円：三井住友ゴールド（NL）0.5%は月間合計で概算5円",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_gold_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "familymart",
+        "amount": 1050
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_gold_nl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 5,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "smbcg_card",
+              "smbcg_id",
+              "smbcg_paypay",
+              "smbcg_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "vpoint"
+        ]
+      }
+    }
+  ],
+  "periodCases": [
+    {
+      "id": "P01",
+      "joinYm": "2024-04",
+      "offset": 0,
+      "today": "2026-09-22",
+      "expectedStart": "2026-04-01",
+      "expectedEnd": "2027-03-31"
+    },
+    {
+      "id": "P02",
+      "joinYm": "2024-04",
+      "offset": 0,
+      "today": "2027-03-31",
+      "expectedStart": "2026-04-01",
+      "expectedEnd": "2027-03-31"
+    },
+    {
+      "id": "P03",
+      "joinYm": "2024-04",
+      "offset": 0,
+      "today": "2027-04-01",
+      "expectedStart": "2027-04-01",
+      "expectedEnd": "2028-03-31"
+    },
+    {
+      "id": "P04",
+      "joinYm": "2025-12",
+      "offset": 0,
+      "today": "2026-09-22",
+      "expectedStart": "2025-12-01",
+      "expectedEnd": "2026-11-30"
+    },
+    {
+      "id": "P05",
+      "joinYm": "2026-09",
+      "offset": 0,
+      "today": "2026-09-22",
+      "expectedStart": "2026-09-01",
+      "expectedEnd": "2027-08-31"
+    },
+    {
+      "id": "P06",
+      "joinYm": "2024-04",
+      "offset": 1,
+      "today": "2026-09-22",
+      "expectedStart": "2026-05-01",
+      "expectedEnd": "2027-04-30"
+    },
+    {
+      "id": "P07",
+      "joinYm": "2023-05",
+      "offset": 1,
+      "today": "2026-09-22",
+      "expectedStart": "2026-06-01",
+      "expectedEnd": "2027-05-31"
+    }
+  ],
+  "periodForCases": [
+    {
+      "id": "Q01",
+      "bonusId": "ppg_1m",
+      "joinYm": "2026-03",
+      "today": "2026-09-22",
+      "expectedStart": "2026-03-01",
+      "expectedEnd": "2027-03-31",
+      "expectedFirst": true
+    },
+    {
+      "id": "Q02",
+      "bonusId": "ppg_1m",
+      "joinYm": "2026-03",
+      "today": "2027-03-31",
+      "expectedStart": "2026-03-01",
+      "expectedEnd": "2027-03-31",
+      "expectedFirst": true
+    },
+    {
+      "id": "Q03",
+      "bonusId": "ppg_1m",
+      "joinYm": "2026-03",
+      "today": "2027-04-01",
+      "expectedStart": "2027-04-01",
+      "expectedEnd": "2028-03-31",
+      "expectedFirst": false
+    },
+    {
+      "id": "Q04",
+      "bonusId": "ppg_1m",
+      "joinYm": "2023-05",
+      "today": "2026-09-22",
+      "expectedStart": "2026-06-01",
+      "expectedEnd": "2027-05-31",
+      "expectedFirst": false
+    },
+    {
+      "id": "Q05",
+      "bonusId": "dg_1m",
+      "joinYm": null,
+      "today": "2026-09-22",
+      "expectedStart": "2025-12-16",
+      "expectedEnd": "2026-12-15",
+      "expectedFirst": false
+    },
+    {
+      "id": "Q06",
+      "bonusId": "dg_1m",
+      "joinYm": null,
+      "today": "2026-12-15",
+      "expectedStart": "2025-12-16",
+      "expectedEnd": "2026-12-15",
+      "expectedFirst": false
+    },
+    {
+      "id": "Q07",
+      "bonusId": "dg_1m",
+      "joinYm": null,
+      "today": "2026-12-16",
+      "expectedStart": "2026-12-16",
+      "expectedEnd": "2027-12-15",
+      "expectedFirst": false
+    },
+    {
+      "id": "Q08",
+      "bonusId": "dg_1m",
+      "joinYm": "2024-04",
+      "today": "2027-01-05",
+      "expectedStart": "2026-12-16",
+      "expectedEnd": "2027-12-15",
+      "expectedFirst": false
+    },
+    {
+      "id": "Q09",
+      "bonusId": "smbcg_1m",
+      "joinYm": "2024-04",
+      "today": "2026-09-22",
+      "expectedStart": "2026-04-01",
+      "expectedEnd": "2027-03-31",
+      "expectedFirst": false
+    }
+  ],
+  "goalStatusCase": {
+    "input": {
+      "progressYen": 300000,
+      "joinYm": "2024-04",
+      "today": "2026-09-22"
+    },
+    "expected": {
+      "state": "active",
+      "start": "2026-04-01",
+      "deadline": "2027-03-31",
+      "remainingYen": 700000,
+      "monthsLeft": 7,
+      "requiredMonthlyYen": 100000,
+      "firstPeriod": false
+    }
+  }
+}

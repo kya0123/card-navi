@@ -1,14 +1,14 @@
-import { h } from '../h';
+import { Fragment, h } from '../h';
 import { foldProps } from '../fold';
 import type { Ctx } from '../app';
-import { NEARBY_RADII, nearbyOn, PROVIDER_NAME, providerOf, radiusOf, type NearbyProvider } from '../../domain/nearby';
+import { NEARBY_RADII, nearbyOn, PROVIDER_NAME, providerOf, radiusOf, YOLP_ENABLED, type NearbyProvider } from '../../domain/nearby';
 import { clearNearbyCache } from '../nearbyService';
 import { loadYolpAppId, YOLP_APPID_KEY, yolpAppId } from './nearby';
 
 /** S06 設定の「近くのお店」パネル（詳細設計 27.6） */
 export function NearbySettingsPanel(ctx: Ctx): Node {
   const s = ctx.state.settings;
-  if (!yolpAppId.loaded) void loadYolpAppId(ctx).then(() => ctx.render());
+  if (YOLP_ENABLED && !yolpAppId.loaded) void loadYolpAppId(ctx).then(() => ctx.render());
   const provider = providerOf(s);
   const hasAppId = !!yolpAppId.value;
   const consented = !!(s.nearbyConsent?.osm || s.nearbyConsent?.yolp);
@@ -34,7 +34,7 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
       {/* 検索先・アプリID・半径は詳細設定（将来は管理者だけが設定する。詳細設計 31.1 U11） */}
       <details class="fold" id="nearby-advanced" {...foldProps('nearby-advanced')}>
         <summary>詳細設定</summary>
-      <fieldset class="field">
+      {YOLP_ENABLED && <fieldset class="field">
         <legend>検索先</legend>
         <label class="check">
           <input type="radio" name="nearby-provider" id="nearby-provider-osm" checked={provider === 'osm'} onChange={() => setProvider('osm')} />
@@ -45,7 +45,7 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
             onChange={() => setProvider('yolp')} />
           <span>Yahoo!ローカルサーチ{hasAppId ? '' : '（アプリIDを入力すると選べます）'}</span>
         </label>
-      </fieldset>
+      </fieldset>}
       <label class="field">
         <span>検索する半径</span>
         <select id="nearby-radius" onChange={(e: Event) => {
@@ -56,6 +56,7 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
           {NEARBY_RADII.map((r) => <option value={String(r)} selected={radiusOf(s) === r}>{r}m</option>)}
         </select>
       </label>
+      {YOLP_ENABLED && <>
       <label class="field">
         <span>Yahoo!ローカルサーチのアプリID（Client ID）</span>
         <input id="yolp-appid" type="text" autocomplete="off" spellcheck={false} value={yolpAppId.value ?? ''} placeholder="Yahoo!デベロッパーネットワークで取得" />
@@ -69,6 +70,7 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
         {hasAppId && <button class="btn btn-small btn-ghost" id="yolp-appid-delete" onClick={() => void saveAppId(null)}>削除</button>}
       </div>
       <p class="note">アプリIDは端末内にだけ保存し、バックアップには含めません。</p>
+      </>}
       </details>
       {consented && (
         <button type="button" class="link-btn" id="nearby-revoke" onClick={() => {
@@ -77,7 +79,7 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
         }}>位置情報の送信への同意を取り消す</button>
       )}
       <p class="note">近くのお店を探すときだけ、約10m単位に丸めた現在地を{PROVIDER_NAME[provider]}のサーバに送ります。位置は保存しません。</p>
-      <p class="note">地図データ：© OpenStreetMap contributors（ODbL）／ Web Services by Yahoo! JAPAN</p>
+      <p class="note">地図データ：© OpenStreetMap contributors（ODbL）{YOLP_ENABLED ? '／ Web Services by Yahoo! JAPAN' : ''}</p>
     </div>
   );
 }

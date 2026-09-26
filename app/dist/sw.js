@@ -1,5 +1,5 @@
 // 自動生成（scripts/build.mjs）
-const CACHE = 'card-advisor-0deeefb9';
+const CACHE = 'card-advisor-4c06ac86';
 const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./icon-512-maskable.png","./apple-touch-icon.png"];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE.map((u) => new Request(u, { cache: 'reload' })))));

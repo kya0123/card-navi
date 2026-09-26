@@ -791,61 +791,30 @@ await run('E25', 'サーバエラー→再試行で成功。オフライン→�
   await context.close();
 });
 
-await run('E26', '設定でYahoo!ローカルサーチ（アプリID）に切り替え→同意をもう一度→JSONPの応答で一覧', async () => {
+await run('E26', '設定にYahoo!ローカルサーチの項目を出さない（連携は見送り中）。検索は OpenStreetMap', async () => {
   const { context, page } = await newPage(GEO, at('2026-09-22'), []);
   await mockOverpass(context);
-  let yolpUrl = '';
-  await context.route('https://map.yahooapis.jp/**', (route) => {
-    const u = new URL(route.request().url());
-    yolpUrl = u.toString();
-    const body = { ResultInfo: { Count: 2 }, Feature: [
-      { Gid: 'g1', Name: 'ローソン 辻堂駅前店', Geometry: { Coordinates: '139.4476,35.3384' } },
-      { Gid: 'g2', Name: 'まちの八百屋', Geometry: { Coordinates: '139.4476,35.3385' } }] };
-    return route.fulfill({ status: 200, contentType: 'text/javascript', body: `${u.searchParams.get('callback')}(${JSON.stringify(body)});` });
-  });
-  await page.click('#nearby-btn');
-  await page.click('#nearby-consent');                              // OSM に同意
-  await page.locator('.nearby-item').first().waitFor();
   await page.getByRole('button', { name: '設定', exact: true }).click();
-  assert.equal(await page.isDisabled('#nearby-provider-yolp'), true, 'アプリIDがなければ選べない');
-  if (!(await page.isVisible('#yolp-appid'))) await page.click('#nearby-advanced > summary');
-  await page.fill('#yolp-appid', 'TEST-APPID');
-  await page.click('#yolp-appid-save');
-  await page.locator('.toast', { hasText: 'アプリIDを保存しました' }).waitFor();
-  await page.check('#nearby-provider-yolp');
+  if (!(await page.isVisible('#nearby-radius'))) await page.click('#nearby-advanced > summary');
+  assert.equal(await page.locator('#nearby-provider-yolp').count(), 0);
+  assert.equal(await page.locator('#yolp-appid').count(), 0);
+  assert.doesNotMatch(await page.locator('#nearby-settings').innerText(), /Yahoo/);
   await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
   await page.click('#nearby-btn');
-  await page.locator('#nearby-consent-panel', { hasText: 'Yahoo! JAPANのサーバ' }).waitFor();
+  await page.locator('#nearby-consent-panel', { hasText: 'OpenStreetMap' }).waitFor();
   await page.click('#nearby-consent');
   await page.locator('.nearby-item').first().waitFor();
-  assert.deepEqual(await page.locator('.nearby-item span').allInnerTexts(), ['ローソン 辻堂駅前店']);
-  assert.match(await page.locator('#nearby-credit').innerText(), /Web Services by Yahoo! JAPAN/);
-  assert.match(yolpUrl, /appid=TEST-APPID/);
-  assert.match(yolpUrl, /dist=0\.3/);
+  assert.match(await page.locator('#nearby-credit').innerText(), /OpenStreetMap/);
   await context.close();
 });
 
-await run('E27', '設定でオフ→ホームに「近く」ボタンが出ない。YOLPのアプリIDはバックアップに含めない', async () => {
+await run('E27', '設定でオフ→ホームに「近く」ボタンが出ない', async () => {
   const { context, page } = await newPage(GEO, at('2026-09-22'), []);
   assert.equal(await page.locator('#nearby-btn').count(), 1);
   await page.getByRole('button', { name: '設定', exact: true }).click();
-  if (!(await page.isVisible('#yolp-appid'))) await page.click('#nearby-advanced > summary');
-  await page.fill('#yolp-appid', 'SECRET-ID');
-  await page.click('#yolp-appid-save');
   await page.uncheck('#nearby-enabled');
   await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
   assert.equal(await page.locator('#nearby-btn').count(), 0);
-  const saved = await page.evaluate(() => new Promise((res) => {
-    const r = indexedDB.open('card-advisor');
-    r.onsuccess = () => { const db = r.result; const names = [...db.objectStoreNames]; res(names); };
-  }));
-  assert.ok(Array.isArray(saved));
-  await page.getByRole('button', { name: '設定', exact: true }).click();
-  const hasJson = await page.locator('#show-json').count();
-  if (hasJson) {
-    await page.click('#show-json');
-    assert.doesNotMatch(await page.locator('body').innerText(), /SECRET-ID/);
-  }
   await context.close();
 });
 

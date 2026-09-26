@@ -21,6 +21,7 @@ import { AdPolicyScreen } from './screens/adpolicy';
 import { NearbyScreen } from './screens/nearby';
 import { CardRateScreen } from './screens/cardRate';
 import { themeOf } from '../domain/theme';
+import { withCustomCards } from '../domain/custom';
 
 export type RouteName = 'home' | 'category' | 'cards' | 'review' | 'info' | 'settings' | 'adpolicy' | 'nearby' | 'rate';
 
@@ -48,7 +49,8 @@ export interface AppState {
 }
 
 export interface Ctx {
-  mi: MasterIndex;
+  /** マスタの索引。その他のカード（詳細設計 32.8）を取り込んだもの */
+  readonly mi: MasterIndex;
   search: SearchIndex;
   state: AppState;
   today: YMD;
@@ -135,7 +137,8 @@ export async function startApp(root: HTMLElement): Promise<void> {
   let rendering = false;
   let pending = false;
   const ctx: Ctx = {
-    mi, search: buildSearchIndex(mi), state, today, repo,
+    get mi() { return withCustomCards(mi, state.settings.customCards); },
+    search: buildSearchIndex(mi), state, today, repo,
     async update(mutate, opts) {
       const next = structuredClone(state.settings);
       mutate(next);

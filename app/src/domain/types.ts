@@ -7,6 +7,18 @@ export type YM = string;
 // ---- マスタ ----
 /** カードの区分（詳細設計 20.3）：定番／ポイ活向け */
 export type CardSegment = 'popular' | 'enthusiast';
+/** カードのランク（詳細設計 32.5）。名前ではなく券種の位置付けで決める */
+export type CardTier = 'general' | 'gold' | 'platinum';
+/** カードのシリーズ（一覧の見出し・並び順・検索用。詳細設計 32.5） */
+export interface Series {
+  id: Id;
+  /** 見出しに出すシリーズ名（例：「ANAカード」） */
+  name: string;
+  /** 並び順・検索用のよみ */
+  kana: string;
+  /** 検索用の別名 */
+  aliases: string[];
+}
 export interface Card {
   id: Id; name: string; brand: string; pointId: Id; annualFee: number;
   /** 一覧・ラベル用の略称（例：「三菱UFJ」） */
@@ -20,11 +32,15 @@ export interface Card {
   highlight: string;
   aliases: string[];
   annualFeeNote?: string;
-  /** 見出しに出すカード会社名と、並び順用のよみ（詳細設計 24.2） */
+  /** カード会社名とよみ（詳細設計 24.2）。v1.20 から見出しには使わず、行の補足に出す */
   company: string; companyKana: string;
+  series: Id; tier: CardTier;
+  /** その他のカード（利用者が登録したカード。詳細設計 32.8）。マスタのカードにはない */
+  userDefined?: boolean;
   officialUrl?: string;
 }
-export interface Method { id: Id; name: string; type: 'card' | 'tap' | 'wallet' | 'code' | 'transit' }
+/** emoney は電子マネー（WAON・nanaco・楽天Edy。詳細設計 32.11） */
+export interface Method { id: Id; name: string; type: 'card' | 'tap' | 'wallet' | 'code' | 'transit' | 'emoney' }
 export type UsableScope = 'visaMerchants' | 'paypayMerchants' | 'suicaMerchants' | 'listed' | 'none';
 export interface Point {
   id: Id; name: string; yenPerPoint: number; usableScope: UsableScope;
@@ -38,6 +54,10 @@ export interface Route {
   countsTowardBonus: boolean;
   sourceUrl: string; checkedAt: YMD; confidence: Confidence;
   needsReview?: boolean; note?: string;
+  /** その他のカードの経路（詳細設計 32.8）。出典・確認日の警告を出さない */
+  userDefined?: boolean;
+  /** カード以外の経路：新規利用者に最初から有効にするか、チェックボックスの表示名（詳細設計 32.11） */
+  defaultEnabled?: boolean; label?: string;
 }
 export interface Bonus {
   id: Id; cardId: Id; thresholdYen: number; valueYen: number;
@@ -57,6 +77,8 @@ export interface Store {
   acceptedMethods?: Id[]; usablePoints?: Id[]; note?: string;
   /** 近くのお店（F13）の紐付けに使う OpenStreetMap のブランド識別子（Wikidata ID） */
   osmBrandWikidata?: string[];
+  /** 現金しか使えない店（acceptedMethods は空。詳細設計 32.11） */
+  cashOnly?: boolean;
 }
 export interface RateRule {
   id: Id; target: { storeId?: Id; categoryId?: Id }; routeId: Id; rate: number;
@@ -65,7 +87,7 @@ export interface RateRule {
 }
 export interface Master {
   schemaVersion: 1; masterVersion: string; checkedAt: YMD; disclaimer: string;
-  cards: Card[]; methods: Method[]; points: Point[]; routes: Route[]; bonuses: Bonus[];
+  series: Series[]; cards: Card[]; methods: Method[]; points: Point[]; routes: Route[]; bonuses: Bonus[];
   categories: Category[]; stores: Store[]; rateRules: RateRule[];
 }
 
@@ -107,6 +129,19 @@ export interface UserSettings {
   nearbyRadiusM?: 100 | 300 | 500 | 1000;
   /** 検索先ごとの位置情報の送信への同意日 */
   nearbyConsent?: { osm?: YMD; yolp?: YMD };
+  /** その他のカード（一覧にないカード。最大5枚。詳細設計 32.8） */
+  customCards?: CustomCard[];
+}
+
+/** その他のカード（詳細設計 32.8） */
+export interface CustomCard {
+  /** 'custom_' ＋連番 */
+  id: Id;
+  /** 利用者が付ける名前。空なら「その他のカード1」 */
+  name: string;
+  pointId: Id;
+  /** 基本のポイント率（0.001〜0.03。0.1%刻み） */
+  baseRate: number;
 }
 
 // ---- 推奨結果 ----
@@ -119,6 +154,8 @@ export interface RecommendItem {
   reasons: string[];
   /** 同じカードの、より低い率の支払い方法（1カード1枠。詳細設計 31.2.3） */
   others: { methodIds: Id[]; effectiveRate: number }[];
+  /** 全カードで比べるとき、この枠にまとめた同じシリーズ・同じ率のカード（詳細設計 32.7） */
+  sameRateCardIds?: Id[];
 }
 export interface RecommendResult {
   storeId: Id | null; categoryId: Id;

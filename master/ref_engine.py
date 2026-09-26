@@ -74,7 +74,58 @@ def goal_status(goal, card_setting, today):
 
 
 # ---------- 推奨（4.2） ----------
-def resolve_rate(route_id, store, category_id, today):
+# ---------- その他のカード（詳細設計 32.8） ----------
+CUSTOM_METHODS = ["card_physical", "smartphone_visa_touch", "online"]
+
+
+def custom_parts(user):
+    """その他のカードを、持っているカードとして使う経路とカードにする（特約・ボーナスなし、月間合計）"""
+    cards, routes = {}, []
+    for i, c in enumerate(user.get("customCards", [])):
+        cards[c["id"]] = {"id": c["id"], "pointId": c["pointId"], "annualFee": 0, "series": "custom", "tier": "general",
+                          "name": c["name"].strip() or f"その他のカード{i + 1}", "userDefined": True}
+        yen = BY["points"][c["pointId"]]["yenPerPoint"]
+        for m in CUSTOM_METHODS:
+            routes.append({"id": f"{c['id']}_{m}", "cardId": c["id"], "methodId": m, "pointId": c["pointId"],
+                           "baseRate": c["baseRate"], "unitYen": 100, "pointsPerUnit": c["baseRate"] * 100 / yen,
+                           "unitScope": "monthlyTotal", "countsTowardBonus": False, "userDefined": True})
+    return cards, routes
+
+
+TIER_RANK = {"general": 0, "gold": 1, "platinum": 2}
+CARD_ORDER = {c["id"]: i for i, c in enumerate(M["cards"])}
+
+
+def merge_same_series(groups, owned, cards):
+    """全カードで比べるとき、同じシリーズ・同じ率の持っていないカードを代表の枠にまとめる（詳細設計 32.7）"""
+    def key(g):
+        c = cards.get(g["cardId"]) if g["cardId"] else None
+        return f"{c['series']}|{g['effectiveRate']}" if c and c["series"] != "custom" else None
+
+    def rank(g):
+        c = cards[g["cardId"]]
+        return (0 if c["id"] in owned else 1, c["annualFee"], TIER_RANK[c["tier"]], CARD_ORDER.get(c["id"], 0))
+
+    clusters = {}
+    for g in groups:
+        k = key(g)
+        if k: clusters.setdefault(k, []).append(g)
+    rep_of = {}
+    for k, members in clusters.items():
+        rep = min(members, key=rank)
+        absorbed = sorted([m for m in members if m is not rep and m["cardId"] not in owned], key=rank)
+        if absorbed: rep["sameRateCardIds"] = [m["cardId"] for m in absorbed]
+        rep_of[k] = rep
+    out, placed = [], set()
+    for g in groups:
+        k = key(g)
+        target = g if (not k or g["cardId"] in owned) else rep_of[k]
+        if id(target) not in placed:
+            out.append(target); placed.add(id(target))
+    return out
+
+
+def resolve_rate(route_id, store, category_id, today, route=None):
     def valid(r):
         return (r.get("validFrom") is None or date.fromisoformat(r["validFrom"]) <= today) and \
                (r.get("validTo") is None or today <= date.fromisoformat(r["validTo"]))
@@ -84,7 +135,7 @@ def resolve_rate(route_id, store, category_id, today):
         if hit: return max(r["rate"] for r in hit), "store"
     hit = [r for r in rules if r["target"].get("categoryId") == category_id]
     if hit: return max(r["rate"] for r in hit), "category"
-    return BY["routes"][route_id]["baseRate"], "base"
+    return (route or BY["routes"][route_id])["baseRate"], "base"
 
 
 def earned_points(route, rate, amount):
@@ -96,28 +147,37 @@ def earned_points(route, rate, amount):
     return math.floor(base * rate + EPS), False
 
 
-def recommend(user, store_id=None, category_id=None, amount=None, today=date(2026, 9, 22), top_n=3):
+def recommend(user, store_id=None, category_id=None, amount=None, today=date(2026, 9, 22), top_n=3, scope="owned"):
     store = BY["stores"].get(store_id) if store_id else None
     cat_id = store["categoryId"] if store else category_id
-    accepted = set(store.get("acceptedMethods") or BY["categories"][cat_id]["defaultMethods"]) if store \
+    # 現金のみの店は acceptedMethods が空（詳細設計 32.11）。空リストも店舗の指定として扱う
+    accepted = set(store["acceptedMethods"] if "acceptedMethods" in store else BY["categories"][cat_id]["defaultMethods"]) if store \
         else set(BY["categories"][cat_id]["defaultMethods"])
 
     owned = {c["cardId"]: c for c in user["ownedCards"]}
     goals = {g["bonusId"]: g for g in user.get("bonusGoals", [])}
+    custom_cards, custom_routes = custom_parts(user)
+    cards = {**BY["cards"], **custom_cards}
     cands = []
-    for r in M["routes"]:
+    for r in M["routes"] + custom_routes:
         if r["methodId"] not in accepted: continue
         if r["cardId"] is None:
             if r["id"] not in user.get("enabledNonCardRoutes", []): continue
             prio = 99
         else:
             c = owned.get(r["cardId"])
-            if not c or r["methodId"] not in c["enabledMethods"]: continue
-            prio = c["priority"]
-        rate, src = resolve_rate(r["id"], store, cat_id, today)
+            if c:
+                if r["methodId"] not in c["enabledMethods"]: continue
+                prio = c["priority"]
+            else:
+                # 全カードで比べるときだけ、持っていないカードを定義順で後ろに加える（詳細設計 30.2）
+                if scope != "all": continue
+                prio = 1000 + CARD_ORDER.get(r["cardId"], 0)
+        rate, src = resolve_rate(r["id"], store, cat_id, today, r)
         bonus_rate = 0.0
         b = BONUS_BY_CARD.get(r["cardId"])
-        if b and b["id"] in goals and goals[b["id"]].get("target") and r["countsTowardBonus"] \
+        # ボーナスは持っているカードだけ加算する
+        if b and r["cardId"] in owned and b["id"] in goals and goals[b["id"]].get("target") and r["countsTowardBonus"] \
                 and r["methodId"] not in b.get("excludedMethods", []):
             g = goals[b["id"]]
             st = goal_status(g, owned[r["cardId"]], today)
@@ -144,14 +204,19 @@ def recommend(user, store_id=None, category_id=None, amount=None, today=date(202
         g = {k: v for k, v in c.items() if k not in ("_prio", "methodId", "routeId")}
         g["methodIds"], g["routeIds"] = [c["methodId"]], [c["routeId"]]
         index[key] = g; groups.append(g)
+    if scope == "all":
+        groups = merge_same_series(groups, owned, cards)
     top = groups[:top_n]
 
     # ポイント払い推奨（4.4）
     point_pay = None
-    if top:
+    if scope == "all":
+        # ポイント払いは持っているカードの1位で判定する
+        point_pay = recommend(user, store_id, category_id, None, today, 1)["pointPay"]
+    elif top:
         t = top[0]
         if t["rateSource"] == "base" and t["bonusRate"] == 0:
-            held = {BY["cards"][cid]["pointId"] for cid in owned} | \
+            held = {cards[cid]["pointId"] for cid in owned} | \
                    {BY["routes"][rid]["pointId"] for rid in user.get("enabledNonCardRoutes", [])}
             usable = set(store.get("usablePoints", [])) if store else set()
             for p in M["points"]:
@@ -203,6 +268,15 @@ def owned_user(card_ids, goals=None, non_card=("paypay_balance", "suica_ride"), 
     for c in oc:
         if join: c["joinYm"] = join
     return {"ownedCards": oc, "enabledNonCardRoutes": list(non_card), "bonusGoals": goals or []}
+
+
+def custom_user(card_ids, customs, non_card=()):
+    """その他のカードを登録した利用者（その他のカードは持っているカードの末尾）"""
+    u = owned_user(card_ids, non_card=non_card)
+    for c in customs:
+        u["ownedCards"].append({"cardId": c["id"], "priority": len(u["ownedCards"]) + 1, "enabledMethods": list(CUSTOM_METHODS)})
+    u["customCards"] = customs
+    return u
 
 
 CASES = [
@@ -279,6 +353,41 @@ CASES = [
      owned_user(["view_std", "rakuten"]), {"store_id": "jr_east", "amount": 1000}),
     ("G48", "ファミマ1,050円：三井住友ゴールド（NL）0.5%は月間合計で概算5円",
      owned_user(["smbc_gold_nl"], non_card=[]), {"store_id": "familymart", "amount": 1050}),
+    # ---- v1.20：その他のカード（32.8）・全カードで比べるときのシリーズまとめ（32.7） ----
+    ("G49", "その他のカード（楽天ポイント1.2%）がファミマで楽天カード1%より上（月間合計・概算12円）",
+     custom_user(["rakuten"], [{"id": "custom_1", "name": "〇〇銀行カード", "pointId": "rakuten_point", "baseRate": 0.012}]),
+     {"store_id": "familymart", "amount": 1000}),
+    ("G50", "その他のカードに特約はない：セブンで三井住友（NL）7%の下",
+     custom_user(["smbc_nl"], [{"id": "custom_1", "name": "", "pointId": "global_point", "baseRate": 0.01}]), {"store_id": "seven"}),
+    ("G51", "全カード・持っているカードなし：セブンで三井住友（NL）シリーズは（NL）の1枠（ゴールド・プラチナプリファードを添える）",
+     owned_user([], non_card=[]), {"store_id": "seven", "scope": "all", "top_n": 10}),
+    ("G52", "全カード・プラチナプリファードを持っている：セブンで（NL）・ゴールド（NL）はプラチナプリファードの枠",
+     owned_user(["smbc_pp"], non_card=[]), {"store_id": "seven", "scope": "all", "top_n": 10}),
+    # ---- 2026-09-26：カードラインナップ第1弾・第2弾（32.3・32.4） ----
+    ("G53", "イオン：JALカード CLUB-Aゴールド2%（特約店）がイオンゴールド1%・JAL普通1%より上",
+     owned_user(["jal_club_a_gold", "aeon_gold", "jal_general"], non_card=[]), {"store_id": "aeon"}),
+    ("G54", "ファミマ1,000円：セゾンゴールド・アメックス0.75%（永久不滅1pt＝5円・概算7円）＞セゾンインターナショナル0.5%＞アメックス・グリーン0.3%",
+     owned_user(["saison_gold_amex", "saison_intl", "amex_green"], non_card=[]), {"store_id": "familymart", "amount": 1000}),
+    ("G55", "オーケー：三菱UFJカード ゴールド7%＞ローソンPontaプラス5%",
+     owned_user(["lawson_ponta", "mufg_gold"], non_card=[]), {"store_id": "ok"}),
+    ("G56", "マクドナルド：JCBゴールドのモバイルオーダー10%＞三井住友（NL）7%",
+     owned_user(["smbc_nl", "jcb_gold"], non_card=[]), {"store_id": "mcdonalds"}),
+    ("G57", "ファミマ：ANA JCBワイドゴールド1%（マイル1円）＞ANA VISA一般0.5%・ANA JCB一般0.5%",
+     owned_user(["ana_visa_general", "ana_jcb_general", "ana_jcb_wide_gold"], non_card=[]), {"store_id": "familymart", "amount": 3000}),
+    ("G58", "エポスプラチナのボーナスON・ファミマ：0.5%＋2%（年100万円で20,000pt）",
+     owned_user(["epos_platinum", "epos_gold"], non_card=[], goals=[{"bonusId": "epp_1m", "target": True, "progressYen": 0}]),
+     {"store_id": "familymart"}),
+    ("G59", "セブン：Oliveゴールド・Oliveプラチナプリファードも8%。同率は優先順",
+     owned_user(["olive_pp", "olive_gold", "smbc_nl"], non_card=[]), {"store_id": "seven"}),
+    # ---- 2026-09-26 段階4：カード以外の支払い（32.11） ----
+    ("G60", "カードなし・d払いとPayPay残高を使う：ファミマでどちらも0.5%（経路ごとに1枠）",
+     owned_user([], non_card=["paypay_balance", "dbarai_balance"]), {"store_id": "familymart"}),
+    ("G61", "楽天ペイ（楽天キャッシュ）1%はリクルートカード1.2%に負ける：ローソン",
+     owned_user(["recruit"], non_card=["rpay_cash"]), {"store_id": "lawson"}),
+    ("G62", "イオン：WAONは2倍で1%。イオンカードセレクト1%と同率ならカードが先",
+     owned_user(["aeon_select"], non_card=["waon_emoney", "nanaco_emoney"]), {"store_id": "aeon"}),
+    ("G63", "セブン：nanacoはセブンで使える（0.5%）。WAONは使えない",
+     owned_user([], non_card=["waon_emoney", "nanaco_emoney"]), {"store_id": "seven"}),
 ]
 
 PERIOD_CASES = [
@@ -309,7 +418,8 @@ if __name__ == "__main__":
         print(cid, desc)
         for x in t:
             print(f"    {x['cardId'] or x['routeIds'][0]:14} {'/'.join(x['methodIds']):45} rate={x['rate']:.4f} bonus={x['bonusRate']:.4f} eff={x['effectiveRate']:.4f}"
-                  f" src={x['rateSource']} earned={x['earnedYen']}{'(概算)' if x['earnedApprox'] else ''}")
+                  f" src={x['rateSource']} earned={x['earnedYen']}{'(概算)' if x['earnedApprox'] else ''}"
+                  f"{' same=' + '/'.join(x['sameRateCardIds']) if x.get('sameRateCardIds') else ''}")
         print("    pointPay:", res["pointPay"])
     for pid, jym, off, today in PERIOD_CASES:
         s, e = bonus_period(jym, off, date.fromisoformat(today))

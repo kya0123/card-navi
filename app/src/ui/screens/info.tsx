@@ -1,6 +1,6 @@
 import { h } from '../h';
 import { foldProps } from '../fold';
-import { compareCards } from '../../domain/catalog';
+import { compareCards, masterCards } from '../../domain/catalog';
 import type { Card } from '../../domain/types';
 import type { Ctx } from '../app';
 import { daysBetween } from '../../domain/date';
@@ -89,7 +89,7 @@ export function InfoScreen(ctx: Ctx): Node {
             </details>
           );
         };
-        const sorted = [...mi.raw.cards].sort(compareCards);
+        const sorted = masterCards(mi).sort(compareCards(mi));
         const others = sorted.filter((c) => !owned.has(c.id));
         return [
           ...sorted.filter((c) => owned.has(c.id)).map(CardPanel),

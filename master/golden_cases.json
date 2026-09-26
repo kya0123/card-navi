@@ -1,5 +1,5 @@
 {
-  "masterVersion": "2026.09.26-1",
+  "masterVersion": "2026.09.26-4",
   "today": "2026-09-22",
   "cases": [
     {
@@ -363,6 +363,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -381,27 +402,6 @@
               "smbcg_id",
               "smbcg_paypay",
               "smbcg_touch"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "ana_card",
-              "ana_id",
-              "ana_paypay",
-              "ana_touch"
             ]
           }
         ],
@@ -531,10 +531,10 @@
           },
           {
             "cardId": "ana_wide_gold",
-            "rate": 0.005,
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -674,10 +674,10 @@
           },
           {
             "cardId": "ana_wide_gold",
-            "rate": 0.005,
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -795,6 +795,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -813,27 +834,6 @@
               "smbcg_id",
               "smbcg_paypay",
               "smbcg_touch"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "ana_card",
-              "ana_id",
-              "ana_paypay",
-              "ana_touch"
             ]
           }
         ],
@@ -941,6 +941,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -959,27 +980,6 @@
               "smbcg_id",
               "smbcg_paypay",
               "smbcg_touch"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "ana_card",
-              "ana_id",
-              "ana_paypay",
-              "ana_touch"
             ]
           }
         ],
@@ -1088,6 +1088,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -1106,27 +1127,6 @@
               "smbcg_id",
               "smbcg_paypay",
               "smbcg_touch"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "ana_card",
-              "ana_id",
-              "ana_paypay",
-              "ana_touch"
             ]
           }
         ],
@@ -1251,11 +1251,11 @@
             ]
           },
           {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -1265,10 +1265,10 @@
               "smartphone_visa_touch"
             ],
             "routeIds": [
-              "smbcg_card",
-              "smbcg_id",
-              "smbcg_paypay",
-              "smbcg_touch"
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
             ]
           }
         ],
@@ -1368,6 +1368,23 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "paypay"
+            ],
+            "routeIds": [
+              "ana_online",
+              "ana_paypay"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -1382,23 +1399,6 @@
             "routeIds": [
               "smbcg_online",
               "smbcg_paypay"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "online",
-              "paypay"
-            ],
-            "routeIds": [
-              "ana_online",
-              "ana_paypay"
             ]
           }
         ],
@@ -1501,6 +1501,21 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "ana_online"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -1513,21 +1528,6 @@
             ],
             "routeIds": [
               "smbcg_online"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "online"
-            ],
-            "routeIds": [
-              "ana_online"
             ]
           }
         ],
@@ -1727,6 +1727,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -1745,27 +1766,6 @@
               "smbcg_id",
               "smbcg_paypay",
               "smbcg_touch"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "ana_card",
-              "ana_id",
-              "ana_paypay",
-              "ana_touch"
             ]
           }
         ],
@@ -2006,6 +2006,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 0,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "smbc_gold_nl",
             "rate": 0.005,
             "rateSource": "base",
@@ -2024,27 +2045,6 @@
               "smbcg_id",
               "smbcg_paypay",
               "smbcg_touch"
-            ]
-          },
-          {
-            "cardId": "ana_wide_gold",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": 0,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "ana_card",
-              "ana_id",
-              "ana_paypay",
-              "ana_touch"
             ]
           }
         ],
@@ -2274,22 +2274,24 @@
             ]
           },
           {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
               "card_physical",
               "applepay_id",
-              "paypay"
+              "paypay",
+              "smartphone_visa_touch"
             ],
             "routeIds": [
-              "smbcg_card",
-              "smbcg_id",
-              "smbcg_paypay"
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
             ]
           }
         ],
@@ -2607,10 +2609,10 @@
           },
           {
             "cardId": "ana_wide_gold",
-            "rate": 0.005,
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -2877,10 +2879,10 @@
           },
           {
             "cardId": "ana_wide_gold",
-            "rate": 0.005,
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -3008,18 +3010,18 @@
             ]
           },
           {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
               "online"
             ],
             "routeIds": [
-              "smbcg_online"
+              "ana_online"
             ]
           }
         ],
@@ -3138,11 +3140,11 @@
             ]
           },
           {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -3151,9 +3153,9 @@
               "smartphone_visa_touch"
             ],
             "routeIds": [
-              "smbcg_card",
-              "smbcg_id",
-              "smbcg_touch"
+              "ana_card",
+              "ana_id",
+              "ana_touch"
             ]
           }
         ],
@@ -3273,10 +3275,10 @@
           },
           {
             "cardId": "ana_wide_gold",
-            "rate": 0.005,
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -3414,11 +3416,11 @@
             ]
           },
           {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -3429,11 +3431,11 @@
               "smartphone_visa_touch"
             ],
             "routeIds": [
-              "smbcg_card",
-              "smbcg_id",
-              "smbcg_online",
-              "smbcg_paypay",
-              "smbcg_touch"
+              "ana_card",
+              "ana_id",
+              "ana_online",
+              "ana_paypay",
+              "ana_touch"
             ]
           }
         ],
@@ -3555,6 +3557,27 @@
             ]
           },
           {
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
+            ]
+          },
+          {
             "cardId": "paypay_gold",
             "rate": 0.01,
             "rateSource": "base",
@@ -3573,27 +3596,6 @@
               "ppg_paypay",
               "ppg_quicpay",
               "ppg_touch"
-            ]
-          },
-          {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
-            "rateSource": "base",
-            "bonusRate": 0.0,
-            "effectiveRate": 0.005,
-            "earnedYen": null,
-            "earnedApprox": false,
-            "methodIds": [
-              "card_physical",
-              "applepay_id",
-              "paypay",
-              "smartphone_visa_touch"
-            ],
-            "routeIds": [
-              "smbcg_card",
-              "smbcg_id",
-              "smbcg_paypay",
-              "smbcg_touch"
             ]
           }
         ],
@@ -3740,11 +3742,11 @@
             ]
           },
           {
-            "cardId": "smbc_gold_nl",
-            "rate": 0.005,
+            "cardId": "ana_wide_gold",
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -3754,10 +3756,10 @@
               "smartphone_visa_touch"
             ],
             "routeIds": [
-              "smbcg_card",
-              "smbcg_id",
-              "smbcg_paypay",
-              "smbcg_touch"
+              "ana_card",
+              "ana_id",
+              "ana_paypay",
+              "ana_touch"
             ]
           }
         ],
@@ -4187,10 +4189,10 @@
           },
           {
             "cardId": "ana_wide_gold",
-            "rate": 0.005,
+            "rate": 0.01,
             "rateSource": "base",
             "bonusRate": 0.0,
-            "effectiveRate": 0.005,
+            "effectiveRate": 0.01,
             "earnedYen": null,
             "earnedApprox": false,
             "methodIds": [
@@ -5740,6 +5742,1519 @@
         ],
         "pointPay": [
           "vpoint"
+        ]
+      }
+    },
+    {
+      "id": "G49",
+      "desc": "その他のカード（楽天ポイント1.2%）がファミマで楽天カード1%より上（月間合計・概算12円）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "rakuten",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "smartphone_visa_touch",
+                "online",
+                "mobile_suica_ride"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "custom_1",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "online"
+              ]
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [],
+          "customCards": [
+            {
+              "id": "custom_1",
+              "name": "〇〇銀行カード",
+              "pointId": "rakuten_point",
+              "baseRate": 0.012
+            }
+          ]
+        },
+        "store_id": "familymart",
+        "amount": 1000
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "custom_1",
+            "rate": 0.012,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.012,
+            "earnedYen": 12,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "custom_1_card_physical",
+              "custom_1_smartphone_visa_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 10,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ]
+          }
+        ],
+        "pointPay": [
+          "rakuten_point"
+        ]
+      }
+    },
+    {
+      "id": "G50",
+      "desc": "その他のカードに特約はない：セブンで三井住友（NL）7%の下",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "custom_1",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "online"
+              ]
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [],
+          "customCards": [
+            {
+              "id": "custom_1",
+              "name": "",
+              "pointId": "global_point",
+              "baseRate": 0.01
+            }
+          ]
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_touch"
+            ]
+          },
+          {
+            "cardId": "custom_1",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "custom_1_card_physical",
+              "custom_1_smartphone_visa_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G51",
+      "desc": "全カード・持っているカードなし：セブンで三井住友（NL）シリーズは（NL）の1枠（ゴールド・プラチナプリファードを添える）",
+      "input": {
+        "user": {
+          "ownedCards": [],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "seven",
+        "scope": "all",
+        "top_n": 10
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "seven_plus",
+            "rate": 0.1,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.1,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "sp_card",
+              "sp_quicpay"
+            ],
+            "sameRateCardIds": [
+              "seven_gold"
+            ]
+          },
+          {
+            "cardId": "olive",
+            "rate": 0.08,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.08,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "olv_touch"
+            ],
+            "sameRateCardIds": [
+              "olive_gold",
+              "olive_pp"
+            ]
+          },
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_touch"
+            ],
+            "sameRateCardIds": [
+              "smbc_gold_nl",
+              "smbc_pp"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ],
+            "sameRateCardIds": [
+              "mufg_gold"
+            ]
+          },
+          {
+            "cardId": "amazon_mc",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "amzmc_touch"
+            ]
+          },
+          {
+            "cardId": "marriott_premium",
+            "rate": 0.03,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.03,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mbp_card",
+              "mbp_quicpay",
+              "mbp_touch"
+            ]
+          },
+          {
+            "cardId": "marriott",
+            "rate": 0.02,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mb_card",
+              "mb_quicpay",
+              "mb_touch"
+            ]
+          },
+          {
+            "cardId": "jcb_w",
+            "rate": 0.015,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.015,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "jcbw_card",
+              "jcbw_quicpay",
+              "jcbw_touch"
+            ],
+            "sameRateCardIds": [
+              "jcb_gold"
+            ]
+          },
+          {
+            "cardId": "recruit",
+            "rate": 0.012,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.012,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rec_card",
+              "rec_quicpay",
+              "rec_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ],
+            "sameRateCardIds": [
+              "rakuten_gold"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G52",
+      "desc": "全カード・プラチナプリファードを持っている：セブンで（NL）・ゴールド（NL）はプラチナプリファードの枠",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_pp",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "seven",
+        "scope": "all",
+        "top_n": 10
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "seven_plus",
+            "rate": 0.1,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.1,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "sp_card",
+              "sp_quicpay"
+            ],
+            "sameRateCardIds": [
+              "seven_gold"
+            ]
+          },
+          {
+            "cardId": "olive",
+            "rate": 0.08,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.08,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "olv_touch"
+            ],
+            "sameRateCardIds": [
+              "olive_gold",
+              "olive_pp"
+            ]
+          },
+          {
+            "cardId": "smbc_pp",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "pp_touch"
+            ],
+            "sameRateCardIds": [
+              "smbc_nl",
+              "smbc_gold_nl"
+            ]
+          },
+          {
+            "cardId": "mufg",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufg_card",
+              "mufg_quicpay"
+            ],
+            "sameRateCardIds": [
+              "mufg_gold"
+            ]
+          },
+          {
+            "cardId": "amazon_mc",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "amzmc_touch"
+            ]
+          },
+          {
+            "cardId": "marriott_premium",
+            "rate": 0.03,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.03,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mbp_card",
+              "mbp_quicpay",
+              "mbp_touch"
+            ]
+          },
+          {
+            "cardId": "marriott",
+            "rate": 0.02,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "mb_card",
+              "mb_quicpay",
+              "mb_touch"
+            ]
+          },
+          {
+            "cardId": "jcb_w",
+            "rate": 0.015,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.015,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "jcbw_card",
+              "jcbw_quicpay",
+              "jcbw_touch"
+            ],
+            "sameRateCardIds": [
+              "jcb_gold"
+            ]
+          },
+          {
+            "cardId": "recruit",
+            "rate": 0.012,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.012,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rec_card",
+              "rec_quicpay",
+              "rec_touch"
+            ]
+          },
+          {
+            "cardId": "rakuten",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rakuten_card",
+              "rakuten_quicpay",
+              "rakuten_touch"
+            ],
+            "sameRateCardIds": [
+              "rakuten_gold"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G53",
+      "desc": "イオン：JALカード CLUB-Aゴールド2%（特約店）がイオンゴールド1%・JAL普通1%より上",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "jal_club_a_gold",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "aeon_gold",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "jal_general",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "aeon"
+      },
+      "expected": {
+        "storeId": "aeon",
+        "categoryId": "supermarket",
+        "top": [
+          {
+            "cardId": "jal_club_a_gold",
+            "rate": 0.02,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.02,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "jalg_card",
+              "jalg_quicpay",
+              "jalg_touch"
+            ]
+          },
+          {
+            "cardId": "aeon_gold",
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "aeong_card",
+              "aeong_quicpay",
+              "aeong_touch"
+            ]
+          },
+          {
+            "cardId": "jal_general",
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "jal_card",
+              "jal_quicpay",
+              "jal_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G54",
+      "desc": "ファミマ1,000円：セゾンゴールド・アメックス0.75%（永久不滅1pt＝5円・概算7円）＞セゾンインターナショナル0.5%＞アメックス・グリーン0.3%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "saison_gold_amex",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "saison_intl",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "amex_green",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "familymart",
+        "amount": 1000
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "saison_gold_amex",
+            "rate": 0.0075,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.0075,
+            "earnedYen": 7,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ssng_card",
+              "ssng_quicpay",
+              "ssng_touch"
+            ]
+          },
+          {
+            "cardId": "saison_intl",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 5,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "ssn_card",
+              "ssn_quicpay",
+              "ssn_touch"
+            ]
+          },
+          {
+            "cardId": "amex_green",
+            "rate": 0.003,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.003,
+            "earnedYen": 3,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "amxg_card",
+              "amxg_quicpay",
+              "amxg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G55",
+      "desc": "オーケー：三菱UFJカード ゴールド7%＞ローソンPontaプラス5%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "lawson_ponta",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "mufg_gold",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "ok"
+      },
+      "expected": {
+        "storeId": "ok",
+        "categoryId": "supermarket",
+        "top": [
+          {
+            "cardId": "mufg_gold",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "mufgg_card",
+              "mufgg_quicpay"
+            ]
+          },
+          {
+            "cardId": "lawson_ponta",
+            "rate": 0.05,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.05,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay"
+            ],
+            "routeIds": [
+              "lpp_card",
+              "lpp_quicpay"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G56",
+      "desc": "マクドナルド：JCBゴールドのモバイルオーダー10%＞三井住友（NL）7%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "smbc_nl",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "jcb_gold",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "mcdonalds"
+      },
+      "expected": {
+        "storeId": "mcdonalds",
+        "categoryId": "restaurant",
+        "top": [
+          {
+            "cardId": "jcb_gold",
+            "rate": 0.1,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.1,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online"
+            ],
+            "routeIds": [
+              "jcbg_online"
+            ]
+          },
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "online",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_online",
+              "nl_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G57",
+      "desc": "ファミマ：ANA JCBワイドゴールド1%（マイル1円）＞ANA VISA一般0.5%・ANA JCB一般0.5%",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "ana_visa_general",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "ana_jcb_general",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "ana_jcb_wide_gold",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "familymart",
+        "amount": 3000
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "ana_jcb_wide_gold",
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": 30,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "anajg_card",
+              "anajg_quicpay",
+              "anajg_touch"
+            ]
+          },
+          {
+            "cardId": "ana_visa_general",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 15,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_id",
+              "paypay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "anav_card",
+              "anav_id",
+              "anav_paypay",
+              "anav_touch"
+            ]
+          },
+          {
+            "cardId": "ana_jcb_general",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": 15,
+            "earnedApprox": true,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "anaj_card",
+              "anaj_quicpay",
+              "anaj_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G58",
+      "desc": "エポスプラチナのボーナスON・ファミマ：0.5%＋2%（年100万円で20,000pt）",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "epos_platinum",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "epos_gold",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": [
+            {
+              "bonusId": "epp_1m",
+              "target": true,
+              "progressYen": 0
+            }
+          ]
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "epos_platinum",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.02,
+            "effectiveRate": 0.025,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "epp_card",
+              "epp_quicpay",
+              "epp_touch"
+            ]
+          },
+          {
+            "cardId": "epos_gold",
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "epg_card",
+              "epg_quicpay",
+              "epg_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G59",
+      "desc": "セブン：Oliveゴールド・Oliveプラチナプリファードも8%。同率は優先順",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "olive_pp",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "olive_gold",
+              "priority": 2,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            },
+            {
+              "cardId": "smbc_nl",
+              "priority": 3,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_id",
+                "online",
+                "paypay"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [],
+          "bonusGoals": []
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "olive_pp",
+            "rate": 0.08,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.08,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "olvpp_touch"
+            ]
+          },
+          {
+            "cardId": "olive_gold",
+            "rate": 0.08,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.08,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "olvg_touch"
+            ]
+          },
+          {
+            "cardId": "smbc_nl",
+            "rate": 0.07,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.07,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "nl_touch"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G60",
+      "desc": "カードなし・d払いとPayPay残高を使う：ファミマでどちらも0.5%（経路ごとに1枠）",
+      "input": {
+        "user": {
+          "ownedCards": [],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "dbarai_balance"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "d_barai"
+            ],
+            "routeIds": [
+              "dbarai_balance"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "paypay"
+            ],
+            "routeIds": [
+              "paypay_balance"
+            ]
+          }
+        ],
+        "pointPay": [
+          "d_point",
+          "paypay_point"
+        ]
+      }
+    },
+    {
+      "id": "G61",
+      "desc": "楽天ペイ（楽天キャッシュ）1%はリクルートカード1.2%に負ける：ローソン",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "recruit",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "rpay_cash"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "lawson"
+      },
+      "expected": {
+        "storeId": "lawson",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "recruit",
+            "rate": 0.012,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.012,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rec_card",
+              "rec_quicpay",
+              "rec_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "rakuten_pay"
+            ],
+            "routeIds": [
+              "rpay_cash"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G62",
+      "desc": "イオン：WAONは2倍で1%。イオンカードセレクト1%と同率ならカードが先",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "aeon_select",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "waon_emoney",
+            "nanaco_emoney"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "aeon"
+      },
+      "expected": {
+        "storeId": "aeon",
+        "categoryId": "supermarket",
+        "top": [
+          {
+            "cardId": "aeon_select",
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "aeon_card",
+              "aeon_quicpay",
+              "aeon_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "waon"
+            ],
+            "routeIds": [
+              "waon_emoney"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G63",
+      "desc": "セブン：nanacoはセブンで使える（0.5%）。WAONは使えない",
+      "input": {
+        "user": {
+          "ownedCards": [],
+          "enabledNonCardRoutes": [
+            "waon_emoney",
+            "nanaco_emoney"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "nanaco"
+            ],
+            "routeIds": [
+              "nanaco_emoney"
+            ]
+          }
+        ],
+        "pointPay": [
+          "nanaco_point"
         ]
       }
     }

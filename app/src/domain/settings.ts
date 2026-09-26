@@ -4,6 +4,7 @@ import type { BonusGoal, OwnedCard, UserSettings, YMD } from './types';
 import { sanitizeNearby } from './nearby';
 import { monthlySpendOf } from './simulate';
 import { isThemeId } from './theme';
+import { CUSTOM_METHODS, sanitizeCustomCards, withCustomCards } from './custom';
 
 export const APP_ID = 'card-advisor';
 export const DEFAULT_STALE_DAYS = 180;
@@ -14,7 +15,8 @@ export function defaultSettings(mi: MasterIndex): UserSettings {
     schemaVersion: 1,
     // 新規利用者は保有カードなし。カード一覧から選ぶ（詳細設計 20.7）
     ownedCards: [],
-    enabledNonCardRoutes: mi.raw.routes.filter((r) => r.cardId === null).map((r) => r.id),
+    // 新規利用者に最初から有効にするのは defaultEnabled の経路だけ（詳細設計 32.11）
+    enabledNonCardRoutes: mi.raw.routes.filter((r) => r.cardId === null && r.defaultEnabled).map((r) => r.id),
     bonusGoals: mi.raw.bonuses.map((b) => ({ bonusId: b.id, target: false })),
     staleWarnDays: DEFAULT_STALE_DAYS,
   };
@@ -26,13 +28,23 @@ export function defaultSettings(mi: MasterIndex): UserSettings {
  */
 export function reconcile(mi: MasterIndex, s: UserSettings): { settings: UserSettings; dropped: number } {
   let dropped = 0;
+  // その他のカード（詳細設計 32.8）：不正なものを外し、持っているカードとして扱えるように取り込む
+  const customCards = sanitizeCustomCards(mi, s.customCards);
+  if (Array.isArray(s.customCards)) dropped += s.customCards.length - customCards.length;
+  const mx = withCustomCards(mi, customCards);
   const ownedCards: OwnedCard[] = [];
   for (const c of s.ownedCards) {
-    if (!mi.cards.has(c.cardId)) { dropped++; continue; }
+    if (!mx.cards.has(c.cardId) || ownedCards.some((x) => x.cardId === c.cardId)) { dropped++; continue; }
     // 支払い方法の選択は廃止し、経路のある支払い方法はすべて使える前提にする（詳細設計 31.2.7）
-    const card: OwnedCard = { ...c, enabledMethods: methodsForCard(mi, c.cardId) };
+    const card: OwnedCard = { ...c, enabledMethods: methodsForCard(mx, c.cardId) };
     if (!(c.joinYm && isValidYM(c.joinYm))) delete card.joinYm;
     ownedCards.push(card);
+  }
+  // その他のカードは常に持っているカード。抜けていれば末尾に加える
+  for (const c of customCards) {
+    if (ownedCards.some((x) => x.cardId === c.id)) continue;
+    const priority = ownedCards.reduce((m, x) => Math.max(m, x.priority), 0) + 1;
+    ownedCards.push({ cardId: c.id, enabledMethods: [...CUSTOM_METHODS], priority });
   }
   const enabledNonCardRoutes = s.enabledNonCardRoutes.filter((r) => mi.routes.get(r)?.cardId === null);
   dropped += s.enabledNonCardRoutes.length - enabledNonCardRoutes.length;
@@ -52,6 +64,7 @@ export function reconcile(mi: MasterIndex, s: UserSettings): { settings: UserSet
   if (s.reviewMonthlySpendYen !== undefined && monthlySpendOf(s) === s.reviewMonthlySpendYen) settings.reviewMonthlySpendYen = s.reviewMonthlySpendYen;
   if (isThemeId(s.theme)) settings.theme = s.theme;
   Object.assign(settings, sanitizeNearby(s));
+  if (customCards.length) settings.customCards = customCards;
   return { settings, dropped };
 }
 

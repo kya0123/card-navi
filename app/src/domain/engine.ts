@@ -2,6 +2,7 @@ import { bonusValueYen, goalStatus } from './bonus';
 import { cmpYMD, daysBetween } from './date';
 import { acceptedMethods, type MasterIndex } from './master';
 import { pointPayFor } from './pointPay';
+import { CUSTOM_SERIES_ID, withCustomCards } from './custom';
 import type {
   Id, RateRule, RateSource, RecommendItem, RecommendResult, Route, Store, UserSettings, YMD,
 } from './types';
@@ -49,8 +50,10 @@ interface Cand {
 }
 
 export function recommend(
-  mi: MasterIndex, user: UserSettings, q: RecommendQuery, today: YMD, topN = 3,
+  master: MasterIndex, user: UserSettings, q: RecommendQuery, today: YMD, topN = 3,
 ): RecommendResult {
+  // その他のカードは持っているカードとして候補に入れる（詳細設計 32.8）
+  const mi = withCustomCards(master, user.customCards);
   const store = q.storeId ? mi.stores.get(q.storeId) : undefined;
   if (q.storeId && !store) throw new Error(`unknown store: ${q.storeId}`);
   const categoryId = store?.categoryId ?? q.categoryId;
@@ -135,12 +138,15 @@ export function recommend(
     groups.push(item);
   }
 
-  const top: RecommendItem[] = groups.slice(0, topN).map(({ _c, ...item }) => {
+  const ranked = all ? mergeSameSeries(mi, groups, owned) : groups;
+  const top: RecommendItem[] = ranked.slice(0, topN).map(({ _c, ...item }) => {
     const c = _c[0];
-    if (c.source === 'base') item.reasons.push(`通常のポイント率${pct(c.rate)}`);
+    if (c.route.userDefined) item.reasons.push(`登録した基本のポイント率${pct(c.rate)}`);
+    else if (c.source === 'base') item.reasons.push(`通常のポイント率${pct(c.rate)}`);
     else item.reasons.push(`${store?.name ?? mi.categories.get(categoryId)?.name}で${pct(c.rate)}（${c.rule?.conditions ?? ''}）`);
     if (c.bonusReason) item.reasons.push(c.bonusReason);
     for (const x of _c) {
+      if (x.route.userDefined) continue;
       if (x.route.needsReview || x.route.confidence === 'low')
         warnings.add(`「${routeLabel(mi, x.route)}」のポイント率は要確認です`);
       const checked = x.rule?.checkedAt ?? x.route.checkedAt;
@@ -160,6 +166,53 @@ export function recommend(
       : pointPayFor(mi, user, top[0], store, accepted),
     warnings: [...warnings],
   };
+}
+
+const TIER_RANK = { general: 0, gold: 1, platinum: 2 } as const;
+
+/**
+ * 全カードで比べるとき、同じシリーズで実質ポイント率が同じカードを1枠にまとめる（詳細設計 32.7）。
+ * 持っていないカードは、同じシリーズ・同じ率の代表の枠にまとめる。代表は ①持っているカード
+ * → ②年会費が安い → ③ランクが低い → ④マスタの定義順。持っているカードはほかの枠にまとめない。
+ * その他のカードとカード以外の経路は対象外
+ */
+function mergeSameSeries<T extends RecommendItem>(mi: MasterIndex, groups: T[], owned: Map<Id, unknown>): T[] {
+  const order = new Map(mi.raw.cards.map((c, i) => [c.id, i]));
+  const keyOf = (g: T) => {
+    const card = g.cardId ? mi.cards.get(g.cardId) : undefined;
+    return card && card.series !== CUSTOM_SERIES_ID ? `${card.series}|${g.effectiveRate}` : null;
+  };
+  const clusters = new Map<string, T[]>();
+  for (const g of groups) {
+    const k = keyOf(g);
+    if (k) clusters.set(k, [...(clusters.get(k) ?? []), g]);
+  }
+  const rank = (g: T) => {
+    const c = mi.cards.get(g.cardId!)!;
+    return [owned.has(c.id) ? 0 : 1, c.annualFee, TIER_RANK[c.tier], order.get(c.id) ?? 0];
+  };
+  const better = (a: T, b: T) => {
+    const x = rank(a), y = rank(b);
+    for (let i = 0; i < x.length; i++) if (x[i] !== y[i]) return x[i] < y[i];
+    return false;
+  };
+  const repOf = new Map<string, T>();
+  for (const [k, members] of clusters) {
+    const rep = members.reduce((a, b) => (better(b, a) ? b : a));
+    const absorbed = members.filter((m) => m !== rep && !owned.has(m.cardId!));
+    if (absorbed.length) rep.sameRateCardIds = absorbed.sort((a, b) => (better(a, b) ? -1 : 1)).map((m) => m.cardId!);
+    repOf.set(k, rep);
+  }
+  const out: T[] = [];
+  const placed = new Set<T>();
+  for (const g of groups) {
+    const k = keyOf(g);
+    if (!k || owned.has(g.cardId!)) { if (!placed.has(g)) { out.push(g); placed.add(g); } continue; }
+    // 持っていないカード：代表の枠を、まとめる中でいちばん上の位置に置く
+    const rep = repOf.get(k)!;
+    if (!placed.has(rep)) { out.push(rep); placed.add(rep); }
+  }
+  return out;
 }
 
 export function routeLabel(mi: MasterIndex, route: Route): string {

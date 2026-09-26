@@ -16,9 +16,9 @@ test('golden: マスタ版数が一致', () => {
 
 for (const c of golden.cases) {
   test(`golden ${c.id}: ${c.desc}`, () => {
-    const { user, store_id, category_id, amount } = c.input as any;
+    const { user, store_id, category_id, amount, scope, top_n } = c.input as any;
     const u: UserSettings = { schemaVersion: 1, staleWarnDays: 180, ...user };
-    const res = recommend(mi, u, { storeId: store_id, categoryId: category_id, amountYen: amount }, golden.today);
+    const res = recommend(mi, u, { storeId: store_id, categoryId: category_id, amountYen: amount, scope }, golden.today, top_n ?? 3);
     const exp = c.expected as any;
     assert.equal(res.top.length, exp.top.length, 'top件数');
     exp.top.forEach((e: any, i: number) => {
@@ -32,6 +32,7 @@ for (const c of golden.cases) {
       assert.ok(close(a.effectiveRate, e.effectiveRate), `#${i + 1} effectiveRate`);
       assert.equal(a.earnedYen, e.earnedYen, `#${i + 1} earnedYen`);
       assert.equal(a.earnedApprox, e.earnedApprox, `#${i + 1} earnedApprox`);
+      assert.deepEqual(a.sameRateCardIds, e.sameRateCardIds, `#${i + 1} sameRateCardIds`);
     });
     const got = res.pointPay ? [...res.pointPay].sort() : null;
     assert.deepEqual(got, exp.pointPay, 'pointPay');

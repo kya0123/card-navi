@@ -146,7 +146,7 @@ export function NearbyScreen(ctx: Ctx): Node {
               return (
                 <li>
                   <button class="suggest-item nearby-item" data-store={it.storeId} onClick={() => { session = null; void ctx.selectStore(it.storeId); }}>
-                    <span>{it.label}</span>
+                    <span>{it.label}{ctx.mi.stores.get(it.storeId)?.cashOnly && <em class="cash-only-tag">現金のみ</em>}</span>
                     <small class="nearby-dist">約{it.distanceM}m</small>
                   </button>
                 </li>

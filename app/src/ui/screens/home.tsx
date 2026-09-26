@@ -3,6 +3,7 @@ import { foldProps } from '../fold';
 import type { Ctx } from '../app';
 import { recommend, type RecommendScope } from '../../domain/engine';
 import { linkFor } from '../../domain/affiliate';
+import { masterCards } from '../../domain/catalog';
 import { searchStores } from '../../domain/search';
 import type { RecommendItem, RecommendResult } from '../../domain/types';
 import { cardName, methodShort, pct, pointName, yen } from '../format';
@@ -31,7 +32,7 @@ export function HomeScreen(ctx: Ctx): Node {
   const noCards = state.settings.ownedCards.length === 0;
   const scope: RecommendScope = noCards ? 'all' : state.recScope;
   const ownedIds = new Set(state.settings.ownedCards.map((c) => c.cardId));
-  const total = mi.raw.cards.length;
+  const total = masterCards(mi).length;
   let result: RecommendResult | null = null;
   let error = '';
   if (state.selection) {
@@ -45,6 +46,9 @@ export function HomeScreen(ctx: Ctx): Node {
       state.selection = null;
     }
   }
+  const selStore = state.selection?.storeId ? mi.stores.get(state.selection.storeId) : undefined;
+  // 現金しか使えない店は比べずに注記だけ出す（詳細設計 32.11）
+  const cash = !!selStore?.cashOnly;
   const title = state.selection?.storeId
     ? mi.stores.get(state.selection.storeId)?.name
     : state.selection?.categoryId ? `${mi.categories.get(state.selection.categoryId)?.name}（店舗未登録）` : '';
@@ -82,13 +86,17 @@ export function HomeScreen(ctx: Ctx): Node {
             <h2 class="result-title">{title}</h2>
             <button class="btn btn-ghost btn-small" onClick={() => ctx.setState({ selection: null, amount: '' })}>クリア</button>
           </div>
-          {!noCards && (
+          {!noCards && !cash && (
             <div class="segs scope-segs" role="tablist" aria-label="比べるカード">
               {ScopeTab(ctx, 'owned', '手持ちで比べる')}
               {ScopeTab(ctx, 'all', `全${total}枚で比べる`)}
             </div>
           )}
-          {result.top.length === 0 ? (
+          {cash ? (
+            <div class="empty" id="cash-only">
+              <p>このお店は現金のみです。ポイントは付きません。</p>
+            </div>
+          ) : result.top.length === 0 ? (
             <div class="empty">
               <p>このお店で使える支払い方法が登録されていません。</p>
               <button class="btn" onClick={() => ctx.go('cards')}>持っているカードを設定する</button>
@@ -98,12 +106,12 @@ export function HomeScreen(ctx: Ctx): Node {
               {result.top.map((item, i) => RankItem(ctx, item, i, scope === 'all' ? ownedIds : null, sourceLabel(ctx, result!, item)))}
             </ol>
           )}
-          {scope === 'all' && (
+          {scope === 'all' && !cash && (
             <p class="note scope-note" id="scope-note">アプリに登録している主なカード{total}枚の中での比較です。日本のすべてのカードではありません。</p>
           )}
           {(() => {
             // 登録カード表示では、未保有カードの提案ヒント（①）は出さない
-            const storeId = scope === 'owned' ? state.selection?.storeId : undefined;
+            const storeId = scope === 'owned' && !cash ? state.selection?.storeId : undefined;
             const hint = storeId ? decideHint(ctx, storeId) : null;
             return hint && Hint(ctx, hint);
           })()}
@@ -114,7 +122,7 @@ export function HomeScreen(ctx: Ctx): Node {
               <small>1位の支払いが通常のポイント率のため、手持ちのポイントを使っても損が小さい場面です</small>
             </div>
           )}
-          <details class="amount" open={state.amount !== ''}>
+          {!cash && <details class="amount" open={state.amount !== ''}>
             <summary>金額を入れて獲得ポイントを計算</summary>
             <label class="field">
               <span>支払金額（円）</span>
@@ -123,7 +131,7 @@ export function HomeScreen(ctx: Ctx): Node {
                 onChange={(e: Event) => ctx.setState({ amount: (e.target as HTMLInputElement).value })} />
             </label>
             {error && <p class="error">{error}</p>}
-          </details>
+          </details>}
           {result.warnings.length > 0 && (
             <ul class="warnings">
               {result.warnings.map((w) => <li>⚠ {w}</li>)}
@@ -172,6 +180,9 @@ function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string
             ? <span class="own-mark own-yes">持っている</span>
             : <span class="own-mark own-no">持っていない</span>)}
         </div>
+        {item.sameRateCardIds && item.sameRateCardIds.length > 0 && (
+          <div class="rank-same">{item.sameRateCardIds.map((id) => cardName(mi, id)).join('・')}も同じポイント率</div>
+        )}
         {methods && <div class="rank-method">{methods}</div>}
         <div class="rank-rate">
           <span class="rate">{pct(item.effectiveRate)}</span>

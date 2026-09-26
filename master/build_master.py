@@ -64,6 +64,45 @@ SRC.update({
     "rakuten_pay_suica": "https://appuser-help.pay.rakuten.net/%E6%A5%BD%E5%A4%A9%E3%83%9A%E3%82%A4%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89%E3%83%A2%E3%83%90%E3%82%A4%E3%83%ABSuica%E3%81%B8%E3%83%81%E3%83%A3%E3%83%BC%E3%82%B8%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88%E3%80%81%E6%A5%BD%E5%A4%A9%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AF%E4%BB%98%E4%B8%8E%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%81%8B%EF%BC%9F-615b1604e95a560022b0210f",
 })
 
+C926B = "2026-09-26"
+SRC.update({
+    # ---- 2026-09-26 カードラインナップ第1弾・第2弾（詳細設計 32.3） ----
+    "ana_visa_general": "https://my-best.com/products/1679790",
+    "ana_mile_course": "https://www.smbc-card.com/mem/cardinfo/cardinfo4010320.jsp",
+    "ana_jcb_general": "https://kakaku.com/card/item.asp?id=036003",
+    "ana_jcb_wide_gold": "https://kakaku.com/card/item.asp?id=036007",
+    "ana_skycoin": "https://www.ana.co.jp/ja/jp/amc/redeem/anaskycoins/",
+    "jal_mile": "https://www.jal.co.jp/jp/ja/jalcard/function/shoppingmile.html",
+    "jal_ejal": "https://www.jal.co.jp/jp/ja/jalmile/use/ejalpoint/miles.html",
+    "jal_gold": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html",
+    "jal_tokuyaku": "https://www.jal.co.jp/jp/ja/jalcard/service/tokuyakuten/",
+    "jal_aeon": "https://partner.jal.co.jp/shop/?tp=701768",
+    "jal_welcia": "https://partner.jal.co.jp/shop/?tp=702250",
+    "rakuten_gold": "https://www.rakuten-card.co.jp/minna-money/credit-card/knowledge/article_2110_00001/",
+    "mufg_gold": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+    "mufg_bonus": "https://www.cr.mufg.jp/mufgcard/point/global/save/pt/index.html",
+    "aupay_gold": "https://www.kddi-fs.com/function/promotion/goldlp/index.html",
+    "jcb_gold": "https://money.it-trend.jp/articles/brand/jcb-gold/09-0002",
+    "jcb_partner": "https://kakakumag.com/money/?id=22348",
+    "jcb_bonus": "https://www.jcb.co.jp/point/j-point-bonus/index.html",
+    "aeon_gold": "https://www.diamond.co.jp/zai/articles/-/190",
+    "olive_gold": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+    "olive_gold_bonus": "https://www.smbc.co.jp/kojin/olive-account/flexible-pay/gold_utilize/",
+    "olive_pp": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+    "view_gold": "https://kakaku.com/card/item.asp?id=040007",
+    "view_gold_bonus": "https://www.for-it.co.jp/mediverse/creditcard/view-card-gold-standard/",
+    "seven_gold": "https://kakaku.com/card/item.asp?id=034003",
+    "saison_point": "https://www.saisoncard.co.jp/aqf-point/",
+    "saison_intl": "https://adviser-navi.co.jp/card/column/16254/",
+    "saison_gold": "https://www.saisoncard.co.jp/amex/content-about/returnrate/",
+    "amex_mr": "https://diamond.jp/zai/articles/-/1049652",
+    "amex_green": "https://www.nissen-ncs.jp/media/contents/details-amex-green/",
+    "amex_gold_pref": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/",
+    "epos_platinum": "https://www.eposcard.co.jp/platinum/bonus_point.html",
+    "lawson_ponta": "https://www.lawsonbank.jp/news/2026/06041000.html",
+    "lawson_ponta_lp": "https://www.lawsonbank.jp/lp/lp_credit.html",
+})
+
 # カード会社（一覧の並び順・見出し用。v1.11）。提携カードは発行・ブランドの主体で分類
 _SMBC = ("三井住友カード", "みついすみともかーど")
 _MUFG = ("三菱UFJニコス", "みつびしゆーえふじぇいにこす")
@@ -84,7 +123,67 @@ COMPANY = {
     "epos": _EPOS, "epos_gold": _EPOS,
     "marriott_premium": _AMEX, "marriott": _AMEX,
     "view_std": ("ビューカード", "びゅーかーど"),
+    # ---- 2026-09-26 ラインナップ第1弾・第2弾 ----
+    "ana_visa_general": _SMBC, "ana_jcb_general": ("JCB", "じぇーしーびー"), "ana_jcb_wide_gold": ("JCB", "じぇーしーびー"),
+    "jal_general": ("JALカード", "じゃるかーど"), "jal_club_a_gold": ("JALカード", "じゃるかーど"),
+    "rakuten_gold": ("楽天カード", "らくてんかーど"), "mufg_gold": _MUFG, "aupay_gold": ("auフィナンシャルサービス", "えーゆーふぃなんしゃるさーびす"),
+    "jcb_gold": ("JCB", "じぇーしーびー"), "aeon_gold": ("イオンフィナンシャルサービス", "いおんふぃなんしゃるさーびす"),
+    "olive_gold": _SMBC, "olive_pp": _SMBC, "view_gold": ("ビューカード", "びゅーかーど"),
+    "seven_gold": ("セブン・カードサービス", "せぶんかーどさーびす"),
+    "saison_intl": ("クレディセゾン", "くれでぃせぞん"), "saison_gold_amex": ("クレディセゾン", "くれでぃせぞん"),
+    "amex_green": _AMEX, "amex_gold_pref": _AMEX, "epos_platinum": _EPOS,
+    "lawson_ponta": ("ローソン銀行", "ろーそんぎんこう"),
 }
+
+# シリーズ（一覧の見出し・並び順・検索用。詳細設計 32.5）。name・kana・aliases
+series = [
+    {"id": "amazon", "name": "Amazon Mastercard", "kana": "あまぞんますたーかーど", "aliases": ["アマゾン"]},
+    {"id": "ana", "name": "ANAカード", "kana": "えーえぬえーかーど", "aliases": ["アナ", "全日空"]},
+    {"id": "aupay", "name": "au PAY カード", "kana": "えーゆーぺいかーど", "aliases": ["エーユー"]},
+    {"id": "dcard", "name": "dカード", "kana": "でぃーかーど", "aliases": ["ドコモ"]},
+    {"id": "jcb_original", "name": "JCBオリジナルシリーズ", "kana": "じぇーしーびーおりじなるしりーず", "aliases": []},
+    {"id": "marriott", "name": "Marriott Bonvoy アメックス", "kana": "まりおっとぼんゔぉいあめっくす", "aliases": ["マリオット", "ボンヴォイ", "ボンボイ"]},
+    {"id": "olive", "name": "Olive", "kana": "おりーぶ", "aliases": []},
+    {"id": "paypay", "name": "PayPayカード", "kana": "ぺいぺいかーど", "aliases": []},
+    {"id": "aeon", "name": "イオンカード", "kana": "いおんかーど", "aliases": []},
+    {"id": "epos", "name": "エポスカード", "kana": "えぽすかーど", "aliases": ["丸井"]},
+    {"id": "seven", "name": "セブンカード・プラス", "kana": "せぶんかーどぷらす", "aliases": []},
+    {"id": "view", "name": "ビューカード", "kana": "びゅーかーど", "aliases": ["JR東日本"]},
+    {"id": "smbc_nl", "name": "三井住友カード（NL）", "kana": "みついすみともかーどなんばーれす", "aliases": ["ナンバーレス"]},
+    {"id": "mufg", "name": "三菱UFJカード", "kana": "みつびしゆーえふじぇいかーど", "aliases": []},
+    {"id": "rakuten", "name": "楽天カード", "kana": "らくてんかーど", "aliases": []},
+    {"id": "recruit", "name": "リクルートカード", "kana": "りくるーとかーど", "aliases": []},
+    # ---- 2026-09-26 ラインナップ第1弾・第2弾 ----
+    {"id": "jal", "name": "JALカード", "kana": "じゃるかーど", "aliases": ["ジャル", "日本航空"]},
+    {"id": "saison", "name": "セゾンカード", "kana": "せぞんかーど", "aliases": ["クレディセゾン", "永久不滅"]},
+    {"id": "amex", "name": "アメリカン・エキスプレス", "kana": "あめりかんえきすぷれす", "aliases": ["アメックス", "Amex"]},
+    {"id": "lawson_ponta", "name": "ローソンPontaプラス", "kana": "ろーそんぽんたぷらす", "aliases": ["ポンタ", "ローソン"]},
+]
+# カード → (シリーズ, ランク)。ランクは名前ではなく券種の位置付けで決める（詳細設計 32.2 L8）
+G, GO, PL = "general", "gold", "platinum"
+CARD_SERIES = {
+    "smbc_nl": ("smbc_nl", G), "smbc_gold_nl": ("smbc_nl", GO), "smbc_pp": ("smbc_nl", PL),
+    "olive": ("olive", G), "amazon_mc": ("amazon", G), "ana_wide_gold": ("ana", GO),
+    "rakuten": ("rakuten", G), "mufg": ("mufg", G), "recruit": ("recruit", G),
+    "paypay_card": ("paypay", G), "paypay_gold": ("paypay", GO),
+    "aeon_select": ("aeon", G), "dcard": ("dcard", G), "dcard_gold": ("dcard", GO),
+    "aupay_card": ("aupay", G), "jcb_w": ("jcb_original", G), "seven_plus": ("seven", G),
+    "epos": ("epos", G), "epos_gold": ("epos", GO),
+    "marriott": ("marriott", GO), "marriott_premium": ("marriott", PL),
+    "view_std": ("view", G),
+    # ---- 2026-09-26 ラインナップ第1弾・第2弾 ----
+    "ana_visa_general": ("ana", G), "ana_jcb_general": ("ana", G), "ana_jcb_wide_gold": ("ana", GO),
+    "jal_general": ("jal", G), "jal_club_a_gold": ("jal", GO),
+    "rakuten_gold": ("rakuten", GO), "mufg_gold": ("mufg", GO), "aupay_gold": ("aupay", GO), "jcb_gold": ("jcb_original", GO),
+    "aeon_gold": ("aeon", GO), "olive_gold": ("olive", GO), "olive_pp": ("olive", PL), "view_gold": ("view", GO),
+    "seven_gold": ("seven", GO), "saison_intl": ("saison", G), "saison_gold_amex": ("saison", GO),
+    "amex_green": ("amex", G), "amex_gold_pref": ("amex", GO), "epos_platinum": ("epos", PL),
+    "lawson_ponta": ("lawson_ponta", G),
+}
+# 一般とゴールドの組の例外（詳細設計 32.5）。ゴールドが発行されていない／一般がない
+SERIES_PAIR_EXEMPT = {"amazon", "recruit", "marriott", "lawson_ponta"}
+# 段階3で追加するまで一般かゴールドが欠けているシリーズ（32.3）。追加したら消す
+SERIES_PAIR_PENDING = set()
 
 # segments: popular＝世間一般で広く使われている定番 / enthusiast＝ポイントマニア界隈でお得とされる
 def card(id, name, short, kana, issuer, brand, point, fee, segments, highlight, aliases=(), fee_note=None):
@@ -92,6 +191,7 @@ def card(id, name, short, kana, issuer, brand, point, fee, segments, highlight, 
          "pointId": point, "annualFee": fee, "segments": list(segments), "highlight": highlight, "aliases": list(aliases)}
     if fee_note: c["annualFeeNote"] = fee_note
     c["company"], c["companyKana"] = COMPANY[id]
+    c["series"], c["tier"] = CARD_SERIES[id]
     return c
 
 POP, ENT = "popular", "enthusiast"
@@ -103,7 +203,7 @@ cards = [
     card("rakuten", "楽天カード", "楽天", "らくてんかーど", "楽天カード", "Visa/Mastercard/JCB/Amex",
          "rakuten_point", 0, (POP,), "どこでも1%。楽天市場で2%（カード分）", ["楽天"]),
     card("ana_wide_gold", "ANA VISAワイドゴールドカード", "ANA", "えーえぬえーわいどごーるど", "三井住友カード", "Visa",
-         "ana_transfer_point", 15400, (POP,), "マイルを貯める定番（本アプリはマイル換算せず1pt＝1円で評価）", ["ANAカード", "ANAワイドゴールド"]),
+         "ana_mile", 15400, (POP,), "200円＝2マイル（1%。2マイルコースは移行手数料無料）。マイルは1マイル＝1円で評価", ["ANAカード", "ANAワイドゴールド"]),
     card("mufg", "三菱UFJカード", "三菱UFJ", "みつびしゆーえふじぇいかーど", "三菱UFJニコス", "Visa/Mastercard/JCB/Amex",
          "global_point", 0, (POP, ENT), "セブン・ローソン・オーケー等のスーパーで7%（月5万円まで）", ["MUFGカード", "三菱UFJ"]),
     card("paypay_gold", "PayPayカード ゴールド", "PayPayG", "ぺいぺいかーどごーるど", "PayPayカード", "Visa/Mastercard/JCB",
@@ -153,6 +253,61 @@ cards = [
     card("view_std", "ビューカード スタンダード", "ビュー", "びゅーかーどすたんだーど", "ビューカード", "Visa/Mastercard/JCB",
          "jre_point", 524, (POP, ENT), "モバイルSuicaへのチャージで1.5%（JRE POINT）。JR東日本の乗車ポイント2%と合わせて3.5%。通常の買い物は0.5%",
          ["ビューカード", "ビュー・スイカ", "VIEWカード"]),
+    # ---- 2026-09-26 ラインナップ第1弾・第2弾（詳細設計 32.3）。マイルは1マイル＝1円で評価 ----
+    card("ana_visa_general", "ANA VISA 一般カード", "ANA VISA", "えーえぬえーびざいっぱんかーど", "三井住友カード", "Visa",
+         "ana_mile", 2200, (POP,), "200円＝1マイル（0.5%。手数料のかからない1pt＝1マイルで評価。2倍コースは年6,600円）", ["ANAカード", "ANA一般"],
+         "初年度無料"),
+    card("ana_jcb_general", "ANA JCB 一般カード", "ANA JCB", "えーえぬえーじぇーしーびーいっぱんかーど", "JCB", "JCB",
+         "ana_mile", 2200, (POP,), "1,000円＝5マイル（0.5%。手数料のかからない5マイルコースで評価）", ["ANAカード", "ANA一般",
+         "ソラチカカード", "ソラチカ", "ANA To Me CARD PASMO JCB"], "初年度無料"),
+    card("ana_jcb_wide_gold", "ANA JCB ワイドゴールドカード", "ANA JCB G", "えーえぬえーじぇーしーびーわいどごーるど", "JCB", "JCB",
+         "ana_mile", 15400, (POP,), "1,000円＝10マイル（1%。10マイルコースは移行手数料無料）", ["ANAカード", "ANAゴールド"]),
+    card("jal_general", "JALカード 普通カード", "JAL", "じゃるかーどふつうかーど", "JALカード（JCBほか各ブランド）", "Visa/Mastercard/JCB",
+         "jal_mile", 2200, (POP,), "200円＝1マイル（0.5%）。イオン・ウエルシア等のJALカード特約店で2倍", ["JALカード", "日本航空"],
+         "初年度無料。JAL・アメリカン・エキスプレス・カードは年会費6,600円"),
+    card("jal_club_a_gold", "JALカード CLUB-Aゴールドカード", "JAL G", "じゃるかーどくらぶえーごーるどかーど", "JALカード（JCBほか各ブランド）", "Visa/Mastercard/JCB",
+         "jal_mile", 17600, (POP,), "100円＝1マイル（1%。ショッピングマイル・プレミアムに自動入会）。JALカード特約店で2%", ["JALゴールド", "CLUB-Aゴールド"],
+         "JAL・アメリカン・エキスプレス・カード CLUB-Aゴールドは年会費が異なる"),
+    card("rakuten_gold", "楽天ゴールドカード", "楽天G", "らくてんごーるどかーど", "楽天カード", "Visa/Mastercard/JCB",
+         "rakuten_point", 2200, (POP,), "1%。楽天市場で2%（カード分）。ポイント率は楽天カードと同じで、空港ラウンジ等が付く", ["楽天ゴールド"]),
+    card("mufg_gold", "三菱UFJカード ゴールド", "三菱UFJ G", "みつびしゆーえふじぇいかーどごーるど", "三菱UFJニコス", "Visa/Mastercard/JCB/Amex",
+         "global_point", 11000, (POP,), "セブン・ローソン・オーケー等で7%（一般と同じ）。年100万円利用で2,200pt（11,000円相当）",
+         ["三菱UFJゴールド", "ゴールドプレステージ", "MUFGゴールド"], "2025年12月に「ゴールドプレステージ」から名称変更"),
+    card("aupay_gold", "au PAY ゴールドカード", "au PAY G", "えーゆーぺいごーるどかーど", "auフィナンシャルサービス", "Visa/Mastercard",
+         "ponta_point", 11000, (POP,), "1%（Pontaポイント）。au携帯料金等の上乗せはauの契約に依存するため含めない", ["auゴールド", "au PAYゴールド"]),
+    card("jcb_gold", "JCBゴールド", "JCB G", "じぇーしーびーごーるど", "JCB", "JCB",
+         "j_point", 11000, (POP,), "0.5%（月間合計）。J-POINTパートナーでセブン・Amazon1.5%、スタバ・マクドナルドのモバイルオーダー10%。年100万円で3,000pt",
+         ["JCBゴールドカード", "JCB GOLD"]),
+    card("aeon_gold", "イオンゴールドカードセレクト", "イオンG", "いおんごーるどかーどせれくと", "イオンフィナンシャルサービス", "Visa/Mastercard/JCB",
+         "waon_point", 0, (POP,), "イオングループで1%（一般と同じ）。年会費無料・招待制（年50万円以上の利用等）", ["イオンゴールド", "イオンゴールドカード"],
+         "招待制・年会費無料"),
+    card("olive_gold", "Olive フレキシブルペイ ゴールド", "Olive G", "おりーぶごーるど", "三井住友カード", "Visa",
+         "vpoint", 5500, (POP,), "対象コンビニ・飲食店で8%（Oliveのクレジットモード）。年100万円利用で10,000pt＋翌年以降の年会費永年無料",
+         ["Oliveゴールド", "オリーブゴールド"], "年100万円利用で翌年以降永年無料"),
+    card("olive_pp", "Olive フレキシブルペイ プラチナプリファード", "Olive PP", "おりーぶぷらちなぷりふぁーど", "三井住友カード", "Visa",
+         "vpoint", 33000, (ENT,), "1%。対象コンビニ・飲食店で8%。年100万円利用ごとに10,000pt（最大40,000pt）",
+         ["Oliveプラチナプリファード", "オリーブプラチナ", "Oliveプラプリ"]),
+    card("view_gold", "ビューカード ゴールド", "ビューG", "びゅーかーどごーるど", "ビューカード", "Visa/Mastercard/JCB",
+         "jre_point", 11000, (POP,), "モバイルSuicaへのチャージで1.5%（乗車ポイントと合わせて3.5%）。通常0.5%。年300万円利用で12,000pt",
+         ["ビューゴールドプラス", "ビューゴールド"]),
+    card("seven_gold", "セブンカード・プラス（ゴールド）", "セブンG", "せぶんかーどぷらすごーるど", "セブン・カードサービス", "JCB",
+         "nanaco_point", 0, (POP,), "0.5%。セブン-イレブンで最大10%（一般と同じ）。年会費無料・招待制", ["セブンゴールド"], "招待制・年会費無料"),
+    card("saison_intl", "セゾンカードインターナショナル", "セゾン", "せぞんかーどいんたーなしょなる", "クレディセゾン", "Visa/Mastercard/JCB",
+         "eikyu_point", 0, (POP,), "1,000円＝永久不滅ポイント1pt（1pt＝5円で評価して0.5%）。ポイントの有効期限なし", ["セゾンカード"]),
+    card("saison_gold_amex", "セゾンゴールド・アメリカン・エキスプレス・カード", "セゾンG", "せぞんごーるどあめっくす", "クレディセゾン", "Amex",
+         "eikyu_point", 11000, (POP,), "国内1,000円＝1.5pt（0.75%）。永久不滅ポイントは1pt＝5円で評価", ["セゾンゴールドアメックス", "セゾンアメックス"],
+         "初年度無料"),
+    card("amex_green", "アメリカン・エキスプレス・グリーン・カード", "アメックス", "あめりかんえきすぷれすぐりーんかーど", "アメリカン・エキスプレス", "Amex",
+         "amex_mr", 13200, (POP,), "100円＝1pt。メンバーシップ・リワードは何も登録しない状態の1pt＝0.3円で評価（0.3%）。月会費1,100円",
+         ["アメックスグリーン", "アメックス・グリーン"], "月会費1,100円"),
+    card("amex_gold_pref", "アメリカン・エキスプレス・ゴールド・プリファード・カード", "アメックスG", "あめりかんえきすぷれすごーるどぷりふぁーど",
+         "アメリカン・エキスプレス", "Amex", "amex_mr", 39600, (POP,),
+         "100円＝1pt（1pt＝0.3円で評価して0.3%）。年200万円利用で無料宿泊券（フリー・ステイ・ギフト。評価に含めない）", ["アメックスゴールド", "ゴールドプリファード"]),
+    card("epos_platinum", "エポスプラチナカード", "エポスP", "えぽすぷらちなかーど", "エポスカード", "Visa",
+         "epos_point", 30000, (ENT,), "0.5%。年100万円利用で20,000pt（ゴールドの2倍）", ["エポスプラチナ"],
+         "招待または年100万円利用で翌年以降20,000円"),
+    card("lawson_ponta", "ローソンPontaプラス", "Pontaプラス", "ろーそんぽんたぷらす", "ローソン銀行（三菱UFJニコス提携）", "Mastercard",
+         "ponta_point", 0, (POP,), "1%（Pontaポイント）。オーケー・スシロー・くら寿司・松屋等で5%（月3万円まで）", ["ポンタプラス", "Pontaプラス", "ローソンカード"]),
 ]
 
 # 公式サイト（カード提案画面の「公式サイトで詳しく見る」に使う）。
@@ -180,6 +335,27 @@ OFFICIAL_URL = {
     "marriott_premium": "https://www.americanexpress.com/jp/credit-cards/marriott-bonvoy-premium-card/",
     "marriott": "https://www.americanexpress.com/jp/credit-cards/marriott-bonvoy-card/",
     "view_std": SRC["view_std"],
+    # ---- 2026-09-26（到達確認は check_affiliates.mjs --online で行う） ----
+    "ana_visa_general": "https://www.smbc-card.com/nyukai/affiliate/ana/index.jsp",
+    "ana_jcb_general": "https://www.jcb.co.jp/promotion/jcb_anacard/first.html",
+    "ana_jcb_wide_gold": "https://www.jcb.co.jp/promotion/jcb_anacard/cp1.html",
+    "jal_general": "https://www.jal.co.jp/jp/ja/jalcard/index03.html",
+    "jal_club_a_gold": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html",
+    "rakuten_gold": "https://www.rakuten-card.co.jp/campaign/gold_card/",
+    "mufg_gold": "https://www.cr.mufg.jp/apply/card/mucard_goldprestige/index.html",
+    "aupay_gold": "https://www.kddi-fs.com/function/promotion/goldlp/index.html",
+    "jcb_gold": "https://www.jcb.co.jp/promotion/ordercard/gold/index.html",
+    "aeon_gold": "https://www.aeon.co.jp/card/lineup/select/",
+    "olive_gold": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+    "olive_pp": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+    "view_gold": "https://www.jreast.co.jp/card/",
+    "seven_gold": "https://www.7card.co.jp/",
+    "saison_intl": "https://www.saisoncard.co.jp/",
+    "saison_gold_amex": "https://www.saisoncard.co.jp/amex/",
+    "amex_green": "https://www.americanexpress.com/ja-jp/",
+    "amex_gold_pref": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/",
+    "epos_platinum": "https://www.eposcard.co.jp/platinum/main.html",
+    "lawson_ponta": "https://www.lawsonbank.jp/lp/lp_credit.html",
 }
 for _c in cards:
     _c["officialUrl"] = OFFICIAL_URL[_c["id"]]
@@ -198,8 +374,14 @@ points = [
     {"id": "vpoint", "name": "Vポイント", "yenPerPoint": 1, "usableScope": "visaMerchants",
      "note": "VポイントPay（Visaのタッチ決済/オンライン）で充当できる前提"},
     {"id": "rakuten_point", "name": "楽天ポイント", "yenPerPoint": 1, "usableScope": "listed"},
-    {"id": "ana_transfer_point", "name": "ANAマイル移行用ポイント（Vポイント）", "yenPerPoint": 1, "usableScope": "none",
-     "note": "1pt=2マイル。マイル換算せず1pt=1円で評価（2026-09-22 決定）"},
+    {"id": "ana_mile", "name": "ANAマイル", "yenPerPoint": 1, "usableScope": "none",
+     "note": "1マイル＝1円で評価（ANA SKY コインへの1マイル＝1コインの交換。2026-09-26 決定）。移行手数料のかからない方法で付与を計算"},
+    {"id": "jal_mile", "name": "JALマイル", "yenPerPoint": 1, "usableScope": "none",
+     "note": "1マイル＝1円で評価（e JALポイントへの1,000マイル＝1,000円の交換。2026-09-26 決定）"},
+    {"id": "eikyu_point", "name": "永久不滅ポイント", "yenPerPoint": 5, "usableScope": "none",
+     "note": "1pt＝5円で評価（セゾン公式「約5円相当」。交換先により5円未満。2026-09-26 決定）"},
+    {"id": "amex_mr", "name": "メンバーシップ・リワード", "yenPerPoint": 0.3, "usableScope": "none",
+     "note": "1pt＝0.3円で評価（メンバーシップ・リワード・プラス未登録の基本レート。2026-09-26 決定）"},
     {"id": "global_point", "name": "三菱UFJポイント（グローバルポイント）", "yenPerPoint": 5, "usableScope": "none",
      "aliases": ["グローバルポイント"], "note": "1pt=5円相当（交換先による）"},
     {"id": "paypay_point", "name": "PayPayポイント", "yenPerPoint": 1, "usableScope": "paypayMerchants"},
@@ -244,11 +426,11 @@ routes = [
           note="Google PayのVisaタッチを想定", src=SRC["rakuten"], conf="medium"),
     route("rakuten_online", "rakuten", "online", 0.01, 100, 1, "rakuten_point", False, src=SRC["rakuten"]),
     # ANA VISAワイドゴールド: 200円=1pt(=2マイル)
-    route("ana_card", "ana_wide_gold", "card_physical", 0.005, 200, 1, "ana_transfer_point", False, src=SRC["ana"], conf="medium"),
-    route("ana_touch", "ana_wide_gold", "smartphone_visa_touch", 0.005, 200, 1, "ana_transfer_point", False, src=SRC["ana"], conf="medium"),
-    route("ana_id", "ana_wide_gold", "applepay_id", 0.005, 200, 1, "ana_transfer_point", False, src=SRC["ana"], conf="medium"),
-    route("ana_online", "ana_wide_gold", "online", 0.005, 200, 1, "ana_transfer_point", False, src=SRC["ana"], conf="medium"),
-    route("ana_paypay", "ana_wide_gold", "paypay", 0.005, 200, 1, "ana_transfer_point", False,
+    route("ana_card", "ana_wide_gold", "card_physical", 0.01, 200, 2, "ana_mile", False, src=SRC["ana"], conf="medium"),
+    route("ana_touch", "ana_wide_gold", "smartphone_visa_touch", 0.01, 200, 2, "ana_mile", False, src=SRC["ana"], conf="medium"),
+    route("ana_id", "ana_wide_gold", "applepay_id", 0.01, 200, 2, "ana_mile", False, src=SRC["ana"], conf="medium"),
+    route("ana_online", "ana_wide_gold", "online", 0.01, 200, 2, "ana_mile", False, src=SRC["ana"], conf="medium"),
+    route("ana_paypay", "ana_wide_gold", "paypay", 0.01, 200, 2, "ana_mile", False,
           note="三井住友カード発行の個人向けカード（ANAカード等の提携カードを含む）は2026/9以降も従来方式で継続（PayPay公式）",
           src=SRC["paypay_other"], conf="high"),
     # 三菱UFJカード: 月間合計1,000円=1pt(5円相当)
@@ -682,9 +864,201 @@ rate_rules.append({"id": "rakuten_ichiba_card", "target": {"storeId": "rakuten_i
                    "confidence": "high",
                    "conditions": "カード通常1%＋楽天市場特典1%（特典分は期間限定・月1,000pt上限）。楽天市場自体の1%は全経路共通のため省略"})
 
-master = {"schemaVersion": 1, "masterVersion": "2026.09.26-1", "checkedAt": RULE_CHECKED,
+# ==== 2026-09-26 カードラインナップ第1弾・第2弾（詳細設計 32.3・32.4） ====
+# ANA VISAワイドゴールドはマイル数で持つ（200円＝2マイル。2マイルコースは移行手数料無料）
+for _r in routes:
+    if _r["cardId"] == "ana_wide_gold":
+        _r["sourceUrl"] = SRC["ana_mile_course"]; _r["checkedAt"] = C926B
+        _r["note"] = ((_r.get("note") + "。") if _r.get("note") else "") + "200円＝1pt＝2マイル（2マイルコース・移行手数料無料）。マイルは1マイル＝1円で評価"
+_n_before = len(routes)
+STD4 = ["card_physical", "smartphone_visa_touch", "applepay_quicpay", "online"]
+card_routes("anav", "ana_visa_general", SMBC_METHODS + ["paypay"], 0.005, 200, 1, "ana_mile", False, SRC["ana_visa_general"], conf="medium",
+            notes={"card_physical": "200円＝1pt。手数料のかからない1pt＝1マイルで評価（2倍コースは年6,600円で1%）",
+                   "paypay": "三井住友カード発行の個人向けカード（提携カードを含む）は2026/9以降もPayPay払い継続"})
+card_routes("anaj", "ana_jcb_general", STD4, 0.005, 1000, 5, "ana_mile", False, SRC["ana_jcb_general"], conf="medium", scope="monthlyTotal",
+            notes={"card_physical": "1,000円＝J-POINT 1pt。手数料のかからない5マイルコース（1pt＝5マイル）で評価。J-POINTパートナーの上乗せは含めない"})
+card_routes("anajg", "ana_jcb_wide_gold", STD4, 0.01, 1000, 10, "ana_mile", False, SRC["ana_jcb_wide_gold"], conf="medium", scope="monthlyTotal",
+            notes={"card_physical": "1,000円＝J-POINT 1pt＝10マイル（ゴールドは10マイルコースの移行手数料無料）"})
+card_routes("jal", "jal_general", STD4, 0.005, 200, 1, "jal_mile", False, SRC["jal_mile"], conf="medium", scope="monthlyTotal",
+            notes={"card_physical": "200円＝1マイル。ショッピングマイル・プレミアム（年4,950円・100円＝1マイル）は含めない"})
+card_routes("jalg", "jal_club_a_gold", STD4, 0.01, 100, 1, "jal_mile", False, SRC["jal_gold"], conf="medium", scope="monthlyTotal",
+            notes={"card_physical": "100円＝1マイル（ショッピングマイル・プレミアムに自動入会・年会費無料）"})
+card_routes("rkg", "rakuten_gold", ["card_physical", "applepay_quicpay", "smartphone_visa_touch", "online"], 0.01, 100, 1,
+            "rakuten_point", False, SRC["rakuten_gold"])
+card_routes("mufgg", "mufg_gold", ["card_physical", "applepay_quicpay", "online"], 0.005, 1000, 1, "global_point", True,
+            SRC["mufg_gold"], scope="monthlyTotal")
+card_routes("aug", "aupay_gold", STD4, 0.01, 100, 1, "ponta_point", False, SRC["aupay_gold"])
+card_routes("jcbg", "jcb_gold", STD4, 0.005, 200, 1, "j_point", True, SRC["jcb_gold"], conf="medium", scope="monthlyTotal")
+card_routes("aeong", "aeon_gold", STD4, 0.005, 200, 1, "waon_point", False, SRC["aeon_gold"], conf="medium")
+card_routes("olvg", "olive_gold", SMBC_METHODS + ["paypay"], 0.005, 200, 1, "vpoint", True, SRC["olive_gold"], conf="medium",
+            scope="monthlyTotal", notes={"paypay": SMBC_PAYPAY_NOTE["paypay"], "card_physical": "クレジットモードでの利用"})
+card_routes("olvpp", "olive_pp", SMBC_METHODS + ["paypay"], 0.01, 100, 1, "vpoint", True, SRC["olive_pp"], conf="medium",
+            scope="monthlyTotal", notes={"paypay": SMBC_PAYPAY_NOTE["paypay"], "card_physical": "クレジットモードでの利用"})
+card_routes("viewg", "view_gold", ["card_physical", "smartphone_visa_touch", "online"], 0.005, 1000, 5, "jre_point", True,
+            SRC["view_gold"], conf="medium", scope="monthlyTotal")
+routes.append(route("view_gold_suica_ride", "view_gold", "mobile_suica_ride", 0.035, 1000, 35, "jre_point", False, scope="monthlyTotal",
+                    note="モバイルSuicaのチャージ元をビューカード ゴールドにした場合：乗車ポイント2%＋チャージ1.5%（いずれもJRE POINT）",
+                    src=SRC["view_gold"], conf="medium"))
+card_routes("spg", "seven_gold", ["card_physical", "applepay_quicpay", "online"], 0.005, 200, 1, "nanaco_point", False,
+            SRC["seven_gold"], conf="medium")
+card_routes("ssn", "saison_intl", STD4, 0.005, 1000, 1, "eikyu_point", False, SRC["saison_intl"], conf="medium", scope="monthlyTotal",
+            notes={"card_physical": "1,000円＝永久不滅ポイント1pt（1pt＝5円で評価）"})
+card_routes("ssng", "saison_gold_amex", STD4, 0.0075, 1000, 1.5, "eikyu_point", False, SRC["saison_gold"], conf="medium", scope="monthlyTotal",
+            notes={"card_physical": "国内の利用は通常の1.5倍（1,000円＝1.5pt）。海外は2倍（含めない）"})
+card_routes("amxg", "amex_green", STD4, 0.003, 100, 1, "amex_mr", False, SRC["amex_green"], conf="medium",
+            notes={"card_physical": "100円＝1pt。メンバーシップ・リワード・プラス（1pt＝1円）は登録しない前提"})
+card_routes("amxgp", "amex_gold_pref", STD4, 0.003, 100, 1, "amex_mr", False, SRC["amex_gold_pref"], conf="medium",
+            notes={"card_physical": "100円＝1pt。フリー・ステイ・ギフト（年200万円で無料宿泊券）は評価に含めない"})
+card_routes("epp", "epos_platinum", STD4, 0.005, 200, 1, "epos_point", True, SRC["epos_platinum"], conf="medium",
+            notes={"card_physical": "選べるポイントアップショップは利用者ごとに異なるため含めない"})
+card_routes("lpp", "lawson_ponta", ["card_physical", "smartphone_visa_touch", "applepay_quicpay", "online"], 0.01, 100, 1,
+            "ponta_point", False, SRC["lawson_ponta"], conf="medium",
+            notes={"card_physical": "Mastercard加盟店で1%。ローソンでの最大6%（毎月10日・20日の時間限定・要エントリー）はキャンペーン扱いで含めない"})
+routes.append(route("rkg_suica_ride", "rakuten_gold", "mobile_suica_ride", 0.025, 1000, 25, "jre_point", False, scope="monthlyTotal",
+                    note="楽天ペイアプリから楽天カードでモバイルSuicaにチャージした場合：乗車ポイント2%＋チャージ0.5%（楽天カードと同じ）",
+                    src=SRC["rakuten_pay_suica"], conf="medium"))
+for _r in routes[_n_before:]:
+    _r["checkedAt"] = C926B
+
+def add_rule26(rid, store_id, route_id, rate, src, conf, cond):
+    add_rule(rid, store_id, route_id, rate, src, conf, cond)
+    rate_rules[-1]["checkedAt"] = C926B
+
+# 楽天ゴールド：楽天市場2%（楽天カードと同じ）
+add_rule26("rkg_ichiba", "rakuten_ichiba", "rkg_online", 0.02, SRC["rakuten_ichiba"], "high",
+           "カード通常1%＋楽天市場特典1%（楽天カードと同じ。特典分は期間限定・月1,000pt上限）")
+# 三菱UFJカード ゴールド：一般と同じ7%特約
+for s_, r_, cond in MUFG:
+    add_rule26(f"mufgg7_{s_}_{r_}", s_, r_.replace("mufg_", "mufgg_"), 0.07, SRC["mufg_gold"], "medium", cond)
+# イオンゴールド：イオングループ2倍
+for s_ in ("aeon", "maxvalu", "mybasket", "daiei"):
+    for r_ in ("aeong_card", "aeong_touch", "aeong_quicpay"):
+        add_rule26(f"aeong2x_{s_}_{r_}", s_, r_, 0.01, SRC["aeon_gold"], "medium", "イオングループ対象店舗でWAON POINT2倍（一般と同じ）")
+# Oliveゴールド・Oliveプラチナプリファード：Oliveのクレジットモードは8%
+for prefix in ("olvg", "olvpp"):
+    for s_ in SMBC_STORE:
+        add_rule26(f"smbc8_{prefix}_{s_}", s_, f"{prefix}_touch", 0.08, SRC["smbc_7pct"], "medium",
+                   SMBC_COND + "。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）")
+    for s_, extra in SMBC_MO.items():
+        add_rule26(f"smbc8mo_{prefix}_{s_}", s_, f"{prefix}_online", 0.08, SRC["smbc_7pct"], "medium",
+                   "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）" + (f"。{extra}" if extra else ""))
+# セブンカード・プラス（ゴールド）：セブン-イレブン10%（一般と同じ）
+for r_ in ("spg_card", "spg_quicpay"):
+    add_rule26(f"spg_seven_{r_}", "seven", r_, 0.10, SRC["seven_gold"], "medium", "7iDにカード登録のうえクレジット決済（一般と同じ）。一部商品は対象外")
+# JCBゴールド：J-POINTパートナー（要ポイントアップ登録）
+for r_ in ("jcbg_card", "jcbg_quicpay", "jcbg_touch"):
+    add_rule26(f"jcbg_seven_{r_}", "seven", r_, 0.015, SRC["jcb_partner"], "medium", "J-POINTパートナー（3倍・要ポイントアップ登録）")
+add_rule26("jcbg_amazon", "amazon", "jcbg_online", 0.015, SRC["jcb_partner"], "medium", "J-POINTパートナー（3倍・要ポイントアップ登録）")
+add_rule26("jcbg_mcd", "mcdonalds", "jcbg_online", 0.10, SRC["jcb_partner"], "medium", "モバイルオーダー・マックデリバリー限定（20倍・要ポイントアップ登録）")
+add_rule26("jcbg_starbucks", "starbucks", "jcbg_online", 0.10, SRC["jcb_partner"], "medium",
+           "モバイルオーダー・スターバックス カードへのオンライン入金（20倍・要ポイントアップ登録）")
+# JALカード特約店（イオングループ・ウエルシア）でマイル2倍
+for s_ in ("aeon", "maxvalu", "mybasket", "daiei", "welcia"):
+    src_ = SRC["jal_welcia"] if s_ == "welcia" else SRC["jal_aeon"]
+    for r_ in ("card", "touch", "quicpay"):
+        add_rule26(f"jal2x_{s_}_{r_}", s_, f"jal_{r_}", 0.01, src_, "medium", "JALカード特約店（200円＝2マイル）")
+        add_rule26(f"jalg2x_{s_}_{r_}", s_, f"jalg_{r_}", 0.02, src_, "medium", "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）")
+# ローソンPontaプラス：対象店舗5%（2026年6月16日以降。月3万円までの上限は計算に含めない）
+LPP_COND = "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+for s_ in ("ok", "sushiro", "kurazushi", "matsuya", "matsunoya"):
+    for r_ in ("lpp_card", "lpp_quicpay"):
+        add_rule26(f"lpp5_{s_}_{r_}", s_, r_, 0.05, SRC["lawson_ponta"], "medium", LPP_COND)
+add_rule26("lpp5_pizzahut", "pizzahut", "lpp_online", 0.05, SRC["lawson_ponta"], "medium", "公式サイト・アプリでのオンライン注文。" + LPP_COND)
+add_rule26("lpp5_cocacola", "cocacola_vm", "lpp_card", 0.05, SRC["lawson_ponta"], "medium", "自販機でのカードのタッチ決済。" + LPP_COND)
+
+bonuses += [
+    {"id": "mufgg_1m", "cardId": "mufg_gold", "thresholdYen": 1000000, "valueYen": 11000,
+     "periodType": "joinMonth", "startOffsetMonths": 0,
+     "description": "年間100万円利用で2,200ポイント（11,000円相当・1pt＝5円）",
+     "periodNote": "集計期間は入会月基準で近似。正確な期間は会員サイトで確認し、必要なら期限を手動設定",
+     "excludedMethods": [], "sourceUrl": SRC["mufg_bonus"], "checkedAt": C926B, "confidence": "medium"},
+    {"id": "jcbg_1m", "cardId": "jcb_gold", "thresholdYen": 1000000, "valueYen": 3000,
+     "periodType": "fixed", "startOffsetMonths": 0, "fixedStartMonthDay": "12-16",
+     "description": "J-POINTボーナス：年間100万円利用で3,000ポイント（50万円ごとの段階制。アプリは100万円時点で評価）",
+     "periodNote": "毎年12月16日〜翌年12月15日の利用分（入会月によらない固定期間）",
+     "excludedMethods": [], "sourceUrl": SRC["jcb_bonus"], "checkedAt": C926B, "confidence": "medium"},
+    {"id": "olvg_1m", "cardId": "olive_gold", "thresholdYen": 1000000, "valueYen": 10000,
+     "oneTimeValueYen": 5500, "oneTimeNote": "初回達成で翌年以降の年会費永年無料（5,500円）",
+     "periodType": "joinMonth", "startOffsetMonths": 0,
+     "description": "年間100万円利用で10,000ポイント（継続特典）＋初回達成で年会費永年無料",
+     "periodNote": "入会月基準の1年間で近似",
+     "excludedMethods": [], "sourceUrl": SRC["olive_gold_bonus"], "checkedAt": C926B, "confidence": "medium"},
+    {"id": "olvpp_1m", "cardId": "olive_pp", "thresholdYen": 1000000, "valueYen": 10000,
+     "periodType": "joinMonth", "startOffsetMonths": 0,
+     "description": "年間100万円利用ごとに10,000ポイント（最大40,000ポイント・継続特典）",
+     "periodNote": "入会月基準の1年間で近似。100万円を超えた分（200万・300万…）は計算に含めない",
+     "excludedMethods": [], "sourceUrl": SRC["olive_pp"], "checkedAt": C926B, "confidence": "medium"},
+    {"id": "viewg_3m", "cardId": "view_gold", "thresholdYen": 3000000, "valueYen": 12000,
+     "periodType": "fixed", "startOffsetMonths": 0, "fixedStartMonthDay": "04-01",
+     "description": "年間300万円利用で12,000ポイント（利用額に応じた段階制。アプリは300万円時点で評価）",
+     "periodNote": "4月〜翌年3月の利用分で近似。Suicaへのチャージは対象外",
+     "excludedMethods": ["mobile_suica_ride"], "oneTimeValueYen": 0,
+     "sourceUrl": SRC["view_gold_bonus"], "checkedAt": C926B, "confidence": "low"},
+    {"id": "epp_1m", "cardId": "epos_platinum", "thresholdYen": 1000000, "valueYen": 20000,
+     "periodType": "joinMonth", "startOffsetMonths": 0,
+     "description": "年間100万円以上200万円未満の利用で20,000ポイント（利用額に応じた段階制。アプリは100万円時点で評価）",
+     "periodNote": "入会月基準の1年間で近似",
+     "excludedMethods": [], "sourceUrl": SRC["epos_platinum"], "checkedAt": C926B, "confidence": "medium"},
+]
+
+# ==== 2026-09-26 段階4：カード以外の支払い（単独のコード決済・電子マネー）と現金のみの店（詳細設計 32.11） ====
+SRC.update({
+    "dbarai": "https://service.smt.docomo.ne.jp/keitai_payment/app/help/detail/0329.html",
+    "rpay": "https://www.itmedia.co.jp/mobile/articles/2601/28/news099.html",
+    "aupay_code": "https://media.aupay.wallet.auone.jp/articles/422",
+    "waon": "https://waon.info/waon/waon-vs-edy/",
+    "nanaco": "https://fpcafe.jp/mocha/2159",
+    "edy": "https://pay-route.co.jp/article/2026/04/01/maximize-rakuten-edy-points-and-credit-charge-comparison/",
+})
+methods += [
+    {"id": "d_barai", "name": "d払い", "type": "code"},
+    {"id": "rakuten_pay", "name": "楽天ペイ", "type": "code"},
+    {"id": "au_pay", "name": "au PAY", "type": "code"},
+    {"id": "waon", "name": "WAON", "type": "emoney"},
+    {"id": "nanaco", "name": "nanaco", "type": "emoney"},
+    {"id": "edy", "name": "楽天Edy", "type": "emoney"},
+]
+# 既存のカード以外の経路：新規利用者に最初から有効にする（defaultEnabled）と表示名
+for _r in routes:
+    if _r["id"] == "paypay_balance": _r["defaultEnabled"] = True; _r["label"] = "PayPay（残高払い）"
+    if _r["id"] == "suica_ride": _r["defaultEnabled"] = True; _r["label"] = "モバイルSuica（JR東日本の乗車）"
+NONCARD_NEW = [
+    # (経路, 支払い方法, 率, 付与単位, pt, ポイント, 表示名, 出典, 注記)
+    ("dbarai_balance", "d_barai", 0.005, 200, 1, "d_point", "d払い（残高・口座払い）", "dbarai",
+     "d払いの基本0.5%。dカードを支払い方法に設定したときの上乗せはカードの組み合わせのため含めない"),
+    ("rpay_cash", "rakuten_pay", 0.01, 200, 2, "rakuten_point", "楽天ペイ（楽天キャッシュ払い）", "rpay",
+     "楽天キャッシュ払い1.0%。楽天ポイントカードを月2回以上提示すると1.5%（条件付きのため含めない）。楽天カードからのチャージ分は含めない"),
+    ("aupay_balance", "au_pay", 0.005, 200, 1, "ponta_point", "au PAY（残高払い）", "aupay_code",
+     "au PAYの基本0.5%。au PAY カードからのチャージ分は含めない"),
+    ("waon_emoney", "waon", 0.005, 200, 1, "waon_point", "WAON", "waon", "WAON POINT 0.5%（イオングループの対象店舗は2倍）。チャージ元カードのポイントは含めない"),
+    ("nanaco_emoney", "nanaco", 0.005, 200, 1, "nanaco_point", "nanaco", "nanaco", "200円（税抜）＝1pt。チャージ元カードのポイントは含めない"),
+    ("edy_emoney", "edy", 0.005, 200, 1, "rakuten_point", "楽天Edy", "edy", "200円＝1pt（0.5%）。チャージ元カードのポイントは含めない"),
+]
+for rid, mid, rate_, unit, ppu, pt, label, src_, note in NONCARD_NEW:
+    _r = route(rid, None, mid, rate_, unit, ppu, pt, False, note=note, src=SRC[src_], conf="medium")
+    _r["checkedAt"] = C926B; _r["label"] = label; _r["defaultEnabled"] = False
+    routes.append(_r)
+# 使える店：コード決済はコンビニ・スーパー・ドラッグストアの既定に加える。電子マネーは店ごと（詳細設計 32.11）
+CODE_METHODS = ["d_barai", "rakuten_pay", "au_pay"]
+for c in categories:
+    if c["id"] in ("convenience", "supermarket", "drugstore"):
+        c["defaultMethods"] = c["defaultMethods"] + CODE_METHODS
+EMONEY_STORES = {
+    "waon": ["aeon", "maxvalu", "mybasket", "daiei", "ministop", "welcia"],
+    "nanaco": ["seven", "itoyokado"],
+    "edy": ["familymart", "lawson", "natural_lawson"],
+}
+_cat_default = {c["id"]: c["defaultMethods"] for c in categories}
+for m_, ids_ in EMONEY_STORES.items():
+    for _s in stores:
+        if _s["id"] in ids_:
+            _s["acceptedMethods"] = (_s.get("acceptedMethods") or list(_cat_default[_s["categoryId"]])) + [m_]
+for s_ in ("aeon", "maxvalu", "mybasket", "daiei"):
+    add_rule26(f"waon2x_{s_}", s_, "waon_emoney", 0.01, SRC["waon"], "medium", "イオングループの対象店舗でWAON POINT2倍（200円＝2pt。WAON会員登録が必要）")
+
+master = {"schemaVersion": 1, "masterVersion": "2026.09.26-4", "checkedAt": RULE_CHECKED,
           "disclaimer": "公開情報をもとにした参考値。キャンペーンは含まない。実際の還元は各社の規約に従う。",
-          "cards": cards, "methods": methods, "points": points, "routes": routes, "bonuses": bonuses,
+          "series": series, "cards": cards, "methods": methods, "points": points, "routes": routes, "bonuses": bonuses,
           "categories": categories, "stores": stores, "rateRules": rate_rules}
 
 # ---- 検証 ----
@@ -692,7 +1066,7 @@ errs = []
 BY_STORE = {x['id']: x for x in stores}
 BY_ROUTE = {x['id']: x for x in routes}
 def ids(xs): return {x["id"] for x in xs}
-for name in ("cards", "methods", "points", "routes", "bonuses", "categories", "stores", "rateRules"):
+for name in ("series", "cards", "methods", "points", "routes", "bonuses", "categories", "stores", "rateRules"):
     xs = master[name]
     if len(ids(xs)) != len(xs): errs.append(f"{name}: id重複")
 C, M, P, R, S, K = ids(cards), ids(methods), ids(points), ids(routes), ids(stores), ids(categories)
@@ -704,6 +1078,16 @@ for c in cards:
     if not c.get("company") or not c.get("companyKana"): errs.append(f"card {c['id']}: カード会社なし")
     if c.get("officialUrl") and not c["officialUrl"].startswith("https://"): errs.append(f"card {c['id']}: officialUrlがhttpsでない")
     if not any(r["cardId"] == c["id"] for r in routes): errs.append(f"card {c['id']}: 決済経路なし")
+    if c.get("series") not in ids(series): errs.append(f"card {c['id']}: series不正")
+    if c.get("tier") not in ("general", "gold", "platinum"): errs.append(f"card {c['id']}: tier不正")
+for x in series:
+    if not x.get("name") or not x.get("kana"): errs.append(f"series {x['id']}: 名前/よみなし")
+    tiers = {c["tier"] for c in cards if c.get("series") == x["id"]}
+    if not tiers: errs.append(f"series {x['id']}: カードなし")
+    elif x["id"] not in SERIES_PAIR_EXEMPT | SERIES_PAIR_PENDING and not {"general", "gold"} <= tiers:
+        errs.append(f"series {x['id']}: 一般とゴールドの組がない")
+    elif x["id"] in SERIES_PAIR_PENDING and {"general", "gold"} <= tiers:
+        errs.append(f"series {x['id']}: 組が揃ったので SERIES_PAIR_PENDING から外す")
 for r in routes:
     if r["cardId"] is not None and r["cardId"] not in C: errs.append(f"route {r['id']}: cardId不正")
     if r["methodId"] not in M: errs.append(f"route {r['id']}: methodId不正")
@@ -731,6 +1115,13 @@ for s in stores:
         if m not in M: errs.append(f"store {s['id']}: method {m}不正")
     for p in s.get("usablePoints", []):
         if p not in P: errs.append(f"store {s['id']}: point {p}不正")
+for m in methods:
+    if m["type"] not in ("card", "tap", "wallet", "code", "transit", "emoney"): errs.append(f"method {m['id']}: type不正")
+for s in stores:
+    if s.get("cashOnly") and s.get("acceptedMethods") != []: errs.append(f"store {s['id']}: 現金のみの店はacceptedMethodsを空にする")
+    if not s.get("cashOnly") and s.get("acceptedMethods") == []: errs.append(f"store {s['id']}: acceptedMethodsが空（現金のみならcashOnly）")
+for r in routes:
+    if r["cardId"] is not None and ("defaultEnabled" in r or "label" in r): errs.append(f"route {r['id']}: defaultEnabled/labelはカード以外の経路だけ")
 for k in categories:
     for m in k["defaultMethods"]:
         if m not in M: errs.append(f"category {k['id']}: method {m}不正")

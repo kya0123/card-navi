@@ -1,7 +1,8 @@
-import type { Bonus, Card, Category, Id, Master, Method, Point, RateRule, Route, Store } from './types';
+import type { Bonus, Card, Category, CustomCard, Id, Master, Method, Point, RateRule, Route, Series, Store } from './types';
 
 export interface MasterIndex {
   raw: Master;
+  series: Map<Id, Series>;
   cards: Map<Id, Card>;
   methods: Map<Id, Method>;
   points: Map<Id, Point>;
@@ -11,6 +12,9 @@ export interface MasterIndex {
   categories: Map<Id, Category>;
   stores: Map<Id, Store>;
   rulesByRoute: Map<Id, RateRule[]>;
+  /** その他のカードを取り込んだ索引のとき、元のマスタの索引と取り込んだカード（domain/custom.ts） */
+  base?: MasterIndex;
+  custom?: readonly CustomCard[];
 }
 
 const byId = <T extends { id: Id }>(xs: T[]) => new Map(xs.map((x) => [x.id, x]));
@@ -24,6 +28,7 @@ export function indexMaster(m: Master): MasterIndex {
   }
   return {
     raw: m,
+    series: byId(m.series),
     cards: byId(m.cards),
     methods: byId(m.methods),
     points: byId(m.points),
@@ -36,11 +41,14 @@ export function indexMaster(m: Master): MasterIndex {
   };
 }
 
+const TIERS: readonly string[] = ['general', 'gold', 'platinum'];
+const METHOD_TYPES: readonly string[] = ['card', 'tap', 'wallet', 'code', 'transit', 'emoney'];
+
 /** マスタの整合性検証。エラーメッセージの配列を返す（空なら正常） */
 export function validateMaster(m: Master): string[] {
   const errs: string[] = [];
   const sets: Record<string, Set<Id>> = {};
-  for (const key of ['cards', 'methods', 'points', 'routes', 'bonuses', 'categories', 'stores', 'rateRules'] as const) {
+  for (const key of ['series', 'cards', 'methods', 'points', 'routes', 'bonuses', 'categories', 'stores', 'rateRules'] as const) {
     const xs = m[key] as { id: Id }[];
     const s = new Set(xs.map((x) => x.id));
     if (s.size !== xs.length) errs.push(`${key}: id重複`);
@@ -54,7 +62,13 @@ export function validateMaster(m: Master): string[] {
       errs.push(`card ${c.id}: segments不正`);
     if (!c.shortName || !c.kana) errs.push(`card ${c.id}: 略称/よみなし`);
     if (!c.company || !c.companyKana) errs.push(`card ${c.id}: カード会社なし`);
+    if (!sets.series.has(c.series)) errs.push(`card ${c.id}: series不正`);
+    if (!TIERS.includes(c.tier)) errs.push(`card ${c.id}: tier不正`);
     if (!m.routes.some((r) => r.cardId === c.id)) errs.push(`card ${c.id}: 決済経路なし`);
+  }
+  for (const x of m.series) {
+    if (!x.name || !x.kana) errs.push(`series ${x.id}: 名前/よみなし`);
+    if (!m.cards.some((c) => c.series === x.id)) errs.push(`series ${x.id}: カードなし`);
   }
   for (const r of m.routes) {
     if (r.cardId !== null && !sets.cards.has(r.cardId)) errs.push(`route ${r.id}: cardId不正`);
@@ -70,6 +84,11 @@ export function validateMaster(m: Master): string[] {
     if (!sets.categories.has(s.categoryId)) errs.push(`store ${s.id}: categoryId不正`);
     for (const x of s.acceptedMethods ?? []) if (!sets.methods.has(x)) errs.push(`store ${s.id}: method ${x}不正`);
     for (const x of s.usablePoints ?? []) if (!sets.points.has(x)) errs.push(`store ${s.id}: point ${x}不正`);
+  }
+  for (const x of m.methods) if (!METHOD_TYPES.includes(x.type)) errs.push(`method ${x.id}: type不正`);
+  for (const s of m.stores) {
+    if (s.cashOnly && !(Array.isArray(s.acceptedMethods) && s.acceptedMethods.length === 0)) errs.push(`store ${s.id}: 現金のみの店はacceptedMethodsを空にする`);
+    if (!s.cashOnly && Array.isArray(s.acceptedMethods) && s.acceptedMethods.length === 0) errs.push(`store ${s.id}: acceptedMethodsが空（現金のみならcashOnly）`);
   }
   for (const k of m.categories)
     for (const x of k.defaultMethods) if (!sets.methods.has(x)) errs.push(`category ${k.id}: method ${x}不正`);

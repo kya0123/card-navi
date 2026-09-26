@@ -521,16 +521,23 @@ await run('E17', '5つの配色すべてで文字4.5:1以上・1位の枠3:1以�
   await context.close();
 });
 
-await run('E18', 'カード一覧：カード会社の見出しが英字（アルファベット順）→日本語（あいうえお順）・同じ会社はまとまる', async () => {
+await run('E18', 'カード一覧：シリーズの見出しが英字（アルファベット順）→日本語（あいうえお順）・シリーズ内は一般→ゴールド→プラチナ', async () => {
   const { context, page } = await newPage({}, BASE, []);
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.waitForSelector('#catalog-list');
-  const heads = await page.locator('.catalog-company').allInnerTexts();
-  assert.deepEqual(heads.slice(0, 5), ['auフィナンシャルサービス', 'JCB', 'NTTドコモ', 'PayPayカード', 'アメリカン・エキスプレス']);
-  assert.equal(heads.at(-1), '楽天カード');
-  assert.equal(heads.length, new Set(heads).size, '会社の見出しは1回ずつ');
+  const heads = await page.locator('.catalog-series').allInnerTexts();
+  assert.deepEqual(heads.slice(0, 5), ['Amazon Mastercard', 'ANAカード', 'au PAY カード', 'dカード', 'JCBオリジナルシリーズ']);
+  assert.equal(heads.at(-1), 'リクルートカード');
+  assert.equal(heads.length, new Set(heads).size, 'シリーズの見出しは1回ずつ');
   const first = await page.locator('.catalog-item').first().innerText();
-  assert.match(first, /au PAY カード/);
+  assert.match(first, /Amazon Mastercard/);
+  const texts = await page.locator('.catalog-item').allInnerTexts();
+  const at = (re) => texts.findIndex((t) => re.test(t));
+  assert.ok(at(/三井住友カード（NL）\n/) < at(/三井住友カード ゴールド（NL）/) && at(/三井住友カード ゴールド（NL）/) < at(/プラチナプリファード/), '一般→ゴールド→プラチナ');
+  assert.match(texts[at(/ANA VISAワイドゴールド/)], /ゴールド・三井住友カード・/, 'ランクと発行会社を補足行に出す');
+  await page.fill('#card-q', 'マリオット');
+  await page.waitForFunction(() => document.querySelectorAll('.catalog-item').length === 2);
+  assert.deepEqual(await page.locator('.catalog-series').allInnerTexts(), ['Marriott Bonvoy アメックス']);
   await page.screenshot({ path: `${SHOT}E18-catalog-order.png` });
   await context.close();
 });

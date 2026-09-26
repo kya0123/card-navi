@@ -536,8 +536,8 @@ html[data-theme="blue"], html[data-theme="teal"], html[data-theme="terra"], html
 .theme-note { font-size: 0.875rem; }
 
 /* ---- v1.11 カード会社の見出し（詳細設計 24章） ---- */
-.catalog-company { margin: 8px 0 -2px; padding: 0 4px; font-size: 0.875rem; font-weight: 700; color: var(--gray-700); }
-.catalog-company:first-child { margin-top: 0; }
+.catalog-series { margin: 8px 0 -2px; padding: 0 4px; font-size: 0.875rem; font-weight: 700; color: var(--gray-700); }
+.catalog-series:first-child { margin-top: 0; }
 
 /* ---- 近くのお店（F13・詳細設計 27.6） ---- */
 .search { display: flex; gap: 8px; align-items: center; }

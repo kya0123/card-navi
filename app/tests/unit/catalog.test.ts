@@ -63,25 +63,45 @@ test('C06: 保有していないカードの特約は推奨に出ない', () => 
   assert.ok(res.top.every((t) => t.cardId !== 'seven_plus' && t.cardId !== 'smbc_gold_nl'));
 });
 
-test('C07: マスタ検証で区分・会社のないカードを検出', () => {
-  const bad = { ...master, cards: master.cards.map((c, i) => (i === 0 ? { ...c, segments: [], company: '' } : c)) };
+test('C07: マスタ検証で区分・会社・シリーズ・ランクのないカードを検出', () => {
+  const bad = { ...master, cards: master.cards.map((c, i) => (i === 0 ? { ...c, segments: [], company: '', series: 'nope', tier: 'silver' } : c)) };
   const errs = validateMaster(bad as Master);
   assert.ok(errs.some((e) => e.includes('segments不正')));
   assert.ok(errs.some((e) => e.includes('カード会社なし')));
+  assert.ok(errs.some((e) => e.includes('series不正')));
+  assert.ok(errs.some((e) => e.includes('tier不正')));
+  const orphan = { ...master, series: [...master.series, { id: 'empty', name: '空', kana: 'から', aliases: [] }] };
+  assert.ok(validateMaster(orphan as Master).some((e) => e.includes('series empty: カードなし')));
   assert.deepEqual(validateMaster(master), []);
 });
 
-test('C08: 並び順は英字の会社→日本語の会社（よみ順）、会社内はカード名順（24.5）', () => {
+test('C08: 並び順はシリーズ名（英字→よみ順）→ランク（一般→ゴールド→プラチナ）→カード名（32.6）', () => {
   const list = cardCatalog(mi, own(), 'all');
-  const companies = [...new Set(list.map((e) => e.card.company))];
-  assert.deepEqual(companies.slice(0, 5), ['auフィナンシャルサービス', 'JCB', 'NTTドコモ', 'PayPayカード', 'アメリカン・エキスプレス']);
-  assert.equal(companies.at(-1), '楽天カード');
-  assert.ok(companies.indexOf('ビューカード') > companies.indexOf('セブン・カードサービス'));
-  assert.ok(companies.indexOf('ビューカード') < companies.indexOf('三井住友カード'));
-  const smbc = list.filter((e) => e.card.company === '三井住友カード').map((e) => e.card.id);
-  assert.deepEqual(smbc.slice(0, 3), ['amazon_mc', 'ana_wide_gold', 'olive']);
-  const sorted = [...master.cards].sort(compareCards).map((c) => c.id);
+  const series = [...new Set(list.map((e) => mi.series.get(e.card.series)!.name))];
+  assert.deepEqual(series, [
+    'Amazon Mastercard', 'ANAカード', 'au PAY カード', 'dカード', 'JCBオリジナルシリーズ', 'Marriott Bonvoy アメックス', 'Olive', 'PayPayカード',
+    'イオンカード', 'エポスカード', 'セブンカード・プラス', 'ビューカード', '三井住友カード（NL）', '三菱UFJカード', '楽天カード', 'リクルートカード',
+  ]);
+  const ids = list.map((e) => e.card.id);
+  assert.deepEqual(ids.filter((id) => mi.cards.get(id)!.series === 'smbc_nl'), ['smbc_nl', 'smbc_gold_nl', 'smbc_pp']);
+  assert.deepEqual(ids.filter((id) => mi.cards.get(id)!.series === 'marriott'), ['marriott', 'marriott_premium']);
+  assert.deepEqual(ids.filter((id) => mi.cards.get(id)!.series === 'dcard'), ['dcard', 'dcard_gold']);
+  const sorted = [...master.cards].sort(compareCards(mi)).map((c) => c.id);
+  assert.deepEqual(ids, sorted);
   assert.deepEqual(cardCatalog(mi, own(), 'popular').map((e) => e.card.id), sorted.filter((id) => mi.cards.get(id)!.segments.includes('popular')));
+});
+
+test('C09: シリーズ名・シリーズの別名・ランク名でも検索できる（32.6）', () => {
+  const u = own();
+  const ids = (q: string) => cardCatalog(mi, u, 'all', q).map((e) => e.card.id);
+  assert.deepEqual(ids('ANA'), ['ana_wide_gold']);
+  assert.deepEqual(ids('あな'), ['ana_wide_gold']);
+  assert.deepEqual(ids('JCBオリジナル'), ['jcb_w']);
+  assert.deepEqual(ids('マリオット'), ['marriott', 'marriott_premium']);
+  assert.deepEqual(ids('プラチナ'), ['marriott_premium', 'smbc_pp']);
+  const gold = ids('ゴールド');
+  assert.ok(gold.includes('marriott') && gold.includes('dcard_gold') && gold.includes('smbc_gold_nl'));
+  assert.ok(gold.every((id) => mi.cards.get(id)!.tier === 'gold' || /ゴールド/.test(mi.cards.get(id)!.name)));
 });
 
 test('T01: 配色の既定は navy、未知の値は navy に戻る、バックアップで引き継ぐ', () => {

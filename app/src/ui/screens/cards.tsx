@@ -2,7 +2,7 @@ import { h, mount } from '../h';
 import type { Ctx } from '../app';
 import { isValidYM } from '../../domain/date';
 import type { BonusGoal } from '../../domain/types';
-import { addOwnedCard, cardCatalog, removeOwnedCard, segmentCounts, type SegmentFilter } from '../../domain/catalog';
+import { addOwnedCard, cardCatalog, removeOwnedCard, segmentCounts, TIER_LABEL, type SegmentFilter } from '../../domain/catalog';
 import { pct } from '../format';
 
 /** S03 カード（詳細設計 20.5）：保有カード／カード一覧から選ぶ を切り替える */
@@ -69,7 +69,7 @@ function CatalogList(ctx: Ctx): Node {
       {items.length === 0 && <p class="empty">該当するカードがありません。</p>}
       <ul class="catalog">
         {items.map(({ card, owned, baseRate, maxRate, hasBonus }, i) => [
-          (i === 0 || items[i - 1].card.company !== card.company) && <li class="catalog-company" role="presentation">{card.company}</li>,
+          (i === 0 || items[i - 1].card.series !== card.series) && <li class="catalog-series" role="presentation">{mi.series.get(card.series)!.name}</li>,
           <li class={`catalog-item${owned ? ' is-owned' : ''}`}>
             <label class="catalog-label">
               <input id={`own-${card.id}`} type="checkbox" checked={owned} onChange={(e: Event) => {
@@ -86,7 +86,7 @@ function CatalogList(ctx: Ctx): Node {
                   {card.segments.includes('enthusiast') && <span class="tag tag-enthusiast">ポイ活向け</span>}
                 </span>
                 <span class="catalog-meta">
-                  {card.brand}・年会費{card.annualFee === 0 ? '無料' : `${card.annualFee.toLocaleString('ja-JP')}円`}・基本{pct(baseRate)}
+                  {TIER_LABEL[card.tier]}・{card.company}・{card.brand}・年会費{card.annualFee === 0 ? '無料' : `${card.annualFee.toLocaleString('ja-JP')}円`}・基本{pct(baseRate)}
                   {maxRate > baseRate ? `・最大${pct(maxRate)}` : ''}{hasBonus ? '・年間ボーナスあり' : ''}
                 </span>
                 <span class="catalog-note">{card.highlight}</span>

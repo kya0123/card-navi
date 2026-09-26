@@ -7,6 +7,18 @@ export type YM = string;
 // ---- マスタ ----
 /** カードの区分（詳細設計 20.3）：定番／ポイ活向け */
 export type CardSegment = 'popular' | 'enthusiast';
+/** カードのランク（詳細設計 32.5）。名前ではなく券種の位置付けで決める */
+export type CardTier = 'general' | 'gold' | 'platinum';
+/** カードのシリーズ（一覧の見出し・並び順・検索用。詳細設計 32.5） */
+export interface Series {
+  id: Id;
+  /** 見出しに出すシリーズ名（例：「ANAカード」） */
+  name: string;
+  /** 並び順・検索用のよみ */
+  kana: string;
+  /** 検索用の別名 */
+  aliases: string[];
+}
 export interface Card {
   id: Id; name: string; brand: string; pointId: Id; annualFee: number;
   /** 一覧・ラベル用の略称（例：「三菱UFJ」） */
@@ -20,8 +32,9 @@ export interface Card {
   highlight: string;
   aliases: string[];
   annualFeeNote?: string;
-  /** 見出しに出すカード会社名と、並び順用のよみ（詳細設計 24.2） */
+  /** カード会社名とよみ（詳細設計 24.2）。v1.20 から見出しには使わず、行の補足に出す */
   company: string; companyKana: string;
+  series: Id; tier: CardTier;
   officialUrl?: string;
 }
 export interface Method { id: Id; name: string; type: 'card' | 'tap' | 'wallet' | 'code' | 'transit' }
@@ -65,7 +78,7 @@ export interface RateRule {
 }
 export interface Master {
   schemaVersion: 1; masterVersion: string; checkedAt: YMD; disclaimer: string;
-  cards: Card[]; methods: Method[]; points: Point[]; routes: Route[]; bonuses: Bonus[];
+  series: Series[]; cards: Card[]; methods: Method[]; points: Point[]; routes: Route[]; bonuses: Bonus[];
   categories: Category[]; stores: Store[]; rateRules: RateRule[];
 }
 

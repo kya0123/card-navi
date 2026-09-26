@@ -89,7 +89,7 @@ export function InfoScreen(ctx: Ctx): Node {
             </details>
           );
         };
-        const sorted = [...mi.raw.cards].sort(compareCards);
+        const sorted = [...mi.raw.cards].sort(compareCards(mi));
         const others = sorted.filter((c) => !owned.has(c.id));
         return [
           ...sorted.filter((c) => owned.has(c.id)).map(CardPanel),

@@ -86,12 +86,50 @@ COMPANY = {
     "view_std": ("ビューカード", "びゅーかーど"),
 }
 
+# シリーズ（一覧の見出し・並び順・検索用。詳細設計 32.5）。name・kana・aliases
+series = [
+    {"id": "amazon", "name": "Amazon Mastercard", "kana": "あまぞんますたーかーど", "aliases": ["アマゾン"]},
+    {"id": "ana", "name": "ANAカード", "kana": "えーえぬえーかーど", "aliases": ["アナ", "全日空"]},
+    {"id": "aupay", "name": "au PAY カード", "kana": "えーゆーぺいかーど", "aliases": ["エーユー"]},
+    {"id": "dcard", "name": "dカード", "kana": "でぃーかーど", "aliases": ["ドコモ"]},
+    {"id": "jcb_original", "name": "JCBオリジナルシリーズ", "kana": "じぇーしーびーおりじなるしりーず", "aliases": []},
+    {"id": "marriott", "name": "Marriott Bonvoy アメックス", "kana": "まりおっとぼんゔぉいあめっくす", "aliases": ["マリオット", "ボンヴォイ", "ボンボイ"]},
+    {"id": "olive", "name": "Olive", "kana": "おりーぶ", "aliases": []},
+    {"id": "paypay", "name": "PayPayカード", "kana": "ぺいぺいかーど", "aliases": []},
+    {"id": "aeon", "name": "イオンカード", "kana": "いおんかーど", "aliases": []},
+    {"id": "epos", "name": "エポスカード", "kana": "えぽすかーど", "aliases": ["丸井"]},
+    {"id": "seven", "name": "セブンカード・プラス", "kana": "せぶんかーどぷらす", "aliases": []},
+    {"id": "view", "name": "ビューカード", "kana": "びゅーかーど", "aliases": ["JR東日本"]},
+    {"id": "smbc_nl", "name": "三井住友カード（NL）", "kana": "みついすみともかーどなんばーれす", "aliases": ["ナンバーレス"]},
+    {"id": "mufg", "name": "三菱UFJカード", "kana": "みつびしゆーえふじぇいかーど", "aliases": []},
+    {"id": "rakuten", "name": "楽天カード", "kana": "らくてんかーど", "aliases": []},
+    {"id": "recruit", "name": "リクルートカード", "kana": "りくるーとかーど", "aliases": []},
+]
+# カード → (シリーズ, ランク)。ランクは名前ではなく券種の位置付けで決める（詳細設計 32.2 L8）
+G, GO, PL = "general", "gold", "platinum"
+CARD_SERIES = {
+    "smbc_nl": ("smbc_nl", G), "smbc_gold_nl": ("smbc_nl", GO), "smbc_pp": ("smbc_nl", PL),
+    "olive": ("olive", G), "amazon_mc": ("amazon", G), "ana_wide_gold": ("ana", GO),
+    "rakuten": ("rakuten", G), "mufg": ("mufg", G), "recruit": ("recruit", G),
+    "paypay_card": ("paypay", G), "paypay_gold": ("paypay", GO),
+    "aeon_select": ("aeon", G), "dcard": ("dcard", G), "dcard_gold": ("dcard", GO),
+    "aupay_card": ("aupay", G), "jcb_w": ("jcb_original", G), "seven_plus": ("seven", G),
+    "epos": ("epos", G), "epos_gold": ("epos", GO),
+    "marriott": ("marriott", GO), "marriott_premium": ("marriott", PL),
+    "view_std": ("view", G),
+}
+# 一般とゴールドの組の例外（詳細設計 32.5）。ゴールドが発行されていない／一般がない
+SERIES_PAIR_EXEMPT = {"amazon", "recruit", "marriott"}
+# 段階3で追加するまで一般かゴールドが欠けているシリーズ（32.3）。追加したら消す
+SERIES_PAIR_PENDING = {"ana", "aupay", "jcb_original", "olive", "aeon", "seven", "view", "mufg", "rakuten"}
+
 # segments: popular＝世間一般で広く使われている定番 / enthusiast＝ポイントマニア界隈でお得とされる
 def card(id, name, short, kana, issuer, brand, point, fee, segments, highlight, aliases=(), fee_note=None):
     c = {"id": id, "name": name, "shortName": short, "kana": kana, "issuer": issuer, "brand": brand,
          "pointId": point, "annualFee": fee, "segments": list(segments), "highlight": highlight, "aliases": list(aliases)}
     if fee_note: c["annualFeeNote"] = fee_note
     c["company"], c["companyKana"] = COMPANY[id]
+    c["series"], c["tier"] = CARD_SERIES[id]
     return c
 
 POP, ENT = "popular", "enthusiast"
@@ -682,9 +720,9 @@ rate_rules.append({"id": "rakuten_ichiba_card", "target": {"storeId": "rakuten_i
                    "confidence": "high",
                    "conditions": "カード通常1%＋楽天市場特典1%（特典分は期間限定・月1,000pt上限）。楽天市場自体の1%は全経路共通のため省略"})
 
-master = {"schemaVersion": 1, "masterVersion": "2026.09.26-1", "checkedAt": RULE_CHECKED,
+master = {"schemaVersion": 1, "masterVersion": "2026.09.26-2", "checkedAt": RULE_CHECKED,
           "disclaimer": "公開情報をもとにした参考値。キャンペーンは含まない。実際の還元は各社の規約に従う。",
-          "cards": cards, "methods": methods, "points": points, "routes": routes, "bonuses": bonuses,
+          "series": series, "cards": cards, "methods": methods, "points": points, "routes": routes, "bonuses": bonuses,
           "categories": categories, "stores": stores, "rateRules": rate_rules}
 
 # ---- 検証 ----
@@ -692,7 +730,7 @@ errs = []
 BY_STORE = {x['id']: x for x in stores}
 BY_ROUTE = {x['id']: x for x in routes}
 def ids(xs): return {x["id"] for x in xs}
-for name in ("cards", "methods", "points", "routes", "bonuses", "categories", "stores", "rateRules"):
+for name in ("series", "cards", "methods", "points", "routes", "bonuses", "categories", "stores", "rateRules"):
     xs = master[name]
     if len(ids(xs)) != len(xs): errs.append(f"{name}: id重複")
 C, M, P, R, S, K = ids(cards), ids(methods), ids(points), ids(routes), ids(stores), ids(categories)
@@ -704,6 +742,16 @@ for c in cards:
     if not c.get("company") or not c.get("companyKana"): errs.append(f"card {c['id']}: カード会社なし")
     if c.get("officialUrl") and not c["officialUrl"].startswith("https://"): errs.append(f"card {c['id']}: officialUrlがhttpsでない")
     if not any(r["cardId"] == c["id"] for r in routes): errs.append(f"card {c['id']}: 決済経路なし")
+    if c.get("series") not in ids(series): errs.append(f"card {c['id']}: series不正")
+    if c.get("tier") not in ("general", "gold", "platinum"): errs.append(f"card {c['id']}: tier不正")
+for x in series:
+    if not x.get("name") or not x.get("kana"): errs.append(f"series {x['id']}: 名前/よみなし")
+    tiers = {c["tier"] for c in cards if c.get("series") == x["id"]}
+    if not tiers: errs.append(f"series {x['id']}: カードなし")
+    elif x["id"] not in SERIES_PAIR_EXEMPT | SERIES_PAIR_PENDING and not {"general", "gold"} <= tiers:
+        errs.append(f"series {x['id']}: 一般とゴールドの組がない")
+    elif x["id"] in SERIES_PAIR_PENDING and {"general", "gold"} <= tiers:
+        errs.append(f"series {x['id']}: 組が揃ったので SERIES_PAIR_PENDING から外す")
 for r in routes:
     if r["cardId"] is not None and r["cardId"] not in C: errs.append(f"route {r['id']}: cardId不正")
     if r["methodId"] not in M: errs.append(f"route {r['id']}: methodId不正")

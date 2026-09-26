@@ -1,8 +1,8 @@
 import { methodsForCard, type MasterIndex } from './master';
 import { normalize } from './search';
-import type { Card, CardSegment, Id, UserSettings } from './types';
+import type { Card, CardSegment, CardTier, Id, UserSettings } from './types';
 
-/** カード一覧と保有カードの選択（詳細設計 20.4・24章） */
+/** カード一覧と保有カードの選択（詳細設計 20.4・24章・32.6） */
 
 export type SegmentFilter = 'all' | CardSegment | 'owned';
 
@@ -27,10 +27,23 @@ function compareNames(a: { name: string; kana: string }, b: { name: string; kana
   return la ? enCollator.compare(a.name, b.name) : jaCollator.compare(a.kana, b.kana);
 }
 
-/** カード会社順 → 会社内はカード名順 */
-export function compareCards(a: Card, b: Card): number {
-  return compareNames({ name: a.company, kana: a.companyKana }, { name: b.company, kana: b.companyKana })
-    || compareNames(a, b);
+export const TIER_ORDER: readonly CardTier[] = ['general', 'gold', 'platinum'];
+export const TIER_LABEL: Record<CardTier, string> = { general: '一般', gold: 'ゴールド', platinum: 'プラチナ' };
+
+/** シリーズ名順 → ランク順（一般→ゴールド→プラチナ）→ カード名順（詳細設計 32.6） */
+export function compareCards(mi: MasterIndex): (a: Card, b: Card) => number {
+  return (a, b) => {
+    const sa = mi.series.get(a.series)!, sb = mi.series.get(b.series)!;
+    return compareNames(sa, sb)
+      || TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier)
+      || compareNames(a, b);
+  };
+}
+
+/** 検索の対象：カード名・よみ・略称・発行会社・別名、シリーズ名・よみ・別名、ランク名 */
+function searchTexts(mi: MasterIndex, c: Card): string[] {
+  const s = mi.series.get(c.series)!;
+  return [c.name, c.kana, c.shortName, c.issuer, ...c.aliases, s.name, s.kana, ...s.aliases, TIER_LABEL[c.tier]];
 }
 
 function rates(mi: MasterIndex, cardId: Id): { base: number; max: number } {
@@ -46,9 +59,9 @@ function rates(mi: MasterIndex, cardId: Id): { base: number; max: number } {
 export function cardCatalog(mi: MasterIndex, user: UserSettings, filter: SegmentFilter, query = ''): CatalogEntry[] {
   const owned = new Set(user.ownedCards.map((c) => c.cardId));
   const q = normalize(query);
-  return [...mi.raw.cards].sort(compareCards)
+  return [...mi.raw.cards].sort(compareCards(mi))
     .filter((c) => filter === 'all' || (filter === 'owned' ? owned.has(c.id) : c.segments.includes(filter)))
-    .filter((c) => !q || [c.name, c.kana, c.shortName, c.issuer, ...c.aliases].some((x) => normalize(x).includes(q)))
+    .filter((c) => !q || searchTexts(mi, c).some((x) => normalize(x).includes(q)))
     .map((card) => {
       const { base, max } = rates(mi, card.id);
       return { card, owned: owned.has(card.id), baseRate: base, maxRate: max, hasBonus: mi.bonusByCard.has(card.id) };

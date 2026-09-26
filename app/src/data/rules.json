@@ -1,8 +1,125 @@
 {
   "schemaVersion": 1,
-  "masterVersion": "2026.09.26-1",
+  "masterVersion": "2026.09.26-2",
   "checkedAt": "2026-09-23",
   "disclaimer": "公開情報をもとにした参考値。キャンペーンは含まない。実際の還元は各社の規約に従う。",
+  "series": [
+    {
+      "id": "amazon",
+      "name": "Amazon Mastercard",
+      "kana": "あまぞんますたーかーど",
+      "aliases": [
+        "アマゾン"
+      ]
+    },
+    {
+      "id": "ana",
+      "name": "ANAカード",
+      "kana": "えーえぬえーかーど",
+      "aliases": [
+        "アナ",
+        "全日空"
+      ]
+    },
+    {
+      "id": "aupay",
+      "name": "au PAY カード",
+      "kana": "えーゆーぺいかーど",
+      "aliases": [
+        "エーユー"
+      ]
+    },
+    {
+      "id": "dcard",
+      "name": "dカード",
+      "kana": "でぃーかーど",
+      "aliases": [
+        "ドコモ"
+      ]
+    },
+    {
+      "id": "jcb_original",
+      "name": "JCBオリジナルシリーズ",
+      "kana": "じぇーしーびーおりじなるしりーず",
+      "aliases": []
+    },
+    {
+      "id": "marriott",
+      "name": "Marriott Bonvoy アメックス",
+      "kana": "まりおっとぼんゔぉいあめっくす",
+      "aliases": [
+        "マリオット",
+        "ボンヴォイ",
+        "ボンボイ"
+      ]
+    },
+    {
+      "id": "olive",
+      "name": "Olive",
+      "kana": "おりーぶ",
+      "aliases": []
+    },
+    {
+      "id": "paypay",
+      "name": "PayPayカード",
+      "kana": "ぺいぺいかーど",
+      "aliases": []
+    },
+    {
+      "id": "aeon",
+      "name": "イオンカード",
+      "kana": "いおんかーど",
+      "aliases": []
+    },
+    {
+      "id": "epos",
+      "name": "エポスカード",
+      "kana": "えぽすかーど",
+      "aliases": [
+        "丸井"
+      ]
+    },
+    {
+      "id": "seven",
+      "name": "セブンカード・プラス",
+      "kana": "せぶんかーどぷらす",
+      "aliases": []
+    },
+    {
+      "id": "view",
+      "name": "ビューカード",
+      "kana": "びゅーかーど",
+      "aliases": [
+        "JR東日本"
+      ]
+    },
+    {
+      "id": "smbc_nl",
+      "name": "三井住友カード（NL）",
+      "kana": "みついすみともかーどなんばーれす",
+      "aliases": [
+        "ナンバーレス"
+      ]
+    },
+    {
+      "id": "mufg",
+      "name": "三菱UFJカード",
+      "kana": "みつびしゆーえふじぇいかーど",
+      "aliases": []
+    },
+    {
+      "id": "rakuten",
+      "name": "楽天カード",
+      "kana": "らくてんかーど",
+      "aliases": []
+    },
+    {
+      "id": "recruit",
+      "name": "リクルートカード",
+      "kana": "りくるーとかーど",
+      "aliases": []
+    }
+  ],
   "cards": [
     {
       "id": "smbc_gold_nl",
@@ -26,6 +143,8 @@
       "annualFeeNote": "年100万円利用で翌年以降永年無料",
       "company": "三井住友カード",
       "companyKana": "みついすみともかーど",
+      "series": "smbc_nl",
+      "tier": "gold",
       "officialUrl": "https://www.smbc-card.com/nyukai/card/gold-numberless.jsp"
     },
     {
@@ -46,6 +165,8 @@
       ],
       "company": "楽天カード",
       "companyKana": "らくてんかーど",
+      "series": "rakuten",
+      "tier": "general",
       "officialUrl": "https://www.rakuten-card.co.jp/"
     },
     {
@@ -67,6 +188,8 @@
       ],
       "company": "三井住友カード",
       "companyKana": "みついすみともかーど",
+      "series": "ana",
+      "tier": "gold",
       "officialUrl": "https://www.smbc-card.com/nyukai/affiliate/ana/index.jsp"
     },
     {
@@ -89,6 +212,8 @@
       ],
       "company": "三菱UFJニコス",
       "companyKana": "みつびしゆーえふじぇいにこす",
+      "series": "mufg",
+      "tier": "general",
       "officialUrl": "https://www.cr.mufg.jp/apply/card/mucard/index.html"
     },
     {
@@ -111,6 +236,8 @@
       ],
       "company": "PayPayカード",
       "companyKana": "ぺいぺいかーど",
+      "series": "paypay",
+      "tier": "gold",
       "officialUrl": "https://www.paypay-card.co.jp/service/card/overview/"
     },
     {
@@ -134,6 +261,8 @@
       ],
       "company": "三井住友カード",
       "companyKana": "みついすみともかーど",
+      "series": "smbc_nl",
+      "tier": "general",
       "officialUrl": "https://www.smbc-card.com/nyukai/card/numberless.jsp"
     },
     {
@@ -155,6 +284,8 @@
       ],
       "company": "三井住友カード",
       "companyKana": "みついすみともかーど",
+      "series": "olive",
+      "tier": "general",
       "officialUrl": "https://www.smbc.co.jp/kojin/olive/"
     },
     {
@@ -176,6 +307,8 @@
       ],
       "company": "PayPayカード",
       "companyKana": "ぺいぺいかーど",
+      "series": "paypay",
+      "tier": "general",
       "officialUrl": "https://www.paypay-card.co.jp/"
     },
     {
@@ -196,6 +329,8 @@
       ],
       "company": "イオンフィナンシャルサービス",
       "companyKana": "いおんふぃなんしゃるさーびす",
+      "series": "aeon",
+      "tier": "general",
       "officialUrl": "https://www.aeon.co.jp/card/lineup/select/"
     },
     {
@@ -216,6 +351,8 @@
       ],
       "company": "NTTドコモ",
       "companyKana": "えぬてぃーてぃーどこも",
+      "series": "dcard",
+      "tier": "general",
       "officialUrl": "https://dcard.docomo.ne.jp/"
     },
     {
@@ -237,6 +374,8 @@
       ],
       "company": "NTTドコモ",
       "companyKana": "えぬてぃーてぃーどこも",
+      "series": "dcard",
+      "tier": "gold",
       "officialUrl": "https://dcard.docomo.ne.jp/"
     },
     {
@@ -258,6 +397,8 @@
       ],
       "company": "auフィナンシャルサービス",
       "companyKana": "えーゆーふぃなんしゃるさーびす",
+      "series": "aupay",
+      "tier": "general",
       "officialUrl": "https://www.kddi-fs.com/"
     },
     {
@@ -281,6 +422,8 @@
       ],
       "company": "JCB",
       "companyKana": "じぇーしーびー",
+      "series": "jcb_original",
+      "tier": "general",
       "officialUrl": "https://www.jcb.co.jp/ordercard/kojin_card/os_card_w.html"
     },
     {
@@ -302,6 +445,8 @@
       ],
       "company": "セブン・カードサービス",
       "companyKana": "せぶんかーどさーびす",
+      "series": "seven",
+      "tier": "general",
       "officialUrl": "https://www.7card.co.jp/"
     },
     {
@@ -322,6 +467,8 @@
       ],
       "company": "エポスカード",
       "companyKana": "えぽすかーど",
+      "series": "epos",
+      "tier": "general",
       "officialUrl": "https://www.eposcard.co.jp/"
     },
     {
@@ -345,6 +492,8 @@
       ],
       "company": "三井住友カード",
       "companyKana": "みついすみともかーど",
+      "series": "amazon",
+      "tier": "general",
       "officialUrl": "https://www.smbc-card.com/nyukai/affiliate/amazon/index.jsp"
     },
     {
@@ -365,6 +514,8 @@
       ],
       "company": "三菱UFJニコス",
       "companyKana": "みつびしゆーえふじぇいにこす",
+      "series": "recruit",
+      "tier": "general",
       "officialUrl": "https://recruit-card.jp/"
     },
     {
@@ -386,6 +537,8 @@
       ],
       "company": "三井住友カード",
       "companyKana": "みついすみともかーど",
+      "series": "smbc_nl",
+      "tier": "platinum",
       "officialUrl": "https://www.smbc-card.com/nyukai/card/platinum-preferred.jsp"
     },
     {
@@ -408,6 +561,8 @@
       "annualFeeNote": "年50万円利用または招待で永年無料",
       "company": "エポスカード",
       "companyKana": "えぽすかーど",
+      "series": "epos",
+      "tier": "gold",
       "officialUrl": "https://www.eposcard.co.jp/gold/"
     },
     {
@@ -434,6 +589,8 @@
       ],
       "company": "アメリカン・エキスプレス",
       "companyKana": "あめりかんえきすぷれす",
+      "series": "marriott",
+      "tier": "platinum",
       "officialUrl": "https://www.americanexpress.com/jp/credit-cards/marriott-bonvoy-premium-card/"
     },
     {
@@ -458,6 +615,8 @@
       ],
       "company": "アメリカン・エキスプレス",
       "companyKana": "あめりかんえきすぷれす",
+      "series": "marriott",
+      "tier": "gold",
       "officialUrl": "https://www.americanexpress.com/jp/credit-cards/marriott-bonvoy-card/"
     },
     {
@@ -481,6 +640,8 @@
       ],
       "company": "ビューカード",
       "companyKana": "びゅーかーど",
+      "series": "view",
+      "tier": "general",
       "officialUrl": "https://www.jreast.co.jp/en/card/first/viewcardstandard.html"
     }
   ],

@@ -1,4 +1,5 @@
 import { h, mount } from '../h';
+import { foldProps } from '../fold';
 import type { Ctx } from '../app';
 import { recommend, type RecommendScope } from '../../domain/engine';
 import { linkFor } from '../../domain/affiliate';
@@ -187,7 +188,7 @@ function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string
           <div class="rank-earned">{item.earnedApprox ? '約' : ''}{yen(item.earnedYen)}相当</div>
         )}
         {i === 0 && (item.reasons.length > 0 || item.others.length > 0) && (
-          <details class="rank-detail" id="rank-detail">
+          <details class="rank-detail" id="rank-detail" {...foldProps(`rank-detail-${source}-${item.cardId ?? item.routeIds[0]}`)}>
             <summary>詳しい条件</summary>
             <ul class="reasons">
               {item.reasons.map((r) => <li>{r}</li>)}

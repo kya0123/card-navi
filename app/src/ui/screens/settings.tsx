@@ -108,6 +108,11 @@ export function SettingsScreen(ctx: Ctx): Node {
           if (t.trim()) void importText(t);
         }}>貼り付けた内容を読み込む</button>
       </div>
+      <div class="panel" id="info-link-panel">
+        <h2>ポイント率の一覧</h2>
+        <p class="note">全カードの支払い方法ごとのポイント率・特約のお店・出典・確認日（版 {ctx.mi.raw.masterVersion}）。</p>
+        <button type="button" class="btn btn-ghost" id="to-info" onClick={() => ctx.go('info')}>ポイント率の一覧を開く</button>
+      </div>
       <div class="panel">
         <h2>カードの提案</h2>
         <label class="check">

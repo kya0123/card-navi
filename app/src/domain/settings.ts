@@ -29,10 +29,8 @@ export function reconcile(mi: MasterIndex, s: UserSettings): { settings: UserSet
   const ownedCards: OwnedCard[] = [];
   for (const c of s.ownedCards) {
     if (!mi.cards.has(c.cardId)) { dropped++; continue; }
-    const valid = new Set(methodsForCard(mi, c.cardId));
-    const enabledMethods = c.enabledMethods.filter((m) => valid.has(m));
-    dropped += c.enabledMethods.length - enabledMethods.length;
-    const card: OwnedCard = { ...c, enabledMethods };
+    // 支払い方法の選択は廃止し、経路のある支払い方法はすべて使える前提にする（詳細設計 31.2.7）
+    const card: OwnedCard = { ...c, enabledMethods: methodsForCard(mi, c.cardId) };
     if (!(c.joinYm && isValidYM(c.joinYm))) delete card.joinYm;
     ownedCards.push(card);
   }

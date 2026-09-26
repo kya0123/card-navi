@@ -1,4 +1,5 @@
 import { h } from '../h';
+import { foldProps } from '../fold';
 import { compareCards } from '../../domain/catalog';
 import type { Card } from '../../domain/types';
 import type { Ctx } from '../app';
@@ -61,20 +62,24 @@ export function InfoScreen(ctx: Ctx): Node {
 
   return (
     <section>
-      <header class="screen-head"><h1>ポイント率</h1></header>
+      <header class="screen-head">
+        <button type="button" class="back" id="info-back" onClick={() => ctx.go('settings')}>‹ 設定</button>
+        <h1>ポイント率の一覧</h1>
+      </header>
       <p class="sub">版 {mi.raw.masterVersion}・確認日 {mi.raw.checkedAt}。キャンペーンと月間上限は含みません。</p>
       {(() => {
         // 保有カードを先に、保有していないカードは折りたたみに（詳細設計 20.6・24.3）
         const owned = new Set(ctx.state.settings.ownedCards.map((c) => c.cardId));
         const CardPanel = (c: Card) => {
           const bonus = mi.bonusByCard.get(c.id);
+          // カードごとに折りたたむ（詳細設計 31.1 U10）
           return (
-            <div class="panel">
-              <h2>{c.name}</h2>
+            <details class="panel info-card" id={`info-${c.id}`} {...foldProps(`info-${c.id}`)}>
+              <summary><h2>{c.name}</h2></summary>
               <p class="muted">年会費 {c.annualFee.toLocaleString()}円{c.annualFeeNote ? `（${c.annualFeeNote}）` : ''}・{pointName(mi, c.pointId)}</p>
               <ul class="info-list">{mi.raw.routes.filter((r) => r.cardId === c.id).map(RouteRow)}</ul>
               {bonus && <p class="note">★ {bonus.description}（{bonus.periodNote}）</p>}
-            </div>
+            </details>
           );
         };
         const sorted = [...mi.raw.cards].sort(compareCards);

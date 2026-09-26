@@ -321,6 +321,23 @@ textarea.code { font-family: var(--mono); font-size: 0.8125rem; line-height: 1.5
 .badge-achieved { color: var(--success); background: var(--green-50); }
 .badge-expired { color: var(--warning); background: var(--yellow-50); }
 .badge-unset { color: var(--gray-700); background: var(--gray-50); }
+.badge-off { color: var(--gray-700); background: var(--surface); }
+/* カード診断（詳細設計 31.2.1） */
+.bonus-block { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.bonus-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.bonus-reach { margin: 0; padding: 6px 10px; border-radius: var(--radius-6); font-size: 0.875rem; font-weight: 700; }
+.bonus-reach-ng { color: var(--red-900, #ce0000); background: var(--red-50, #fdeeee); }
+.bonus-reach-ok { color: var(--success); background: var(--green-50); }
+.fold { border-top: 1px solid var(--line-soft); padding-top: 4px; }
+.fold > summary { cursor: pointer; color: var(--key); font-weight: 700; font-size: 0.9375rem; min-height: 44px; display: flex; align-items: center; }
+.fold[open] { display: flex; flex-direction: column; gap: 12px; }
+.net-headline { margin: 0; font-size: 1.375rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.net-plus { color: var(--key); }
+.net-minus { color: var(--red-900, #ce0000); }
+.bonus-flags { display: flex; flex-direction: column; gap: 8px; }
+/* ポイント率の一覧：カードごとに折りたたみ */
+.info-card > summary { cursor: pointer; list-style: revert; }
+.info-card > summary h2 { display: inline; }
 /* DADS progress-indicator（線形） */
 .progress { height: 8px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
 .progress-bar { height: 100%; background: var(--key); border-radius: 999px; }
@@ -368,7 +385,7 @@ textarea.code { font-family: var(--mono); font-size: 0.8125rem; line-height: 1.5
 .toast .icon-btn { background: transparent; color: inherit; border-color: transparent; }
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   background: var(--surface); border-top: 1px solid var(--line);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }

@@ -86,14 +86,23 @@ await run('E01', '「せぶん」→候補タップで三井住友スマホの�
 
 await run('E02', 'ボーナス設定（狙う・入会年月・累計）でセブンが8%（7%＋ボーナス1%。初回特典は含めない）になる', async () => {
   const { context, page } = await newPage();
-  await page.getByRole('button', { name: 'ボーナス' }).click();
+  // 狙う・入会年月はカードタブ、累計はカード診断の「ボーナスの入力」（折りたたみ）
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  assert.equal(await page.getByText('使う支払い方法').count(), 0, '支払い方法のチェックはない');
+  assert.equal(await page.locator('#join-rakuten').count(), 0, 'ボーナスのないカードは入会年月なし');
   await page.check('#target-smbcg_1m');
-  await page.fill('#bjoin-smbcg_1m', '2024-04');
-  await page.locator('#bjoin-smbcg_1m').dispatchEvent('change');
+  await page.fill('#join-smbc_gold_nl', '2024-04');
+  await page.locator('#join-smbc_gold_nl').dispatchEvent('change');
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
+  assert.equal(await page.getAttribute('#diag-owned', 'aria-selected'), 'true', '既定は持っているカード');
+  assert.equal(await page.isVisible('#progress-smbcg_1m'), false, '入力欄は折りたたみ');
+  await page.click('#bonus-input-smbcg_1m > summary');
   await page.fill('#progress-smbcg_1m', '300000');
   await page.locator('#progress-smbcg_1m').dispatchEvent('change');
   await page.waitForTimeout(100);
-  const stats = await page.locator('.stats').first().innerText();
+  assert.match(await page.locator('#reach-smbcg_1m').innerText(), /月50,000円の利用では期限までに届きません/);
+  const stats = await page.locator('#bonus-smbcg_1m .stats').innerText();
   assert.match(stats, /2027-03-31/);
   assert.match(stats, /100,000円/);
   await page.screenshot({ path: `${SHOT}E02-bonus.png`, fullPage: true });
@@ -133,8 +142,8 @@ await run('E03', 'バックアップの書き出し→設定変更→読み込�
   const { context, page } = await newPage({ acceptDownloads: true });
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.click('#view-owned');
-  await page.fill('#join-rakuten', '2018-01');
-  await page.locator('#join-rakuten').dispatchEvent('change');
+  await page.fill('#join-smbc_gold_nl', '2018-01');
+  await page.locator('#join-smbc_gold_nl').dispatchEvent('change');
   await page.getByRole('button', { name: '設定', exact: true }).click();
   const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#export')]);
   const file = `${SHOT}backup.json`;
@@ -142,9 +151,9 @@ await run('E03', 'バックアップの書き出し→設定変更→読み込�
   // 設定を変更（楽天の入会年月を消す）
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.click('#view-owned');
-  await page.fill('#join-rakuten', '');
-  await page.locator('#join-rakuten').dispatchEvent('change');
-  assert.equal(await page.inputValue('#join-rakuten'), '');
+  await page.fill('#join-smbc_gold_nl', '');
+  await page.locator('#join-smbc_gold_nl').dispatchEvent('change');
+  assert.equal(await page.inputValue('#join-smbc_gold_nl'), '');
   // 読み込み
   await page.getByRole('button', { name: '設定', exact: true }).click();
   await page.setInputFiles('#import', file);
@@ -152,7 +161,7 @@ await run('E03', 'バックアップの書き出し→設定変更→読み込�
   assert.match(await page.locator('.toast').last().innerText(), /読み込みました/);
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.click('#view-owned');
-  assert.equal(await page.inputValue('#join-rakuten'), '2018-01');
+  assert.equal(await page.inputValue('#join-smbc_gold_nl'), '2018-01');
   await context.close();
 });
 
@@ -167,11 +176,13 @@ await run('E04', 'オフラインで再読込しても全画面が動作する',
   await page.fill('#q', 'すたば');
   await page.locator('.suggest-item').first().click();
   assert.equal(await rank1(page).locator('.rate').innerText(), '7%');
-  for (const tab of ['カード', 'ボーナス', 'ポイント率', '設定']) {
+  for (const tab of ['カード', 'カード診断', '設定']) {
     await page.getByRole('button', { name: tab, exact: true }).click();
     await page.waitForSelector('.screen-head h1');
   }
-  await page.getByRole('button', { name: 'ポイント率', exact: true }).click();
+  assert.equal(await page.locator('.tabbar .tab').count(), 4, 'タブは4つ');
+  await page.click('#to-info');
+  await page.locator('#info-smbc_gold_nl > summary').click();
   assert.ok(await page.locator('.src.disabled').count() > 0, 'オフライン時は出典リンクを無効表示');
   await page.screenshot({ path: `${SHOT}E04-offline-info.png`, fullPage: true });
   await context.close();
@@ -237,8 +248,8 @@ await run('E08', '文字のコントラスト比4.5:1以上・1位の金色の�
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.click('#view-catalog');
   assert.deepEqual(await lowContrast(page), [], 'カード一覧');
-  await page.getByRole('button', { name: 'ボーナス', exact: true }).click();
-  assert.deepEqual(await lowContrast(page), [], 'ボーナス画面');
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
+  assert.deepEqual(await lowContrast(page), [], 'カード診断');
   await context.close();
 });
 
@@ -305,24 +316,29 @@ await run('E10', '楽天のみ：13日後はヒントなし→21日目はバナ�
   await pick(page, 'せぶん', 'セブン-イレブン');
   await page.locator('#hint').waitFor();                         // 同じ日の同じお店は出し続ける
   await page.click('#hint-more');
-  await page.locator('h1', { hasText: 'カードを見直す' }).waitFor();
+  await page.locator('h1', { hasText: 'カード診断' }).waitFor();
   const first = page.locator('.review-card').first();
   // v1.15（分冊10章）：並びは年間の損得順（月5万円）。v1.17 で Olive は8%になり1位
   assert.match(await first.locator('h2').innerText(), /Olive/);
   assert.match(await first.locator('.review-lead').innerText(), /5件中4件/);
+  assert.equal(await first.locator('.net-headline').innerText(), '年間 ＋33,600円');
+  await first.locator('details.fold > summary').click();
   assert.match(await first.innerText(), /年間 ＋33,600円（ポイント＋33,600円／ボーナス＋0円／年会費−0円）/);
   assert.match(await first.innerText(), /1万円ごとに ＋700円/);
   // 年会費82,500円のマリオット・プレミアムは「回収できません」の下
   const mbp = page.locator('#fee-loss .review-card', { hasText: 'Marriott Bonvoy アメリカン・エキスプレス・プレミアム' });
   assert.match(await mbp.innerText(), /年間 −70,500円/);
+  await mbp.locator('details.fold > summary').evaluate((el) => el.click());
   assert.match(await mbp.innerText(), /月343,800円以上の利用で年会費を回収/);
   assert.equal(await mbp.locator('a.btn').getAttribute('href'), 'https://www.americanexpress.com/jp/credit-cards/marriott-bonvoy-premium-card/');
   const smbc = page.locator('.review-card', { hasText: '三井住友カード ゴールド（NL）' });
   assert.match(await smbc.locator('.review-lead').innerText(), /5件中4件/);
+  await smbc.locator('details.fold > summary').evaluate((el) => el.click());
   assert.match(await smbc.innerText(), /1万円ごとに ＋600円/);
   assert.match(await smbc.innerText(), /年間 ＋23,300円/);
   assert.match(await smbc.innerText(), /月9,600円以上の利用で年会費を回収/);   // 旧定義（上がるお店での月額）は7,700円
   assert.equal(await smbc.locator('a.btn').getAttribute('href'), 'https://www.smbc-card.com/nyukai/card/gold-numberless.jsp');
+  await page.locator('.review-card').nth(1).locator('details.fold > summary').evaluate((el) => el.click());
   assert.match(await page.locator('.review-card').nth(1).innerText(), /年会費無料：持つだけで損はありません/);
   assert.deepEqual(await contrastIssues(page), []);
   await page.screenshot({ path: `${SHOT}E10-review.png`, fullPage: true });
@@ -343,7 +359,7 @@ await run('E11', 'バナー：翌日ホームに表示→タップでS07→翌�
   await page.click('.result-head .btn');                           // クリア
   await banner.waitFor();                                          // 同じ日は出し続ける
   await page.locator('.promo-main').click();
-  await page.locator('h1', { hasText: 'カードを見直す' }).waitFor();
+  await page.locator('h1', { hasText: 'カード診断' }).waitFor();
   await goto(page, '2026-09-24');
   assert.equal(await page.locator('#promo-banner').count(), 0, 'タップ後は7日間出さない');
   await goto(page, '2026-09-30');
@@ -360,7 +376,7 @@ await run('E12', '設定で提案をオフ：ヒントもバナーも出ない�
   assert.equal(await page.locator('#promo-banner').count(), 0);
   await pick(page, 'せぶん', 'セブン-イレブン');
   assert.equal(await page.locator('#hint').count(), 0);
-  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
   assert.equal(await page.locator('.review-card').count(), 9);    // v1.13：21枚で9枚（旧：2）
   await page.click('#to-adpolicy');
   await page.locator('h1', { hasText: '広告の方針' }).waitFor();
@@ -440,22 +456,23 @@ await run('E14', '初回：案内バナー・登録カード全体でおすす�
 });
 
 await run('E15', '入会年月を設定したカードを一覧で外すときは確認し、キャンセルなら保有のまま', async () => {
-  const { context, page } = await newPage({}, BASE, ['rakuten']);
+  const { context, page } = await newPage({}, BASE, ['smbc_gold_nl']);
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.click('#view-owned');
-  await page.fill('#join-rakuten', '2018-01');
-  await page.locator('#join-rakuten').dispatchEvent('change');
+  await page.fill('#join-smbc_gold_nl', '2018-01');
+  await page.locator('#join-smbc_gold_nl').dispatchEvent('change');
   await page.click('#view-catalog');
   page.once('dialog', (d) => d.dismiss());
-  await page.locator('#own-rakuten').click();
+  await page.locator('#own-smbc_gold_nl').click();
   await page.waitForTimeout(100);
-  assert.equal(await page.isChecked('#own-rakuten'), true);
+  assert.equal(await page.isChecked('#own-smbc_gold_nl'), true);
   page.once('dialog', (d) => d.accept());
-  await page.locator('#own-rakuten').click();
+  await page.locator('#own-smbc_gold_nl').click();
   await page.waitForTimeout(100);
-  assert.equal(await page.isChecked('#own-rakuten'), false);
-  // 還元情報：保有していないカードは折りたたみに入る
-  await page.getByRole('button', { name: 'ポイント率', exact: true }).click();
+  assert.equal(await page.isChecked('#own-smbc_gold_nl'), false);
+  // ポイント率の一覧（設定から開く）：持っていないカードは折りたたみに入る
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.click('#to-info');
   assert.match(await page.locator('#info-others > summary').innerText(), /持っていないカード（\d+枚）/);
   await context.close();
 });
@@ -535,7 +552,7 @@ await run('E19', '見直す：持っているカードの判定。月の利用�
   await page.locator('.toast', { hasText: '読み込みました' }).waitFor();
   for (const [q, t] of [['せぶん', 'セブン-イレブン'], ['まくどなるど', 'マクドナルド'], ['すたば', 'スターバックス'],
     ['ろーそんすりーえふ', 'ローソンスリーエフ'], ['ふぁみま', 'ファミリーマート']]) await pick(page, q, t);
-  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
   const mbp = page.locator('#fee-owned-marriott_premium');
   const ana = page.locator('#fee-owned-ana_wide_gold');
   // 普段は1行だけ。［変更］で入力欄を開く（A案）
@@ -544,6 +561,7 @@ await run('E19', '見直す：持っているカードの判定。月の利用�
   await page.click('#fee-spend-edit');
   assert.equal(await page.inputValue('#fee-spend'), '50000');
   assert.match(await mbp.locator('.fee-verdict').innerText(), /回収できません（年−70,500円）。月343,800円以上で回収/);
+  await page.locator('#fee-detail-ana_wide_gold > summary').evaluate((el) => el.click());
   assert.match(await ana.locator('.review-lead').innerText(), /ほかのカードと同じか低い率/);
   assert.match(await ana.locator('.fee-verdict').innerText(), /回収できません（年−15,400円）/);
   await page.fill('#fee-spend', '400000');
@@ -556,7 +574,7 @@ await run('E19', '見直す：持っているカードの判定。月の利用�
   await page.screenshot({ path: `${SHOT}E19-fee.png`, fullPage: true });
   await page.waitForTimeout(300);
   await goto(page, '2026-09-22');
-  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
   assert.match(await page.locator('#fee-spend-line').innerText(), /月410,000円/);
   await page.click('#fee-spend-edit');
   assert.equal(await page.inputValue('#fee-spend'), '410000');
@@ -609,13 +627,13 @@ await run('E28', 'おすすめの切り替え：登録カード（22枚）で保
 
 await run('E29', '見直す：提案カードも年会費のある保有カードもないときは利用額を出さない→お店を調べて提案が出ると1行で出す', async () => {
   const { context, page } = await newPage({}, at('2026-09-22'), ['rakuten']);
-  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
   await page.waitForSelector('#review-empty');
   assert.equal(await page.locator('#fee-spend-line').count(), 0);
   assert.equal(await page.locator('#fee-spend-panel').count(), 0);
   for (const [q, t] of [['せぶん', 'セブン-イレブン'], ['まくどなるど', 'マクドナルド'], ['すたば', 'スターバックス'],
     ['ろーそんすりーえふ', 'ローソンスリーエフ'], ['ふぁみま', 'ファミリーマート']]) await pick(page, q, t);
-  await page.getByRole('button', { name: '見直す', exact: true }).click();
+  await page.getByRole('button', { name: 'カード診断', exact: true }).click();
   await page.waitForSelector('#fee-gain-head');
   assert.match(await page.locator('#fee-spend-line').innerText(), /月50,000円のカード利用で計算しています/);
   await page.click('#fee-spend-edit');
@@ -757,6 +775,7 @@ await run('E26', '設定でYahoo!ローカルサーチ（アプリID）に切り
   await page.locator('.nearby-item').first().waitFor();
   await page.getByRole('button', { name: '設定', exact: true }).click();
   assert.equal(await page.isDisabled('#nearby-provider-yolp'), true, 'アプリIDがなければ選べない');
+  if (!(await page.isVisible('#yolp-appid'))) await page.click('#nearby-advanced > summary');
   await page.fill('#yolp-appid', 'TEST-APPID');
   await page.click('#yolp-appid-save');
   await page.locator('.toast', { hasText: 'アプリIDを保存しました' }).waitFor();
@@ -777,6 +796,7 @@ await run('E27', '設定でオフ→ホームに「近く」ボタンが出な�
   const { context, page } = await newPage(GEO, at('2026-09-22'), []);
   assert.equal(await page.locator('#nearby-btn').count(), 1);
   await page.getByRole('button', { name: '設定', exact: true }).click();
+  if (!(await page.isVisible('#yolp-appid'))) await page.click('#nearby-advanced > summary');
   await page.fill('#yolp-appid', 'SECRET-ID');
   await page.click('#yolp-appid-save');
   await page.uncheck('#nearby-enabled');

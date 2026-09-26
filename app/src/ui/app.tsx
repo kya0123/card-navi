@@ -14,15 +14,14 @@ import { requestPersist, SettingsRepo } from '../storage/settingsRepo';
 import { HomeScreen } from './screens/home';
 import { CategoryScreen } from './screens/category';
 import { CardsScreen } from './screens/cards';
-import { BonusScreen } from './screens/bonus';
 import { InfoScreen } from './screens/info';
 import { SettingsScreen } from './screens/settings';
-import { ReviewScreen } from './screens/review';
+import { ReviewScreen, showSuggestView } from './screens/review';
 import { AdPolicyScreen } from './screens/adpolicy';
 import { NearbyScreen } from './screens/nearby';
 import { themeOf } from '../domain/theme';
 
-export type RouteName = 'home' | 'category' | 'cards' | 'bonus' | 'review' | 'info' | 'settings' | 'adpolicy' | 'nearby';
+export type RouteName = 'home' | 'category' | 'cards' | 'review' | 'info' | 'settings' | 'adpolicy' | 'nearby';
 
 export interface AppState {
   settings: UserSettings;
@@ -67,13 +66,11 @@ export interface Ctx {
 const TABS: { route: RouteName; label: string; icon: string }[] = [
   { route: 'home', label: 'おすすめ', icon: '◎' },
   { route: 'cards', label: 'カード', icon: '▭' },
-  { route: 'bonus', label: 'ボーナス', icon: '★' },
-  { route: 'review', label: '見直す', icon: '⇄' },
-  { route: 'info', label: 'ポイント率', icon: 'ⓘ' },
+  { route: 'review', label: 'カード診断', icon: '⇄' },
   { route: 'settings', label: '設定', icon: '⚙' },
 ];
 
-const ROUTES: RouteName[] = ['home', 'category', 'cards', 'bonus', 'review', 'info', 'settings', 'adpolicy', 'nearby'];
+const ROUTES: RouteName[] = ['home', 'category', 'cards', 'review', 'info', 'settings', 'adpolicy', 'nearby'];
 
 /** 初期表示の画面は #cards のような単純なハッシュで指定できる */
 function initialRoute(): RouteName {
@@ -155,6 +152,7 @@ export async function startApp(root: HTMLElement): Promise<void> {
     aff: affiliates as unknown as AffiliateMaster,
     savePromo() { void repo.setMeta('promo', state.promo); },
     openReview(cardId) {
+      showSuggestView();
       ctx.go('review');
       if (cardId) document.getElementById(`review-${cardId}`)?.scrollIntoView({ block: 'start' });
     },
@@ -180,7 +178,7 @@ function render(root: HTMLElement, ctx: Ctx): void {
   const route = ctx.state.route;
   const screens: Record<RouteName, (c: Ctx) => Node> = {
     home: HomeScreen, category: CategoryScreen, cards: CardsScreen,
-    bonus: BonusScreen, review: ReviewScreen, info: InfoScreen, settings: SettingsScreen, adpolicy: AdPolicyScreen,
+    review: ReviewScreen, info: InfoScreen, settings: SettingsScreen, adpolicy: AdPolicyScreen,
     nearby: NearbyScreen,
   };
   const { state } = ctx;
@@ -188,7 +186,7 @@ function render(root: HTMLElement, ctx: Ctx): void {
   const last = state.settings.lastExportAt;
   const needBackup = !state.backupBannerDismissed && state.storagePersistent
     && (!last || daysBetween(last, ctx.today) > 30) && state.settings.ownedCards.some((c) => c.joinYm);
-  const active = route === 'category' || route === 'nearby' ? 'home' : route === 'adpolicy' ? 'settings' : route;
+  const active = route === 'category' || route === 'nearby' ? 'home' : route === 'adpolicy' || route === 'info' ? 'settings' : route;
 
   const activeEl = document.activeElement as HTMLElement | null;
   const focusId = activeEl?.id;

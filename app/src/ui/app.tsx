@@ -19,9 +19,10 @@ import { SettingsScreen } from './screens/settings';
 import { ReviewScreen, showSuggestView } from './screens/review';
 import { AdPolicyScreen } from './screens/adpolicy';
 import { NearbyScreen } from './screens/nearby';
+import { CardRateScreen } from './screens/cardRate';
 import { themeOf } from '../domain/theme';
 
-export type RouteName = 'home' | 'category' | 'cards' | 'review' | 'info' | 'settings' | 'adpolicy' | 'nearby';
+export type RouteName = 'home' | 'category' | 'cards' | 'review' | 'info' | 'settings' | 'adpolicy' | 'nearby' | 'rate';
 
 export interface AppState {
   settings: UserSettings;
@@ -41,6 +42,9 @@ export interface AppState {
   promo: PromoState;
   /** おすすめの比較範囲（保存しない。保有カードが0枚のときは常に登録カード全体） */
   recScope: RecommendScope;
+  /** S11 カードのポイント率で表示するカードと、戻り先 */
+  rateCardId: Id | null;
+  rateBack: RouteName;
 }
 
 export interface Ctx {
@@ -61,6 +65,8 @@ export interface Ctx {
   savePromo(): void;
   /** S07 を開く。cardId を渡すとそのカードの位置までスクロールする */
   openReview(cardId?: Id): void;
+  /** S11 カードのポイント率を開く（戻ると今の画面へ） */
+  openCardRate(cardId: Id): void;
 }
 
 const TABS: { route: RouteName; label: string; icon: string }[] = [
@@ -122,6 +128,8 @@ export async function startApp(root: HTMLElement): Promise<void> {
     armed: null,
     promo,
     recScope: 'owned',
+    rateCardId: null,
+    rateBack: 'cards',
   };
 
   let rendering = false;
@@ -151,6 +159,12 @@ export async function startApp(root: HTMLElement): Promise<void> {
     toast(msg) { state.toasts.push(msg); ctx.render(); },
     aff: affiliates as unknown as AffiliateMaster,
     savePromo() { void repo.setMeta('promo', state.promo); },
+    openCardRate(cardId) {
+      const back = state.route === 'rate' ? state.rateBack : state.route;
+      state.rateCardId = cardId;
+      state.rateBack = back;
+      ctx.go('rate');
+    },
     openReview(cardId) {
       showSuggestView();
       ctx.go('review');
@@ -179,14 +193,15 @@ function render(root: HTMLElement, ctx: Ctx): void {
   const screens: Record<RouteName, (c: Ctx) => Node> = {
     home: HomeScreen, category: CategoryScreen, cards: CardsScreen,
     review: ReviewScreen, info: InfoScreen, settings: SettingsScreen, adpolicy: AdPolicyScreen,
-    nearby: NearbyScreen,
+    nearby: NearbyScreen, rate: CardRateScreen,
   };
   const { state } = ctx;
   applyTheme(state.settings.theme);
   const last = state.settings.lastExportAt;
   const needBackup = !state.backupBannerDismissed && state.storagePersistent
     && (!last || daysBetween(last, ctx.today) > 30) && state.settings.ownedCards.some((c) => c.joinYm);
-  const active = route === 'category' || route === 'nearby' ? 'home' : route === 'adpolicy' || route === 'info' ? 'settings' : route;
+  const active = route === 'category' || route === 'nearby' ? 'home' : route === 'adpolicy' || route === 'info' ? 'settings'
+    : route === 'rate' ? (state.rateBack === 'home' ? 'home' : 'cards') : route;
 
   const activeEl = document.activeElement as HTMLElement | null;
   const focusId = activeEl?.id;

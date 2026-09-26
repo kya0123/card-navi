@@ -194,6 +194,9 @@ function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string
               {item.reasons.map((r) => <li>{r}</li>)}
               {item.others.map((o) => <li>{o.methodIds.map(methodShort).join('・')}は{pct(o.effectiveRate)}</li>)}
             </ul>
+            {item.cardId && (
+              <button type="button" class="link-btn" id="rank-rate-link" onClick={() => ctx.openCardRate(item.cardId!)}>このカードのポイント率を見る ›</button>
+            )}
           </details>
         )}
         {link && (

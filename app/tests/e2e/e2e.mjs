@@ -655,6 +655,39 @@ await run('E30', 'お店を選ぶと結果の位置まで自動で移動する�
   await context.close();
 });
 
+await run('E31', 'カードのポイント率（S11）：カードタブ・カード一覧・おすすめの詳しい条件から開き、戻ると元の画面', async () => {
+  const { context, page } = await newPage();
+  // カードタブ（持っているカード）から
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  await page.click('#rate-smbc_gold_nl');
+  await page.locator('h1', { hasText: '三井住友カード ゴールド（NL）' }).waitFor();
+  assert.match(await page.locator('#rate-routes').innerText(), /スマホのタッチ決済/);
+  assert.match(await page.locator('#rate-routes').innerText(), /特約 \d+店舗（7%）/);
+  assert.match(await page.locator('#rate-bonus').innerText(), /＋1%として計算/);
+  assert.equal(await page.locator('.tab.active .tab-label').innerText(), 'カード');
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E31-card-rate.png`, fullPage: true });
+  await page.click('#rate-back');
+  await page.locator('#view-owned.active').waitFor();
+  // カード一覧（持っていないカード）から
+  await page.click('#view-catalog');
+  await page.click('#catalog-rate-recruit');
+  await page.locator('h1', { hasText: 'リクルートカード' }).waitFor();
+  assert.equal(await page.locator('#rate-bonus').count(), 0, 'ボーナスのないカード');
+  await page.click('#rate-back');
+  await page.locator('#catalog-list').waitFor();
+  // おすすめの詳しい条件から → 戻るとおすすめ
+  await pick(page, 'せぶん', 'セブン-イレブン');
+  await page.click('#rank-detail > summary');
+  await page.click('#rank-rate-link');
+  await page.locator('#rate-routes').waitFor();
+  assert.equal(await page.locator('.tab.active .tab-label').innerText(), 'おすすめ');
+  await page.click('#rate-back');
+  await page.locator('.result-title', { hasText: 'セブン-イレブン' }).waitFor();
+  await context.close();
+});
+
 // ---------- v1.15：近くのお店（詳細設計 27.7） ----------
 const ORIGIN = { latitude: 35.3383, longitude: 139.4476 };
 const GEO = { geolocation: { ...ORIGIN, accuracy: 20 }, permissions: ['geolocation'] };

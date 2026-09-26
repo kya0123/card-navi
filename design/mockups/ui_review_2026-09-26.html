@@ -54,7 +54,7 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
 .store-title{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
 .search{border:1px solid #666;border-radius:var(--r8);background:#fff;padding:10px 12px;color:#999;font-size:.95rem}
 .chip{display:inline-block;border:1px solid var(--navy);border-radius:var(--r8);padding:2px 10px;color:var(--navy);font-weight:700;font-size:.82rem;margin:0 4px 6px 0}
-.tabs{display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:1px solid #ccc;padding:6px 0 10px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #ccc;padding:6px 0 10px}
 .tab{display:flex;flex-direction:column;align-items:center;font-size:.72rem;color:#555;gap:2px;position:relative}
 .tab b{font-size:1.1rem;font-weight:400;line-height:1.4}.tab.on{color:var(--navy);font-weight:700}.tab.on:before{content:"";position:absolute;top:-7px;left:10%;right:10%;height:4px;background:var(--gold)}
 .new{background:#fff3c4;outline:2px dashed #b08d2f;outline-offset:2px;border-radius:6px}
@@ -66,15 +66,15 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
 </head>
 <body>
 <div class="page-head">
-  <h1>カード払いナビ 画面案（UIの見直し・2026-09-26）</h1>
-  <p>詳細設計31章の確認用。黄色の点線枠は、今の画面から変わる箇所です。数字は「三井住友カード ゴールド（NL）・楽天カード・三菱UFJカードを持ち、三井住友ゴールドのボーナスを狙っている」例。</p>
+  <h1>カード払いナビ 画面案（UIの見直し・2026-09-26 改訂）</h1>
+  <p>詳細設計31章の確認用。黄色の点線枠は、今の画面から変わる箇所です。タブは4つ（おすすめ／カード／カード診断／設定）。数字は「三井住友カード ゴールド（NL）・楽天カード・三菱UFJカードを持ち、三井住友ゴールドのボーナスを狙っている」例。</p>
 </div>
 
 <div class="row">
 
 <!-- A: おすすめ -->
 <div class="frame">
-<p class="cap">① おすすめ（結果）<small>1カード1枠・理由は1行・切り替えの文言・結果へ自動移動</small></p>
+<p class="cap">① おすすめ（結果）<small>1カード1枠・%を大きく＋ボーナスはバッジ・理由は1行・結果へ自動移動</small></p>
 <div class="phone"><div class="scr">
   <div class="search">店舗名を入力（例：せぶん、スタバ）</div>
   <div class="store-title"><h2 class="t" style="margin:0">セブン-イレブン</h2><span class="btn">クリア</span></div>
@@ -84,16 +84,16 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
     <h3>三井住友カード ゴールド（NL）</h3>
     <span class="method">スマホのタッチ決済</span>
     <div class="rate">8%</div>
-    <div class="why new">セブン-イレブンで7%＋ボーナス1%</div>
+    <div class="why new">7% <span class="tag st" style="margin:0 4px">＋ボーナス1%</span> セブン-イレブンの特約</div>
     <details class="new"><summary>詳しい条件</summary>
-      <p class="note">店頭はスマホのタッチ決済のみ（カードのタッチ・iD・挿し込みは対象外）。<br>ボーナス：年100万円で10,000pt。年会費5,500円を差し引いて1%相当（残り580,000円・期限2026-10-31）。<br>カード・iD・PayPayは1.5%。</p>
+      <p class="note">店頭はスマホのタッチ決済のみ（カードのタッチ・iD・挿し込みは対象外）。<br>ボーナス：年100万円で10,000pt＝1%相当（残り580,000円・期限2026-10-31）。年会費は考えません。<br>カード・iD・PayPayは1.5%。<br><span class="link">このカードのポイント率を見る ›</span></p>
     </details>
   </div></div>
   <div class="rank"><div class="no">2</div><div><h3>三菱UFJカード</h3><div class="method">カード／Apple Pay（QUICPay）</div><div class="rate">7%</div></div></div>
   <div class="rank new"><div class="no">3</div><div><h3>楽天カード</h3><div class="method">カード／Apple Pay（QUICPay）／スマホのタッチ決済</div><div class="rate">1%</div></div></div>
   <p class="note new">今は3位に三井住友ゴールドの別の支払い方法（2.05%）が出ていますが、同じカードは1枠にまとめます。</p>
 </div>
-<div class="tabs"><div class="tab on"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>ⓘ</b>ポイント率</div><div class="tab"><b>⚙</b>設定</div></div>
+<div class="tabs"><div class="tab on"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
 </div></div>
 
 <!-- B: カードタブ -->
@@ -111,11 +111,13 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
       <div class="chk plain"><span class="box"></span>今期は達成済み</div>
       <p class="note" style="margin:4px 0 0">年100万円で10,000pt。進み具合は［カード診断］で確認できます。</p>
     </div>
+    <p class="link new" style="margin:8px 0 0;font-size:.9rem">ポイント率を見る ›</p>
     <span class="btn red new">持っているカードから外す</span>
   </div>
   <div class="panel">
     <div class="line" style="justify-content:space-between;margin:0"><h3>楽天カード</h3><span><span class="btn">↑</span> <span class="btn">↓</span></span></div>
     <p class="note new" style="margin:6px 0 0">年間ボーナスはありません（入会年月の入力も不要）</p>
+    <p class="link new" style="margin:4px 0 0;font-size:.9rem">ポイント率を見る ›</p>
     <span class="btn red">持っているカードから外す</span>
   </div>
   <div class="panel">
@@ -127,7 +129,7 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
     <div class="chk plain"><span class="box on">✓</span>モバイルSuica（JR東日本の乗車）</div>
   </div>
 </div>
-<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab on"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>ⓘ</b>ポイント率</div><div class="tab"><b>⚙</b>設定</div></div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab on"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
 </div></div>
 
 <!-- C: カード診断 持っているカード -->
@@ -158,7 +160,7 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
   </div>
   <p class="note new">年会費もボーナスもないカード（楽天・三菱UFJ）は、ここには出しません。</p>
 </div>
-<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>ⓘ</b>ポイント率</div><div class="tab"><b>⚙</b>設定</div></div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
 </div></div>
 
 <!-- D: カード診断 おすすめカード -->
@@ -190,27 +192,53 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{fon
   <p class="note" style="margin:0 0 6px"><strong>この使い方では年会費を回収できません</strong></p>
   <div class="panel"><h3>Marriott Bonvoy アメックス・プレミアム</h3><p class="muted" style="margin:0">年会費 82,500円</p><p class="ng" style="margin:6px 0 0">年間 −78,500円</p><details><summary>内訳とお店</summary></details></div>
 </div>
-<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>ⓘ</b>ポイント率</div><div class="tab"><b>⚙</b>設定</div></div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
 </div></div>
 
-<!-- E: タブ名の比較 -->
-<div class="frame tabcmp">
-<p class="cap">⑤ タブ名の比較<small>どちらか1つを選んでください</small></p>
-<div>
-  <p class="legend"><strong>案1：カード診断</strong>（何をする画面か伝わりやすい。5文字で少し長い）</p>
-  <div class="phone" style="border-width:6px;border-radius:14px"><div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>ⓘ</b>ポイント率</div><div class="tab"><b>⚙</b>設定</div></div></div>
-  <p class="note">見出し：「カード診断」／案内文：「持っているカードの年会費とボーナス、追加すると得なカードを診断します」</p>
+<!-- E: カードのポイント率 -->
+<div class="frame">
+<p class="cap">⑤ カードのポイント率（新設・タブ外）<small>カードタブ・おすすめの詳しい条件から開く</small></p>
+<div class="phone"><div class="scr">
+  <p class="link" style="margin:0 0 4px">‹ 戻る</p>
+  <h2 class="t" style="margin-top:0">三井住友カード ゴールド（NL）</h2>
+  <p class="muted" style="margin:-6px 0 10px">年会費 5,500円・Vポイント（1pt＝1円）</p>
+  <div class="panel">
+    <div class="delta" style="border:0"><span>カード</span><b>0.5%</b></div>
+    <div class="delta"><span>スマホのタッチ決済</span><b>0.5%</b></div>
+    <div class="delta"><span>iD</span><b>0.5%</b></div>
+    <div class="delta"><span>ネット・アプリ注文</span><b>0.5%</b></div>
+    <div class="delta"><span>PayPay</span><b>0.5%</b></div>
+    <p class="note" style="margin:6px 0 0">月の合計200円ごとに1pt。確認日 2026-09-25・<span class="link">出典</span></p>
+  </div>
+  <div class="panel">
+    <h3>特約のお店</h3>
+    <details open><summary>7%（スマホのタッチ決済）42店舗</summary><p class="note">セブン-イレブン、ローソン、マクドナルド、スターバックス、サイゼリヤ、ドトール …</p></details>
+    <details><summary>ほかの特約 6店舗</summary></details>
+  </div>
+  <div class="panel">
+    <h3>年間ボーナス</h3>
+    <p style="margin:4px 0 0;font-size:.9rem">年100万円利用で10,000pt（毎年）＝おすすめでは<b>＋1%</b>として計算</p>
+    <p class="note" style="margin:4px 0 0">初回達成で年会費永年無料（5,500円）はカード診断で計算します。</p>
+  </div>
 </div>
-<div>
-  <p class="legend"><strong>案2：ナビ</strong>（短い。アプリ名「カード払いナビ」と重なり、おすすめタブとの違いが伝わりにくい）</p>
-  <div class="phone" style="border-width:6px;border-radius:14px"><div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>ナビ</div><div class="tab"><b>ⓘ</b>ポイント率</div><div class="tab"><b>⚙</b>設定</div></div></div>
-  <p class="note">見出し：「カードナビ」など、画面内で補う必要があります</p>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab on"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
+</div></div>
+
+<!-- F: 設定 -->
+<div class="frame">
+<p class="cap">⑥ 設定<small>バックアップの案内・ポイント率の一覧・詳細設定（折りたたみ）</small></p>
+<div class="phone"><div class="scr">
+  <h2 class="t">設定</h2>
+  <div class="panel new" style="border-left:6px solid var(--navy)"><strong>設定のバックアップをおすすめします</strong><p class="note" style="margin:4px 0 0">最終バックアップ：まだありません</p><span class="btn fill" style="margin-top:8px">ファイルに書き出す</span></div>
+  <div class="panel new"><div class="line" style="justify-content:space-between;margin:0"><h3>ポイント率の一覧</h3><span class="link">開く ›</span></div><p class="note" style="margin:4px 0 0">全カードの支払い方法ごとの率・特約・出典・確認日（版 2026.09.26-1）</p></div>
+  <div class="panel"><h3>配色</h3><p class="note" style="margin:4px 0 0">ネイビー×ゴールド（標準）ほか5つ</p></div>
+  <div class="panel"><h3>カードの提案</h3><div class="chk plain"><span class="box on">✓</span>持っていないカードの提案を表示する</div></div>
+  <div class="panel"><h3>近くのお店</h3><div class="chk plain"><span class="box on">✓</span>おすすめ画面に「近く」ボタンを表示する</div>
+    <details class="new"><summary>詳細設定</summary><p class="note">検索先（OpenStreetMap／Yahoo!ローカルサーチ）、アプリID、検索する半径。将来は管理者だけが設定します。</p></details></div>
+  <div class="panel"><h3>このアプリについて</h3><p class="note" style="margin:4px 0 0">アプリ版・ポイント率の版・保存先・設定の初期化</p></div>
 </div>
-<div class="panel" style="margin-top:6px">
-  <h3>タブの変化</h3>
-  <p class="note" style="margin:6px 0 0">今：おすすめ／カード／ボーナス／見直す／還元情報／設定（6つ）<br>案：おすすめ／カード／<b>カード診断</b>／<b>ポイント率</b>／設定（5つ）</p>
-</div>
-</div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab on"><b>⚙</b>設定</div></div>
+</div></div>
 
 </div>
 </body>

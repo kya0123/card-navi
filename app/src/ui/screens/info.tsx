@@ -15,7 +15,8 @@ function groupByCondition(rules: RateRule[]): [string, RateRule[]][] {
 
 const CONF: Record<string, string> = { high: '公式', medium: '二次情報', low: '推定' };
 
-export function InfoScreen(ctx: Ctx): Node {
+/** 支払い方法ごとの行（ポイント率の一覧 S05 とカードのポイント率 S11 で共通） */
+export function routeRows(ctx: Ctx) {
   const { mi, state } = ctx;
   const stale = (d: string) => daysBetween(d, ctx.today) > state.settings.staleWarnDays;
   const offline = typeof navigator !== 'undefined' && navigator.onLine === false;
@@ -59,6 +60,12 @@ export function InfoScreen(ctx: Ctx): Node {
       </li>
     );
   };
+  return RouteRow;
+}
+
+export function InfoScreen(ctx: Ctx): Node {
+  const { mi } = ctx;
+  const RouteRow = routeRows(ctx);
 
   return (
     <section>

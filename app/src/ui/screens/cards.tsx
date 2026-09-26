@@ -92,6 +92,7 @@ function CatalogList(ctx: Ctx): Node {
                 <span class="catalog-note">{card.highlight}</span>
               </span>
             </label>
+            <button type="button" class="link-btn catalog-rate" id={`catalog-rate-${card.id}`} onClick={() => ctx.openCardRate(card.id)}>ポイント率を見る ›</button>
           </li>,
         ])}
       </ul>
@@ -166,6 +167,7 @@ function OwnedView(ctx: Ctx): Node {
                 <p class="note">{bonus.description}。進み具合は［カード診断］で確認できます。</p>
               </div>
             )}
+            <button type="button" class="link-btn" id={`rate-${oc.cardId}`} onClick={() => ctx.openCardRate(oc.cardId)}>ポイント率を見る ›</button>
             {(() => {
               const armId = `remove-${oc.cardId}`;
               const armed = state.armed === armId;

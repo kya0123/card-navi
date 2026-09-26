@@ -317,7 +317,7 @@
   "routes":   [{ "id", "cardId|null", "methodId", "pointId", "baseRate", "unitYen", "pointsPerUnit",
                  "unitScope": "perTransaction|monthlyTotal", "rounding": "floor",
                  "countsTowardBonus": true, "sourceUrl", "checkedAt", "confidence", "needsReview", "note",
-                 "defaultEnabled" }],   // v1.13：カード以外の経路で、新規利用者に最初から有効にするもの
+                 "defaultEnabled", "label" }],   // v1.13：カード以外の経路で、新規利用者に最初から有効にするもの／チェックボックスの表示名
   "bonuses":  [{ "id", "cardId", "thresholdYen", "valueYen", "oneTimeValueYen", "periodType": "joinMonth",
                  "startOffsetMonths": 0, "excludedMethods": [], "description" }],
   "categories":[{ "id", "name", "defaultMethods": [] }],
@@ -431,7 +431,7 @@
 | 20 | 見直すタブの前提（よく行くお店に均等に使う）と実際の使い方のずれ。必要ならお店ごとの利用額の入力を検討 | 運用後 |
 | 21 | カードラインナップ第1弾（詳細設計32.3）の還元率の調査。JALカードとセゾンカードは何枚に分けるか・どのカードにするかも調査で決める。メンバーシップ・リワードの交換レートは公式ページで再確認 | 段階3の実装前 |
 | 22 | ~~楽天プレミアムカードを収録するか~~ → 基本が楽天カードと同じ1.0%で「プラチナはポイント率に差があるものだけ」に当たらないため、収録しない（詳細設計32.2 L10） | 完了 |
-| 23 | チャージ元カードとの組み合わせ（例：楽天カード→楽天キャッシュ→楽天ペイ、au PAY カード→au PAY残高）の評価。評価するなら `rakuten_suica_ride` と同じくそのカードの経路として追加する | 段階4の後 |
+| 23 | チャージ元カードとの組み合わせ（例：楽天カード→楽天キャッシュ→楽天ペイ、au PAY カード→au PAY残高）の評価。今回は対象外（2026-09-26 決定）。将来評価するなら `rakuten_suica_ride` と同じくそのカードの経路として追加する | 今回は対象外 |
 | 24 | カード以外の支払い（詳細設計32.11）の率と、店舗で使えるかどうかの調査。現金のみのチェーンの有無 | 段階4の実装前 |
 
 実装結果・テスト結果は `design/test_report.md`、経緯は `design/decision_log.md` を参照。

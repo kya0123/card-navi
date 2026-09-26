@@ -1,9 +1,9 @@
 import { h, mount } from '../h';
 import type { Ctx } from '../app';
-import { methodsForCard } from '../../domain/master';
 import { isValidYM } from '../../domain/date';
+import type { BonusGoal } from '../../domain/types';
 import { addOwnedCard, cardCatalog, removeOwnedCard, segmentCounts, type SegmentFilter } from '../../domain/catalog';
-import { methodShort, pct } from '../format';
+import { pct } from '../format';
 
 /** S03 カード（詳細設計 20.5）：保有カード／カード一覧から選ぶ を切り替える */
 
@@ -111,10 +111,15 @@ function OwnedView(ctx: Ctx): Node {
           <p>持っているカードがまだありません。「カード一覧から選ぶ」で持っているカードを選んでください。</p>
           <button class="btn" onClick={() => { view = 'catalog'; ctx.render(); }}>カード一覧から選ぶ</button>
         </div>
-      ) : <p class="sub">使う支払い方法だけチェックしてください。同じポイント率のときは上のカードを優先します。</p>}
+      ) : <p class="sub">同じポイント率のときは上のカードを優先します。支払い方法はすべて使える前提で比べます。</p>}
       {owned.map((oc, idx) => {
         const card = mi.cards.get(oc.cardId)!;
-        const methods = methodsForCard(mi, oc.cardId);
+        const bonus = mi.bonusByCard.get(oc.cardId);
+        const goal = bonus ? state.settings.bonusGoals.find((g) => g.bonusId === bonus.id) : undefined;
+        const setGoal = (f: (g: BonusGoal) => void) => ctx.update((s) => {
+          const g = s.bonusGoals.find((x) => x.bonusId === bonus!.id);
+          if (g) { f(g); g.updatedAt = ctx.today; }
+        });
         return (
           <div class="panel">
             <div class="panel-head">
@@ -132,7 +137,9 @@ function OwnedView(ctx: Ctx): Node {
                 })}>↓</button>
               </div>
             </div>
-            <label class="field">
+            {/* 入会年月・狙う・今期は達成済みは、年間ボーナスのあるカードだけ（詳細設計 31.2.1） */}
+            {!bonus && <p class="note">年間ボーナスはありません。</p>}
+            {bonus && <label class="field">
               <span>入会年月（ボーナス期限の計算に使います）</span>
               <input id={`join-${oc.cardId}`} type="month" value={oc.joinYm ?? ''} max={ctx.today.slice(0, 7)}
                 onChange={(e: Event) => {
@@ -143,22 +150,22 @@ function OwnedView(ctx: Ctx): Node {
                     if (v) c.joinYm = v; else delete c.joinYm;
                   });
                 }} />
-            </label>
-            <fieldset class="checks">
-              <legend>使う支払い方法</legend>
-              {methods.map((m) => (
-                <label class="check">
-                  <input type="checkbox" checked={oc.enabledMethods.includes(m)} onChange={(e: Event) => {
-                    const on = (e.target as HTMLInputElement).checked;
-                    void ctx.update((s) => {
-                      const c = s.ownedCards.find((x) => x.cardId === oc.cardId)!;
-                      c.enabledMethods = on ? [...new Set([...c.enabledMethods, m])] : c.enabledMethods.filter((x) => x !== m);
-                    });
-                  }} />
-                  <span>{methodShort(m)}</span>
+            </label>}
+            {bonus && (
+              <div class="bonus-flags">
+                <label class="switch">
+                  <input id={`target-${bonus.id}`} type="checkbox" checked={!!goal?.target}
+                    onChange={(e: Event) => { const on = (e.target as HTMLInputElement).checked; void setGoal((g) => { g.target = on; }); }} />
+                  <span>このボーナスを狙う</span>
                 </label>
-              ))}
-            </fieldset>
+                <label class="check">
+                  <input id={`achieved-${bonus.id}`} type="checkbox" checked={!!goal?.achieved}
+                    onChange={(e: Event) => { const on = (e.target as HTMLInputElement).checked; void setGoal((g) => { g.achieved = on; }); }} />
+                  <span>今期は達成済み</span>
+                </label>
+                <p class="note">{bonus.description}。進み具合は［カード診断］で確認できます。</p>
+              </div>
+            )}
             {(() => {
               const armId = `remove-${oc.cardId}`;
               const armed = state.armed === armId;

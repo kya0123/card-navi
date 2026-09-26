@@ -1,4 +1,5 @@
 import { h } from '../h';
+import { foldProps } from '../fold';
 import type { Ctx } from '../app';
 import { NEARBY_RADII, nearbyOn, PROVIDER_NAME, providerOf, radiusOf, type NearbyProvider } from '../../domain/nearby';
 import { clearNearbyCache } from '../nearbyService';
@@ -30,6 +31,9 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
           onChange={(e: Event) => { const on = (e.target as HTMLInputElement).checked; void ctx.update((x) => { x.nearbyEnabled = on; }); }} />
         <span>おすすめ画面に「近く」ボタンを表示する</span>
       </label>
+      {/* 検索先・アプリID・半径は詳細設定（将来は管理者だけが設定する。詳細設計 31.1 U11） */}
+      <details class="fold" id="nearby-advanced" {...foldProps('nearby-advanced')}>
+        <summary>詳細設定</summary>
       <fieldset class="field">
         <legend>検索先</legend>
         <label class="check">
@@ -65,6 +69,7 @@ export function NearbySettingsPanel(ctx: Ctx): Node {
         {hasAppId && <button class="btn btn-small btn-ghost" id="yolp-appid-delete" onClick={() => void saveAppId(null)}>削除</button>}
       </div>
       <p class="note">アプリIDは端末内にだけ保存し、バックアップには含めません。</p>
+      </details>
       {consented && (
         <button type="button" class="link-btn" id="nearby-revoke" onClick={() => {
           void ctx.update((x) => { delete x.nearbyConsent; });

@@ -5,8 +5,9 @@ import { indexMaster, validateMaster } from '../../src/domain/master';
 import { earnedYen, recommend, resolveRate } from '../../src/domain/engine';
 import { bonusPeriod, bonusValueYen, goalStatus, periodFor, rolloverGoals } from '../../src/domain/bonus';
 import { buildSearchIndex, normalize, searchStores } from '../../src/domain/search';
-import { defaultSettings, makeBackup, parseBackup } from '../../src/domain/settings';
+import { defaultSettings, makeBackup, parseBackup, reconcile } from '../../src/domain/settings';
 import { addOwnedCard } from '../../src/domain/catalog';
+import { methodsForCard } from '../../src/domain/master';
 import type { Master, RateRule, UserSettings } from '../../src/domain/types';
 
 const master = rules as unknown as Master;
@@ -287,4 +288,11 @@ test('rolloverGoals: 固定期間は入会年月がなくても繰り越す', ()
   assert.equal(r.goals[0].progressYen, 0);
   assert.equal(r.goals[0].periodEnd, '2027-12-15');
   assert.equal(r.goals[0].prevPeriod?.progressYen, 800000);
+});
+
+test('reconcile: 支払い方法の選択は廃止。外していた支払い方法もすべて使える状態に戻す', () => {
+  const s = user({ ownedCards: [{ cardId: 'rakuten', enabledMethods: ['card_physical'], priority: 1 }] });
+  const r = reconcile(mi, s);
+  assert.deepEqual(r.settings.ownedCards[0].enabledMethods, methodsForCard(mi, 'rakuten'));
+  assert.equal(r.dropped, 0);
 });

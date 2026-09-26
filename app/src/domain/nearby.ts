@@ -39,7 +39,9 @@ export interface NearbyIndex {
 }
 
 // ---------- 設定 ----------
-export const providerOf = (s: UserSettings): NearbyProvider => s.nearbyProvider ?? 'osm';
+/** Yahoo!ローカルサーチ連携を画面に出すか。いまは連携を見送るので設定から隠し、検索は OpenStreetMap に固定する（機能は残す） */
+export const YOLP_ENABLED = false;
+export const providerOf = (s: UserSettings): NearbyProvider => (YOLP_ENABLED ? s.nearbyProvider ?? 'osm' : 'osm');
 export const radiusOf = (s: UserSettings): NearbyRadius => s.nearbyRadiusM ?? DEFAULT_RADIUS;
 export const nearbyOn = (s: UserSettings): boolean => s.nearbyEnabled !== false;
 export function nextRadius(r: number): NearbyRadius | null {

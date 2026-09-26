@@ -63,6 +63,11 @@ function CatalogView(ctx: Ctx): Node {
   );
 }
 
+/** カード以外の支払いの小見出し（詳細設計 32.11） */
+const NONCARD_GROUPS: { label: string; types: string[] }[] = [
+  { label: 'コード決済', types: ['code'] }, { label: '電子マネー', types: ['emoney'] }, { label: '交通', types: ['transit'] },
+];
+
 /** その他のカードを削除し、持っているカードからも外す */
 function applyRemoveCustom(s: UserSettings, id: string): void {
   const next = removeCustomCard(s, id);
@@ -257,21 +262,28 @@ function OwnedView(ctx: Ctx): Node {
           </div>
         );
       })}
-      <div class="panel">
+      <div class="panel" id="noncard-panel">
         <h2>カード以外の支払い</h2>
-        <fieldset class="checks">
-          {nonCard.map((r) => (
-            <label class="check">
-              <input type="checkbox" checked={state.settings.enabledNonCardRoutes.includes(r.id)} onChange={(e: Event) => {
-                const on = (e.target as HTMLInputElement).checked;
-                void ctx.update((s) => {
-                  s.enabledNonCardRoutes = on ? [...new Set([...s.enabledNonCardRoutes, r.id])] : s.enabledNonCardRoutes.filter((x) => x !== r.id);
-                });
-              }} />
-              <span>{r.methodId === 'paypay' ? 'PayPay残高払い' : 'モバイルSuica（JR東日本の乗車）'}</span>
-            </label>
-          ))}
-        </fieldset>
+        <p class="note">使っているものにチェックを入れると、使えるお店でおすすめの候補に加わります。チャージ元のカードのポイントは含めません。</p>
+        {NONCARD_GROUPS.map(({ label, types }) => {
+          const list = nonCard.filter((r) => types.includes(mi.methods.get(r.methodId)?.type ?? ''));
+          return list.length > 0 && (
+            <fieldset class="checks noncard-group">
+              <legend>{label}</legend>
+              {list.map((r) => (
+                <label class="check">
+                  <input type="checkbox" id={`noncard-${r.id}`} checked={state.settings.enabledNonCardRoutes.includes(r.id)} onChange={(e: Event) => {
+                    const on = (e.target as HTMLInputElement).checked;
+                    void ctx.update((s) => {
+                      s.enabledNonCardRoutes = on ? [...new Set([...s.enabledNonCardRoutes, r.id])] : s.enabledNonCardRoutes.filter((x) => x !== r.id);
+                    });
+                  }} />
+                  <span>{r.label ?? mi.methods.get(r.methodId)?.name ?? r.id}</span>
+                </label>
+              ))}
+            </fieldset>
+          );
+        })}
       </div>
     </div>
   );

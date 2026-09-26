@@ -15,7 +15,8 @@ export function defaultSettings(mi: MasterIndex): UserSettings {
     schemaVersion: 1,
     // 新規利用者は保有カードなし。カード一覧から選ぶ（詳細設計 20.7）
     ownedCards: [],
-    enabledNonCardRoutes: mi.raw.routes.filter((r) => r.cardId === null).map((r) => r.id),
+    // 新規利用者に最初から有効にするのは defaultEnabled の経路だけ（詳細設計 32.11）
+    enabledNonCardRoutes: mi.raw.routes.filter((r) => r.cardId === null && r.defaultEnabled).map((r) => r.id),
     bonusGoals: mi.raw.bonuses.map((b) => ({ bonusId: b.id, target: false })),
     staleWarnDays: DEFAULT_STALE_DAYS,
   };

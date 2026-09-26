@@ -60,6 +60,8 @@ async function contrastIssues(page) {
     const out = [];
     for (const el of document.querySelectorAll('body *')) {
       if (!el.childNodes.length || ![...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) continue;
+      // 無効なボタンなどはコントラストの基準の対象外（WCAG 1.4.3）
+      if (el.closest(':disabled')) continue;
       const r = el.getBoundingClientRect(); if (!r.width || !r.height) continue;
       const fg = parse(getComputedStyle(el).color).rgb; const bg = bgOf(el);
       const [a, b] = [lum(fg), lum(bg)].sort((x, y) => y - x); const ratio = (a + 0.05) / (b + 0.05);
@@ -770,6 +772,28 @@ await run('E33', '全カードで比べる：同じシリーズ・同じ率は1�
   assert.equal(await pp.locator('.rank-same').innerText(), '三井住友カード（NL）・三井住友カード ゴールド（NL）も同じポイント率');
   assert.deepEqual(await contrastIssues(page), []);
   await page.screenshot({ path: `${SHOT}E33-same-series.png`, fullPage: true });
+  await context.close();
+});
+
+await run('E34', 'カード以外の支払い：コード決済・電子マネー・交通の小見出し。新しい支払いは既定でオフ→d払いにチェックでおすすめに出る', async () => {
+  const { context, page } = await newPage({}, BASE, ['smbc_nl']);
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.click('#view-owned');
+  await page.locator('#noncard-panel').waitFor();
+  assert.deepEqual(await page.locator('#noncard-panel legend').allInnerTexts(), ['コード決済', '電子マネー', '交通']);
+  assert.equal(await page.isChecked('#noncard-paypay_balance'), true);
+  assert.equal(await page.isChecked('#noncard-suica_ride'), true);
+  for (const id of ['dbarai_balance', 'rpay_cash', 'aupay_balance', 'waon_emoney', 'nanaco_emoney', 'edy_emoney'])
+    assert.equal(await page.isChecked(`#noncard-${id}`), false, `${id} は既定でオフ`);
+  assert.match(await page.locator('#noncard-panel').innerText(), /d払い（残高・口座払い）[\s\S]*WAON[\s\S]*モバイルSuica（JR東日本の乗車）/);
+  assert.deepEqual(await contrastIssues(page), []);
+  await page.screenshot({ path: `${SHOT}E34-noncard.png`, fullPage: true });
+  await pick(page, 'ふぁみま', 'ファミリーマート');
+  assert.equal(await page.locator('.rank-card', { hasText: 'd払い' }).count(), 0);
+  await page.getByRole('button', { name: 'カード', exact: true }).click();
+  await page.check('#noncard-dbarai_balance');
+  await pick(page, 'ふぁみま', 'ファミリーマート');
+  assert.equal(await page.locator('.rank-card', { hasText: 'd払い（残高・口座払い）' }).count(), 1);
   await context.close();
 });
 

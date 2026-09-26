@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import rules from '../../src/data/rules.json' with { type: 'json' };
-import { indexMaster } from '../../src/domain/master';
+import { indexMaster, validateMaster } from '../../src/domain/master';
 import { recommend } from '../../src/domain/engine';
 import { defaultSettings, makeBackup, parseBackup, reconcile } from '../../src/domain/settings';
 import { addOwnedCard, cardCatalog, masterCards, segmentCounts } from '../../src/domain/catalog';
@@ -150,4 +150,44 @@ test('L17: その他のカードのポイントも、ポイント払いの判定
 test('L18: sanitizeCustomCards は配列以外を空にする', () => {
   assert.deepEqual(sanitizeCustomCards(mi, undefined), []);
   assert.deepEqual(sanitizeCustomCards(mi, { id: 'custom_1' }), []);
+});
+
+// ---- 32.11 カード以外の支払い・現金のみの店 ----
+
+test('L20: 新規利用者に最初から有効なのはPayPay残高とモバイルSuicaだけ。新しい支払いは既定でオフ', () => {
+  assert.deepEqual(defaultSettings(mi).enabledNonCardRoutes.sort(), ['paypay_balance', 'suica_ride']);
+  const nonCard = master.routes.filter((r) => r.cardId === null);
+  assert.deepEqual(nonCard.map((r) => r.id).sort(),
+    ['aupay_balance', 'dbarai_balance', 'edy_emoney', 'nanaco_emoney', 'paypay_balance', 'rpay_cash', 'suica_ride', 'waon_emoney']);
+  assert.ok(nonCard.every((r) => r.label), 'カード以外の経路には表示名がある');
+  assert.deepEqual(master.methods.filter((m) => m.type === 'emoney').map((m) => m.id), ['waon', 'nanaco', 'edy']);
+});
+
+test('L21: 既存利用者の設定には新しい支払いを自動で加えない', () => {
+  const s = { ...own('rakuten'), enabledNonCardRoutes: ['paypay_balance'] };
+  assert.deepEqual(reconcile(mi, s).settings.enabledNonCardRoutes, ['paypay_balance']);
+});
+
+test('L22: 使えるお店：コード決済はコンビニ・スーパー・ドラッグストア。電子マネーは店ごと', () => {
+  const s = { ...own(), enabledNonCardRoutes: ['dbarai_balance', 'waon_emoney', 'nanaco_emoney', 'edy_emoney'] };
+  const ids = (store: string) => recommend(mi, s, { storeId: store }, TODAY, 10).top.map((t) => t.routeIds[0]);
+  assert.deepEqual(ids('welcia').sort(), ['dbarai_balance', 'waon_emoney']);
+  assert.deepEqual(ids('seven').sort(), ['dbarai_balance', 'nanaco_emoney']);
+  assert.deepEqual(ids('familymart').sort(), ['dbarai_balance', 'edy_emoney']);
+  assert.deepEqual(ids('mcdonalds'), [], '飲食チェーンは既定に加えていない');
+  assert.equal(recommend(mi, s, { storeId: 'aeon' }, TODAY).top[0].effectiveRate, 0.01, 'WAONはイオンで2倍');
+});
+
+test('L23: 現金のみの店：候補は0件。マスタ検証は acceptedMethods が空であることを求める', () => {
+  const cashStore = { id: 'cash_ramen', name: '現金ラーメン', kana: 'げんきんらーめん', aliases: [], categoryId: 'restaurant', acceptedMethods: [], cashOnly: true };
+  const m2 = { ...master, stores: [...master.stores, cashStore] } as Master;
+  assert.deepEqual(validateMaster(m2), []);
+  const mi2 = indexMaster(m2);
+  const res = recommend(mi2, own('rakuten', 'smbc_nl'), { storeId: 'cash_ramen' }, TODAY);
+  assert.deepEqual(res.top, []);
+  assert.equal(res.pointPay, null);
+  const bad = { ...master, stores: [...master.stores, { ...cashStore, acceptedMethods: ['card_physical'] }] } as Master;
+  assert.ok(validateMaster(bad).some((e) => e.includes('現金のみの店はacceptedMethodsを空にする')));
+  const bad2 = { ...master, stores: [...master.stores, { ...cashStore, cashOnly: false }] } as Master;
+  assert.ok(validateMaster(bad2).some((e) => e.includes('acceptedMethodsが空')));
 });

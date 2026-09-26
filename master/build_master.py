@@ -1001,7 +1001,62 @@ bonuses += [
      "excludedMethods": [], "sourceUrl": SRC["epos_platinum"], "checkedAt": C926B, "confidence": "medium"},
 ]
 
-master = {"schemaVersion": 1, "masterVersion": "2026.09.26-3", "checkedAt": RULE_CHECKED,
+# ==== 2026-09-26 段階4：カード以外の支払い（単独のコード決済・電子マネー）と現金のみの店（詳細設計 32.11） ====
+SRC.update({
+    "dbarai": "https://service.smt.docomo.ne.jp/keitai_payment/app/help/detail/0329.html",
+    "rpay": "https://www.itmedia.co.jp/mobile/articles/2601/28/news099.html",
+    "aupay_code": "https://media.aupay.wallet.auone.jp/articles/422",
+    "waon": "https://waon.info/waon/waon-vs-edy/",
+    "nanaco": "https://fpcafe.jp/mocha/2159",
+    "edy": "https://pay-route.co.jp/article/2026/04/01/maximize-rakuten-edy-points-and-credit-charge-comparison/",
+})
+methods += [
+    {"id": "d_barai", "name": "d払い", "type": "code"},
+    {"id": "rakuten_pay", "name": "楽天ペイ", "type": "code"},
+    {"id": "au_pay", "name": "au PAY", "type": "code"},
+    {"id": "waon", "name": "WAON", "type": "emoney"},
+    {"id": "nanaco", "name": "nanaco", "type": "emoney"},
+    {"id": "edy", "name": "楽天Edy", "type": "emoney"},
+]
+# 既存のカード以外の経路：新規利用者に最初から有効にする（defaultEnabled）と表示名
+for _r in routes:
+    if _r["id"] == "paypay_balance": _r["defaultEnabled"] = True; _r["label"] = "PayPay（残高払い）"
+    if _r["id"] == "suica_ride": _r["defaultEnabled"] = True; _r["label"] = "モバイルSuica（JR東日本の乗車）"
+NONCARD_NEW = [
+    # (経路, 支払い方法, 率, 付与単位, pt, ポイント, 表示名, 出典, 注記)
+    ("dbarai_balance", "d_barai", 0.005, 200, 1, "d_point", "d払い（残高・口座払い）", "dbarai",
+     "d払いの基本0.5%。dカードを支払い方法に設定したときの上乗せはカードの組み合わせのため含めない"),
+    ("rpay_cash", "rakuten_pay", 0.01, 200, 2, "rakuten_point", "楽天ペイ（楽天キャッシュ払い）", "rpay",
+     "楽天キャッシュ払い1.0%。楽天ポイントカードを月2回以上提示すると1.5%（条件付きのため含めない）。楽天カードからのチャージ分は含めない"),
+    ("aupay_balance", "au_pay", 0.005, 200, 1, "ponta_point", "au PAY（残高払い）", "aupay_code",
+     "au PAYの基本0.5%。au PAY カードからのチャージ分は含めない"),
+    ("waon_emoney", "waon", 0.005, 200, 1, "waon_point", "WAON", "waon", "WAON POINT 0.5%（イオングループの対象店舗は2倍）。チャージ元カードのポイントは含めない"),
+    ("nanaco_emoney", "nanaco", 0.005, 200, 1, "nanaco_point", "nanaco", "nanaco", "200円（税抜）＝1pt。チャージ元カードのポイントは含めない"),
+    ("edy_emoney", "edy", 0.005, 200, 1, "rakuten_point", "楽天Edy", "edy", "200円＝1pt（0.5%）。チャージ元カードのポイントは含めない"),
+]
+for rid, mid, rate_, unit, ppu, pt, label, src_, note in NONCARD_NEW:
+    _r = route(rid, None, mid, rate_, unit, ppu, pt, False, note=note, src=SRC[src_], conf="medium")
+    _r["checkedAt"] = C926B; _r["label"] = label; _r["defaultEnabled"] = False
+    routes.append(_r)
+# 使える店：コード決済はコンビニ・スーパー・ドラッグストアの既定に加える。電子マネーは店ごと（詳細設計 32.11）
+CODE_METHODS = ["d_barai", "rakuten_pay", "au_pay"]
+for c in categories:
+    if c["id"] in ("convenience", "supermarket", "drugstore"):
+        c["defaultMethods"] = c["defaultMethods"] + CODE_METHODS
+EMONEY_STORES = {
+    "waon": ["aeon", "maxvalu", "mybasket", "daiei", "ministop", "welcia"],
+    "nanaco": ["seven", "itoyokado"],
+    "edy": ["familymart", "lawson", "natural_lawson"],
+}
+_cat_default = {c["id"]: c["defaultMethods"] for c in categories}
+for m_, ids_ in EMONEY_STORES.items():
+    for _s in stores:
+        if _s["id"] in ids_:
+            _s["acceptedMethods"] = (_s.get("acceptedMethods") or list(_cat_default[_s["categoryId"]])) + [m_]
+for s_ in ("aeon", "maxvalu", "mybasket", "daiei"):
+    add_rule26(f"waon2x_{s_}", s_, "waon_emoney", 0.01, SRC["waon"], "medium", "イオングループの対象店舗でWAON POINT2倍（200円＝2pt。WAON会員登録が必要）")
+
+master = {"schemaVersion": 1, "masterVersion": "2026.09.26-4", "checkedAt": RULE_CHECKED,
           "disclaimer": "公開情報をもとにした参考値。キャンペーンは含まない。実際の還元は各社の規約に従う。",
           "series": series, "cards": cards, "methods": methods, "points": points, "routes": routes, "bonuses": bonuses,
           "categories": categories, "stores": stores, "rateRules": rate_rules}
@@ -1060,6 +1115,13 @@ for s in stores:
         if m not in M: errs.append(f"store {s['id']}: method {m}不正")
     for p in s.get("usablePoints", []):
         if p not in P: errs.append(f"store {s['id']}: point {p}不正")
+for m in methods:
+    if m["type"] not in ("card", "tap", "wallet", "code", "transit", "emoney"): errs.append(f"method {m['id']}: type不正")
+for s in stores:
+    if s.get("cashOnly") and s.get("acceptedMethods") != []: errs.append(f"store {s['id']}: 現金のみの店はacceptedMethodsを空にする")
+    if not s.get("cashOnly") and s.get("acceptedMethods") == []: errs.append(f"store {s['id']}: acceptedMethodsが空（現金のみならcashOnly）")
+for r in routes:
+    if r["cardId"] is not None and ("defaultEnabled" in r or "label" in r): errs.append(f"route {r['id']}: defaultEnabled/labelはカード以外の経路だけ")
 for k in categories:
     for m in k["defaultMethods"]:
         if m not in M: errs.append(f"category {k['id']}: method {m}不正")

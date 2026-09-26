@@ -68,7 +68,7 @@ export function CategoryScreen(ctx: Ctx): Node {
         {stores.map(({ s, tags }) => (
           <li>
             <button class="suggest-item" onClick={() => { browsing = null; void ctx.selectStore(s.id); }}>
-              <span>{s.name}</span>
+              <span>{s.name}{s.cashOnly && <em class="cash-only-tag">現金のみ</em>}</span>
               {tags.length > 0 && <small class="tags">{tags.map((t) => <em class="tag">{t}</em>)}</small>}
             </button>
           </li>

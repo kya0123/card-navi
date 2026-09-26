@@ -574,3 +574,8 @@ fieldset.field legend { font-weight: 700; color: var(--ink-strong); margin-botto
 }
 .select:focus { outline: 4px solid var(--black); outline-offset: 2px; box-shadow: 0 0 0 2px var(--yellow-300); }
 
+/* カード以外の支払い・現金のみの店（詳細設計 32.11） */
+.noncard-group { margin-top: 4px; }
+.noncard-group legend { font-size: 0.875rem; color: var(--gray-700); }
+.cash-only-tag { margin-left: 8px; padding: 0 6px; border: 1px solid var(--gray-600); border-radius: var(--radius-8); font-size: 0.75rem; font-style: normal; color: var(--gray-700); }
+

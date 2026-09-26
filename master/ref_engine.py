@@ -150,7 +150,8 @@ def earned_points(route, rate, amount):
 def recommend(user, store_id=None, category_id=None, amount=None, today=date(2026, 9, 22), top_n=3, scope="owned"):
     store = BY["stores"].get(store_id) if store_id else None
     cat_id = store["categoryId"] if store else category_id
-    accepted = set(store.get("acceptedMethods") or BY["categories"][cat_id]["defaultMethods"]) if store \
+    # 現金のみの店は acceptedMethods が空（詳細設計 32.11）。空リストも店舗の指定として扱う
+    accepted = set(store["acceptedMethods"] if "acceptedMethods" in store else BY["categories"][cat_id]["defaultMethods"]) if store \
         else set(BY["categories"][cat_id]["defaultMethods"])
 
     owned = {c["cardId"]: c for c in user["ownedCards"]}
@@ -378,6 +379,15 @@ CASES = [
      {"store_id": "familymart"}),
     ("G59", "セブン：Oliveゴールド・Oliveプラチナプリファードも8%。同率は優先順",
      owned_user(["olive_pp", "olive_gold", "smbc_nl"], non_card=[]), {"store_id": "seven"}),
+    # ---- 2026-09-26 段階4：カード以外の支払い（32.11） ----
+    ("G60", "カードなし・d払いとPayPay残高を使う：ファミマでどちらも0.5%（経路ごとに1枠）",
+     owned_user([], non_card=["paypay_balance", "dbarai_balance"]), {"store_id": "familymart"}),
+    ("G61", "楽天ペイ（楽天キャッシュ）1%はリクルートカード1.2%に負ける：ローソン",
+     owned_user(["recruit"], non_card=["rpay_cash"]), {"store_id": "lawson"}),
+    ("G62", "イオン：WAONは2倍で1%。イオンカードセレクト1%と同率ならカードが先",
+     owned_user(["aeon_select"], non_card=["waon_emoney", "nanaco_emoney"]), {"store_id": "aeon"}),
+    ("G63", "セブン：nanacoはセブンで使える（0.5%）。WAONは使えない",
+     owned_user([], non_card=["waon_emoney", "nanaco_emoney"]), {"store_id": "seven"}),
 ]
 
 PERIOD_CASES = [

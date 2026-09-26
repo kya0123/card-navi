@@ -42,6 +42,7 @@ export function indexMaster(m: Master): MasterIndex {
 }
 
 const TIERS: readonly string[] = ['general', 'gold', 'platinum'];
+const METHOD_TYPES: readonly string[] = ['card', 'tap', 'wallet', 'code', 'transit', 'emoney'];
 
 /** マスタの整合性検証。エラーメッセージの配列を返す（空なら正常） */
 export function validateMaster(m: Master): string[] {
@@ -83,6 +84,11 @@ export function validateMaster(m: Master): string[] {
     if (!sets.categories.has(s.categoryId)) errs.push(`store ${s.id}: categoryId不正`);
     for (const x of s.acceptedMethods ?? []) if (!sets.methods.has(x)) errs.push(`store ${s.id}: method ${x}不正`);
     for (const x of s.usablePoints ?? []) if (!sets.points.has(x)) errs.push(`store ${s.id}: point ${x}不正`);
+  }
+  for (const x of m.methods) if (!METHOD_TYPES.includes(x.type)) errs.push(`method ${x.id}: type不正`);
+  for (const s of m.stores) {
+    if (s.cashOnly && !(Array.isArray(s.acceptedMethods) && s.acceptedMethods.length === 0)) errs.push(`store ${s.id}: 現金のみの店はacceptedMethodsを空にする`);
+    if (!s.cashOnly && Array.isArray(s.acceptedMethods) && s.acceptedMethods.length === 0) errs.push(`store ${s.id}: acceptedMethodsが空（現金のみならcashOnly）`);
   }
   for (const k of m.categories)
     for (const x of k.defaultMethods) if (!sets.methods.has(x)) errs.push(`category ${k.id}: method ${x}不正`);

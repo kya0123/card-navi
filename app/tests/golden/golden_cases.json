@@ -1,5 +1,5 @@
 {
-  "masterVersion": "2026.09.26-3",
+  "masterVersion": "2026.09.26-4",
   "today": "2026-09-22",
   "cases": [
     {
@@ -7027,6 +7027,235 @@
           }
         ],
         "pointPay": null
+      }
+    },
+    {
+      "id": "G60",
+      "desc": "カードなし・d払いとPayPay残高を使う：ファミマでどちらも0.5%（経路ごとに1枠）",
+      "input": {
+        "user": {
+          "ownedCards": [],
+          "enabledNonCardRoutes": [
+            "paypay_balance",
+            "dbarai_balance"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "familymart"
+      },
+      "expected": {
+        "storeId": "familymart",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "d_barai"
+            ],
+            "routeIds": [
+              "dbarai_balance"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "paypay"
+            ],
+            "routeIds": [
+              "paypay_balance"
+            ]
+          }
+        ],
+        "pointPay": [
+          "d_point",
+          "paypay_point"
+        ]
+      }
+    },
+    {
+      "id": "G61",
+      "desc": "楽天ペイ（楽天キャッシュ）1%はリクルートカード1.2%に負ける：ローソン",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "recruit",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "rpay_cash"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "lawson"
+      },
+      "expected": {
+        "storeId": "lawson",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": "recruit",
+            "rate": 0.012,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.012,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "rec_card",
+              "rec_quicpay",
+              "rec_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.01,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "rakuten_pay"
+            ],
+            "routeIds": [
+              "rpay_cash"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G62",
+      "desc": "イオン：WAONは2倍で1%。イオンカードセレクト1%と同率ならカードが先",
+      "input": {
+        "user": {
+          "ownedCards": [
+            {
+              "cardId": "aeon_select",
+              "priority": 1,
+              "enabledMethods": [
+                "card_physical",
+                "smartphone_visa_touch",
+                "applepay_quicpay",
+                "online"
+              ],
+              "joinYm": "2024-04"
+            }
+          ],
+          "enabledNonCardRoutes": [
+            "waon_emoney",
+            "nanaco_emoney"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "aeon"
+      },
+      "expected": {
+        "storeId": "aeon",
+        "categoryId": "supermarket",
+        "top": [
+          {
+            "cardId": "aeon_select",
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "card_physical",
+              "applepay_quicpay",
+              "smartphone_visa_touch"
+            ],
+            "routeIds": [
+              "aeon_card",
+              "aeon_quicpay",
+              "aeon_touch"
+            ]
+          },
+          {
+            "cardId": null,
+            "rate": 0.01,
+            "rateSource": "store",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.01,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "waon"
+            ],
+            "routeIds": [
+              "waon_emoney"
+            ]
+          }
+        ],
+        "pointPay": null
+      }
+    },
+    {
+      "id": "G63",
+      "desc": "セブン：nanacoはセブンで使える（0.5%）。WAONは使えない",
+      "input": {
+        "user": {
+          "ownedCards": [],
+          "enabledNonCardRoutes": [
+            "waon_emoney",
+            "nanaco_emoney"
+          ],
+          "bonusGoals": []
+        },
+        "store_id": "seven"
+      },
+      "expected": {
+        "storeId": "seven",
+        "categoryId": "convenience",
+        "top": [
+          {
+            "cardId": null,
+            "rate": 0.005,
+            "rateSource": "base",
+            "bonusRate": 0.0,
+            "effectiveRate": 0.005,
+            "earnedYen": null,
+            "earnedApprox": false,
+            "methodIds": [
+              "nanaco"
+            ],
+            "routeIds": [
+              "nanaco_emoney"
+            ]
+          }
+        ],
+        "pointPay": [
+          "nanaco_point"
+        ]
       }
     }
   ],

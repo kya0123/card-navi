@@ -9,6 +9,12 @@ const SHORT: Record<string, string> = {
   online: 'ネット・アプリ注文',
   paypay: 'PayPay',
   mobile_suica_ride: 'モバイルSuica',
+  d_barai: 'd払い',
+  rakuten_pay: '楽天ペイ',
+  au_pay: 'au PAY',
+  waon: 'WAON',
+  nanaco: 'nanaco',
+  edy: '楽天Edy',
 };
 
 export const methodShort = (id: Id) => SHORT[id] ?? id;
@@ -20,7 +26,8 @@ export function cardName(mi: MasterIndex, cardId: Id | null, routeId?: Id): stri
   if (cardId) return mi.cards.get(cardId)?.name ?? cardId;
   const r = routeId ? mi.routes.get(routeId) : undefined;
   if (r?.methodId === 'paypay') return 'PayPay残高';
-  return r ? mi.methods.get(r.methodId)?.name ?? r.id : '';
+  // カード以外の経路はマスタの表示名（詳細設計 32.11）
+  return r ? r.label ?? mi.methods.get(r.methodId)?.name ?? r.id : '';
 }
 
 export const pointName = (mi: MasterIndex, id: Id) => mi.points.get(id)?.name ?? id;

@@ -39,7 +39,8 @@ export interface Card {
   userDefined?: boolean;
   officialUrl?: string;
 }
-export interface Method { id: Id; name: string; type: 'card' | 'tap' | 'wallet' | 'code' | 'transit' }
+/** emoney は電子マネー（WAON・nanaco・楽天Edy。詳細設計 32.11） */
+export interface Method { id: Id; name: string; type: 'card' | 'tap' | 'wallet' | 'code' | 'transit' | 'emoney' }
 export type UsableScope = 'visaMerchants' | 'paypayMerchants' | 'suicaMerchants' | 'listed' | 'none';
 export interface Point {
   id: Id; name: string; yenPerPoint: number; usableScope: UsableScope;
@@ -55,6 +56,8 @@ export interface Route {
   needsReview?: boolean; note?: string;
   /** その他のカードの経路（詳細設計 32.8）。出典・確認日の警告を出さない */
   userDefined?: boolean;
+  /** カード以外の経路：新規利用者に最初から有効にするか、チェックボックスの表示名（詳細設計 32.11） */
+  defaultEnabled?: boolean; label?: string;
 }
 export interface Bonus {
   id: Id; cardId: Id; thresholdYen: number; valueYen: number;
@@ -74,6 +77,8 @@ export interface Store {
   acceptedMethods?: Id[]; usablePoints?: Id[]; note?: string;
   /** 近くのお店（F13）の紐付けに使う OpenStreetMap のブランド識別子（Wikidata ID） */
   osmBrandWikidata?: string[];
+  /** 現金しか使えない店（acceptedMethods は空。詳細設計 32.11） */
+  cashOnly?: boolean;
 }
 export interface RateRule {
   id: Id; target: { storeId?: Id; categoryId?: Id }; routeId: Id; rate: number;

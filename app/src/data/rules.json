@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "masterVersion": "2026.09.26-3",
+  "masterVersion": "2026.09.26-4",
   "checkedAt": "2026-09-23",
   "disclaimer": "公開情報をもとにした参考値。キャンペーンは含まない。実際の還元は各社の規約に従う。",
   "series": [
@@ -1189,6 +1189,36 @@
       "id": "mobile_suica_ride",
       "name": "モバイルSuica（乗車）",
       "type": "transit"
+    },
+    {
+      "id": "d_barai",
+      "name": "d払い",
+      "type": "code"
+    },
+    {
+      "id": "rakuten_pay",
+      "name": "楽天ペイ",
+      "type": "code"
+    },
+    {
+      "id": "au_pay",
+      "name": "au PAY",
+      "type": "code"
+    },
+    {
+      "id": "waon",
+      "name": "WAON",
+      "type": "emoney"
+    },
+    {
+      "id": "nanaco",
+      "name": "nanaco",
+      "type": "emoney"
+    },
+    {
+      "id": "edy",
+      "name": "楽天Edy",
+      "type": "emoney"
     }
   ],
   "points": [
@@ -1674,7 +1704,9 @@
       "sourceUrl": "https://paypay.ne.jp/article/reward-rate/",
       "checkedAt": "2026-09-22",
       "confidence": "high",
-      "note": "銀行口座チャージ前提。他社カードのPayPay払いは2026/8/31終了"
+      "note": "銀行口座チャージ前提。他社カードのPayPay払いは2026/8/31終了",
+      "defaultEnabled": true,
+      "label": "PayPay（残高払い）"
     },
     {
       "id": "suica_ride",
@@ -1690,7 +1722,9 @@
       "sourceUrl": "https://www.jrepoint.jp/point/append/railway/",
       "checkedAt": "2026-09-25",
       "confidence": "high",
-      "note": "JR東日本線のみ・定期区間外。JRE POINT登録が必要。2026/9のJRE POINT改定（駅ビル・エキナカ）の影響なし。チャージ元カードのポイントは含めない（一般カードはモバイルSuicaチャージでポイント付与なし）"
+      "note": "JR東日本線のみ・定期区間外。JRE POINT登録が必要。2026/9のJRE POINT改定（駅ビル・エキナカ）の影響なし。チャージ元カードのポイントは含めない（一般カードはモバイルSuicaチャージでポイント付与なし）",
+      "defaultEnabled": true,
+      "label": "モバイルSuica（JR東日本の乗車）"
     },
     {
       "id": "nl_card",
@@ -4049,6 +4083,114 @@
       "checkedAt": "2026-09-26",
       "confidence": "medium",
       "note": "楽天ペイアプリから楽天カードでモバイルSuicaにチャージした場合：乗車ポイント2%＋チャージ0.5%（楽天カードと同じ）"
+    },
+    {
+      "id": "dbarai_balance",
+      "cardId": null,
+      "methodId": "d_barai",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "d_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://service.smt.docomo.ne.jp/keitai_payment/app/help/detail/0329.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "d払いの基本0.5%。dカードを支払い方法に設定したときの上乗せはカードの組み合わせのため含めない",
+      "label": "d払い（残高・口座払い）",
+      "defaultEnabled": false
+    },
+    {
+      "id": "rpay_cash",
+      "cardId": null,
+      "methodId": "rakuten_pay",
+      "baseRate": 0.01,
+      "unitYen": 200,
+      "pointsPerUnit": 2,
+      "pointId": "rakuten_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.itmedia.co.jp/mobile/articles/2601/28/news099.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "楽天キャッシュ払い1.0%。楽天ポイントカードを月2回以上提示すると1.5%（条件付きのため含めない）。楽天カードからのチャージ分は含めない",
+      "label": "楽天ペイ（楽天キャッシュ払い）",
+      "defaultEnabled": false
+    },
+    {
+      "id": "aupay_balance",
+      "cardId": null,
+      "methodId": "au_pay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://media.aupay.wallet.auone.jp/articles/422",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "au PAYの基本0.5%。au PAY カードからのチャージ分は含めない",
+      "label": "au PAY（残高払い）",
+      "defaultEnabled": false
+    },
+    {
+      "id": "waon_emoney",
+      "cardId": null,
+      "methodId": "waon",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "waon_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://waon.info/waon/waon-vs-edy/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "WAON POINT 0.5%（イオングループの対象店舗は2倍）。チャージ元カードのポイントは含めない",
+      "label": "WAON",
+      "defaultEnabled": false
+    },
+    {
+      "id": "nanaco_emoney",
+      "cardId": null,
+      "methodId": "nanaco",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "nanaco_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://fpcafe.jp/mocha/2159",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円（税抜）＝1pt。チャージ元カードのポイントは含めない",
+      "label": "nanaco",
+      "defaultEnabled": false
+    },
+    {
+      "id": "edy_emoney",
+      "cardId": null,
+      "methodId": "edy",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "rakuten_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://pay-route.co.jp/article/2026/04/01/maximize-rakuten-edy-points-and-credit-charge-comparison/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1pt（0.5%）。チャージ元カードのポイントは含めない",
+      "label": "楽天Edy",
+      "defaultEnabled": false
     }
   ],
   "bonuses": [
@@ -4281,7 +4423,10 @@
         "smartphone_visa_touch",
         "applepay_quicpay",
         "applepay_id",
-        "paypay"
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay"
       ]
     },
     {
@@ -4292,7 +4437,10 @@
         "smartphone_visa_touch",
         "applepay_quicpay",
         "applepay_id",
-        "paypay"
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay"
       ]
     },
     {
@@ -4303,7 +4451,10 @@
         "smartphone_visa_touch",
         "applepay_quicpay",
         "applepay_id",
-        "paypay"
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay"
       ]
     },
     {
@@ -4382,6 +4533,17 @@
       ],
       "osmBrandWikidata": [
         "Q259340"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "nanaco"
       ]
     },
     {
@@ -4393,6 +4555,17 @@
       "usablePoints": [
         "ponta_point",
         "d_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "edy"
       ]
     },
     {
@@ -4404,6 +4577,17 @@
       "usablePoints": [
         "ponta_point",
         "d_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "edy"
       ]
     },
     {
@@ -4439,6 +4623,17 @@
       "usablePoints": [
         "rakuten_point",
         "d_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "edy"
       ]
     },
     {
@@ -4446,7 +4641,18 @@
       "name": "ミニストップ",
       "kana": "みにすとっぷ",
       "aliases": [],
-      "categoryId": "convenience"
+      "categoryId": "convenience",
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "waon"
+      ]
     },
     {
       "id": "poplar",
@@ -4736,6 +4942,17 @@
       "categoryId": "supermarket",
       "usablePoints": [
         "waon_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "waon"
       ]
     },
     {
@@ -4745,14 +4962,36 @@
       "aliases": [
         "ヨーカドー"
       ],
-      "categoryId": "supermarket"
+      "categoryId": "supermarket",
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "nanaco"
+      ]
     },
     {
       "id": "welcia",
       "name": "ウエルシア",
       "kana": "うえるしあ",
       "aliases": [],
-      "categoryId": "drugstore"
+      "categoryId": "drugstore",
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "waon"
+      ]
     },
     {
       "id": "matsukiyo",
@@ -5309,6 +5548,17 @@
       "categoryId": "supermarket",
       "usablePoints": [
         "waon_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "waon"
       ]
     },
     {
@@ -5321,6 +5571,17 @@
       "categoryId": "supermarket",
       "usablePoints": [
         "waon_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "waon"
       ]
     },
     {
@@ -5331,6 +5592,17 @@
       "categoryId": "supermarket",
       "usablePoints": [
         "waon_point"
+      ],
+      "acceptedMethods": [
+        "card_physical",
+        "smartphone_visa_touch",
+        "applepay_quicpay",
+        "applepay_id",
+        "paypay",
+        "d_barai",
+        "rakuten_pay",
+        "au_pay",
+        "waon"
       ]
     },
     {
@@ -13496,6 +13768,62 @@
       "checkedAt": "2026-09-26",
       "confidence": "medium",
       "conditions": "自販機でのカードのタッチ決済。基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "waon2x_aeon",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "waon_emoney",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://waon.info/waon/waon-vs-edy/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループの対象店舗でWAON POINT2倍（200円＝2pt。WAON会員登録が必要）"
+    },
+    {
+      "id": "waon2x_maxvalu",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "waon_emoney",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://waon.info/waon/waon-vs-edy/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループの対象店舗でWAON POINT2倍（200円＝2pt。WAON会員登録が必要）"
+    },
+    {
+      "id": "waon2x_mybasket",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "waon_emoney",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://waon.info/waon/waon-vs-edy/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループの対象店舗でWAON POINT2倍（200円＝2pt。WAON会員登録が必要）"
+    },
+    {
+      "id": "waon2x_daiei",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "waon_emoney",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://waon.info/waon/waon-vs-edy/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループの対象店舗でWAON POINT2倍（200円＝2pt。WAON会員登録が必要）"
     }
   ]
 }

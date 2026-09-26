@@ -1,9 +1,10 @@
 import { h, mount } from '../h';
 import type { Ctx } from '../app';
 import { isValidYM } from '../../domain/date';
-import type { BonusGoal } from '../../domain/types';
+import type { BonusGoal, UserSettings } from '../../domain/types';
 import { addOwnedCard, cardCatalog, removeOwnedCard, segmentCounts, TIER_LABEL, type SegmentFilter } from '../../domain/catalog';
-import { pct } from '../format';
+import { pct, pointName } from '../format';
+import { addCustomCard, CUSTOM_MAX, CUSTOM_RATE_MAX, CUSTOM_RATE_MIN, normalizeCustomRate, removeCustomCard } from '../../domain/custom';
 
 /** S03 カード（詳細設計 20.5）：保有カード／カード一覧から選ぶ を切り替える */
 
@@ -57,7 +58,75 @@ function CatalogView(ctx: Ctx): Node {
           if (box) mount(box, CatalogList(ctx));
         }} />
       {list}
+      {(filter === 'all' || filter === 'owned') && CustomSection(ctx)}
     </div>
+  );
+}
+
+/** その他のカードを削除し、持っているカードからも外す */
+function applyRemoveCustom(s: UserSettings, id: string): void {
+  const next = removeCustomCard(s, id);
+  s.ownedCards = next.ownedCards;
+  if (next.customCards) s.customCards = next.customCards; else delete s.customCards;
+}
+
+/** その他のカード（一覧にないカード。詳細設計 32.8）：一覧の末尾に置く */
+function CustomSection(ctx: Ctx): Node {
+  const { mi, state } = ctx;
+  const list = state.settings.customCards ?? [];
+  const points = (mi.base ?? mi).raw.points;
+  return (
+    <section class="custom-cards" id="custom-cards" aria-labelledby="custom-head">
+      <h2 class="catalog-series" id="custom-head">その他のカード（一覧にないカード）</h2>
+      <p class="note">一覧にないカードは、基本のポイント率とポイントを入れると、持っているカードとしておすすめの候補に加わります。特約とボーナスは比べません。</p>
+      <ul class="catalog">
+        {list.map((c) => {
+          const card = mi.cards.get(c.id);
+          const armId = `custom-remove-${c.id}`;
+          const armed = state.armed === armId;
+          return (
+            <li class="catalog-item is-owned custom-item" id={`custom-${c.id}`}>
+              <div class="catalog-label">
+                <span class="catalog-body">
+                  <span class="catalog-title"><strong>{card?.name ?? c.id}</strong></span>
+                  <span class="catalog-meta">基本{pct(c.baseRate)}・{pointName(mi, c.pointId)}</span>
+                </span>
+              </div>
+              <button type="button" id={armId} class={`btn btn-small custom-remove ${armed ? 'btn-danger' : 'btn-ghost danger'}`} onClick={() => {
+                if (!armed) { ctx.setState({ armed: armId }); return; }
+                state.armed = null;
+                void ctx.update((s) => applyRemoveCustom(s, c.id));
+              }}>{armed ? 'もう一度押すと削除します' : '削除'}</button>
+            </li>
+          );
+        })}
+      </ul>
+      {list.length < CUSTOM_MAX ? (
+        <div class="panel custom-form">
+          <label class="field">
+            <span>カードの名前（任意）</span>
+            <input id="custom-name" type="text" maxLength={30} autocomplete="off" placeholder={`その他のカード${list.length + 1}`} />
+          </label>
+          <label class="field">
+            <span>貯まるポイント</span>
+            <select id="custom-point" class="select">
+              {points.map((p) => <option value={p.id}>{p.name}</option>)}
+            </select>
+          </label>
+          <label class="field">
+            <span>基本のポイント率（%）</span>
+            <input id="custom-rate" type="number" inputMode="decimal" min={CUSTOM_RATE_MIN * 100} max={CUSTOM_RATE_MAX * 100} step="0.1" value="1.0" />
+            <small>{CUSTOM_RATE_MIN * 100}〜{CUSTOM_RATE_MAX * 100}%（0.1%刻み）。ポイント1pt＝何円かは選んだポイントの評価で計算します</small>
+          </label>
+          <button type="button" class="btn" id="custom-add" onClick={() => {
+            const val = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null)?.value ?? '';
+            const rate = normalizeCustomRate(Number(val('custom-rate')) / 100);
+            if (rate === null) { ctx.toast(`基本のポイント率は${CUSTOM_RATE_MIN * 100}〜${CUSTOM_RATE_MAX * 100}%で入れてください`); return; }
+            void ctx.update((s) => { Object.assign(s, addCustomCard(mi, s, { name: val('custom-name'), pointId: val('custom-point'), baseRate: rate })); });
+          }}>その他のカードを追加</button>
+        </div>
+      ) : <p class="note">その他のカードは{CUSTOM_MAX}枚まで登録できます。</p>}
+    </section>
   );
 }
 
@@ -139,7 +208,8 @@ function OwnedView(ctx: Ctx): Node {
               </div>
             </div>
             {/* 入会年月・狙う・今期は達成済みは、年間ボーナスのあるカードだけ（詳細設計 31.2.1） */}
-            {!bonus && <p class="note">年間ボーナスはありません。</p>}
+            {card.userDefined && <p class="note">その他のカード：基本{pct(mi.routes.get(`${card.id}_card_physical`)?.baseRate ?? 0)}・{pointName(mi, card.pointId)}（特約・ボーナスなし）</p>}
+            {!bonus && !card.userDefined && <p class="note">年間ボーナスはありません。</p>}
             {bonus && <label class="field">
               <span>入会年月（ボーナス期限の計算に使います）</span>
               <input id={`join-${oc.cardId}`} type="month" value={oc.joinYm ?? ''} max={ctx.today.slice(0, 7)}
@@ -167,7 +237,7 @@ function OwnedView(ctx: Ctx): Node {
                 <p class="note">{bonus.description}。進み具合は［カード診断］で確認できます。</p>
               </div>
             )}
-            <button type="button" class="link-btn" id={`rate-${oc.cardId}`} onClick={() => ctx.openCardRate(oc.cardId)}>ポイント率を見る ›</button>
+            {!card.userDefined && <button type="button" class="link-btn" id={`rate-${oc.cardId}`} onClick={() => ctx.openCardRate(oc.cardId)}>ポイント率を見る ›</button>}
             {(() => {
               const armId = `remove-${oc.cardId}`;
               const armed = state.armed === armId;
@@ -176,10 +246,12 @@ function OwnedView(ctx: Ctx): Node {
                   if (!armed) { ctx.setState({ armed: armId }); return; }
                   state.armed = null;
                   void ctx.update((s) => {
+                    // その他のカードは外すと登録も消える（詳細設計 32.8）
+                    if (card.userDefined) { applyRemoveCustom(s, oc.cardId); return; }
                     s.ownedCards = s.ownedCards.filter((x) => x.cardId !== oc.cardId);
                     renumber(s.ownedCards.sort((a, b) => a.priority - b.priority));
                   });
-                }}>{armed ? 'もう一度押すと外します（入会年月も消えます）' : '持っているカードから外す'}</button>
+                }}>{armed ? (card.userDefined ? 'もう一度押すと削除します' : 'もう一度押すと外します（入会年月も消えます）') : (card.userDefined ? '削除する' : '持っているカードから外す')}</button>
               );
             })()}
           </div>

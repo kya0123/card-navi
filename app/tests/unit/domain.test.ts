@@ -147,10 +147,12 @@ test('recommend: 登録カード全体では未保有カードも候補になる
   assert.equal(all.top[0].effectiveRate, 0.1);
 });
 
-test('recommend: 登録カード全体で同率なら持っているカードが先', () => {
+test('recommend: 登録カード全体で同率なら持っているカードが先（同じシリーズは持っているカードの枠にまとまる。32.7）', () => {
   const all = recommend(mi, user(), { storeId: 'seven', scope: 'all' }, TODAY, 10);
   const ids = all.top.map((t) => t.cardId);
-  assert.ok(ids.indexOf('smbc_gold_nl') < ids.indexOf('smbc_nl'));
+  assert.ok(ids.indexOf('smbc_gold_nl') < ids.indexOf('amazon_mc'));
+  assert.ok(!ids.includes('smbc_nl'));
+  assert.deepEqual(all.top.find((t) => t.cardId === 'smbc_gold_nl')!.sameRateCardIds, ['smbc_nl', 'smbc_pp']);
 });
 
 test('recommend: 保有0枚でも登録カード全体なら候補が出る。ポイント払いは出さない', () => {

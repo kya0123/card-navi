@@ -1,4 +1,4 @@
-import type { Bonus, Card, Category, Id, Master, Method, Point, RateRule, Route, Series, Store } from './types';
+import type { Bonus, Card, Category, CustomCard, Id, Master, Method, Point, RateRule, Route, Series, Store } from './types';
 
 export interface MasterIndex {
   raw: Master;
@@ -12,6 +12,9 @@ export interface MasterIndex {
   categories: Map<Id, Category>;
   stores: Map<Id, Store>;
   rulesByRoute: Map<Id, RateRule[]>;
+  /** その他のカードを取り込んだ索引のとき、元のマスタの索引と取り込んだカード（domain/custom.ts） */
+  base?: MasterIndex;
+  custom?: readonly CustomCard[];
 }
 
 const byId = <T extends { id: Id }>(xs: T[]) => new Map(xs.map((x) => [x.id, x]));

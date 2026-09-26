@@ -35,6 +35,8 @@ export interface Card {
   /** カード会社名とよみ（詳細設計 24.2）。v1.20 から見出しには使わず、行の補足に出す */
   company: string; companyKana: string;
   series: Id; tier: CardTier;
+  /** その他のカード（利用者が登録したカード。詳細設計 32.8）。マスタのカードにはない */
+  userDefined?: boolean;
   officialUrl?: string;
 }
 export interface Method { id: Id; name: string; type: 'card' | 'tap' | 'wallet' | 'code' | 'transit' }
@@ -51,6 +53,8 @@ export interface Route {
   countsTowardBonus: boolean;
   sourceUrl: string; checkedAt: YMD; confidence: Confidence;
   needsReview?: boolean; note?: string;
+  /** その他のカードの経路（詳細設計 32.8）。出典・確認日の警告を出さない */
+  userDefined?: boolean;
 }
 export interface Bonus {
   id: Id; cardId: Id; thresholdYen: number; valueYen: number;
@@ -120,6 +124,19 @@ export interface UserSettings {
   nearbyRadiusM?: 100 | 300 | 500 | 1000;
   /** 検索先ごとの位置情報の送信への同意日 */
   nearbyConsent?: { osm?: YMD; yolp?: YMD };
+  /** その他のカード（一覧にないカード。最大5枚。詳細設計 32.8） */
+  customCards?: CustomCard[];
+}
+
+/** その他のカード（詳細設計 32.8） */
+export interface CustomCard {
+  /** 'custom_' ＋連番 */
+  id: Id;
+  /** 利用者が付ける名前。空なら「その他のカード1」 */
+  name: string;
+  pointId: Id;
+  /** 基本のポイント率（0.001〜0.03。0.1%刻み） */
+  baseRate: number;
 }
 
 // ---- 推奨結果 ----
@@ -132,6 +149,8 @@ export interface RecommendItem {
   reasons: string[];
   /** 同じカードの、より低い率の支払い方法（1カード1枠。詳細設計 31.2.3） */
   others: { methodIds: Id[]; effectiveRate: number }[];
+  /** 全カードで比べるとき、この枠にまとめた同じシリーズ・同じ率のカード（詳細設計 32.7） */
+  sameRateCardIds?: Id[];
 }
 export interface RecommendResult {
   storeId: Id | null; categoryId: Id;

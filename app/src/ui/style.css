@@ -185,6 +185,7 @@ a { color: var(--key); text-underline-offset: 3px; }
 .rank-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .rank-card { font-weight: 700; color: var(--ink-strong); overflow-wrap: anywhere; line-height: 1.5; }
 .rank-method { font-size: 0.875rem; color: var(--muted); }
+.rank-same { font-size: 0.875rem; color: var(--gray-700); }
 .rank-rate { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
 .rate { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.125rem; color: var(--ink-strong); }
 .rate-break { font-size: 0.875rem; color: var(--muted); }
@@ -561,3 +562,15 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 fieldset.field legend { font-weight: 700; color: var(--ink-strong); margin-bottom: 4px; padding: 0; }
 .field select { height: 2.75rem; font-size: 1rem; padding: 0 8px; border: 1px solid var(--gray-600); border-radius: var(--radius-8); background: var(--surface); max-width: 12rem; }
 .check input:disabled + span { color: var(--gray-700); }
+
+/* その他のカード（詳細設計 32.8） */
+.custom-cards { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.custom-cards h2.catalog-series { margin: 0; }
+.custom-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-right: 12px; }
+.custom-form { margin-top: 4px; }
+.select {
+  width: 100%; min-height: 3rem; padding: 10px 16px;
+  border: 1px solid var(--gray-600); border-radius: var(--radius-8); background: var(--surface); color: var(--ink-strong); font-size: 1rem;
+}
+.select:focus { outline: 4px solid var(--black); outline-offset: 2px; box-shadow: 0 0 0 2px var(--yellow-300); }
+

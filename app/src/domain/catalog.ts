@@ -33,6 +33,8 @@ export const TIER_LABEL: Record<CardTier, string> = { general: '一般', gold: '
 /** シリーズ名順 → ランク順（一般→ゴールド→プラチナ）→ カード名順（詳細設計 32.6） */
 export function compareCards(mi: MasterIndex): (a: Card, b: Card) => number {
   return (a, b) => {
+    // その他のカードは末尾（詳細設計 32.6）
+    if (!!a.userDefined !== !!b.userDefined) return a.userDefined ? 1 : -1;
     const sa = mi.series.get(a.series)!, sb = mi.series.get(b.series)!;
     return compareNames(sa, sb)
       || TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier)
@@ -59,7 +61,7 @@ function rates(mi: MasterIndex, cardId: Id): { base: number; max: number } {
 export function cardCatalog(mi: MasterIndex, user: UserSettings, filter: SegmentFilter, query = ''): CatalogEntry[] {
   const owned = new Set(user.ownedCards.map((c) => c.cardId));
   const q = normalize(query);
-  return [...mi.raw.cards].sort(compareCards(mi))
+  return masterCards(mi).sort(compareCards(mi))
     .filter((c) => filter === 'all' || (filter === 'owned' ? owned.has(c.id) : c.segments.includes(filter)))
     .filter((c) => !q || searchTexts(mi, c).some((x) => normalize(x).includes(q)))
     .map((card) => {
@@ -68,13 +70,19 @@ export function cardCatalog(mi: MasterIndex, user: UserSettings, filter: Segment
     });
 }
 
+/** マスタのカード（その他のカードを除く）。一覧・「全N枚」の枚数に使う */
+export function masterCards(mi: MasterIndex): Card[] {
+  return mi.raw.cards.filter((c) => !c.userDefined);
+}
+
 export function segmentCounts(mi: MasterIndex, user: UserSettings): Record<SegmentFilter, number> {
   const owned = new Set(user.ownedCards.map((c) => c.cardId));
+  const cards = masterCards(mi);
   return {
-    all: mi.raw.cards.length,
-    popular: mi.raw.cards.filter((c) => c.segments.includes('popular')).length,
-    enthusiast: mi.raw.cards.filter((c) => c.segments.includes('enthusiast')).length,
-    owned: mi.raw.cards.filter((c) => owned.has(c.id)).length,
+    all: cards.length,
+    popular: cards.filter((c) => c.segments.includes('popular')).length,
+    enthusiast: cards.filter((c) => c.segments.includes('enthusiast')).length,
+    owned: cards.filter((c) => owned.has(c.id)).length,
   };
 }
 

@@ -3,6 +3,7 @@ import { foldProps } from '../fold';
 import type { Ctx } from '../app';
 import { recommend, type RecommendScope } from '../../domain/engine';
 import { linkFor } from '../../domain/affiliate';
+import { masterCards } from '../../domain/catalog';
 import { searchStores } from '../../domain/search';
 import type { RecommendItem, RecommendResult } from '../../domain/types';
 import { cardName, methodShort, pct, pointName, yen } from '../format';
@@ -31,7 +32,7 @@ export function HomeScreen(ctx: Ctx): Node {
   const noCards = state.settings.ownedCards.length === 0;
   const scope: RecommendScope = noCards ? 'all' : state.recScope;
   const ownedIds = new Set(state.settings.ownedCards.map((c) => c.cardId));
-  const total = mi.raw.cards.length;
+  const total = masterCards(mi).length;
   let result: RecommendResult | null = null;
   let error = '';
   if (state.selection) {
@@ -172,6 +173,9 @@ function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string
             ? <span class="own-mark own-yes">持っている</span>
             : <span class="own-mark own-no">持っていない</span>)}
         </div>
+        {item.sameRateCardIds && item.sameRateCardIds.length > 0 && (
+          <div class="rank-same">{item.sameRateCardIds.map((id) => cardName(mi, id)).join('・')}も同じポイント率</div>
+        )}
         {methods && <div class="rank-method">{methods}</div>}
         <div class="rank-rate">
           <span class="rate">{pct(item.effectiveRate)}</span>

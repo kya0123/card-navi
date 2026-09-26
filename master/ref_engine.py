@@ -362,6 +362,22 @@ CASES = [
      owned_user([], non_card=[]), {"store_id": "seven", "scope": "all", "top_n": 10}),
     ("G52", "全カード・プラチナプリファードを持っている：セブンで（NL）・ゴールド（NL）はプラチナプリファードの枠",
      owned_user(["smbc_pp"], non_card=[]), {"store_id": "seven", "scope": "all", "top_n": 10}),
+    # ---- 2026-09-26：カードラインナップ第1弾・第2弾（32.3・32.4） ----
+    ("G53", "イオン：JALカード CLUB-Aゴールド2%（特約店）がイオンゴールド1%・JAL普通1%より上",
+     owned_user(["jal_club_a_gold", "aeon_gold", "jal_general"], non_card=[]), {"store_id": "aeon"}),
+    ("G54", "ファミマ1,000円：セゾンゴールド・アメックス0.75%（永久不滅1pt＝5円・概算7円）＞セゾンインターナショナル0.5%＞アメックス・グリーン0.3%",
+     owned_user(["saison_gold_amex", "saison_intl", "amex_green"], non_card=[]), {"store_id": "familymart", "amount": 1000}),
+    ("G55", "オーケー：三菱UFJカード ゴールド7%＞ローソンPontaプラス5%",
+     owned_user(["lawson_ponta", "mufg_gold"], non_card=[]), {"store_id": "ok"}),
+    ("G56", "マクドナルド：JCBゴールドのモバイルオーダー10%＞三井住友（NL）7%",
+     owned_user(["smbc_nl", "jcb_gold"], non_card=[]), {"store_id": "mcdonalds"}),
+    ("G57", "ファミマ：ANA JCBワイドゴールド1%（マイル1円）＞ANA VISA一般0.5%・ANA JCB一般0.5%",
+     owned_user(["ana_visa_general", "ana_jcb_general", "ana_jcb_wide_gold"], non_card=[]), {"store_id": "familymart", "amount": 3000}),
+    ("G58", "エポスプラチナのボーナスON・ファミマ：0.5%＋2%（年100万円で20,000pt）",
+     owned_user(["epos_platinum", "epos_gold"], non_card=[], goals=[{"bonusId": "epp_1m", "target": True, "progressYen": 0}]),
+     {"store_id": "familymart"}),
+    ("G59", "セブン：Oliveゴールド・Oliveプラチナプリファードも8%。同率は優先順",
+     owned_user(["olive_pp", "olive_gold", "smbc_nl"], non_card=[]), {"store_id": "seven"}),
 ]
 
 PERIOD_CASES = [

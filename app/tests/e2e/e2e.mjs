@@ -351,7 +351,7 @@ await run('E11', 'バナー：翌日ホームに表示→タップでS07→翌�
   const banner = page.locator('#promo-banner');
   await banner.waitFor();
   assert.match(await banner.innerText(), /あなたの使い方に合うカードが見つかりました/);
-  assert.match(await banner.innerText(), /9件/);                  // v1.13：21枚で9枚（旧：2件）
+  assert.match(await banner.innerText(), /14件/);                 // v1.20：42枚で14枚（v1.13：21枚で9枚、旧：2件）
   assert.deepEqual(await contrastIssues(page), []);
   await page.screenshot({ path: `${SHOT}E11-banner.png`, fullPage: true });
   await pick(page, 'せぶん', 'セブン-イレブン');
@@ -377,7 +377,7 @@ await run('E12', '設定で提案をオフ：ヒントもバナーも出ない�
   await pick(page, 'せぶん', 'セブン-イレブン');
   assert.equal(await page.locator('#hint').count(), 0);
   await page.getByRole('button', { name: 'カード診断', exact: true }).click();
-  assert.equal(await page.locator('.review-card').count(), 9);    // v1.13：21枚で9枚（旧：2）
+  assert.equal(await page.locator('.review-card').count(), 14);   // v1.20：42枚で14枚（v1.13：21枚で9枚、旧：2）
   await page.click('#to-adpolicy');
   await page.locator('h1', { hasText: '広告の方針' }).waitFor();
   await context.close();
@@ -401,7 +401,7 @@ await run('E14', '初回：案内バナー・登録カード全体でおすす�
   const { context, page } = await newPage({}, BASE, []);
   // 保有カードなしでは案内を表示し、登録カード全体でおすすめする（切り替えは出さない）
   await page.waitForSelector('#onboard');
-  assert.match(await page.locator('#onboard').innerText(), /登録カード（22枚）全体/);
+  assert.match(await page.locator('#onboard').innerText(), /登録カード（42枚）全体/);
   await page.fill('#q', 'ふぁみま');
   await page.keyboard.press('Enter');
   await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
@@ -409,7 +409,7 @@ await run('E14', '初回：案内バナー・登録カード全体でおすす�
   assert.equal(await page.locator('#scope-all').count(), 0, '保有0枚では切り替えを出さない');
   assert.equal(await page.locator('.rank .own-no').count(), 3, 'すべて未保有');
   assert.equal(await page.locator('.rank .own-yes').count(), 0);
-  assert.match(await page.locator('#scope-note').innerText(), /主なカード22枚の中での比較です。日本のすべてのカードではありません/);
+  assert.match(await page.locator('#scope-note').innerText(), /主なカード42枚の中での比較です。日本のすべてのカードではありません/);
   await page.locator('#onboard .btn').click();
   // 保有0枚ではカード一覧を初期表示
   await page.waitForSelector('#catalog-list');
@@ -526,15 +526,15 @@ await run('E18', 'カード一覧：シリーズの見出しが英字（アル�
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.waitForSelector('#catalog-list');
   const heads = await page.locator('#catalog-list .catalog-series').allInnerTexts();
-  assert.deepEqual(heads.slice(0, 5), ['Amazon Mastercard', 'ANAカード', 'au PAY カード', 'dカード', 'JCBオリジナルシリーズ']);
-  assert.equal(heads.at(-1), 'リクルートカード');
+  assert.deepEqual(heads.slice(0, 5), ['Amazon Mastercard', 'ANAカード', 'au PAY カード', 'dカード', 'JALカード']);
+  assert.equal(heads.at(-1), 'ローソンPontaプラス');
   assert.equal(heads.length, new Set(heads).size, 'シリーズの見出しは1回ずつ');
   assert.equal(await page.locator('.catalog-series').last().innerText(), 'その他のカード（一覧にないカード）', 'その他のカードは一覧の末尾');
   const first = await page.locator('.catalog-item').first().innerText();
   assert.match(first, /Amazon Mastercard/);
   const texts = await page.locator('.catalog-item').allInnerTexts();
   const at = (re) => texts.findIndex((t) => re.test(t));
-  assert.ok(at(/三井住友カード（NL）\n/) < at(/三井住友カード ゴールド（NL）/) && at(/三井住友カード ゴールド（NL）/) < at(/プラチナプリファード/), '一般→ゴールド→プラチナ');
+  assert.ok(at(/三井住友カード（NL）\n/) < at(/三井住友カード ゴールド（NL）/) && at(/三井住友カード ゴールド（NL）/) < at(/三井住友カード プラチナプリファード/), '一般→ゴールド→プラチナ');
   assert.match(texts[at(/ANA VISAワイドゴールド/)], /ゴールド・三井住友カード・/, 'ランクと発行会社を補足行に出す');
   await page.fill('#card-q', 'マリオット');
   await page.waitForFunction(() => document.querySelectorAll('.catalog-item').length === 2);
@@ -589,7 +589,7 @@ await run('E19', '見直す：持っているカードの判定。月の利用�
   await context.close();
 });
 
-await run('E28', 'おすすめの切り替え：登録カード（22枚）で保有・未保有の印と公式サイトのリンク、注記。ヒント・ポイント払いは持っているカードで判定', async () => {
+await run('E28', 'おすすめの切り替え：登録カード（42枚）で保有・未保有の印と公式サイトのリンク、注記。ヒント・ポイント払いは持っているカードで判定', async () => {
   const { context, page } = await setupRakutenOnly();
   await goto(page, '2026-09-22');                                // ③を出す日（同じ日は①を出さない）
   await page.locator('#promo-banner').waitFor();
@@ -601,7 +601,7 @@ await run('E28', 'おすすめの切り替え：登録カード（22枚）で保
   await page.click('#scope-all');
   await page.waitForSelector('#scope-note');
   assert.equal(await page.getAttribute('#scope-all', 'aria-selected'), 'true');
-  assert.match(await page.locator('#scope-all').innerText(), /全22枚で比べる/);
+  assert.match(await page.locator('#scope-all').innerText(), /全42枚で比べる/);
   assert.match(await page.locator('#scope-owned').innerText(), /手持ちで比べる/);
   assert.equal(await page.locator('#hint').count(), 0, '登録カード表示ではヒントを出さない');
   assert.match(await rank1(page).locator('.rank-card').innerText(), /セブンカード・プラス/);
@@ -610,7 +610,7 @@ await run('E28', 'おすすめの切り替え：登録カード（22枚）で保
   assert.equal(await link.innerText(), '公式サイトを見る');
   assert.match(await link.getAttribute('href'), /^https:\/\//);
   assert.equal(await rank1(page).locator('.pr').count(), 0, 'アフィリエイト未登録なのでPRなし');
-  assert.match(await page.locator('#scope-note').innerText(), /主なカード22枚の中での比較です。日本のすべてのカードではありません/);
+  assert.match(await page.locator('#scope-note').innerText(), /主なカード42枚の中での比較です。日本のすべてのカードではありません/);
   assert.deepEqual(await contrastIssues(page), []);
   await page.screenshot({ path: `${SHOT}E28-scope-all.png`, fullPage: true });
   // 持っているカードに戻すと印・注記は消え、ヒントが出る
@@ -729,7 +729,7 @@ await run('E32', 'その他のカード：一覧の末尾で登録→持って�
   await page.locator('#custom-custom_1').waitFor();
   assert.match(await page.locator('#custom-custom_1').innerText(), /〇〇銀行カード[\s\S]*基本1\.2%・楽天ポイント/);
   assert.match(await page.locator('#view-owned').innerText(), /持っているカード（2）/);
-  assert.match(await page.locator('#filter-all').innerText(), /すべて 22/, '一覧の枚数にはその他のカードを含めない');
+  assert.match(await page.locator('#filter-all').innerText(), /すべて 42/, '一覧の枚数にはその他のカードを含めない');
   assert.deepEqual(await contrastIssues(page), []);
   await page.screenshot({ path: `${SHOT}E32-custom-card.png`, fullPage: true });
   await pick(page, 'ふぁみま', 'ファミリーマート');
@@ -737,7 +737,7 @@ await run('E32', 'その他のカード：一覧の末尾で登録→持って�
   assert.match(await rank1(page).locator('.rate').innerText(), /1\.2%/);
   await page.click('#scope-all');
   await page.waitForSelector('#scope-note');
-  assert.match(await page.locator('#scope-all').innerText(), /全22枚で比べる/, '全N枚にはその他のカードを含めない');
+  assert.match(await page.locator('#scope-all').innerText(), /全42枚で比べる/, '全N枚にはその他のカードを含めない');
   await page.click('#scope-owned');
   // 再読み込み後も残る
   await page.reload();
@@ -766,7 +766,7 @@ await run('E33', '全カードで比べる：同じシリーズ・同じ率は1�
   await page.waitForSelector('#scope-note');
   const cards = await page.locator('.rank .rank-card').allInnerTexts();
   assert.ok(!cards.some((t) => /^三井住友カード（NL）/.test(t) || /ゴールド（NL）/.test(t)), 'NL・ゴールドNLは別の枠に出ない');
-  const pp = page.locator('.rank', { hasText: 'プラチナプリファード' });
+  const pp = page.locator('.rank', { hasText: '三井住友カード プラチナプリファード' });
   assert.equal(await pp.locator('.rank-same').innerText(), '三井住友カード（NL）・三井住友カード ゴールド（NL）も同じポイント率');
   assert.deepEqual(await contrastIssues(page), []);
   await page.screenshot({ path: `${SHOT}E33-same-series.png`, fullPage: true });

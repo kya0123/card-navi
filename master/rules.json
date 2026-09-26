@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "masterVersion": "2026.09.26-2",
+  "masterVersion": "2026.09.26-3",
   "checkedAt": "2026-09-23",
   "disclaimer": "公開情報をもとにした参考値。キャンペーンは含まない。実際の還元は各社の規約に従う。",
   "series": [
@@ -118,6 +118,42 @@
       "name": "リクルートカード",
       "kana": "りくるーとかーど",
       "aliases": []
+    },
+    {
+      "id": "jal",
+      "name": "JALカード",
+      "kana": "じゃるかーど",
+      "aliases": [
+        "ジャル",
+        "日本航空"
+      ]
+    },
+    {
+      "id": "saison",
+      "name": "セゾンカード",
+      "kana": "せぞんかーど",
+      "aliases": [
+        "クレディセゾン",
+        "永久不滅"
+      ]
+    },
+    {
+      "id": "amex",
+      "name": "アメリカン・エキスプレス",
+      "kana": "あめりかんえきすぷれす",
+      "aliases": [
+        "アメックス",
+        "Amex"
+      ]
+    },
+    {
+      "id": "lawson_ponta",
+      "name": "ローソンPontaプラス",
+      "kana": "ろーそんぽんたぷらす",
+      "aliases": [
+        "ポンタ",
+        "ローソン"
+      ]
     }
   ],
   "cards": [
@@ -176,12 +212,12 @@
       "kana": "えーえぬえーわいどごーるど",
       "issuer": "三井住友カード",
       "brand": "Visa",
-      "pointId": "ana_transfer_point",
+      "pointId": "ana_mile",
       "annualFee": 15400,
       "segments": [
         "popular"
       ],
-      "highlight": "マイルを貯める定番（本アプリはマイル換算せず1pt＝1円で評価）",
+      "highlight": "200円＝2マイル（1%。2マイルコースは移行手数料無料）。マイルは1マイル＝1円で評価",
       "aliases": [
         "ANAカード",
         "ANAワイドゴールド"
@@ -643,6 +679,479 @@
       "series": "view",
       "tier": "general",
       "officialUrl": "https://www.jreast.co.jp/en/card/first/viewcardstandard.html"
+    },
+    {
+      "id": "ana_visa_general",
+      "name": "ANA VISA 一般カード",
+      "shortName": "ANA VISA",
+      "kana": "えーえぬえーびざいっぱんかーど",
+      "issuer": "三井住友カード",
+      "brand": "Visa",
+      "pointId": "ana_mile",
+      "annualFee": 2200,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "200円＝1マイル（0.5%。手数料のかからない1pt＝1マイルで評価。2倍コースは年6,600円）",
+      "aliases": [
+        "ANAカード",
+        "ANA一般"
+      ],
+      "annualFeeNote": "初年度無料",
+      "company": "三井住友カード",
+      "companyKana": "みついすみともかーど",
+      "series": "ana",
+      "tier": "general",
+      "officialUrl": "https://www.smbc-card.com/nyukai/affiliate/ana/index.jsp"
+    },
+    {
+      "id": "ana_jcb_general",
+      "name": "ANA JCB 一般カード",
+      "shortName": "ANA JCB",
+      "kana": "えーえぬえーじぇーしーびーいっぱんかーど",
+      "issuer": "JCB",
+      "brand": "JCB",
+      "pointId": "ana_mile",
+      "annualFee": 2200,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "1,000円＝5マイル（0.5%。手数料のかからない5マイルコースで評価）",
+      "aliases": [
+        "ANAカード",
+        "ANA一般",
+        "ソラチカカード",
+        "ソラチカ",
+        "ANA To Me CARD PASMO JCB"
+      ],
+      "annualFeeNote": "初年度無料",
+      "company": "JCB",
+      "companyKana": "じぇーしーびー",
+      "series": "ana",
+      "tier": "general",
+      "officialUrl": "https://www.jcb.co.jp/promotion/jcb_anacard/first.html"
+    },
+    {
+      "id": "ana_jcb_wide_gold",
+      "name": "ANA JCB ワイドゴールドカード",
+      "shortName": "ANA JCB G",
+      "kana": "えーえぬえーじぇーしーびーわいどごーるど",
+      "issuer": "JCB",
+      "brand": "JCB",
+      "pointId": "ana_mile",
+      "annualFee": 15400,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "1,000円＝10マイル（1%。10マイルコースは移行手数料無料）",
+      "aliases": [
+        "ANAカード",
+        "ANAゴールド"
+      ],
+      "company": "JCB",
+      "companyKana": "じぇーしーびー",
+      "series": "ana",
+      "tier": "gold",
+      "officialUrl": "https://www.jcb.co.jp/promotion/jcb_anacard/cp1.html"
+    },
+    {
+      "id": "jal_general",
+      "name": "JALカード 普通カード",
+      "shortName": "JAL",
+      "kana": "じゃるかーどふつうかーど",
+      "issuer": "JALカード（JCBほか各ブランド）",
+      "brand": "Visa/Mastercard/JCB",
+      "pointId": "jal_mile",
+      "annualFee": 2200,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "200円＝1マイル（0.5%）。イオン・ウエルシア等のJALカード特約店で2倍",
+      "aliases": [
+        "JALカード",
+        "日本航空"
+      ],
+      "annualFeeNote": "初年度無料。JAL・アメリカン・エキスプレス・カードは年会費6,600円",
+      "company": "JALカード",
+      "companyKana": "じゃるかーど",
+      "series": "jal",
+      "tier": "general",
+      "officialUrl": "https://www.jal.co.jp/jp/ja/jalcard/index03.html"
+    },
+    {
+      "id": "jal_club_a_gold",
+      "name": "JALカード CLUB-Aゴールドカード",
+      "shortName": "JAL G",
+      "kana": "じゃるかーどくらぶえーごーるどかーど",
+      "issuer": "JALカード（JCBほか各ブランド）",
+      "brand": "Visa/Mastercard/JCB",
+      "pointId": "jal_mile",
+      "annualFee": 17600,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "100円＝1マイル（1%。ショッピングマイル・プレミアムに自動入会）。JALカード特約店で2%",
+      "aliases": [
+        "JALゴールド",
+        "CLUB-Aゴールド"
+      ],
+      "annualFeeNote": "JAL・アメリカン・エキスプレス・カード CLUB-Aゴールドは年会費が異なる",
+      "company": "JALカード",
+      "companyKana": "じゃるかーど",
+      "series": "jal",
+      "tier": "gold",
+      "officialUrl": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html"
+    },
+    {
+      "id": "rakuten_gold",
+      "name": "楽天ゴールドカード",
+      "shortName": "楽天G",
+      "kana": "らくてんごーるどかーど",
+      "issuer": "楽天カード",
+      "brand": "Visa/Mastercard/JCB",
+      "pointId": "rakuten_point",
+      "annualFee": 2200,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "1%。楽天市場で2%（カード分）。ポイント率は楽天カードと同じで、空港ラウンジ等が付く",
+      "aliases": [
+        "楽天ゴールド"
+      ],
+      "company": "楽天カード",
+      "companyKana": "らくてんかーど",
+      "series": "rakuten",
+      "tier": "gold",
+      "officialUrl": "https://www.rakuten-card.co.jp/campaign/gold_card/"
+    },
+    {
+      "id": "mufg_gold",
+      "name": "三菱UFJカード ゴールド",
+      "shortName": "三菱UFJ G",
+      "kana": "みつびしゆーえふじぇいかーどごーるど",
+      "issuer": "三菱UFJニコス",
+      "brand": "Visa/Mastercard/JCB/Amex",
+      "pointId": "global_point",
+      "annualFee": 11000,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "セブン・ローソン・オーケー等で7%（一般と同じ）。年100万円利用で2,200pt（11,000円相当）",
+      "aliases": [
+        "三菱UFJゴールド",
+        "ゴールドプレステージ",
+        "MUFGゴールド"
+      ],
+      "annualFeeNote": "2025年12月に「ゴールドプレステージ」から名称変更",
+      "company": "三菱UFJニコス",
+      "companyKana": "みつびしゆーえふじぇいにこす",
+      "series": "mufg",
+      "tier": "gold",
+      "officialUrl": "https://www.cr.mufg.jp/apply/card/mucard_goldprestige/index.html"
+    },
+    {
+      "id": "aupay_gold",
+      "name": "au PAY ゴールドカード",
+      "shortName": "au PAY G",
+      "kana": "えーゆーぺいごーるどかーど",
+      "issuer": "auフィナンシャルサービス",
+      "brand": "Visa/Mastercard",
+      "pointId": "ponta_point",
+      "annualFee": 11000,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "1%（Pontaポイント）。au携帯料金等の上乗せはauの契約に依存するため含めない",
+      "aliases": [
+        "auゴールド",
+        "au PAYゴールド"
+      ],
+      "company": "auフィナンシャルサービス",
+      "companyKana": "えーゆーふぃなんしゃるさーびす",
+      "series": "aupay",
+      "tier": "gold",
+      "officialUrl": "https://www.kddi-fs.com/function/promotion/goldlp/index.html"
+    },
+    {
+      "id": "jcb_gold",
+      "name": "JCBゴールド",
+      "shortName": "JCB G",
+      "kana": "じぇーしーびーごーるど",
+      "issuer": "JCB",
+      "brand": "JCB",
+      "pointId": "j_point",
+      "annualFee": 11000,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "0.5%（月間合計）。J-POINTパートナーでセブン・Amazon1.5%、スタバ・マクドナルドのモバイルオーダー10%。年100万円で3,000pt",
+      "aliases": [
+        "JCBゴールドカード",
+        "JCB GOLD"
+      ],
+      "company": "JCB",
+      "companyKana": "じぇーしーびー",
+      "series": "jcb_original",
+      "tier": "gold",
+      "officialUrl": "https://www.jcb.co.jp/promotion/ordercard/gold/index.html"
+    },
+    {
+      "id": "aeon_gold",
+      "name": "イオンゴールドカードセレクト",
+      "shortName": "イオンG",
+      "kana": "いおんごーるどかーどせれくと",
+      "issuer": "イオンフィナンシャルサービス",
+      "brand": "Visa/Mastercard/JCB",
+      "pointId": "waon_point",
+      "annualFee": 0,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "イオングループで1%（一般と同じ）。年会費無料・招待制（年50万円以上の利用等）",
+      "aliases": [
+        "イオンゴールド",
+        "イオンゴールドカード"
+      ],
+      "annualFeeNote": "招待制・年会費無料",
+      "company": "イオンフィナンシャルサービス",
+      "companyKana": "いおんふぃなんしゃるさーびす",
+      "series": "aeon",
+      "tier": "gold",
+      "officialUrl": "https://www.aeon.co.jp/card/lineup/select/"
+    },
+    {
+      "id": "olive_gold",
+      "name": "Olive フレキシブルペイ ゴールド",
+      "shortName": "Olive G",
+      "kana": "おりーぶごーるど",
+      "issuer": "三井住友カード",
+      "brand": "Visa",
+      "pointId": "vpoint",
+      "annualFee": 5500,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "対象コンビニ・飲食店で8%（Oliveのクレジットモード）。年100万円利用で10,000pt＋翌年以降の年会費永年無料",
+      "aliases": [
+        "Oliveゴールド",
+        "オリーブゴールド"
+      ],
+      "annualFeeNote": "年100万円利用で翌年以降永年無料",
+      "company": "三井住友カード",
+      "companyKana": "みついすみともかーど",
+      "series": "olive",
+      "tier": "gold",
+      "officialUrl": "https://www.smbc.co.jp/kojin/olive-account/gold/"
+    },
+    {
+      "id": "olive_pp",
+      "name": "Olive フレキシブルペイ プラチナプリファード",
+      "shortName": "Olive PP",
+      "kana": "おりーぶぷらちなぷりふぁーど",
+      "issuer": "三井住友カード",
+      "brand": "Visa",
+      "pointId": "vpoint",
+      "annualFee": 33000,
+      "segments": [
+        "enthusiast"
+      ],
+      "highlight": "1%。対象コンビニ・飲食店で8%。年100万円利用ごとに10,000pt（最大40,000pt）",
+      "aliases": [
+        "Oliveプラチナプリファード",
+        "オリーブプラチナ",
+        "Oliveプラプリ"
+      ],
+      "company": "三井住友カード",
+      "companyKana": "みついすみともかーど",
+      "series": "olive",
+      "tier": "platinum",
+      "officialUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/"
+    },
+    {
+      "id": "view_gold",
+      "name": "ビューカード ゴールド",
+      "shortName": "ビューG",
+      "kana": "びゅーかーどごーるど",
+      "issuer": "ビューカード",
+      "brand": "Visa/Mastercard/JCB",
+      "pointId": "jre_point",
+      "annualFee": 11000,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "モバイルSuicaへのチャージで1.5%（乗車ポイントと合わせて3.5%）。通常0.5%。年300万円利用で12,000pt",
+      "aliases": [
+        "ビューゴールドプラス",
+        "ビューゴールド"
+      ],
+      "company": "ビューカード",
+      "companyKana": "びゅーかーど",
+      "series": "view",
+      "tier": "gold",
+      "officialUrl": "https://www.jreast.co.jp/card/"
+    },
+    {
+      "id": "seven_gold",
+      "name": "セブンカード・プラス（ゴールド）",
+      "shortName": "セブンG",
+      "kana": "せぶんかーどぷらすごーるど",
+      "issuer": "セブン・カードサービス",
+      "brand": "JCB",
+      "pointId": "nanaco_point",
+      "annualFee": 0,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "0.5%。セブン-イレブンで最大10%（一般と同じ）。年会費無料・招待制",
+      "aliases": [
+        "セブンゴールド"
+      ],
+      "annualFeeNote": "招待制・年会費無料",
+      "company": "セブン・カードサービス",
+      "companyKana": "せぶんかーどさーびす",
+      "series": "seven",
+      "tier": "gold",
+      "officialUrl": "https://www.7card.co.jp/"
+    },
+    {
+      "id": "saison_intl",
+      "name": "セゾンカードインターナショナル",
+      "shortName": "セゾン",
+      "kana": "せぞんかーどいんたーなしょなる",
+      "issuer": "クレディセゾン",
+      "brand": "Visa/Mastercard/JCB",
+      "pointId": "eikyu_point",
+      "annualFee": 0,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "1,000円＝永久不滅ポイント1pt（1pt＝5円で評価して0.5%）。ポイントの有効期限なし",
+      "aliases": [
+        "セゾンカード"
+      ],
+      "company": "クレディセゾン",
+      "companyKana": "くれでぃせぞん",
+      "series": "saison",
+      "tier": "general",
+      "officialUrl": "https://www.saisoncard.co.jp/"
+    },
+    {
+      "id": "saison_gold_amex",
+      "name": "セゾンゴールド・アメリカン・エキスプレス・カード",
+      "shortName": "セゾンG",
+      "kana": "せぞんごーるどあめっくす",
+      "issuer": "クレディセゾン",
+      "brand": "Amex",
+      "pointId": "eikyu_point",
+      "annualFee": 11000,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "国内1,000円＝1.5pt（0.75%）。永久不滅ポイントは1pt＝5円で評価",
+      "aliases": [
+        "セゾンゴールドアメックス",
+        "セゾンアメックス"
+      ],
+      "annualFeeNote": "初年度無料",
+      "company": "クレディセゾン",
+      "companyKana": "くれでぃせぞん",
+      "series": "saison",
+      "tier": "gold",
+      "officialUrl": "https://www.saisoncard.co.jp/amex/"
+    },
+    {
+      "id": "amex_green",
+      "name": "アメリカン・エキスプレス・グリーン・カード",
+      "shortName": "アメックス",
+      "kana": "あめりかんえきすぷれすぐりーんかーど",
+      "issuer": "アメリカン・エキスプレス",
+      "brand": "Amex",
+      "pointId": "amex_mr",
+      "annualFee": 13200,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "100円＝1pt。メンバーシップ・リワードは何も登録しない状態の1pt＝0.3円で評価（0.3%）。月会費1,100円",
+      "aliases": [
+        "アメックスグリーン",
+        "アメックス・グリーン"
+      ],
+      "annualFeeNote": "月会費1,100円",
+      "company": "アメリカン・エキスプレス",
+      "companyKana": "あめりかんえきすぷれす",
+      "series": "amex",
+      "tier": "general",
+      "officialUrl": "https://www.americanexpress.com/ja-jp/"
+    },
+    {
+      "id": "amex_gold_pref",
+      "name": "アメリカン・エキスプレス・ゴールド・プリファード・カード",
+      "shortName": "アメックスG",
+      "kana": "あめりかんえきすぷれすごーるどぷりふぁーど",
+      "issuer": "アメリカン・エキスプレス",
+      "brand": "Amex",
+      "pointId": "amex_mr",
+      "annualFee": 39600,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "100円＝1pt（1pt＝0.3円で評価して0.3%）。年200万円利用で無料宿泊券（フリー・ステイ・ギフト。評価に含めない）",
+      "aliases": [
+        "アメックスゴールド",
+        "ゴールドプリファード"
+      ],
+      "company": "アメリカン・エキスプレス",
+      "companyKana": "あめりかんえきすぷれす",
+      "series": "amex",
+      "tier": "gold",
+      "officialUrl": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/"
+    },
+    {
+      "id": "epos_platinum",
+      "name": "エポスプラチナカード",
+      "shortName": "エポスP",
+      "kana": "えぽすぷらちなかーど",
+      "issuer": "エポスカード",
+      "brand": "Visa",
+      "pointId": "epos_point",
+      "annualFee": 30000,
+      "segments": [
+        "enthusiast"
+      ],
+      "highlight": "0.5%。年100万円利用で20,000pt（ゴールドの2倍）",
+      "aliases": [
+        "エポスプラチナ"
+      ],
+      "annualFeeNote": "招待または年100万円利用で翌年以降20,000円",
+      "company": "エポスカード",
+      "companyKana": "えぽすかーど",
+      "series": "epos",
+      "tier": "platinum",
+      "officialUrl": "https://www.eposcard.co.jp/platinum/main.html"
+    },
+    {
+      "id": "lawson_ponta",
+      "name": "ローソンPontaプラス",
+      "shortName": "Pontaプラス",
+      "kana": "ろーそんぽんたぷらす",
+      "issuer": "ローソン銀行（三菱UFJニコス提携）",
+      "brand": "Mastercard",
+      "pointId": "ponta_point",
+      "annualFee": 0,
+      "segments": [
+        "popular"
+      ],
+      "highlight": "1%（Pontaポイント）。オーケー・スシロー・くら寿司・松屋等で5%（月3万円まで）",
+      "aliases": [
+        "ポンタプラス",
+        "Pontaプラス",
+        "ローソンカード"
+      ],
+      "company": "ローソン銀行",
+      "companyKana": "ろーそんぎんこう",
+      "series": "lawson_ponta",
+      "tier": "general",
+      "officialUrl": "https://www.lawsonbank.jp/lp/lp_credit.html"
     }
   ],
   "methods": [
@@ -697,11 +1206,32 @@
       "usableScope": "listed"
     },
     {
-      "id": "ana_transfer_point",
-      "name": "ANAマイル移行用ポイント（Vポイント）",
+      "id": "ana_mile",
+      "name": "ANAマイル",
       "yenPerPoint": 1,
       "usableScope": "none",
-      "note": "1pt=2マイル。マイル換算せず1pt=1円で評価（2026-09-22 決定）"
+      "note": "1マイル＝1円で評価（ANA SKY コインへの1マイル＝1コインの交換。2026-09-26 決定）。移行手数料のかからない方法で付与を計算"
+    },
+    {
+      "id": "jal_mile",
+      "name": "JALマイル",
+      "yenPerPoint": 1,
+      "usableScope": "none",
+      "note": "1マイル＝1円で評価（e JALポイントへの1,000マイル＝1,000円の交換。2026-09-26 決定）"
+    },
+    {
+      "id": "eikyu_point",
+      "name": "永久不滅ポイント",
+      "yenPerPoint": 5,
+      "usableScope": "none",
+      "note": "1pt＝5円で評価（セゾン公式「約5円相当」。交換先により5円未満。2026-09-26 決定）"
+    },
+    {
+      "id": "amex_mr",
+      "name": "メンバーシップ・リワード",
+      "yenPerPoint": 0.3,
+      "usableScope": "none",
+      "note": "1pt＝0.3円で評価（メンバーシップ・リワード・プラス未登録の基本レート。2026-09-26 決定）"
     },
     {
       "id": "global_point",
@@ -931,77 +1461,81 @@
       "id": "ana_card",
       "cardId": "ana_wide_gold",
       "methodId": "card_physical",
-      "baseRate": 0.005,
+      "baseRate": 0.01,
       "unitYen": 200,
-      "pointsPerUnit": 1,
-      "pointId": "ana_transfer_point",
+      "pointsPerUnit": 2,
+      "pointId": "ana_mile",
       "unitScope": "perTransaction",
       "rounding": "floor",
       "countsTowardBonus": false,
-      "sourceUrl": "https://www.happy-mi-life.net/entry/2018-01-18-221228",
-      "checkedAt": "2026-09-22",
-      "confidence": "medium"
+      "sourceUrl": "https://www.smbc-card.com/mem/cardinfo/cardinfo4010320.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1pt＝2マイル（2マイルコース・移行手数料無料）。マイルは1マイル＝1円で評価"
     },
     {
       "id": "ana_touch",
       "cardId": "ana_wide_gold",
       "methodId": "smartphone_visa_touch",
-      "baseRate": 0.005,
+      "baseRate": 0.01,
       "unitYen": 200,
-      "pointsPerUnit": 1,
-      "pointId": "ana_transfer_point",
+      "pointsPerUnit": 2,
+      "pointId": "ana_mile",
       "unitScope": "perTransaction",
       "rounding": "floor",
       "countsTowardBonus": false,
-      "sourceUrl": "https://www.happy-mi-life.net/entry/2018-01-18-221228",
-      "checkedAt": "2026-09-22",
-      "confidence": "medium"
+      "sourceUrl": "https://www.smbc-card.com/mem/cardinfo/cardinfo4010320.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1pt＝2マイル（2マイルコース・移行手数料無料）。マイルは1マイル＝1円で評価"
     },
     {
       "id": "ana_id",
       "cardId": "ana_wide_gold",
       "methodId": "applepay_id",
-      "baseRate": 0.005,
+      "baseRate": 0.01,
       "unitYen": 200,
-      "pointsPerUnit": 1,
-      "pointId": "ana_transfer_point",
+      "pointsPerUnit": 2,
+      "pointId": "ana_mile",
       "unitScope": "perTransaction",
       "rounding": "floor",
       "countsTowardBonus": false,
-      "sourceUrl": "https://www.happy-mi-life.net/entry/2018-01-18-221228",
-      "checkedAt": "2026-09-22",
-      "confidence": "medium"
+      "sourceUrl": "https://www.smbc-card.com/mem/cardinfo/cardinfo4010320.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1pt＝2マイル（2マイルコース・移行手数料無料）。マイルは1マイル＝1円で評価"
     },
     {
       "id": "ana_online",
       "cardId": "ana_wide_gold",
       "methodId": "online",
-      "baseRate": 0.005,
+      "baseRate": 0.01,
       "unitYen": 200,
-      "pointsPerUnit": 1,
-      "pointId": "ana_transfer_point",
+      "pointsPerUnit": 2,
+      "pointId": "ana_mile",
       "unitScope": "perTransaction",
       "rounding": "floor",
       "countsTowardBonus": false,
-      "sourceUrl": "https://www.happy-mi-life.net/entry/2018-01-18-221228",
-      "checkedAt": "2026-09-22",
-      "confidence": "medium"
+      "sourceUrl": "https://www.smbc-card.com/mem/cardinfo/cardinfo4010320.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1pt＝2マイル（2マイルコース・移行手数料無料）。マイルは1マイル＝1円で評価"
     },
     {
       "id": "ana_paypay",
       "cardId": "ana_wide_gold",
       "methodId": "paypay",
-      "baseRate": 0.005,
+      "baseRate": 0.01,
       "unitYen": 200,
-      "pointsPerUnit": 1,
-      "pointId": "ana_transfer_point",
+      "pointsPerUnit": 2,
+      "pointId": "ana_mile",
       "unitScope": "perTransaction",
       "rounding": "floor",
       "countsTowardBonus": false,
-      "sourceUrl": "https://paypay.ne.jp/notice/20260701/c-card_voucher/",
-      "checkedAt": "2026-09-25",
+      "sourceUrl": "https://www.smbc-card.com/mem/cardinfo/cardinfo4010320.jsp",
+      "checkedAt": "2026-09-26",
       "confidence": "high",
-      "note": "三井住友カード発行の個人向けカード（ANAカード等の提携カードを含む）は2026/9以降も従来方式で継続（PayPay公式）"
+      "note": "三井住友カード発行の個人向けカード（ANAカード等の提携カードを含む）は2026/9以降も従来方式で継続（PayPay公式）。200円＝1pt＝2マイル（2マイルコース・移行手数料無料）。マイルは1マイル＝1円で評価"
     },
     {
       "id": "mufg_card",
@@ -2267,6 +2801,1254 @@
       "checkedAt": "2026-09-26",
       "confidence": "medium",
       "note": "楽天ペイアプリから楽天カードでモバイルSuicaにチャージした場合：乗車ポイント2%（JRE POINT）＋チャージ0.5%（楽天ポイント）。Apple Pay・モバイルSuicaアプリからの直接チャージはポイントなし"
+    },
+    {
+      "id": "anav_card",
+      "cardId": "ana_visa_general",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "ana_mile",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://my-best.com/products/1679790",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1pt。手数料のかからない1pt＝1マイルで評価（2倍コースは年6,600円で1%）"
+    },
+    {
+      "id": "anav_touch",
+      "cardId": "ana_visa_general",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "ana_mile",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://my-best.com/products/1679790",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anav_id",
+      "cardId": "ana_visa_general",
+      "methodId": "applepay_id",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "ana_mile",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://my-best.com/products/1679790",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anav_online",
+      "cardId": "ana_visa_general",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "ana_mile",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://my-best.com/products/1679790",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anav_paypay",
+      "cardId": "ana_visa_general",
+      "methodId": "paypay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "ana_mile",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://my-best.com/products/1679790",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "三井住友カード発行の個人向けカード（提携カードを含む）は2026/9以降もPayPay払い継続"
+    },
+    {
+      "id": "anaj_card",
+      "cardId": "ana_jcb_general",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "1,000円＝J-POINT 1pt。手数料のかからない5マイルコース（1pt＝5マイル）で評価。J-POINTパートナーの上乗せは含めない"
+    },
+    {
+      "id": "anaj_touch",
+      "cardId": "ana_jcb_general",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anaj_quicpay",
+      "cardId": "ana_jcb_general",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anaj_online",
+      "cardId": "ana_jcb_general",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anajg_card",
+      "cardId": "ana_jcb_wide_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.01,
+      "unitYen": 1000,
+      "pointsPerUnit": 10,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "1,000円＝J-POINT 1pt＝10マイル（ゴールドは10マイルコースの移行手数料無料）"
+    },
+    {
+      "id": "anajg_touch",
+      "cardId": "ana_jcb_wide_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.01,
+      "unitYen": 1000,
+      "pointsPerUnit": 10,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anajg_quicpay",
+      "cardId": "ana_jcb_wide_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.01,
+      "unitYen": 1000,
+      "pointsPerUnit": 10,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "anajg_online",
+      "cardId": "ana_jcb_wide_gold",
+      "methodId": "online",
+      "baseRate": 0.01,
+      "unitYen": 1000,
+      "pointsPerUnit": 10,
+      "pointId": "ana_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=036007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jal_card",
+      "cardId": "jal_general",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/function/shoppingmile.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "200円＝1マイル。ショッピングマイル・プレミアム（年4,950円・100円＝1マイル）は含めない"
+    },
+    {
+      "id": "jal_touch",
+      "cardId": "jal_general",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/function/shoppingmile.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jal_quicpay",
+      "cardId": "jal_general",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/function/shoppingmile.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jal_online",
+      "cardId": "jal_general",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/function/shoppingmile.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jalg_card",
+      "cardId": "jal_club_a_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "100円＝1マイル（ショッピングマイル・プレミアムに自動入会・年会費無料）"
+    },
+    {
+      "id": "jalg_touch",
+      "cardId": "jal_club_a_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jalg_quicpay",
+      "cardId": "jal_club_a_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jalg_online",
+      "cardId": "jal_club_a_gold",
+      "methodId": "online",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "jal_mile",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.jal.co.jp/jp/ja/jalcard/card/club_a_gold.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "rkg_card",
+      "cardId": "rakuten_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "rakuten_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.rakuten-card.co.jp/minna-money/credit-card/knowledge/article_2110_00001/",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "rkg_quicpay",
+      "cardId": "rakuten_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "rakuten_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.rakuten-card.co.jp/minna-money/credit-card/knowledge/article_2110_00001/",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "rkg_touch",
+      "cardId": "rakuten_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "rakuten_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.rakuten-card.co.jp/minna-money/credit-card/knowledge/article_2110_00001/",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "rkg_online",
+      "cardId": "rakuten_gold",
+      "methodId": "online",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "rakuten_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.rakuten-card.co.jp/minna-money/credit-card/knowledge/article_2110_00001/",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "mufgg_card",
+      "cardId": "mufg_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "global_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "mufgg_quicpay",
+      "cardId": "mufg_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "global_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "mufgg_online",
+      "cardId": "mufg_gold",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "global_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "aug_card",
+      "cardId": "aupay_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.kddi-fs.com/function/promotion/goldlp/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "aug_touch",
+      "cardId": "aupay_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.kddi-fs.com/function/promotion/goldlp/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "aug_quicpay",
+      "cardId": "aupay_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.kddi-fs.com/function/promotion/goldlp/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "aug_online",
+      "cardId": "aupay_gold",
+      "methodId": "online",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.kddi-fs.com/function/promotion/goldlp/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "high"
+    },
+    {
+      "id": "jcbg_card",
+      "cardId": "jcb_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "j_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://money.it-trend.jp/articles/brand/jcb-gold/09-0002",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jcbg_touch",
+      "cardId": "jcb_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "j_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://money.it-trend.jp/articles/brand/jcb-gold/09-0002",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jcbg_quicpay",
+      "cardId": "jcb_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "j_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://money.it-trend.jp/articles/brand/jcb-gold/09-0002",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jcbg_online",
+      "cardId": "jcb_gold",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "j_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://money.it-trend.jp/articles/brand/jcb-gold/09-0002",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "aeong_card",
+      "cardId": "aeon_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "waon_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "aeong_touch",
+      "cardId": "aeon_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "waon_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "aeong_quicpay",
+      "cardId": "aeon_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "waon_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "aeong_online",
+      "cardId": "aeon_gold",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "waon_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvg_card",
+      "cardId": "olive_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "クレジットモードでの利用"
+    },
+    {
+      "id": "olvg_touch",
+      "cardId": "olive_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvg_id",
+      "cardId": "olive_gold",
+      "methodId": "applepay_id",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvg_online",
+      "cardId": "olive_gold",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvg_paypay",
+      "cardId": "olive_gold",
+      "methodId": "paypay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/gold/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "三井住友カード発行の個人カードは2026/9以降もPayPay払い継続。PayPayポイントは付与なし"
+    },
+    {
+      "id": "olvpp_card",
+      "cardId": "olive_pp",
+      "methodId": "card_physical",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "クレジットモードでの利用"
+    },
+    {
+      "id": "olvpp_touch",
+      "cardId": "olive_pp",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvpp_id",
+      "cardId": "olive_pp",
+      "methodId": "applepay_id",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvpp_online",
+      "cardId": "olive_pp",
+      "methodId": "online",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvpp_paypay",
+      "cardId": "olive_pp",
+      "methodId": "paypay",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "vpoint",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "三井住友カード発行の個人カードは2026/9以降もPayPay払い継続。PayPayポイントは付与なし"
+    },
+    {
+      "id": "viewg_card",
+      "cardId": "view_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "jre_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=040007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "viewg_touch",
+      "cardId": "view_gold",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "jre_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=040007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "viewg_online",
+      "cardId": "view_gold",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 5,
+      "pointId": "jre_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=040007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "view_gold_suica_ride",
+      "cardId": "view_gold",
+      "methodId": "mobile_suica_ride",
+      "baseRate": 0.035,
+      "unitYen": 1000,
+      "pointsPerUnit": 35,
+      "pointId": "jre_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=040007",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "モバイルSuicaのチャージ元をビューカード ゴールドにした場合：乗車ポイント2%＋チャージ1.5%（いずれもJRE POINT）"
+    },
+    {
+      "id": "spg_card",
+      "cardId": "seven_gold",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "nanaco_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=034003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "spg_quicpay",
+      "cardId": "seven_gold",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "nanaco_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=034003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "spg_online",
+      "cardId": "seven_gold",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "nanaco_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=034003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "ssn_card",
+      "cardId": "saison_intl",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://adviser-navi.co.jp/card/column/16254/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "1,000円＝永久不滅ポイント1pt（1pt＝5円で評価）"
+    },
+    {
+      "id": "ssn_touch",
+      "cardId": "saison_intl",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://adviser-navi.co.jp/card/column/16254/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "ssn_quicpay",
+      "cardId": "saison_intl",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://adviser-navi.co.jp/card/column/16254/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "ssn_online",
+      "cardId": "saison_intl",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 1000,
+      "pointsPerUnit": 1,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://adviser-navi.co.jp/card/column/16254/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "ssng_card",
+      "cardId": "saison_gold_amex",
+      "methodId": "card_physical",
+      "baseRate": 0.0075,
+      "unitYen": 1000,
+      "pointsPerUnit": 1.5,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.saisoncard.co.jp/amex/content-about/returnrate/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "国内の利用は通常の1.5倍（1,000円＝1.5pt）。海外は2倍（含めない）"
+    },
+    {
+      "id": "ssng_touch",
+      "cardId": "saison_gold_amex",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.0075,
+      "unitYen": 1000,
+      "pointsPerUnit": 1.5,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.saisoncard.co.jp/amex/content-about/returnrate/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "ssng_quicpay",
+      "cardId": "saison_gold_amex",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.0075,
+      "unitYen": 1000,
+      "pointsPerUnit": 1.5,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.saisoncard.co.jp/amex/content-about/returnrate/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "ssng_online",
+      "cardId": "saison_gold_amex",
+      "methodId": "online",
+      "baseRate": 0.0075,
+      "unitYen": 1000,
+      "pointsPerUnit": 1.5,
+      "pointId": "eikyu_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.saisoncard.co.jp/amex/content-about/returnrate/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "amxg_card",
+      "cardId": "amex_green",
+      "methodId": "card_physical",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.nissen-ncs.jp/media/contents/details-amex-green/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "100円＝1pt。メンバーシップ・リワード・プラス（1pt＝1円）は登録しない前提"
+    },
+    {
+      "id": "amxg_touch",
+      "cardId": "amex_green",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.nissen-ncs.jp/media/contents/details-amex-green/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "amxg_quicpay",
+      "cardId": "amex_green",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.nissen-ncs.jp/media/contents/details-amex-green/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "amxg_online",
+      "cardId": "amex_green",
+      "methodId": "online",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.nissen-ncs.jp/media/contents/details-amex-green/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "amxgp_card",
+      "cardId": "amex_gold_pref",
+      "methodId": "card_physical",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "100円＝1pt。フリー・ステイ・ギフト（年200万円で無料宿泊券）は評価に含めない"
+    },
+    {
+      "id": "amxgp_touch",
+      "cardId": "amex_gold_pref",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "amxgp_quicpay",
+      "cardId": "amex_gold_pref",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "amxgp_online",
+      "cardId": "amex_gold_pref",
+      "methodId": "online",
+      "baseRate": 0.003,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "amex_mr",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.americanexpress.com/ja-jp/benefits/gold-preferred-card/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "epp_card",
+      "cardId": "epos_platinum",
+      "methodId": "card_physical",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "epos_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.eposcard.co.jp/platinum/bonus_point.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "選べるポイントアップショップは利用者ごとに異なるため含めない"
+    },
+    {
+      "id": "epp_touch",
+      "cardId": "epos_platinum",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "epos_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.eposcard.co.jp/platinum/bonus_point.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "epp_quicpay",
+      "cardId": "epos_platinum",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "epos_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.eposcard.co.jp/platinum/bonus_point.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "epp_online",
+      "cardId": "epos_platinum",
+      "methodId": "online",
+      "baseRate": 0.005,
+      "unitYen": 200,
+      "pointsPerUnit": 1,
+      "pointId": "epos_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": true,
+      "sourceUrl": "https://www.eposcard.co.jp/platinum/bonus_point.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "lpp_card",
+      "cardId": "lawson_ponta",
+      "methodId": "card_physical",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "Mastercard加盟店で1%。ローソンでの最大6%（毎月10日・20日の時間限定・要エントリー）はキャンペーン扱いで含めない"
+    },
+    {
+      "id": "lpp_touch",
+      "cardId": "lawson_ponta",
+      "methodId": "smartphone_visa_touch",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "lpp_quicpay",
+      "cardId": "lawson_ponta",
+      "methodId": "applepay_quicpay",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "lpp_online",
+      "cardId": "lawson_ponta",
+      "methodId": "online",
+      "baseRate": 0.01,
+      "unitYen": 100,
+      "pointsPerUnit": 1,
+      "pointId": "ponta_point",
+      "unitScope": "perTransaction",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "rkg_suica_ride",
+      "cardId": "rakuten_gold",
+      "methodId": "mobile_suica_ride",
+      "baseRate": 0.025,
+      "unitYen": 1000,
+      "pointsPerUnit": 25,
+      "pointId": "jre_point",
+      "unitScope": "monthlyTotal",
+      "rounding": "floor",
+      "countsTowardBonus": false,
+      "sourceUrl": "https://appuser-help.pay.rakuten.net/%E6%A5%BD%E5%A4%A9%E3%83%9A%E3%82%A4%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89%E3%83%A2%E3%83%90%E3%82%A4%E3%83%ABSuica%E3%81%B8%E3%83%81%E3%83%A3%E3%83%BC%E3%82%B8%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88%E3%80%81%E6%A5%BD%E5%A4%A9%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AF%E4%BB%98%E4%B8%8E%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%81%8B%EF%BC%9F-615b1604e95a560022b0210f",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "note": "楽天ペイアプリから楽天カードでモバイルSuicaにチャージした場合：乗車ポイント2%＋チャージ0.5%（楽天カードと同じ）"
     }
   ],
   "bonuses": [
@@ -2397,6 +4179,97 @@
       "sourceUrl": "https://www.americanexpress.com/ja-jp/credit-cards/card-types/both-marriott-bonvoy-mclp-ieep/",
       "checkedAt": "2026-09-26",
       "confidence": "high"
+    },
+    {
+      "id": "mufgg_1m",
+      "cardId": "mufg_gold",
+      "thresholdYen": 1000000,
+      "valueYen": 11000,
+      "periodType": "joinMonth",
+      "startOffsetMonths": 0,
+      "description": "年間100万円利用で2,200ポイント（11,000円相当・1pt＝5円）",
+      "periodNote": "集計期間は入会月基準で近似。正確な期間は会員サイトで確認し、必要なら期限を手動設定",
+      "excludedMethods": [],
+      "sourceUrl": "https://www.cr.mufg.jp/mufgcard/point/global/save/pt/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "jcbg_1m",
+      "cardId": "jcb_gold",
+      "thresholdYen": 1000000,
+      "valueYen": 3000,
+      "periodType": "fixed",
+      "startOffsetMonths": 0,
+      "fixedStartMonthDay": "12-16",
+      "description": "J-POINTボーナス：年間100万円利用で3,000ポイント（50万円ごとの段階制。アプリは100万円時点で評価）",
+      "periodNote": "毎年12月16日〜翌年12月15日の利用分（入会月によらない固定期間）",
+      "excludedMethods": [],
+      "sourceUrl": "https://www.jcb.co.jp/point/j-point-bonus/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvg_1m",
+      "cardId": "olive_gold",
+      "thresholdYen": 1000000,
+      "valueYen": 10000,
+      "oneTimeValueYen": 5500,
+      "oneTimeNote": "初回達成で翌年以降の年会費永年無料（5,500円）",
+      "periodType": "joinMonth",
+      "startOffsetMonths": 0,
+      "description": "年間100万円利用で10,000ポイント（継続特典）＋初回達成で年会費永年無料",
+      "periodNote": "入会月基準の1年間で近似",
+      "excludedMethods": [],
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/flexible-pay/gold_utilize/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "olvpp_1m",
+      "cardId": "olive_pp",
+      "thresholdYen": 1000000,
+      "valueYen": 10000,
+      "periodType": "joinMonth",
+      "startOffsetMonths": 0,
+      "description": "年間100万円利用ごとに10,000ポイント（最大40,000ポイント・継続特典）",
+      "periodNote": "入会月基準の1年間で近似。100万円を超えた分（200万・300万…）は計算に含めない",
+      "excludedMethods": [],
+      "sourceUrl": "https://www.smbc.co.jp/kojin/olive-account/platinum-preferred/",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "viewg_3m",
+      "cardId": "view_gold",
+      "thresholdYen": 3000000,
+      "valueYen": 12000,
+      "periodType": "fixed",
+      "startOffsetMonths": 0,
+      "fixedStartMonthDay": "04-01",
+      "description": "年間300万円利用で12,000ポイント（利用額に応じた段階制。アプリは300万円時点で評価）",
+      "periodNote": "4月〜翌年3月の利用分で近似。Suicaへのチャージは対象外",
+      "excludedMethods": [
+        "mobile_suica_ride"
+      ],
+      "oneTimeValueYen": 0,
+      "sourceUrl": "https://www.for-it.co.jp/mediverse/creditcard/view-card-gold-standard/",
+      "checkedAt": "2026-09-26",
+      "confidence": "low"
+    },
+    {
+      "id": "epp_1m",
+      "cardId": "epos_platinum",
+      "thresholdYen": 1000000,
+      "valueYen": 20000,
+      "periodType": "joinMonth",
+      "startOffsetMonths": 0,
+      "description": "年間100万円以上200万円未満の利用で20,000ポイント（利用額に応じた段階制。アプリは100万円時点で評価）",
+      "periodNote": "入会月基準の1年間で近似",
+      "excludedMethods": [],
+      "sourceUrl": "https://www.eposcard.co.jp/platinum/bonus_point.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium"
     }
   ],
   "categories": [
@@ -8081,6 +9954,3548 @@
       "checkedAt": "2026-09-22",
       "confidence": "high",
       "conditions": "カード通常1%＋楽天市場特典1%（特典分は期間限定・月1,000pt上限）。楽天市場自体の1%は全経路共通のため省略"
+    },
+    {
+      "id": "rkg_ichiba",
+      "target": {
+        "storeId": "rakuten_ichiba"
+      },
+      "routeId": "rkg_online",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.rakuten-card.co.jp/campaign/rakuten-card/point-up/",
+      "checkedAt": "2026-09-26",
+      "confidence": "high",
+      "conditions": "カード通常1%＋楽天市場特典1%（楽天カードと同じ。特典分は期間限定・月1,000pt上限）"
+    },
+    {
+      "id": "mufgg7_seven_mufg_card",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_seven_mufg_quicpay",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_lawson_mufg_card",
+      "target": {
+        "storeId": "lawson"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_lawson_mufg_quicpay",
+      "target": {
+        "storeId": "lawson"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_natural_lawson_mufg_card",
+      "target": {
+        "storeId": "natural_lawson"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_natural_lawson_mufg_quicpay",
+      "target": {
+        "storeId": "natural_lawson"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_lawson100_mufg_card",
+      "target": {
+        "storeId": "lawson100"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_lawson100_mufg_quicpay",
+      "target": {
+        "storeId": "lawson100"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内・駅ビル内等の一部店舗、スマホレジ、ネット注文は対象外"
+    },
+    {
+      "id": "mufgg7_cocacola_vm_mufg_card",
+      "target": {
+        "storeId": "cocacola_vm"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "自販機でのカードのタッチ決済（Coke ON Payも対象、Apple Pay経由は対象外）。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_ueshima_mufg_card",
+      "target": {
+        "storeId": "ueshima"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_ueshima_mufg_quicpay",
+      "target": {
+        "storeId": "ueshima"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_cafe_de_crie_mufg_card",
+      "target": {
+        "storeId": "cafe_de_crie"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_cafe_de_crie_mufg_quicpay",
+      "target": {
+        "storeId": "cafe_de_crie"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_kurazushi_mufg_card",
+      "target": {
+        "storeId": "kurazushi"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_kurazushi_mufg_quicpay",
+      "target": {
+        "storeId": "kurazushi"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_sushiro_mufg_card",
+      "target": {
+        "storeId": "sushiro"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_sushiro_mufg_quicpay",
+      "target": {
+        "storeId": "sushiro"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。複合商業施設内の一部店舗は対象外"
+    },
+    {
+      "id": "mufgg7_starbucks_mufg_online",
+      "target": {
+        "storeId": "starbucks"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "スターバックス カードへのオンライン入金のみ（店頭・Apple Pay・店頭入金は対象外）。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_pizzahut_mufg_online",
+      "target": {
+        "storeId": "pizzahut"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式サイト・公式アプリでのオンライン注文のみ。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_matsuya_mufg_card",
+      "target": {
+        "storeId": "matsuya"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店舗の券売機・セルフレジ、Apple Pay（QUICPay）。高速道路SA・PA内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_matsuya_mufg_quicpay",
+      "target": {
+        "storeId": "matsuya"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店舗の券売機・セルフレジ、Apple Pay（QUICPay）。高速道路SA・PA内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_matsunoya_mufg_card",
+      "target": {
+        "storeId": "matsunoya"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店舗の券売機・セルフレジ、Apple Pay（QUICPay）。高速道路SA・PA内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_matsunoya_mufg_quicpay",
+      "target": {
+        "storeId": "matsunoya"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店舗の券売機・セルフレジ、Apple Pay（QUICPay）。高速道路SA・PA内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_mycurry_mufg_card",
+      "target": {
+        "storeId": "mycurry"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店舗の券売機・セルフレジ、Apple Pay（QUICPay）。高速道路SA・PA内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_mycurry_mufg_quicpay",
+      "target": {
+        "storeId": "mycurry"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店舗の券売機・セルフレジ、Apple Pay（QUICPay）。高速道路SA・PA内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_matsuya_mufg_online",
+      "target": {
+        "storeId": "matsuya"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "松弁ネット・松屋モバイルオーダー・松弁デリバリー（公式オンラインショップは対象外）。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_matsunoya_mufg_online",
+      "target": {
+        "storeId": "matsunoya"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "松弁ネット・松屋モバイルオーダー・松弁デリバリー（公式オンラインショップは対象外）。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_mycurry_mufg_online",
+      "target": {
+        "storeId": "mycurry"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "松弁ネット・松屋モバイルオーダー・松弁デリバリー（公式オンラインショップは対象外）。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_zetteria_mufg_card",
+      "target": {
+        "storeId": "zetteria"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭決済、公式アプリのモバイルオーダー。複合商業施設内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_zetteria_mufg_quicpay",
+      "target": {
+        "storeId": "zetteria"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭決済、公式アプリのモバイルオーダー。複合商業施設内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_zetteria_mufg_online",
+      "target": {
+        "storeId": "zetteria"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭決済、公式アプリのモバイルオーダー。複合商業施設内の一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_akachan_mufg_card",
+      "target": {
+        "storeId": "akachan"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（QUICPayは対象外）とOnline Shop。複合商業施設内・フランチャイズの一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_akachan_mufg_online",
+      "target": {
+        "storeId": "akachan"
+      },
+      "routeId": "mufgg_online",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（QUICPayは対象外）とOnline Shop。複合商業施設内・フランチャイズの一部店舗は対象外。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_curves_mufg_card",
+      "target": {
+        "storeId": "curves"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "入会金・月会費のみ。対象店舗の合計で月5万円まで（上限は計算に含めない）"
+    },
+    {
+      "id": "mufgg7_aoki_super_mufg_card",
+      "target": {
+        "storeId": "aoki_super"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_aoki_super_mufg_quicpay",
+      "target": {
+        "storeId": "aoki_super"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_foodstore_aoki_mufg_card",
+      "target": {
+        "storeId": "foodstore_aoki"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_foodstore_aoki_mufg_quicpay",
+      "target": {
+        "storeId": "foodstore_aoki"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_ok_mufg_card",
+      "target": {
+        "storeId": "ok"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_ok_mufg_quicpay",
+      "target": {
+        "storeId": "ok"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_ozeki_mufg_card",
+      "target": {
+        "storeId": "ozeki"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_ozeki_mufg_quicpay",
+      "target": {
+        "storeId": "ozeki"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sunlive_mufg_card",
+      "target": {
+        "storeId": "sunlive"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sunlive_mufg_quicpay",
+      "target": {
+        "storeId": "sunlive"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_marushoku_mufg_card",
+      "target": {
+        "storeId": "marushoku"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_marushoku_mufg_quicpay",
+      "target": {
+        "storeId": "marushoku"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_livehall_mufg_card",
+      "target": {
+        "storeId": "livehall"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_livehall_mufg_quicpay",
+      "target": {
+        "storeId": "livehall"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sank_mufg_card",
+      "target": {
+        "storeId": "sank"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sank_mufg_quicpay",
+      "target": {
+        "storeId": "sank"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sunlive_buono_mufg_card",
+      "target": {
+        "storeId": "sunlive_buono"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sunlive_buono_mufg_quicpay",
+      "target": {
+        "storeId": "sunlive_buono"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sanwa_mufg_card",
+      "target": {
+        "storeId": "sanwa"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_sanwa_mufg_quicpay",
+      "target": {
+        "storeId": "sanwa"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_foodone_mufg_card",
+      "target": {
+        "storeId": "foodone"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_foodone_mufg_quicpay",
+      "target": {
+        "storeId": "foodone"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_uocho_mufg_card",
+      "target": {
+        "storeId": "uocho"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_uocho_mufg_quicpay",
+      "target": {
+        "storeId": "uocho"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_nogi_ichiba_mufg_card",
+      "target": {
+        "storeId": "nogi_ichiba"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_nogi_ichiba_mufg_quicpay",
+      "target": {
+        "storeId": "nogi_ichiba"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_genki_ichiba_mufg_card",
+      "target": {
+        "storeId": "genki_ichiba"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_genki_ichiba_mufg_quicpay",
+      "target": {
+        "storeId": "genki_ichiba"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_kinsho_mufg_card",
+      "target": {
+        "storeId": "kinsho"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_kinsho_mufg_quicpay",
+      "target": {
+        "storeId": "kinsho"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_harves_mufg_card",
+      "target": {
+        "storeId": "harves"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_harves_mufg_quicpay",
+      "target": {
+        "storeId": "harves"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_pochette_mufg_card",
+      "target": {
+        "storeId": "pochette"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_pochette_mufg_quicpay",
+      "target": {
+        "storeId": "pochette"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_tokyu_store_mufg_card",
+      "target": {
+        "storeId": "tokyu_store"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_tokyu_store_mufg_quicpay",
+      "target": {
+        "storeId": "tokyu_store"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_presse_mufg_card",
+      "target": {
+        "storeId": "presse"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_presse_mufg_quicpay",
+      "target": {
+        "storeId": "presse"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_food_station_mufg_card",
+      "target": {
+        "storeId": "food_station"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_food_station_mufg_quicpay",
+      "target": {
+        "storeId": "food_station"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_tobu_store_mufg_card",
+      "target": {
+        "storeId": "tobu_store"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_tobu_store_mufg_quicpay",
+      "target": {
+        "storeId": "tobu_store"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_domy_mufg_card",
+      "target": {
+        "storeId": "domy"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_domy_mufg_quicpay",
+      "target": {
+        "storeId": "domy"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_hanamasa_mufg_card",
+      "target": {
+        "storeId": "hanamasa"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_hanamasa_mufg_quicpay",
+      "target": {
+        "storeId": "hanamasa"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_japan_meat_mufg_card",
+      "target": {
+        "storeId": "japan_meat"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_japan_meat_mufg_quicpay",
+      "target": {
+        "storeId": "japan_meat"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_meatmeet_mufg_card",
+      "target": {
+        "storeId": "meatmeet"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_meatmeet_mufg_quicpay",
+      "target": {
+        "storeId": "meatmeet"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_powermart_mufg_card",
+      "target": {
+        "storeId": "powermart"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_powermart_mufg_quicpay",
+      "target": {
+        "storeId": "powermart"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_feel_mufg_card",
+      "target": {
+        "storeId": "feel"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_feel_mufg_quicpay",
+      "target": {
+        "storeId": "feel"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_yamanaka_mufg_card",
+      "target": {
+        "storeId": "yamanaka"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_yamanaka_mufg_quicpay",
+      "target": {
+        "storeId": "yamanaka"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_frante_mufg_card",
+      "target": {
+        "storeId": "frante"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_frante_mufg_quicpay",
+      "target": {
+        "storeId": "frante"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_frante_rose_mufg_card",
+      "target": {
+        "storeId": "frante_rose"
+      },
+      "routeId": "mufgg_card",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "mufgg7_frante_rose_mufg_quicpay",
+      "target": {
+        "storeId": "frante_rose"
+      },
+      "routeId": "mufgg_quicpay",
+      "rate": 0.07,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.bk.mufg.jp/tsukau/credit/sagasu/mufgcard_goldprestige/index.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "カード（挿し込み・カードのタッチ）またはApple Pay（QUICPay）。対象店舗の合計で月5万円まで（上限は計算に含めない）。テナント・ネットスーパー等は対象外"
+    },
+    {
+      "id": "aeong2x_aeon_aeong_card",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "aeong_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_aeon_aeong_touch",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "aeong_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_aeon_aeong_quicpay",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "aeong_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_maxvalu_aeong_card",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "aeong_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_maxvalu_aeong_touch",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "aeong_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_maxvalu_aeong_quicpay",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "aeong_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_mybasket_aeong_card",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "aeong_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_mybasket_aeong_touch",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "aeong_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_mybasket_aeong_quicpay",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "aeong_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_daiei_aeong_card",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "aeong_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_daiei_aeong_touch",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "aeong_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "aeong2x_daiei_aeong_quicpay",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "aeong_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.diamond.co.jp/zai/articles/-/190",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "イオングループ対象店舗でWAON POINT2倍（一般と同じ）"
+    },
+    {
+      "id": "smbc8_olvg_seicomart",
+      "target": {
+        "storeId": "seicomart"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_taiei",
+      "target": {
+        "storeId": "taiei"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_hamanasu_club",
+      "target": {
+        "storeId": "hamanasu_club"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_hasegawa_store",
+      "target": {
+        "storeId": "hasegawa_store"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_seven",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_poplar",
+      "target": {
+        "storeId": "poplar"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_seikatsu_saika",
+      "target": {
+        "storeId": "seikatsu_saika"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_ministop",
+      "target": {
+        "storeId": "ministop"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_lawson",
+      "target": {
+        "storeId": "lawson"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_natural_lawson",
+      "target": {
+        "storeId": "natural_lawson"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_lawson100",
+      "target": {
+        "storeId": "lawson100"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_lawson_threef",
+      "target": {
+        "storeId": "lawson_threef"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_mcdonalds",
+      "target": {
+        "storeId": "mcdonalds"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_mos",
+      "target": {
+        "storeId": "mos"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_kfc",
+      "target": {
+        "storeId": "kfc"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_yoshinoya",
+      "target": {
+        "storeId": "yoshinoya"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_freshness",
+      "target": {
+        "storeId": "freshness"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_saizeriya",
+      "target": {
+        "storeId": "saizeriya"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_gusto",
+      "target": {
+        "storeId": "gusto"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_bamiyan",
+      "target": {
+        "storeId": "bamiyan"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_shabuyo",
+      "target": {
+        "storeId": "shabuyo"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_jonathan",
+      "target": {
+        "storeId": "jonathan"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_yumean",
+      "target": {
+        "storeId": "yumean"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_steakgusto",
+      "target": {
+        "storeId": "steakgusto"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_karayoshi",
+      "target": {
+        "storeId": "karayoshi"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_musashinomori",
+      "target": {
+        "storeId": "musashinomori"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_aiya",
+      "target": {
+        "storeId": "aiya"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_grazie",
+      "target": {
+        "storeId": "grazie"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_totoyamichi",
+      "target": {
+        "storeId": "totoyamichi"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_chawan",
+      "target": {
+        "storeId": "chawan"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_laohana",
+      "target": {
+        "storeId": "laohana"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_tonkaratei",
+      "target": {
+        "storeId": "tonkaratei"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_yumean_shokudo",
+      "target": {
+        "storeId": "yumean_shokudo"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_momona",
+      "target": {
+        "storeId": "momona"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_hachiro_soba",
+      "target": {
+        "storeId": "hachiro_soba"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_sanmarusan",
+      "target": {
+        "storeId": "sanmarusan"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_sukiya",
+      "target": {
+        "storeId": "sukiya"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_hamazushi",
+      "target": {
+        "storeId": "hamazushi"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_cocos",
+      "target": {
+        "storeId": "cocos"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_doutor",
+      "target": {
+        "storeId": "doutor"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_excelsior",
+      "target": {
+        "storeId": "excelsior"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvg_kappazushi",
+      "target": {
+        "storeId": "kappazushi"
+      },
+      "routeId": "olvg_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8mo_olvg_mcdonalds",
+      "target": {
+        "storeId": "mcdonalds"
+      },
+      "routeId": "olvg_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）"
+    },
+    {
+      "id": "smbc8mo_olvg_mos",
+      "target": {
+        "storeId": "mos"
+      },
+      "routeId": "olvg_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）。モスバーガー＆カフェ・公式の配達も対象"
+    },
+    {
+      "id": "smbc8mo_olvg_kfc",
+      "target": {
+        "storeId": "kfc"
+      },
+      "routeId": "olvg_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）。公式の配達も対象"
+    },
+    {
+      "id": "smbc8mo_olvg_yoshinoya",
+      "target": {
+        "storeId": "yoshinoya"
+      },
+      "routeId": "olvg_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）"
+    },
+    {
+      "id": "smbc8mo_olvg_sukiya",
+      "target": {
+        "storeId": "sukiya"
+      },
+      "routeId": "olvg_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）"
+    },
+    {
+      "id": "smbc8mo_olvg_starbucks",
+      "target": {
+        "storeId": "starbucks"
+      },
+      "routeId": "olvg_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）。アプリまたはApp Clip経由のApple Payのみ（店頭支払い・カードへのチャージは対象外）"
+    },
+    {
+      "id": "smbc8_olvpp_seicomart",
+      "target": {
+        "storeId": "seicomart"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_taiei",
+      "target": {
+        "storeId": "taiei"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_hamanasu_club",
+      "target": {
+        "storeId": "hamanasu_club"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_hasegawa_store",
+      "target": {
+        "storeId": "hasegawa_store"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_seven",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_poplar",
+      "target": {
+        "storeId": "poplar"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_seikatsu_saika",
+      "target": {
+        "storeId": "seikatsu_saika"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_ministop",
+      "target": {
+        "storeId": "ministop"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_lawson",
+      "target": {
+        "storeId": "lawson"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_natural_lawson",
+      "target": {
+        "storeId": "natural_lawson"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_lawson100",
+      "target": {
+        "storeId": "lawson100"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_lawson_threef",
+      "target": {
+        "storeId": "lawson_threef"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_mcdonalds",
+      "target": {
+        "storeId": "mcdonalds"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_mos",
+      "target": {
+        "storeId": "mos"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_kfc",
+      "target": {
+        "storeId": "kfc"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_yoshinoya",
+      "target": {
+        "storeId": "yoshinoya"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_freshness",
+      "target": {
+        "storeId": "freshness"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_saizeriya",
+      "target": {
+        "storeId": "saizeriya"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_gusto",
+      "target": {
+        "storeId": "gusto"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_bamiyan",
+      "target": {
+        "storeId": "bamiyan"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_shabuyo",
+      "target": {
+        "storeId": "shabuyo"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_jonathan",
+      "target": {
+        "storeId": "jonathan"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_yumean",
+      "target": {
+        "storeId": "yumean"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_steakgusto",
+      "target": {
+        "storeId": "steakgusto"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_karayoshi",
+      "target": {
+        "storeId": "karayoshi"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_musashinomori",
+      "target": {
+        "storeId": "musashinomori"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_aiya",
+      "target": {
+        "storeId": "aiya"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_grazie",
+      "target": {
+        "storeId": "grazie"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_totoyamichi",
+      "target": {
+        "storeId": "totoyamichi"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_chawan",
+      "target": {
+        "storeId": "chawan"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_laohana",
+      "target": {
+        "storeId": "laohana"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_tonkaratei",
+      "target": {
+        "storeId": "tonkaratei"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_yumean_shokudo",
+      "target": {
+        "storeId": "yumean_shokudo"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_momona",
+      "target": {
+        "storeId": "momona"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_hachiro_soba",
+      "target": {
+        "storeId": "hachiro_soba"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_sanmarusan",
+      "target": {
+        "storeId": "sanmarusan"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_sukiya",
+      "target": {
+        "storeId": "sukiya"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_hamazushi",
+      "target": {
+        "storeId": "hamazushi"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_cocos",
+      "target": {
+        "storeId": "cocos"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_doutor",
+      "target": {
+        "storeId": "doutor"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_excelsior",
+      "target": {
+        "storeId": "excelsior"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8_olvpp_kappazushi",
+      "target": {
+        "storeId": "kappazushi"
+      },
+      "routeId": "olvpp_touch",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "店頭はスマホのタッチ決済（Visa・Mastercard）のみ（カード現物のタッチ・iD・挿し込みは対象外）。商業施設内など一部店舗は対象外。Oliveフレキシブルペイのクレジットモードは8%（一般と同じ扱い）"
+    },
+    {
+      "id": "smbc8mo_olvpp_mcdonalds",
+      "target": {
+        "storeId": "mcdonalds"
+      },
+      "routeId": "olvpp_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）"
+    },
+    {
+      "id": "smbc8mo_olvpp_mos",
+      "target": {
+        "storeId": "mos"
+      },
+      "routeId": "olvpp_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）。モスバーガー＆カフェ・公式の配達も対象"
+    },
+    {
+      "id": "smbc8mo_olvpp_kfc",
+      "target": {
+        "storeId": "kfc"
+      },
+      "routeId": "olvpp_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）。公式の配達も対象"
+    },
+    {
+      "id": "smbc8mo_olvpp_yoshinoya",
+      "target": {
+        "storeId": "yoshinoya"
+      },
+      "routeId": "olvpp_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）"
+    },
+    {
+      "id": "smbc8mo_olvpp_sukiya",
+      "target": {
+        "storeId": "sukiya"
+      },
+      "routeId": "olvpp_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）"
+    },
+    {
+      "id": "smbc8mo_olvpp_starbucks",
+      "target": {
+        "storeId": "starbucks"
+      },
+      "routeId": "olvpp_online",
+      "rate": 0.08,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.smbc-card.com/nyukai/merit/proper_p5.jsp",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式アプリのモバイルオーダー（Visa・Apple Pay・Google Pay）。アプリまたはApp Clip経由のApple Payのみ（店頭支払い・カードへのチャージは対象外）"
+    },
+    {
+      "id": "spg_seven_spg_card",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "spg_card",
+      "rate": 0.1,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=034003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "7iDにカード登録のうえクレジット決済（一般と同じ）。一部商品は対象外"
+    },
+    {
+      "id": "spg_seven_spg_quicpay",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "spg_quicpay",
+      "rate": 0.1,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakaku.com/card/item.asp?id=034003",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "7iDにカード登録のうえクレジット決済（一般と同じ）。一部商品は対象外"
+    },
+    {
+      "id": "jcbg_seven_jcbg_card",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "jcbg_card",
+      "rate": 0.015,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakakumag.com/money/?id=22348",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "J-POINTパートナー（3倍・要ポイントアップ登録）"
+    },
+    {
+      "id": "jcbg_seven_jcbg_quicpay",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "jcbg_quicpay",
+      "rate": 0.015,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakakumag.com/money/?id=22348",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "J-POINTパートナー（3倍・要ポイントアップ登録）"
+    },
+    {
+      "id": "jcbg_seven_jcbg_touch",
+      "target": {
+        "storeId": "seven"
+      },
+      "routeId": "jcbg_touch",
+      "rate": 0.015,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakakumag.com/money/?id=22348",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "J-POINTパートナー（3倍・要ポイントアップ登録）"
+    },
+    {
+      "id": "jcbg_amazon",
+      "target": {
+        "storeId": "amazon"
+      },
+      "routeId": "jcbg_online",
+      "rate": 0.015,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakakumag.com/money/?id=22348",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "J-POINTパートナー（3倍・要ポイントアップ登録）"
+    },
+    {
+      "id": "jcbg_mcd",
+      "target": {
+        "storeId": "mcdonalds"
+      },
+      "routeId": "jcbg_online",
+      "rate": 0.1,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakakumag.com/money/?id=22348",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "モバイルオーダー・マックデリバリー限定（20倍・要ポイントアップ登録）"
+    },
+    {
+      "id": "jcbg_starbucks",
+      "target": {
+        "storeId": "starbucks"
+      },
+      "routeId": "jcbg_online",
+      "rate": 0.1,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://kakakumag.com/money/?id=22348",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "モバイルオーダー・スターバックス カードへのオンライン入金（20倍・要ポイントアップ登録）"
+    },
+    {
+      "id": "jal2x_aeon_card",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "jal_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_aeon_card",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "jalg_card",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_aeon_touch",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "jal_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_aeon_touch",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "jalg_touch",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_aeon_quicpay",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "jal_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_aeon_quicpay",
+      "target": {
+        "storeId": "aeon"
+      },
+      "routeId": "jalg_quicpay",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_maxvalu_card",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "jal_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_maxvalu_card",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "jalg_card",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_maxvalu_touch",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "jal_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_maxvalu_touch",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "jalg_touch",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_maxvalu_quicpay",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "jal_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_maxvalu_quicpay",
+      "target": {
+        "storeId": "maxvalu"
+      },
+      "routeId": "jalg_quicpay",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_mybasket_card",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "jal_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_mybasket_card",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "jalg_card",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_mybasket_touch",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "jal_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_mybasket_touch",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "jalg_touch",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_mybasket_quicpay",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "jal_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_mybasket_quicpay",
+      "target": {
+        "storeId": "mybasket"
+      },
+      "routeId": "jalg_quicpay",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_daiei_card",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "jal_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_daiei_card",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "jalg_card",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_daiei_touch",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "jal_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_daiei_touch",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "jalg_touch",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_daiei_quicpay",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "jal_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_daiei_quicpay",
+      "target": {
+        "storeId": "daiei"
+      },
+      "routeId": "jalg_quicpay",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=701768",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_welcia_card",
+      "target": {
+        "storeId": "welcia"
+      },
+      "routeId": "jal_card",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=702250",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_welcia_card",
+      "target": {
+        "storeId": "welcia"
+      },
+      "routeId": "jalg_card",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=702250",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_welcia_touch",
+      "target": {
+        "storeId": "welcia"
+      },
+      "routeId": "jal_touch",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=702250",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_welcia_touch",
+      "target": {
+        "storeId": "welcia"
+      },
+      "routeId": "jalg_touch",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=702250",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "jal2x_welcia_quicpay",
+      "target": {
+        "storeId": "welcia"
+      },
+      "routeId": "jal_quicpay",
+      "rate": 0.01,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=702250",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（200円＝2マイル）"
+    },
+    {
+      "id": "jalg2x_welcia_quicpay",
+      "target": {
+        "storeId": "welcia"
+      },
+      "routeId": "jalg_quicpay",
+      "rate": 0.02,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://partner.jal.co.jp/shop/?tp=702250",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "JALカード特約店（ショッピングマイル・プレミアム会員は100円＝2マイル）"
+    },
+    {
+      "id": "lpp5_ok_lpp_card",
+      "target": {
+        "storeId": "ok"
+      },
+      "routeId": "lpp_card",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_ok_lpp_quicpay",
+      "target": {
+        "storeId": "ok"
+      },
+      "routeId": "lpp_quicpay",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_sushiro_lpp_card",
+      "target": {
+        "storeId": "sushiro"
+      },
+      "routeId": "lpp_card",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_sushiro_lpp_quicpay",
+      "target": {
+        "storeId": "sushiro"
+      },
+      "routeId": "lpp_quicpay",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_kurazushi_lpp_card",
+      "target": {
+        "storeId": "kurazushi"
+      },
+      "routeId": "lpp_card",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_kurazushi_lpp_quicpay",
+      "target": {
+        "storeId": "kurazushi"
+      },
+      "routeId": "lpp_quicpay",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_matsuya_lpp_card",
+      "target": {
+        "storeId": "matsuya"
+      },
+      "routeId": "lpp_card",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_matsuya_lpp_quicpay",
+      "target": {
+        "storeId": "matsuya"
+      },
+      "routeId": "lpp_quicpay",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_matsunoya_lpp_card",
+      "target": {
+        "storeId": "matsunoya"
+      },
+      "routeId": "lpp_card",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_matsunoya_lpp_quicpay",
+      "target": {
+        "storeId": "matsunoya"
+      },
+      "routeId": "lpp_quicpay",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_pizzahut",
+      "target": {
+        "storeId": "pizzahut"
+      },
+      "routeId": "lpp_online",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "公式サイト・アプリでのオンライン注文。基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
+    },
+    {
+      "id": "lpp5_cocacola",
+      "target": {
+        "storeId": "cocacola_vm"
+      },
+      "routeId": "lpp_card",
+      "rate": 0.05,
+      "validFrom": null,
+      "validTo": null,
+      "sourceUrl": "https://www.lawsonbank.jp/news/2026/06041000.html",
+      "checkedAt": "2026-09-26",
+      "confidence": "medium",
+      "conditions": "自販機でのカードのタッチ決済。基本1%＋対象店舗の上乗せ4%（2026年6月16日利用分から。対象店舗の合計で月3万円まで・上限は計算に含めない）"
     }
   ]
 }

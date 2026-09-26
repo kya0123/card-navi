@@ -193,7 +193,14 @@ export function bestUnownedAt(mi: MasterIndex, user: UserSettings, storeId: Id, 
   const base = neutral(user);
   const beforeRate = topAt(mi, base, storeId, today)?.rate ?? 0;
   let best: HintCandidate | null = null;
-  for (const cardId of unownedCards(mi, user).sort()) {
+  // 同率なら年会費の安いカード → ランクの低いカード → カードID（分冊 12.2）
+  const tier = { general: 0, gold: 1, platinum: 2 } as const;
+  const key = (id: Id) => { const c = mi.cards.get(id)!; return [c.annualFee, tier[c.tier]] as const; };
+  const order = unownedCards(mi, user).sort((a, b) => {
+    const [fa, ta] = key(a), [fb, tb] = key(b);
+    return fa - fb || ta - tb || (a < b ? -1 : a > b ? 1 : 0);
+  });
+  for (const cardId of order) {
     const top = topAt(mi, withCandidate(mi, base, cardId), storeId, today);
     if (!top || top.cardId !== cardId) continue;
     if (round6(top.rate - beforeRate) < HINT_MIN_DELTA) continue;

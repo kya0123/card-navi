@@ -34,9 +34,9 @@ test('C02: 区分の絞り込み・件数', () => {
 test('C03: 検索（別名・略称・よみ）', () => {
   const u = own();
   assert.deepEqual(cardCatalog(mi, u, 'all', 'やふー').map((e) => e.card.id), ['paypay_gold']);
-  assert.deepEqual(cardCatalog(mi, u, 'all', 'プラプリ').map((e) => e.card.id), ['smbc_pp']);
+  assert.deepEqual(cardCatalog(mi, u, 'all', 'プラプリ').map((e) => e.card.id), ['olive_pp', 'smbc_pp']);
   assert.deepEqual(cardCatalog(mi, u, 'all', 'りくる').map((e) => e.card.id), ['recruit']);
-  assert.deepEqual(cardCatalog(mi, u, 'all', 'びゅー').map((e) => e.card.id), ['view_std']);
+  assert.deepEqual(cardCatalog(mi, u, 'all', 'びゅー').map((e) => e.card.id), ['view_std', 'view_gold']);
 });
 
 test('C04: 基本・最大還元率と年間ボーナスの有無', () => {
@@ -79,8 +79,9 @@ test('C08: 並び順はシリーズ名（英字→よみ順）→ランク（一
   const list = cardCatalog(mi, own(), 'all');
   const series = [...new Set(list.map((e) => mi.series.get(e.card.series)!.name))];
   assert.deepEqual(series, [
-    'Amazon Mastercard', 'ANAカード', 'au PAY カード', 'dカード', 'JCBオリジナルシリーズ', 'Marriott Bonvoy アメックス', 'Olive', 'PayPayカード',
-    'イオンカード', 'エポスカード', 'セブンカード・プラス', 'ビューカード', '三井住友カード（NL）', '三菱UFJカード', '楽天カード', 'リクルートカード',
+    'Amazon Mastercard', 'ANAカード', 'au PAY カード', 'dカード', 'JALカード', 'JCBオリジナルシリーズ', 'Marriott Bonvoy アメックス', 'Olive', 'PayPayカード',
+    'アメリカン・エキスプレス', 'イオンカード', 'エポスカード', 'セゾンカード', 'セブンカード・プラス', 'ビューカード', '三井住友カード（NL）', '三菱UFJカード',
+    '楽天カード', 'リクルートカード', 'ローソンPontaプラス',
   ]);
   const ids = list.map((e) => e.card.id);
   assert.deepEqual(ids.filter((id) => mi.cards.get(id)!.series === 'smbc_nl'), ['smbc_nl', 'smbc_gold_nl', 'smbc_pp']);
@@ -94,11 +95,14 @@ test('C08: 並び順はシリーズ名（英字→よみ順）→ランク（一
 test('C09: シリーズ名・シリーズの別名・ランク名でも検索できる（32.6）', () => {
   const u = own();
   const ids = (q: string) => cardCatalog(mi, u, 'all', q).map((e) => e.card.id);
-  assert.deepEqual(ids('ANA'), ['ana_wide_gold']);
-  assert.deepEqual(ids('あな'), ['ana_wide_gold']);
-  assert.deepEqual(ids('JCBオリジナル'), ['jcb_w']);
+  const ana = ['ana_jcb_general', 'ana_visa_general', 'ana_jcb_wide_gold', 'ana_wide_gold'];
+  assert.deepEqual(ids('ANA'), ana, 'ANAシリーズは一般→ゴールド');
+  assert.deepEqual(ids('あな'), ana);
+  assert.deepEqual(ids('ソラチカ'), ['ana_jcb_general'], 'ソラチカカードはANA JCB一般の別名');
+  assert.deepEqual(ids('JCBオリジナル'), ['jcb_w', 'jcb_gold']);
+  assert.deepEqual(ids('JAL'), ['jal_general', 'jal_club_a_gold']);
   assert.deepEqual(ids('マリオット'), ['marriott', 'marriott_premium']);
-  assert.deepEqual(ids('プラチナ'), ['marriott_premium', 'smbc_pp']);
+  assert.deepEqual(ids('プラチナ'), ['marriott_premium', 'olive_pp', 'epos_platinum', 'smbc_pp']);
   const gold = ids('ゴールド');
   assert.ok(gold.includes('marriott') && gold.includes('dcard_gold') && gold.includes('smbc_gold_nl'));
   assert.ok(gold.every((id) => mi.cards.get(id)!.tier === 'gold' || /ゴールド/.test(mi.cards.get(id)!.name)));
@@ -151,3 +155,19 @@ test('M01: 2026-09-26 のマスタ修正（Olive 8%・Amazon はセブンのみ�
   assert.equal(vb.fixedStartMonthDay, '04-01');
   assert.ok(vb.excludedMethods.includes('mobile_suica_ride'));
 });
+
+test('C10: ラインナップ第1弾・第2弾（32.3・32.4）：シリーズごとに一般とゴールド。マイル・永久不滅・MRの評価', () => {
+  for (const x of master.series) {
+    if (['amazon', 'recruit', 'marriott', 'lawson_ponta'].includes(x.id)) continue;
+    const tiers = new Set(master.cards.filter((c) => c.series === x.id).map((c) => c.tier));
+    assert.ok(tiers.has('general') && tiers.has('gold'), `${x.name}：一般とゴールド`);
+  }
+  assert.equal(mi.points.get('ana_mile')!.yenPerPoint, 1);
+  assert.equal(mi.points.get('jal_mile')!.yenPerPoint, 1);
+  assert.equal(mi.points.get('eikyu_point')!.yenPerPoint, 5);
+  assert.equal(mi.points.get('amex_mr')!.yenPerPoint, 0.3);
+  assert.equal(mi.points.has('ana_transfer_point'), false);
+  assert.equal(mi.routes.get('ana_card')!.baseRate, 0.01, 'ANA VISAワイドゴールドは1マイル＝1円で1%');
+  assert.ok(!mi.cards.has('rakuten_premium') && !mi.cards.has('jcb_platinum'), '率・ボーナスに差のない上位カードは入れない');
+});
+

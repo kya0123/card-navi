@@ -101,9 +101,9 @@ export function goalStatus(bonus: Bonus, goal: BonusGoal, card: OwnedCard | unde
 }
 
 /** ボーナス価値（円）。入会初年度の期間は firstPeriodValueYen を使う。初回特典は未達成の場合のみ加算 */
-export function bonusValueYen(bonus: Bonus, goal: BonusGoal, firstPeriod = false): number {
-  const base = firstPeriod && bonus.firstPeriodValueYen != null ? bonus.firstPeriodValueYen : bonus.valueYen;
-  return base + (goal.oneTimeAchieved ? 0 : bonus.oneTimeValueYen ?? 0);
+export function bonusValueYen(bonus: Bonus, _goal: BonusGoal, firstPeriod = false): number {
+  // おすすめではボーナスポイントだけを上乗せする。年会費無料になる初回特典（oneTimeValueYen）は含めない（詳細設計 31.2.4）
+  return firstPeriod && bonus.firstPeriodValueYen != null ? bonus.firstPeriodValueYen : bonus.valueYen;
 }
 
 export interface RolloverNotice { bonusId: string; cardName: string }

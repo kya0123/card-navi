@@ -11,7 +11,7 @@ let view: 'owned' | 'catalog' | null = null;
 let filter: SegmentFilter = 'all';
 let query = '';
 const FILTERS: { id: SegmentFilter; label: string }[] = [
-  { id: 'all', label: 'すべて' }, { id: 'popular', label: '定番' }, { id: 'enthusiast', label: 'ポイ活向け' }, { id: 'owned', label: '保有中' },
+  { id: 'all', label: 'すべて' }, { id: 'popular', label: '定番' }, { id: 'enthusiast', label: 'ポイ活向け' }, { id: 'owned', label: '持っている' },
 ];
 
 export function CardsScreen(ctx: Ctx): Node {
@@ -26,7 +26,7 @@ export function CardsScreen(ctx: Ctx): Node {
     <section>
       <header class="screen-head"><h1>カード</h1></header>
       <div class="segs" role="tablist" aria-label="表示の切り替え">
-        {tab('owned', `保有カード（${n}）`)}
+        {tab('owned', `持っているカード（${n}）`)}
         {tab('catalog', 'カード一覧から選ぶ')}
       </div>
       {view === 'owned' ? OwnedView(ctx) : CatalogView(ctx)}
@@ -76,7 +76,7 @@ function CatalogList(ctx: Ctx): Node {
                 const el = e.target as HTMLInputElement;
                 if (el.checked) { void ctx.update((s) => { Object.assign(s, addOwnedCard(mi, s, card.id)); }); return; }
                 const joined = ctx.state.settings.ownedCards.find((c) => c.cardId === card.id)?.joinYm;
-                if (joined && !window.confirm(`${card.name}を保有カードから外しますか？（入会年月も消えます）`)) { el.checked = true; return; }
+                if (joined && !window.confirm(`${card.name}を持っているカードから外しますか？（入会年月も消えます）`)) { el.checked = true; return; }
                 void ctx.update((s) => { Object.assign(s, removeOwnedCard(s, card.id)); });
               }} />
               <span class="catalog-body">
@@ -108,10 +108,10 @@ function OwnedView(ctx: Ctx): Node {
     <div>
       {owned.length === 0 ? (
         <div class="empty">
-          <p>保有カードがまだありません。「カード一覧から選ぶ」で持っているカードを選んでください。</p>
+          <p>持っているカードがまだありません。「カード一覧から選ぶ」で持っているカードを選んでください。</p>
           <button class="btn" onClick={() => { view = 'catalog'; ctx.render(); }}>カード一覧から選ぶ</button>
         </div>
-      ) : <p class="sub">使う支払い方法だけチェックしてください。同じ還元率のときは上のカードを優先します。</p>}
+      ) : <p class="sub">使う支払い方法だけチェックしてください。同じポイント率のときは上のカードを優先します。</p>}
       {owned.map((oc, idx) => {
         const card = mi.cards.get(oc.cardId)!;
         const methods = methodsForCard(mi, oc.cardId);
@@ -170,7 +170,7 @@ function OwnedView(ctx: Ctx): Node {
                     s.ownedCards = s.ownedCards.filter((x) => x.cardId !== oc.cardId);
                     renumber(s.ownedCards.sort((a, b) => a.priority - b.priority));
                   });
-                }}>{armed ? 'もう一度押すと外します（入会年月も消えます）' : '保有カードから外す'}</button>
+                }}>{armed ? 'もう一度押すと外します（入会年月も消えます）' : '持っているカードから外す'}</button>
               );
             })()}
           </div>

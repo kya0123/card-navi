@@ -92,7 +92,7 @@ export function recommend(
       const st = goalStatus(bonus, goal, owned.get(bonus.cardId), today);
       if (st.state === 'active') {
         bonusRate = bonusValueYen(bonus, goal, st.firstPeriod) / st.thresholdYen;
-        bonusReason = `年間${yen(st.thresholdYen)}ボーナス狙い中：+${pct(bonusRate)}相当（残り${yen(st.remainingYen)}・期限${st.deadline}）`;
+        bonusReason = `ボーナス：年間${yen(st.thresholdYen)}の利用で＋${pct(bonusRate)}相当（残り${yen(st.remainingYen)}・期限${st.deadline}）`;
       }
     }
     cands.push({
@@ -107,22 +107,29 @@ export function recommend(
     || a.prio - b.prio
     || (a.route.id < b.route.id ? -1 : a.route.id > b.route.id ? 1 : 0));
 
-  // 同じカード×同じ実質還元率はまとめる（詳細設計 D1）
+  // 1カード1枠（詳細設計 31.2.3）：いちばん高い実質還元率の経路をまとめ、同じカードの低い率は others に回す。
+  // カード以外の経路は経路ごとに1枠
   const groups: (RecommendItem & { _c: Cand[] })[] = [];
   const index = new Map<string, RecommendItem & { _c: Cand[] }>();
   for (const c of cands) {
-    const key = `${c.route.cardId ?? c.route.id}|${c.effectiveRate}`;
+    const key = c.route.cardId ?? c.route.id;
     const g = index.get(key);
     if (g) {
-      g.routeIds.push(c.route.id);
-      g.methodIds.push(c.route.methodId);
-      g._c.push(c);
+      if (c.effectiveRate === g.effectiveRate) {
+        g.routeIds.push(c.route.id);
+        g.methodIds.push(c.route.methodId);
+        g._c.push(c);
+      } else {
+        const o = g.others.find((x) => x.effectiveRate === c.effectiveRate);
+        if (o) o.methodIds.push(c.route.methodId);
+        else g.others.push({ methodIds: [c.route.methodId], effectiveRate: c.effectiveRate });
+      }
       continue;
     }
     const item = {
       cardId: c.route.cardId, routeIds: [c.route.id], methodIds: [c.route.methodId],
       rate: c.rate, rateSource: c.source, bonusRate: c.bonusRate, effectiveRate: c.effectiveRate,
-      earnedYen: c.earned.yen, earnedApprox: c.earned.approx, reasons: [] as string[], _c: [c],
+      earnedYen: c.earned.yen, earnedApprox: c.earned.approx, reasons: [] as string[], others: [], _c: [c],
     };
     index.set(key, item);
     groups.push(item);
@@ -130,15 +137,15 @@ export function recommend(
 
   const top: RecommendItem[] = groups.slice(0, topN).map(({ _c, ...item }) => {
     const c = _c[0];
-    if (c.source === 'base') item.reasons.push(`通常還元${pct(c.rate)}`);
+    if (c.source === 'base') item.reasons.push(`通常のポイント率${pct(c.rate)}`);
     else item.reasons.push(`${store?.name ?? mi.categories.get(categoryId)?.name}で${pct(c.rate)}（${c.rule?.conditions ?? ''}）`);
     if (c.bonusReason) item.reasons.push(c.bonusReason);
     for (const x of _c) {
       if (x.route.needsReview || x.route.confidence === 'low')
-        warnings.add(`「${routeLabel(mi, x.route)}」の還元情報は要確認です`);
+        warnings.add(`「${routeLabel(mi, x.route)}」のポイント率は要確認です`);
       const checked = x.rule?.checkedAt ?? x.route.checkedAt;
       const days = daysBetween(checked, today);
-      if (days > user.staleWarnDays) warnings.add(`還元ルールの確認日（${checked}）から${days}日経過しています`);
+      if (days > user.staleWarnDays) warnings.add(`ポイント率の確認日（${checked}）から${days}日経過しています`);
     }
     return item;
   });

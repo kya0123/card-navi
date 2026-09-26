@@ -123,21 +123,23 @@ def recommend(user, store_id=None, category_id=None, amount=None, today=date(202
             st = goal_status(g, owned[r["cardId"]], today)
             if st["state"] == "active":
                 base = b["firstPeriodValueYen"] if st["firstPeriod"] and b.get("firstPeriodValueYen") is not None else b["valueYen"]
-                value = base + (0 if g.get("oneTimeAchieved") else b.get("oneTimeValueYen", 0))
-                bonus_rate = value / g.get("thresholdYen", b["thresholdYen"])
+                # 年会費無料になる初回特典（oneTimeValueYen）は含めない（詳細設計 31.2.4）
+                bonus_rate = base / g.get("thresholdYen", b["thresholdYen"])
         pts, approx = earned_points(r, rate, amount)
         cands.append({"routeId": r["id"], "cardId": r["cardId"], "methodId": r["methodId"],
                       "rate": round(rate, 6), "rateSource": src, "bonusRate": round(bonus_rate, 6),
                       "effectiveRate": round(rate + bonus_rate, 6), "earnedYen": pts, "earnedApprox": approx,
                       "_prio": prio})
     cands.sort(key=lambda x: (-x["effectiveRate"], -(x["bonusRate"] > 0), x["_prio"], x["routeId"]))
-    # 同じカード（カードなし経路は経路単位）で実質還元率が同じ経路は1件にまとめ、支払い方法を列挙する
+    # 1カード1枠（詳細設計 31.2.3）：カードごとにいちばん高い実質還元率の経路をまとめる。
+    # 同じカードの低い率は枠にしない。カードなし経路は経路単位
     groups, index = [], {}
     for c in cands:
-        key = (c["cardId"] or c["routeId"], c["effectiveRate"])
+        key = c["cardId"] or c["routeId"]
         if key in index:
             g = index[key]
-            g["methodIds"].append(c["methodId"]); g["routeIds"].append(c["routeId"])
+            if c["effectiveRate"] == g["effectiveRate"]:
+                g["methodIds"].append(c["methodId"]); g["routeIds"].append(c["routeId"])
             continue
         g = {k: v for k, v in c.items() if k not in ("_prio", "methodId", "routeId")}
         g["methodIds"], g["routeIds"] = [c["methodId"]], [c["routeId"]]
@@ -205,9 +207,9 @@ def owned_user(card_ids, goals=None, non_card=("paypay_balance", "suica_ride"), 
 
 CASES = [
     ("G01", "セブン・ボーナスOFF：三井住友スマホVisaタッチ7%が1位（同率の三菱UFJより優先順で上）", user(), {"store_id": "seven"}),
-    ("G02", "セブン・ボーナスON：7%+1.55%", user(target=True), {"store_id": "seven"}),
+    ("G02", "セブン・ボーナスON：7%+1%（初回特典は含めない）", user(target=True), {"store_id": "seven"}),
     ("G03", "ファミマ・ボーナスOFF：楽天1%、ポイント払い推奨あり", user(), {"store_id": "familymart"}),
-    ("G04", "ファミマ・ボーナスON：三井住友0.5%+1.55%が1位、ポイント払い推奨なし", user(target=True), {"store_id": "familymart"}),
+    ("G04", "ファミマ・ボーナスON：三井住友0.5%+1%が1位、ポイント払い推奨なし", user(target=True), {"store_id": "familymart"}),
     ("G05", "ファミマ・ボーナスON・年会費無料は達成済み：0.5%+1.0%", user(target=True, oneTimeAchieved=True), {"store_id": "familymart"}),
     ("G06", "ボーナスON・今期達成済み：ボーナス加算なし", user(target=True, achieved=True), {"store_id": "familymart"}),
     ("G07", "ボーナスON・累計が条件額以上：加算なし", user(target=True, progressYen=1000000), {"store_id": "familymart"}),
@@ -222,7 +224,7 @@ CASES = [
     ("G16", "楽天・三菱UFJのみ保有でセブン：三菱UFJ 7%", user(owned=["rakuten", "mufg"]), {"store_id": "seven"}),
     ("G17", "三井住友のスマホタッチOFFでセブン：三菱UFJ 7%が1位", user(disable=("smbc_gold_nl", "smartphone_visa_touch")), {"store_id": "seven"}),
     ("G18", "三井住友のみ・ボーナスOFFでファミマ：0.5%、Vポイント払い推奨", user(owned=["smbc_gold_nl"], nonCard=[]), {"store_id": "familymart"}),
-    ("G19", "スタバ・ボーナスON：三井住友モバイルオーダー7%+1.55%（店頭は対象外）", user(target=True), {"store_id": "starbucks"}),
+    ("G19", "スタバ・ボーナスON：三井住友モバイルオーダー7%+1%（店頭は対象外）", user(target=True), {"store_id": "starbucks"}),
     ("G20", "マクドナルド・ボーナスOFF：三井住友7%、ポイント払い推奨なし", user(), {"store_id": "mcdonalds"}),
     ("G22", "ナチュラルローソン：三井住友スマホタッチ7%と三菱UFJ 7%", user(), {"store_id": "natural_lawson"}),
     ("G23", "ローソンスリーエフ：三井住友のみ7%（三菱UFJは対象外）", user(), {"store_id": "lawson_threef"}),
@@ -232,9 +234,9 @@ CASES = [
     ("G27", "松屋：三菱UFJ（カード/QUICPay/モバイルオーダー）7%", user(), {"store_id": "matsuya"}),
     ("G28", "PayPayゴールド追加・ボーナスOFF・ファミマ：楽天とPayPayゴールドが同率1%（優先順で楽天が上）", user(ppg={}), {"store_id": "familymart"}),
     ("G29", "PayPayゴールドのボーナスON（累計20万）・ファミマ：1%+1.1%=2.1%", user(ppg={"target": True, "progress": 200000}), {"store_id": "familymart"}),
-    ("G30", "両方のボーナスON・ファミマ：PayPayゴールド2.1% > 三井住友2.05%", user(target=True, ppg={"target": True}), {"store_id": "familymart"}),
+    ("G30", "両方のボーナスON・ファミマ：PayPayゴールド2.1% > 三井住友1.5%", user(target=True, ppg={"target": True}), {"store_id": "familymart"}),
     ("G31", "PayPayゴールドのボーナスON・セブン：三井住友スマホタッチ7%が1位のまま", user(ppg={"target": True}), {"store_id": "seven"}),
-    ("G21", "Yahoo!ショッピング・ボーナスON：三井住友（オンライン/PayPay）2.05%", user(target=True), {"store_id": "yahoo_shopping"}),
+    ("G21", "Yahoo!ショッピング・ボーナスON：三井住友（オンライン/PayPay）1.5%", user(target=True), {"store_id": "yahoo_shopping"}),
     # ---- v1.7：カード一覧から選んだ保有カードのみで推奨 ----
     ("G32", "Amazon：Amazon MC 2%とJCB W 2%が同率（優先順でAmazon MCが上）",
      owned_user(["amazon_mc", "jcb_w", "rakuten"]), {"store_id": "amazon"}),

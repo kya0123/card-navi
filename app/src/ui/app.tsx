@@ -69,7 +69,7 @@ const TABS: { route: RouteName; label: string; icon: string }[] = [
   { route: 'cards', label: 'カード', icon: '▭' },
   { route: 'bonus', label: 'ボーナス', icon: '★' },
   { route: 'review', label: '見直す', icon: '⇄' },
-  { route: 'info', label: '還元情報', icon: 'ⓘ' },
+  { route: 'info', label: 'ポイント率', icon: 'ⓘ' },
   { route: 'settings', label: '設定', icon: '⚙' },
 ];
 
@@ -91,7 +91,7 @@ export async function startApp(root: HTMLElement): Promise<void> {
   const master = rules as unknown as Master;
   const errs = validateMaster(master);
   if (errs.length) {
-    mount(root, <div class="fatal">還元ルールデータに誤りがあります：{errs.join(' / ')}</div>);
+    mount(root, <div class="fatal">ポイント率のデータに誤りがあります：{errs.join(' / ')}</div>);
     return;
   }
   const mi = indexMaster(master);
@@ -114,7 +114,7 @@ export async function startApp(root: HTMLElement): Promise<void> {
     amount: '',
     toasts: [
       ...roll.notices.map((n) => `${n.cardName}のボーナス期間が新しくなりました（累計をリセットしました）`),
-      ...(loaded.dropped ? [`還元ルールの更新で使えなくなった設定を${loaded.dropped}件取り除きました`] : []),
+      ...(loaded.dropped ? [`ポイント率の更新で使えなくなった設定を${loaded.dropped}件取り除きました`] : []),
       ...(kv.persistent ? [] : ['この環境では設定が保存されません（プライベートモード等）']),
     ],
     persistGranted: null,
@@ -147,6 +147,9 @@ export async function startApp(root: HTMLElement): Promise<void> {
       state.query = '';
       state.recent = await repo.touchRecent(storeId, new Date().toISOString());
       ctx.go('home');
+      // 結果の位置まで自動で移動する（詳細設計 31.2.5）
+      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      document.getElementById('result')?.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
     },
     toast(msg) { state.toasts.push(msg); ctx.render(); },
     aff: affiliates as unknown as AffiliateMaster,
@@ -200,10 +203,10 @@ function render(root: HTMLElement, ctx: Ctx): void {
           }}>更新</button>
         </div>
       )}
-      {needBackup && route === 'home' && (
-        <div class="banner" role="status">
+      {/* バックアップの案内は設定タブにだけ出す（詳細設計 31.2.5） */}
+      {needBackup && route === 'settings' && (
+        <div class="banner" role="status" id="backup-banner">
           <span>設定のバックアップをおすすめします</span>
-          <button class="btn btn-small btn-ghost" onClick={() => ctx.go('settings')}>設定へ</button>
           <button class="icon-btn" aria-label="閉じる" onClick={() => ctx.setState({ backupBannerDismissed: true })}>×</button>
         </div>
       )}

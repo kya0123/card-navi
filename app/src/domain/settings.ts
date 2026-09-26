@@ -82,7 +82,7 @@ export function parseBackup(
     return { ok: false, error: '設定の形式が正しくありません' };
   for (const c of s.ownedCards) {
     if (typeof c?.cardId !== 'string' || !Array.isArray(c.enabledMethods) || typeof c.priority !== 'number')
-      return { ok: false, error: '保有カードの形式が正しくありません' };
+      return { ok: false, error: '持っているカードの形式が正しくありません' };
   }
   for (const g of s.bonusGoals) {
     if (typeof g?.bonusId !== 'string' || typeof g.target !== 'boolean')

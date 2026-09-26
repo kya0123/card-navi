@@ -83,18 +83,18 @@ export function HomeScreen(ctx: Ctx): Node {
           </div>
           {!noCards && (
             <div class="segs scope-segs" role="tablist" aria-label="比べるカード">
-              {ScopeTab(ctx, 'owned', '持っているカード')}
-              {ScopeTab(ctx, 'all', `登録カード（${total}枚）`)}
+              {ScopeTab(ctx, 'owned', '手持ちで比べる')}
+              {ScopeTab(ctx, 'all', `全${total}枚で比べる`)}
             </div>
           )}
           {result.top.length === 0 ? (
             <div class="empty">
               <p>このお店で使える支払い方法が登録されていません。</p>
-              <button class="btn" onClick={() => ctx.go('cards')}>保有カードを設定する</button>
+              <button class="btn" onClick={() => ctx.go('cards')}>持っているカードを設定する</button>
             </div>
           ) : (
             <ol class="ranking">
-              {result.top.map((item, i) => RankItem(ctx, item, i, scope === 'all' ? ownedIds : null))}
+              {result.top.map((item, i) => RankItem(ctx, item, i, scope === 'all' ? ownedIds : null, sourceLabel(ctx, result!, item)))}
             </ol>
           )}
           {scope === 'all' && (
@@ -110,7 +110,7 @@ export function HomeScreen(ctx: Ctx): Node {
             <div class="pointpay" role="note">
               <strong>ポイント払いがおすすめ</strong>
               <span>{result.pointPay.map((p) => pointName(mi, p)).join('／')}</span>
-              <small>1位の決済が通常還元のため、手持ちのポイントを使っても損が小さい場面です</small>
+              <small>1位の支払いが通常のポイント率のため、手持ちのポイントを使っても損が小さい場面です</small>
             </div>
           )}
           <details class="amount" open={state.amount !== ''}>
@@ -131,11 +131,19 @@ export function HomeScreen(ctx: Ctx): Node {
         </div>
       )}
       <footer class="disclaimer">
-        <p>還元ルール確認日 {mi.raw.checkedAt}（版 {mi.raw.masterVersion}）</p>
+        <p>ポイント率の確認日 {mi.raw.checkedAt}（版 {mi.raw.masterVersion}）</p>
         <p>{mi.raw.disclaimer} 月間の付与上限は考慮していません。</p>
       </footer>
     </section>
   );
+}
+
+/** 1位の理由の1行要約：「セブン-イレブンの特約」「コンビニの特約」「通常のポイント率」 */
+function sourceLabel(ctx: Ctx, result: RecommendResult, item: RecommendItem): string {
+  if (item.rateSource === 'base') return '通常のポイント率';
+  const name = item.rateSource === 'store' && result.storeId
+    ? ctx.mi.stores.get(result.storeId)?.name : ctx.mi.categories.get(result.categoryId)?.name;
+  return `${name}の特約`;
 }
 
 function ScopeTab(ctx: Ctx, id: RecommendScope, label: string): Node {
@@ -147,7 +155,7 @@ function ScopeTab(ctx: Ctx, id: RecommendScope, label: string): Node {
 }
 
 /** ownedIds を渡すと（登録カード表示）、保有・未保有の印と未保有カードのリンクを出す */
-function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string> | null): Node {
+function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string> | null, source: string): Node {
   const { mi } = ctx;
   const name = cardName(mi, item.cardId, item.routeIds[0]);
   const methods = item.cardId ? item.methodIds.map(methodShort).join('／') : '';
@@ -160,19 +168,32 @@ function RankItem(ctx: Ctx, item: RecommendItem, i: number, ownedIds: Set<string
         <div class="rank-card">
           {name}
           {ownedIds && item.cardId && (owned
-            ? <span class="own-mark own-yes">保有</span>
-            : <span class="own-mark own-no">未保有</span>)}
+            ? <span class="own-mark own-yes">持っている</span>
+            : <span class="own-mark own-no">持っていない</span>)}
         </div>
         {methods && <div class="rank-method">{methods}</div>}
         <div class="rank-rate">
           <span class="rate">{pct(item.effectiveRate)}</span>
-          {item.bonusRate > 0 && <span class="rate-break">（{pct(item.rate)}＋ボーナス{pct(item.bonusRate)}）</span>}
         </div>
+        {/* 1行の要約：「7% ＋ボーナス1% セブン-イレブンの特約」（詳細設計 31.2.5） */}
+        {(i === 0 || item.bonusRate > 0) && (
+          <div class="rank-why">
+            {item.bonusRate > 0 && <span class="rate-base">{pct(item.rate)}</span>}
+            {item.bonusRate > 0 && <span class="bonus-badge">＋ボーナス{pct(item.bonusRate)}</span>}
+            {i === 0 && <span class="why-src">{source}</span>}
+          </div>
+        )}
         {item.earnedYen != null && (
           <div class="rank-earned">{item.earnedApprox ? '約' : ''}{yen(item.earnedYen)}相当</div>
         )}
-        {i === 0 && item.reasons.length > 0 && (
-          <ul class="reasons">{item.reasons.map((r) => <li>{r}</li>)}</ul>
+        {i === 0 && (item.reasons.length > 0 || item.others.length > 0) && (
+          <details class="rank-detail" id="rank-detail">
+            <summary>詳しい条件</summary>
+            <ul class="reasons">
+              {item.reasons.map((r) => <li>{r}</li>)}
+              {item.others.map((o) => <li>{o.methodIds.map(methodShort).join('・')}は{pct(o.effectiveRate)}</li>)}
+            </ul>
+          </details>
         )}
         {link && (
           <div class="rank-link">
@@ -214,7 +235,7 @@ function Banner(ctx: Ctx): Node | null {
       <button type="button" class="promo-main" onClick={() => tapBanner(ctx)}>
         <span class="promo-text">
           <strong>あなたの使い方に合うカードが見つかりました</strong>
-          <small>よく行くお店で還元が上がるカード {b.results.length}件{b.pr ? '（PRを含みます）' : ''}</small>
+          <small>よく行くお店でポイント率が上がるカード {b.results.length}件{b.pr ? '（PRを含みます）' : ''}</small>
         </span>
         <span class="promo-arrow" aria-hidden="true">›</span>
       </button>

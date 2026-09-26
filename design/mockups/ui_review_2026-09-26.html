@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カード払いナビ 画面案（UIの見直し）</title>
+<style>
+:root{--navy:#1f3a68;--gold:#c9a227;--gold-line:#b08d2f;--ground:#f6f4ef;--surface:#fff;--ink:#333;--strong:#1a1a1a;--muted:#666;--line:#949494;--soft:#ddd;--key-soft:#e9edf5;--ok:#197a4b;--ok-bg:#e6f5ec;--ng:#b3261e;--ng-bg:#fdeeee;--r8:8px;--r12:12px;
+font-family:"Noto Sans JP",-apple-system,"Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif;color:var(--ink);}
+*{box-sizing:border-box}body{margin:0;background:#e8e6e1;line-height:1.7;letter-spacing:.02em}
+.page-head{max-width:1700px;margin:0 auto;padding:24px 16px 0}
+.page-head h1{font-size:1.4rem;margin:0 0 4px}.page-head p{margin:0 0 4px;color:var(--muted);font-size:.9rem}
+.row{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;padding:24px 16px 48px;max-width:1700px;margin:0 auto}
+.frame{width:390px;flex:none}
+.cap{font-weight:700;font-size:.95rem;margin:0 0 8px;color:var(--strong)}
+.cap small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.phone{width:390px;background:var(--ground);border-radius:28px;border:10px solid #222;overflow:hidden;display:flex;flex-direction:column;min-height:780px}
+.scr{padding:16px 16px 12px;flex:1}
+h2.t{font-size:1.4rem;margin:4px 0 12px;color:var(--strong)}
+h3{font-size:1rem;margin:0;color:var(--strong)}
+.segs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--navy);border-radius:var(--r8);overflow:hidden;margin-bottom:12px}
+.seg{padding:10px 4px;text-align:center;font-weight:700;color:var(--navy);background:#fff;font-size:.92rem}
+.seg+.seg{border-left:1px solid var(--navy)}.seg.on{background:var(--navy);color:#fff}
+.panel{background:var(--surface);border:1px solid var(--soft);border-radius:var(--r12);padding:14px;margin-bottom:12px}
+.muted{color:var(--muted);font-size:.85rem}
+.big{font-size:1.35rem;font-weight:700;color:var(--navy)}
+.ok{color:var(--ok);font-weight:700}.ng{color:var(--ng);font-weight:700}
+.line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.link{color:var(--navy);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+details{border-top:1px solid var(--soft);margin-top:10px;padding-top:6px}
+summary{color:var(--navy);font-weight:700;cursor:pointer;font-size:.9rem;padding:4px 0}
+.chk{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--key-soft);border-radius:var(--r8);margin-top:8px;font-weight:700;font-size:.92rem}
+.box{width:22px;height:22px;border:2px solid var(--navy);border-radius:4px;display:inline-grid;place-items:center;background:#fff;flex:none}
+.box.on{background:var(--navy);color:#fff;font-size:15px;line-height:1}
+.chk.plain{background:none;padding:6px 0;font-weight:400}
+.bar{height:10px;background:#e6e6e6;border-radius:5px;overflow:hidden;margin:10px 0 6px}.bar i{display:block;height:100%;background:var(--navy);width:42%}
+dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0 0}dt{font-size:.78rem;color:var(--muted)}dd{margin:0;font-weight:700;font-size:.9rem}
+.note{font-size:.82rem;color:var(--muted)}
+.warn{background:var(--ng-bg);color:var(--ng);border-radius:6px;padding:6px 10px;font-size:.85rem;font-weight:700;margin-top:8px}
+.field{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:.85rem;font-weight:700}
+.input{border:1px solid #666;border-radius:var(--r8);padding:8px 10px;background:#fff;font-weight:400}
+.btns{display:flex;gap:8px;margin-top:10px}.btn{border:1px solid var(--navy);border-radius:var(--r8);padding:6px 12px;font-weight:700;color:var(--navy);background:#fff;font-size:.85rem}
+.btn.dis{color:#aaa;border-color:#ccc}.btn.red,.btn.fill{display:block}.btn.red{color:var(--ng);border-color:var(--ng);width:100%;text-align:center;margin-top:10px}
+.btn.fill{background:var(--navy);color:#fff;width:100%;text-align:center;padding:10px}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:0 6px;border:1px solid currentColor;border-radius:4px;background:#fff;margin-left:6px;vertical-align:2px}
+.tag.own{color:var(--ok)}.tag.not{color:#4d4d4d}.tag.st{color:var(--navy)}.tag.pr{color:#333}
+.rank{background:#fff;border:1px solid var(--soft);border-radius:var(--r8);padding:12px 14px;display:flex;gap:12px;margin-bottom:8px}
+.rank.one{border:2px solid var(--gold-line);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.no{width:30px;height:30px;border-radius:50%;background:#e6e6e6;display:grid;place-items:center;font-weight:700;flex:none;font-size:.9rem}
+.one .no{background:var(--gold);color:var(--navy);width:36px;height:36px}
+.rate{font-size:1.15rem;font-weight:700;color:var(--strong)}.one .rate{font-size:2rem;color:var(--navy);line-height:1.2}
+.method{font-size:.85rem;color:var(--muted)}.one .method{display:inline-block;background:var(--key-soft);color:var(--navy);font-weight:700;border-radius:6px;padding:0 8px;margin:4px 0}
+.why{font-size:.9rem;margin-top:4px;color:var(--strong)}
+.store-title{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.search{border:1px solid #666;border-radius:var(--r8);background:#fff;padding:10px 12px;color:#999;font-size:.95rem}
+.chip{display:inline-block;border:1px solid var(--navy);border-radius:var(--r8);padding:2px 10px;color:var(--navy);font-weight:700;font-size:.82rem;margin:0 4px 6px 0}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #ccc;padding:6px 0 10px}
+.tab{display:flex;flex-direction:column;align-items:center;font-size:.72rem;color:#555;gap:2px;position:relative}
+.tab b{font-size:1.1rem;font-weight:400;line-height:1.4}.tab.on{color:var(--navy);font-weight:700}.tab.on:before{content:"";position:absolute;top:-7px;left:10%;right:10%;height:4px;background:var(--gold)}
+.new{background:#fff3c4;outline:2px dashed #b08d2f;outline-offset:2px;border-radius:6px}
+.legend{font-size:.8rem;color:var(--muted);margin:0 0 6px}
+.delta{display:flex;justify-content:space-between;font-size:.85rem;border-top:1px solid #eee;padding:4px 0}
+.tabcmp{display:flex;flex-direction:column;gap:14px}
+.tabcmp .phone{min-height:auto}
+</style>
+</head>
+<body>
+<div class="page-head">
+  <h1>カード払いナビ 画面案（UIの見直し・2026-09-26 改訂）</h1>
+  <p>詳細設計31章の確認用。黄色の点線枠は、今の画面から変わる箇所です。タブは4つ（おすすめ／カード／カード診断／設定）。数字は「三井住友カード ゴールド（NL）・楽天カード・三菱UFJカードを持ち、三井住友ゴールドのボーナスを狙っている」例。</p>
+</div>
+
+<div class="row">
+
+<!-- A: おすすめ -->
+<div class="frame">
+<p class="cap">① おすすめ（結果）<small>1カード1枠・%を大きく＋ボーナスはバッジ・理由は1行・結果へ自動移動</small></p>
+<div class="phone"><div class="scr">
+  <div class="search">店舗名を入力（例：せぶん、スタバ）</div>
+  <div class="store-title"><h2 class="t" style="margin:0">セブン-イレブン</h2><span class="btn">クリア</span></div>
+  <p class="legend new">↑ お店を選ぶと、ここまで自動で移動（最近使ったお店は画面外）</p>
+  <div class="segs new"><div class="seg on">手持ちで比べる</div><div class="seg">全22枚で比べる</div></div>
+  <div class="rank one"><div class="no">1</div><div>
+    <h3>三井住友カード ゴールド（NL）</h3>
+    <span class="method">スマホのタッチ決済</span>
+    <div class="rate">8%</div>
+    <div class="why new">7% <span class="tag st" style="margin:0 4px">＋ボーナス1%</span> セブン-イレブンの特約</div>
+    <details class="new"><summary>詳しい条件</summary>
+      <p class="note">店頭はスマホのタッチ決済のみ（カードのタッチ・iD・挿し込みは対象外）。<br>ボーナス：年100万円で10,000pt＝1%相当（残り580,000円・期限2026-10-31）。年会費は考えません。<br>カード・iD・PayPayは1.5%。<br><span class="link">このカードのポイント率を見る ›</span></p>
+    </details>
+  </div></div>
+  <div class="rank"><div class="no">2</div><div><h3>三菱UFJカード</h3><div class="method">カード／Apple Pay（QUICPay）</div><div class="rate">7%</div></div></div>
+  <div class="rank new"><div class="no">3</div><div><h3>楽天カード</h3><div class="method">カード／Apple Pay（QUICPay）／スマホのタッチ決済</div><div class="rate">1%</div></div></div>
+  <p class="note new">今は3位に三井住友ゴールドの別の支払い方法（2.05%）が出ていますが、同じカードは1枠にまとめます。</p>
+</div>
+<div class="tabs"><div class="tab on"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
+</div></div>
+
+<!-- B: カードタブ -->
+<div class="frame">
+<p class="cap">② カード（持っているカード）<small>支払い方法のチェック廃止・ボーナスは「狙う」「今期は達成済み」だけ</small></p>
+<div class="phone"><div class="scr">
+  <h2 class="t">カード</h2>
+  <div class="segs"><div class="seg on new">持っているカード（3）</div><div class="seg">カード一覧から選ぶ</div></div>
+  <p class="note">同じポイント率のときは上のカードを優先します。支払い方法はすべて使える前提で比べます。</p>
+  <div class="panel">
+    <div class="line" style="justify-content:space-between;margin:0"><h3>三井住友カード ゴールド（NL）</h3><span style="white-space:nowrap"><span class="btn dis">↑</span> <span class="btn">↓</span></span></div>
+    <div class="new" style="padding:6px;margin-top:8px">
+      <div class="field">入会年月<span class="input">2025-11</span></div>
+      <div class="chk"><span class="box on">✓</span>このボーナスを狙う</div>
+      <div class="chk plain"><span class="box"></span>今期は達成済み</div>
+      <p class="note" style="margin:4px 0 0">年100万円で10,000pt。進み具合は［カード診断］で確認できます。</p>
+    </div>
+    <p class="link new" style="margin:8px 0 0;font-size:.9rem">ポイント率を見る ›</p>
+    <span class="btn red new">持っているカードから外す</span>
+  </div>
+  <div class="panel">
+    <div class="line" style="justify-content:space-between;margin:0"><h3>楽天カード</h3><span><span class="btn">↑</span> <span class="btn">↓</span></span></div>
+    <p class="note new" style="margin:6px 0 0">年間ボーナスはありません（入会年月の入力も不要）</p>
+    <p class="link new" style="margin:4px 0 0;font-size:.9rem">ポイント率を見る ›</p>
+    <span class="btn red">持っているカードから外す</span>
+  </div>
+  <div class="panel">
+    <div class="line" style="justify-content:space-between;margin:0"><h3>三菱UFJカード</h3><span><span class="btn">↑</span> <span class="btn dis">↓</span></span></div>
+    <span class="btn red">持っているカードから外す</span>
+  </div>
+  <div class="panel"><h3>カード以外の支払い</h3>
+    <div class="chk plain"><span class="box on">✓</span>PayPay残高払い</div>
+    <div class="chk plain"><span class="box on">✓</span>モバイルSuica（JR東日本の乗車）</div>
+  </div>
+</div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab on"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
+</div></div>
+
+<!-- C: カード診断 持っているカード -->
+<div class="frame">
+<p class="cap">③ カード診断［持っているカード］<small>年会費の回収＋ボーナスの達成見込み・入力は折りたたみ</small></p>
+<div class="phone"><div class="scr">
+  <h2 class="t new">カード診断</h2>
+  <div class="segs new"><div class="seg on">持っているカード</div><div class="seg">おすすめカード</div></div>
+  <p class="line">月50,000円のカード利用で計算しています <span class="link">変更</span></p>
+  <div class="panel">
+    <h3>三井住友カード ゴールド（NL）</h3>
+    <p class="muted" style="margin:0">年会費 5,500円</p>
+    <p class="ok" style="margin:6px 0 0">年会費を回収できています（年＋6,500円）</p>
+    <div class="new" style="padding:6px;margin-top:10px">
+      <div class="line" style="margin:0;justify-content:space-between"><strong>年間ボーナス</strong><span class="tag st">狙っている</span></div>
+      <div class="bar"><i></i></div>
+      <dl><div><dt>累計</dt><dd>420,000円 / 1,000,000円</dd></div><div><dt>残り</dt><dd>580,000円</dd></div>
+      <div><dt>期限</dt><dd>2026-10-31（あと2か月）</dd></div><div><dt>必要な月額</dt><dd>290,000円</dd></div></dl>
+      <p class="warn">月5万円の利用では期限までに届きません</p>
+    </div>
+    <details class="new"><summary>内訳</summary><p class="note">1位になるお店 6件中2件／年間の上乗せ 約12,000円＋ボーナス0円／年会費 5,500円</p></details>
+    <details class="new" open><summary>ボーナスの入力</summary>
+      <div class="field">今期の累計利用額（概算・円）<span class="input">420000</span></div>
+      <div class="field">達成条件額（円）<span class="input">1000000</span></div>
+      <div class="chk plain"><span class="box"></span>初回特典（年会費永年無料）は達成済み</div>
+      <p class="link" style="margin:4px 0 0;font-size:.85rem">期限を手動で変更する</p>
+    </details>
+  </div>
+  <p class="note new">年会費もボーナスもないカード（楽天・三菱UFJ）は、ここには出しません。</p>
+</div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
+</div></div>
+
+<!-- D: カード診断 おすすめカード -->
+<div class="frame">
+<p class="cap">④ カード診断［おすすめカード］<small>年間の損得を1行で・内訳とお店は折りたたみ</small></p>
+<div class="phone"><div class="scr">
+  <h2 class="t">カード診断</h2>
+  <div class="segs"><div class="seg">持っているカード</div><div class="seg on">おすすめカード</div></div>
+  <p class="line">月50,000円のカード利用で計算しています <span class="link">変更</span></p>
+  <p class="note" style="margin:0 0 6px"><strong>追加すると得なカード</strong></p>
+  <div class="panel">
+    <div class="line" style="justify-content:space-between;margin:0"><h3>Olive フレキシブルペイ</h3></div>
+    <p class="muted" style="margin:0">年会費 無料</p>
+    <p class="big new" style="margin:6px 0 0">年間 ＋3,500円</p>
+    <p style="margin:0;font-size:.9rem">よく行くお店 6件中<strong>1件</strong>でポイント率アップ</p>
+    <details class="new"><summary>内訳とお店</summary>
+      <div class="delta"><span>スターバックス</span><span>7% → <b>10.5%</b></span></div>
+      <p class="note">ポイント＋3,500円／ボーナス＋0円／年会費−0円・1万円ごとに＋350円</p>
+    </details>
+    <span class="btn fill" style="margin-top:10px">公式サイトで詳しく見る</span>
+    <p class="link" style="margin:8px 0 0;font-size:.85rem">このカードを持っている（持っているカードに追加）</p>
+  </div>
+  <div class="panel">
+    <h3>セブンカード・プラス</h3><p class="muted" style="margin:0">年会費 無料</p>
+    <p class="big" style="margin:6px 0 0">年間 ＋3,000円</p>
+    <p style="margin:0;font-size:.9rem">よく行くお店 6件中<strong>1件</strong>でポイント率アップ</p>
+    <details><summary>内訳とお店</summary></details>
+  </div>
+  <p class="note" style="margin:0 0 6px"><strong>この使い方では年会費を回収できません</strong></p>
+  <div class="panel"><h3>Marriott Bonvoy アメックス・プレミアム</h3><p class="muted" style="margin:0">年会費 82,500円</p><p class="ng" style="margin:6px 0 0">年間 −78,500円</p><details><summary>内訳とお店</summary></details></div>
+</div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab on"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
+</div></div>
+
+<!-- E: カードのポイント率 -->
+<div class="frame">
+<p class="cap">⑤ カードのポイント率（新設・タブ外）<small>カードタブ・おすすめの詳しい条件から開く</small></p>
+<div class="phone"><div class="scr">
+  <p class="link" style="margin:0 0 4px">‹ 戻る</p>
+  <h2 class="t" style="margin-top:0">三井住友カード ゴールド（NL）</h2>
+  <p class="muted" style="margin:-6px 0 10px">年会費 5,500円・Vポイント（1pt＝1円）</p>
+  <div class="panel">
+    <div class="delta" style="border:0"><span>カード</span><b>0.5%</b></div>
+    <div class="delta"><span>スマホのタッチ決済</span><b>0.5%</b></div>
+    <div class="delta"><span>iD</span><b>0.5%</b></div>
+    <div class="delta"><span>ネット・アプリ注文</span><b>0.5%</b></div>
+    <div class="delta"><span>PayPay</span><b>0.5%</b></div>
+    <p class="note" style="margin:6px 0 0">月の合計200円ごとに1pt。確認日 2026-09-25・<span class="link">出典</span></p>
+  </div>
+  <div class="panel">
+    <h3>特約のお店</h3>
+    <details open><summary>7%（スマホのタッチ決済）42店舗</summary><p class="note">セブン-イレブン、ローソン、マクドナルド、スターバックス、サイゼリヤ、ドトール …</p></details>
+    <details><summary>ほかの特約 6店舗</summary></details>
+  </div>
+  <div class="panel">
+    <h3>年間ボーナス</h3>
+    <p style="margin:4px 0 0;font-size:.9rem">年100万円利用で10,000pt（毎年）＝おすすめでは<b>＋1%</b>として計算</p>
+    <p class="note" style="margin:4px 0 0">初回達成で年会費永年無料（5,500円）はカード診断で計算します。</p>
+  </div>
+</div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab on"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab"><b>⚙</b>設定</div></div>
+</div></div>
+
+<!-- F: 設定 -->
+<div class="frame">
+<p class="cap">⑥ 設定<small>バックアップの案内・ポイント率の一覧・詳細設定（折りたたみ）</small></p>
+<div class="phone"><div class="scr">
+  <h2 class="t">設定</h2>
+  <div class="panel new" style="border-left:6px solid var(--navy)"><strong>設定のバックアップをおすすめします</strong><p class="note" style="margin:4px 0 0">最終バックアップ：まだありません</p><span class="btn fill" style="margin-top:8px">ファイルに書き出す</span></div>
+  <div class="panel new"><div class="line" style="justify-content:space-between;margin:0"><h3>ポイント率の一覧</h3><span class="link">開く ›</span></div><p class="note" style="margin:4px 0 0">全カードの支払い方法ごとの率・特約・出典・確認日（版 2026.09.26-1）</p></div>
+  <div class="panel"><h3>配色</h3><p class="note" style="margin:4px 0 0">ネイビー×ゴールド（標準）ほか5つ</p></div>
+  <div class="panel"><h3>カードの提案</h3><div class="chk plain"><span class="box on">✓</span>持っていないカードの提案を表示する</div></div>
+  <div class="panel"><h3>近くのお店</h3><div class="chk plain"><span class="box on">✓</span>おすすめ画面に「近く」ボタンを表示する</div>
+    <details class="new"><summary>詳細設定</summary><p class="note">検索先（OpenStreetMap／Yahoo!ローカルサーチ）、アプリID、検索する半径。将来は管理者だけが設定します。</p></details></div>
+  <div class="panel"><h3>このアプリについて</h3><p class="note" style="margin:4px 0 0">アプリ版・ポイント率の版・保存先・設定の初期化</p></div>
+</div>
+<div class="tabs"><div class="tab"><b>◎</b>おすすめ</div><div class="tab"><b>▭</b>カード</div><div class="tab"><b>⇄</b>カード診断</div><div class="tab on"><b>⚙</b>設定</div></div>
+</div></div>
+
+</div>
+</body>
+</html>

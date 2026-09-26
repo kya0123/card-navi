@@ -74,7 +74,7 @@ export function ReviewScreen(ctx: Ctx): Node {
       )}
       {enough && items.length === 0 && (
         <div class="panel" id="review-none">
-          <p>今の組み合わせで十分です。最近のお店では、カードを追加しても還元はほとんど変わりません。</p>
+          <p>今の組み合わせで十分です。最近のお店では、カードを追加してもポイント率はほとんど変わりません。</p>
         </div>
       )}
       {gain.map((it, i) => ReviewCard(ctx, it, i))}
@@ -115,7 +115,7 @@ function ReviewCard(ctx: Ctx, it: ReviewItem, index: number): Node {
         </div>
         {it.link?.pr && <span class="pr">PR</span>}
       </div>
-      <p class="review-lead">よく行くお店 {it.totalStores}件中<strong>{it.improved.length}件</strong>で還元アップ</p>
+      <p class="review-lead">よく行くお店 {it.totalStores}件中<strong>{it.improved.length}件</strong>でポイント率アップ</p>
       <ul class="deltas">{it.improved.slice(0, SHOW_STORES).map(row)}</ul>
       {rest.length > 0 && (
         <details class="more-stores">
@@ -139,17 +139,17 @@ function ReviewCard(ctx: Ctx, it: ReviewItem, index: number): Node {
           if (s.ownedCards.some((c) => c.cardId === it.cardId)) return;
           s.ownedCards.push({ cardId: it.cardId, enabledMethods: methodsForCard(mi, it.cardId), priority: s.ownedCards.length + 1 });
         }, { render: false });
-        ctx.toast(`${card.name}を保有カードに追加しました`);
-      }}>このカードを持っている（保有カードに追加）</button>
+        ctx.toast(`${card.name}を持っているカードに追加しました`);
+      }}>このカードを持っている（持っているカードに追加）</button>
     </article>
   );
 }
 
 const signed = (n: number) => `${n >= 0 ? '＋' : '−'}${yen(Math.abs(n))}`;
 
-/** 「年間 ＋23,300円（還元＋28,800円／ボーナス＋0円／年会費−5,500円）」 */
+/** 「年間 ＋23,300円（ポイント＋28,800円／ボーナス＋0円／年会費−5,500円）」 */
 function NetLine(n: NetResult): string {
-  return `年間 ${signed(n.netYen)}（還元＋${yen(n.gainYen)}／ボーナス＋${yen(n.bonusYen)}／年会費−${yen(n.feeYen)}）`;
+  return `年間 ${signed(n.netYen)}（ポイント＋${yen(n.gainYen)}／ボーナス＋${yen(n.bonusYen)}／年会費−${yen(n.feeYen)}）`;
 }
 
 function OwnedFee(ctx: Ctx, o: OwnedFeeResult): Node {

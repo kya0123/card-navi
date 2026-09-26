@@ -123,7 +123,7 @@ export function SettingsScreen(ctx: Ctx): Node {
       </div>
       {NearbySettingsPanel(ctx)}
       <div class="panel">
-        <h2>還元情報の警告</h2>
+        <h2>ポイント率の情報の警告</h2>
         <label class="field">
           <span>確認日からこの日数を過ぎたら警告する（30〜365日）</span>
           <input id="stale" type="number" min="30" max="365" step="1" value={s.staleWarnDays}
@@ -138,7 +138,7 @@ export function SettingsScreen(ctx: Ctx): Node {
         <h2>このアプリについて</h2>
         <dl class="stats">
           <div><dt>アプリ版</dt><dd>{typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : 'dev'}</dd></div>
-          <div><dt>還元ルール版</dt><dd>{mi.raw.masterVersion}</dd></div>
+          <div><dt>ポイント率の版</dt><dd>{mi.raw.masterVersion}</dd></div>
           <div><dt>保存先</dt><dd>{persistText}</dd></div>
         </dl>
         <p class="note">カード番号や利用明細は保存しません。近くのお店を探すとき以外、入力内容が外部に送信されることはありません。</p>

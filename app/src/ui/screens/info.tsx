@@ -61,7 +61,7 @@ export function InfoScreen(ctx: Ctx): Node {
 
   return (
     <section>
-      <header class="screen-head"><h1>還元情報</h1></header>
+      <header class="screen-head"><h1>ポイント率</h1></header>
       <p class="sub">版 {mi.raw.masterVersion}・確認日 {mi.raw.checkedAt}。キャンペーンと月間上限は含みません。</p>
       {(() => {
         // 保有カードを先に、保有していないカードは折りたたみに（詳細設計 20.6・24.3）
@@ -83,7 +83,7 @@ export function InfoScreen(ctx: Ctx): Node {
           ...sorted.filter((c) => owned.has(c.id)).map(CardPanel),
           others.length > 0 && (
             <details class="panel" id="info-others">
-              <summary>保有していないカード（{others.length}枚）</summary>
+              <summary>持っていないカード（{others.length}枚）</summary>
               {others.map(CardPanel)}
             </details>
           ),

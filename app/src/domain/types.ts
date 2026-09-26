@@ -117,6 +117,8 @@ export interface RecommendItem {
   bonusRate: number; effectiveRate: number;
   earnedYen: number | null; earnedApprox: boolean;
   reasons: string[];
+  /** 同じカードの、より低い率の支払い方法（1カード1枠。詳細設計 31.2.3） */
+  others: { methodIds: Id[]; effectiveRate: number }[];
 }
 export interface RecommendResult {
   storeId: Id | null; categoryId: Id;

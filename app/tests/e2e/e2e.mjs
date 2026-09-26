@@ -84,7 +84,7 @@ await run('E01', '「せぶん」→候補タップで三井住友スマホの�
   await context.close();
 });
 
-await run('E02', 'ボーナス設定（狙う・入会年月・累計）でセブンが8.55%になる', async () => {
+await run('E02', 'ボーナス設定（狙う・入会年月・累計）でセブンが8%（7%＋ボーナス1%。初回特典は含めない）になる', async () => {
   const { context, page } = await newPage();
   await page.getByRole('button', { name: 'ボーナス' }).click();
   await page.check('#target-smbcg_1m');
@@ -101,18 +101,30 @@ await run('E02', 'ボーナス設定（狙う・入会年月・累計）でセ�
   await page.fill('#q', 'セブン');
   await page.keyboard.press('Enter');
   await page.waitForSelector('.rank-1');
-  assert.equal(await rank1(page).locator('.rate').innerText(), '8.55%');
+  assert.equal(await rank1(page).locator('.rate').innerText(), '8%');
+  assert.match(await rank1(page).locator('.rank-why').innerText(), /7%\s*＋ボーナス1%\s*セブン-イレブンの特約/);
+  // 詳しい条件は折りたたみ。同じカードの別の支払い方法（1.5%）はここに入る
+  assert.equal(await page.locator('#rank-detail').getAttribute('open'), null);
+  await page.click('#rank-detail > summary');
+  assert.match(await page.locator('#rank-detail').innerText(), /ボーナス：年間1,000,000円の利用で＋1%相当/);
+  assert.match(await page.locator('#rank-detail').innerText(), /は1.5%/);
+  assert.equal(await page.locator('.rank .rank-card', { hasText: '三井住友カード ゴールド' }).count(), 1, '同じカードは1枠');
   // 再読込後も設定が残る（IndexedDB）
   await page.reload();
   await page.waitForSelector('.search-input');
   await page.locator('.chip', { hasText: 'セブン-イレブン' }).click();
-  assert.equal(await rank1(page).locator('.rate').innerText(), '8.55%');
+  assert.equal(await rank1(page).locator('.rate').innerText(), '8%');
+  // バックアップの案内はおすすめ画面に出さず、設定タブに出す（入会年月を設定済み・未バックアップ）
+  assert.equal(await page.locator('#backup-banner').count(), 0);
+  await page.getByRole('button', { name: '設定', exact: true }).click();
+  await page.locator('#backup-banner').waitFor();
+  await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
   await page.screenshot({ path: `${SHOT}E02-seven-bonus.png`, fullPage: true });
-  // ファミマではボーナス込み2.05%、ポイント払い推奨なし
+  // ファミマではボーナス込み1.5%（0.5%＋1%）、ポイント払い推奨なし
   await page.fill('#q', 'ファミマ');
   await page.keyboard.press('Enter');
   await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
-  assert.equal(await rank1(page).locator('.rate').innerText(), '2.05%');
+  assert.equal(await rank1(page).locator('.rate').innerText(), '1.5%');
   assert.equal(await page.locator('.pointpay').count(), 0);
   await context.close();
 });
@@ -155,11 +167,11 @@ await run('E04', 'オフラインで再読込しても全画面が動作する',
   await page.fill('#q', 'すたば');
   await page.locator('.suggest-item').first().click();
   assert.equal(await rank1(page).locator('.rate').innerText(), '7%');
-  for (const tab of ['カード', 'ボーナス', '還元情報', '設定']) {
+  for (const tab of ['カード', 'ボーナス', 'ポイント率', '設定']) {
     await page.getByRole('button', { name: tab, exact: true }).click();
     await page.waitForSelector('.screen-head h1');
   }
-  await page.getByRole('button', { name: '還元情報', exact: true }).click();
+  await page.getByRole('button', { name: 'ポイント率', exact: true }).click();
   assert.ok(await page.locator('.src.disabled').count() > 0, 'オフライン時は出典リンクを無効表示');
   await page.screenshot({ path: `${SHOT}E04-offline-info.png`, fullPage: true });
   await context.close();
@@ -298,7 +310,7 @@ await run('E10', '楽天のみ：13日後はヒントなし→21日目はバナ�
   // v1.15（分冊10章）：並びは年間の損得順（月5万円）。v1.17 で Olive は8%になり1位
   assert.match(await first.locator('h2').innerText(), /Olive/);
   assert.match(await first.locator('.review-lead').innerText(), /5件中4件/);
-  assert.match(await first.innerText(), /年間 ＋33,600円（還元＋33,600円／ボーナス＋0円／年会費−0円）/);
+  assert.match(await first.innerText(), /年間 ＋33,600円（ポイント＋33,600円／ボーナス＋0円／年会費−0円）/);
   assert.match(await first.innerText(), /1万円ごとに ＋700円/);
   // 年会費82,500円のマリオット・プレミアムは「回収できません」の下
   const mbp = page.locator('#fee-loss .review-card', { hasText: 'Marriott Bonvoy アメリカン・エキスプレス・プレミアム' });
@@ -400,7 +412,7 @@ await run('E14', '初回：案内バナー・登録カード全体でおすす�
   assert.equal(await page.evaluate(() => document.activeElement?.id), 'card-q');
   await page.check('#own-recruit');
   await page.locator('.catalog-item.is-owned').waitFor();
-  await page.locator('#view-owned', { hasText: '保有カード（1）' }).waitFor({ timeout: 3000 });
+  await page.locator('#view-owned', { hasText: '持っているカード（1）' }).waitFor({ timeout: 3000 });
   await page.fill('#card-q', '');
   await page.locator('#card-q').dispatchEvent('input');
   // おすすめ：リクルート1.2%が1位、案内は消える
@@ -418,7 +430,7 @@ await run('E14', '初回：案内バナー・登録カード全体でおすす�
   // 外すと登録カード全体に戻る（入会年月なしなので確認ダイアログなし）
   await page.getByRole('button', { name: 'カード', exact: true }).click();
   await page.uncheck('#own-recruit');
-  await page.locator('#view-owned', { hasText: '保有カード（0）' }).waitFor({ timeout: 3000 });
+  await page.locator('#view-owned', { hasText: '持っているカード（0）' }).waitFor({ timeout: 3000 });
   await page.getByRole('button', { name: 'おすすめ', exact: true }).click();
   await page.locator('.result-title', { hasText: 'ファミリーマート' }).waitFor();
   assert.equal(await page.locator('#scope-all').count(), 0);
@@ -443,8 +455,8 @@ await run('E15', '入会年月を設定したカードを一覧で外すとき�
   await page.waitForTimeout(100);
   assert.equal(await page.isChecked('#own-rakuten'), false);
   // 還元情報：保有していないカードは折りたたみに入る
-  await page.getByRole('button', { name: '還元情報', exact: true }).click();
-  assert.match(await page.locator('#info-others > summary').innerText(), /保有していないカード（\d+枚）/);
+  await page.getByRole('button', { name: 'ポイント率', exact: true }).click();
+  assert.match(await page.locator('#info-others > summary').innerText(), /持っていないカード（\d+枚）/);
   await context.close();
 });
 
@@ -563,10 +575,11 @@ await run('E28', 'おすすめの切り替え：登録カード（22枚）で保
   await page.click('#scope-all');
   await page.waitForSelector('#scope-note');
   assert.equal(await page.getAttribute('#scope-all', 'aria-selected'), 'true');
-  assert.match(await page.locator('#scope-all').innerText(), /登録カード（22枚）/);
+  assert.match(await page.locator('#scope-all').innerText(), /全22枚で比べる/);
+  assert.match(await page.locator('#scope-owned').innerText(), /手持ちで比べる/);
   assert.equal(await page.locator('#hint').count(), 0, '登録カード表示ではヒントを出さない');
   assert.match(await rank1(page).locator('.rank-card').innerText(), /セブンカード・プラス/);
-  assert.equal(await rank1(page).locator('.own-no').innerText(), '未保有');
+  assert.equal(await rank1(page).locator('.own-no').innerText(), '持っていない');
   const link = rank1(page).locator('.card-link');
   assert.equal(await link.innerText(), '公式サイトを見る');
   assert.match(await link.getAttribute('href'), /^https:\/\//);
@@ -612,6 +625,18 @@ await run('E29', '見直す：提案カードも年会費のある保有カー�
   await context.close();
 });
 
+await run('E30', 'お店を選ぶと結果の位置まで自動で移動する（最近使ったお店が多いとき）', async () => {
+  const { context, page } = await setupRakutenOnly();
+  await goto(page, '2026-09-02');
+  await page.locator('.chip', { hasText: 'マクドナルド' }).click();
+  await page.waitForSelector('.rank-1');
+  await page.waitForFunction(() => {
+    const r = document.getElementById('result')?.getBoundingClientRect();
+    return !!r && window.scrollY > 0 && r.top >= 0 && r.top < 160;
+  }, null, { timeout: 5000 });
+  await context.close();
+});
+
 // ---------- v1.15：近くのお店（詳細設計 27.7） ----------
 const ORIGIN = { latitude: 35.3383, longitude: 139.4476 };
 const GEO = { geolocation: { ...ORIGIN, accuracy: 20 }, permissions: ['geolocation'] };
@@ -633,7 +658,7 @@ async function mockOverpass(context, body = OVERPASS_JSON, status = 200) {
 }
 
 await run('E21', '近くのお店：初回の同意→距離順の一覧（未登録・半径外は出ない、出典）→セブンをタップで推奨', async () => {
-  const { context, page } = await newPage(GEO, at('2026-09-22'), []);
+  const { context, page } = await newPage(GEO, at('2026-09-22'));
   const calls = await mockOverpass(context);
   await page.click('#nearby-btn');
   await page.locator('#nearby-consent-panel').waitFor();
@@ -644,6 +669,7 @@ await run('E21', '近くのお店：初回の同意→距離順の一覧（未�
   const labels = await page.locator('.nearby-item span').allInnerTexts();
   assert.deepEqual(labels, ['ファミリーマート 辻堂駅前店', 'セブン-イレブン 辻堂駅北口店', 'スターバックス']);
   assert.deepEqual(await page.locator('.nearby-dist').allInnerTexts(), ['約0m', '約56m', '約111m']);
+  assert.equal(await page.locator('.nearby-item .tag').count(), 0, 'ポイント率のタグは出さない');
   assert.match(await page.locator('#nearby-summary').innerText(), /半径300m・3件/);
   assert.match(await page.locator('#nearby-credit').innerText(), /© OpenStreetMap contributors/);
   assert.match(calls[0], /around%3A300%2C35\.3383%2C139\.4476/);

@@ -28,7 +28,7 @@ export function BonusScreen(ctx: Ctx): Node {
     <section>
       <header class="screen-head"><h1>年間ボーナス</h1></header>
       <p class="sub">「狙う」をオンにすると、達成に向けてそのカードを優先しておすすめします。累計は月1回くらいの概算で十分です。</p>
-      {bonuses.length === 0 && <p class="empty">保有カードに年間ボーナスのあるカードがありません。</p>}
+      {bonuses.length === 0 && <p class="empty">持っているカードに年間ボーナスのあるカードがありません。</p>}
       {bonuses.map((b) => {
         const g = state.settings.bonusGoals.find((x) => x.bonusId === b.id) ?? { bonusId: b.id, target: false };
         const card = state.settings.ownedCards.find((c) => c.cardId === b.cardId);

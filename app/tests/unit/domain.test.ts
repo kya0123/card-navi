@@ -84,15 +84,26 @@ const INITIAL_CARDS = ['smbc_gold_nl', 'rakuten', 'ana_wide_gold', 'mufg', 'payp
 const withInitial = (): UserSettings => INITIAL_CARDS.reduce((s, id) => addOwnedCard(mi, s, id), defaultSettings(mi));
 const user = (patch: Partial<UserSettings> = {}): UserSettings => ({ ...withInitial(), ...patch });
 
-test('recommend: 同じカード・同じ率はまとめ、率が違えば別になる', () => {
+test('recommend: 同じカードは1枠（いちばん高い率）。低い率の支払い方法は others に入る', () => {
   const s = user({ bonusGoals: [{ bonusId: 'smbcg_1m', target: false }] });
   const res = recommend(mi, s, { storeId: 'seven' }, TODAY, 10);
   const smbc = res.top.filter((t) => t.cardId === 'smbc_gold_nl');
-  assert.equal(smbc.length, 2);
+  assert.equal(smbc.length, 1);
   assert.deepEqual(smbc[0].methodIds, ['smartphone_visa_touch']);
-  assert.ok(smbc[1].methodIds.length >= 3);
-  const cards = res.top.map((t) => `${t.cardId ?? t.routeIds[0]}|${t.effectiveRate}`);
+  assert.equal(smbc[0].others.length, 1);
+  assert.ok(smbc[0].others[0].methodIds.length >= 3);
+  assert.ok(smbc[0].others[0].effectiveRate < smbc[0].effectiveRate);
+  const cards = res.top.map((t) => t.cardId ?? t.routeIds[0]);
   assert.equal(new Set(cards).size, cards.length);
+});
+
+test('recommend: ボーナスの上乗せに年会費無料の初回特典は含めない', () => {
+  const s = user({ ownedCards: user().ownedCards.map((c) => (c.cardId === 'smbc_gold_nl' ? { ...c, joinYm: '2024-04' } : c)),
+    bonusGoals: [{ bonusId: 'smbcg_1m', target: true, progressYen: 0 }] });
+  const res = recommend(mi, s, { storeId: 'seven' }, TODAY);
+  assert.equal(res.top[0].bonusRate, 0.01);
+  const done = recommend(mi, { ...s, bonusGoals: [{ bonusId: 'smbcg_1m', target: true, achieved: true }] }, { storeId: 'seven' }, TODAY);
+  assert.equal(done.top[0].bonusRate, 0, '今期達成済みは加算しない');
 });
 
 test('recommend: 入会年月が未設定ならボーナスは加算しない', () => {

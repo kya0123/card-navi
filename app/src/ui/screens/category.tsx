@@ -63,7 +63,7 @@ export function CategoryScreen(ctx: Ctx): Node {
         <button type="button" class="back" onClick={() => { browsing = null; ctx.render(); }}>‹ カテゴリ</button>
         <h1>{cat.name}</h1>
       </header>
-      <p class="sub">お店を選んでください。<span class="tag-sample">三井住友 7%</span> のような表示は、お持ちのカードで高還元になるお店です。</p>
+      <p class="sub">お店を選んでください。<span class="tag-sample">三井住友 7%</span> のような表示は、持っているカードでポイント率が高くなるお店です。</p>
       <ul class="suggest-list store-list" aria-label={`${cat.name}のお店`}>
         {stores.map(({ s, tags }) => (
           <li>
@@ -79,7 +79,7 @@ export function CategoryScreen(ctx: Ctx): Node {
         state.query = '';
         browsing = null;
         ctx.go('home');
-      }}>一覧にないお店（{cat.name}の通常還元で比べる）</button>
+      }}>一覧にないお店（{cat.name}の通常のポイント率で比べる）</button>
     </section>
   );
 }

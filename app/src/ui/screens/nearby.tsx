@@ -5,8 +5,6 @@ import {
   buildNearbyIndex, ERROR_TEXT, LOW_ACCURACY_M, NearbyError, nextRadius, PROVIDER_NAME, providerOf, radiusOf,
   toNearbyItems, type NearbyErrorKind, type NearbyIndex, type NearbyItem, type NearbyProvider,
 } from '../../domain/nearby';
-import type { Id } from '../../domain/types';
-import { pct } from '../format';
 import { findPlaces, getPosition, type Position } from '../nearbyService';
 
 /** S10 近くのお店（詳細設計 27.6） */
@@ -42,22 +40,6 @@ export function openNearby(ctx: Ctx): void {
   const s = ctx.state.settings;
   session = { phase: 'start', radiusM: radiusOf(s), provider: providerOf(s) };
   ctx.go('nearby');
-}
-
-/** 保有カードで特約（高還元）がある店舗のラベル。例：「三井住友G 7%」（S02 と同じ考え方） */
-function highlightTags(mi: MasterIndex, owned: Set<Id>, storeId: Id): string[] {
-  const best = new Map<Id, number>();
-  for (const r of mi.raw.rateRules) {
-    if (r.target.storeId !== storeId) continue;
-    const cardId = mi.routes.get(r.routeId)?.cardId;
-    if (!cardId || !owned.has(cardId)) continue;
-    best.set(cardId, Math.max(best.get(cardId) ?? 0, r.rate));
-  }
-  // 率の高い順に3件まで（多いと一覧が読みにくいため）
-  return [...best.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([id, rate]) => {
-    const c = mi.cards.get(id) as { name: string; shortName?: string } | undefined;
-    return `${c?.shortName ?? c?.name ?? id} ${pct(rate)}`;
-  });
 }
 
 async function search(ctx: Ctx): Promise<void> {
@@ -107,13 +89,12 @@ function OtherWays(ctx: Ctx): Node {
 }
 
 export function NearbyScreen(ctx: Ctx): Node {
-  const { mi, state } = ctx;
+  const { state } = ctx;
   if (!session) session = { phase: 'start', radiusM: radiusOf(state.settings), provider: providerOf(state.settings) };
   const s = session;
   if (s.phase === 'start') start(ctx);
 
   const retry = () => { s.phase = 'start'; s.error = undefined; ctx.render(); };
-  const owned = new Set(state.settings.ownedCards.map((c) => c.cardId));
   let body: Node;
 
   if (s.phase === 'consent') {
@@ -160,14 +141,13 @@ export function NearbyScreen(ctx: Ctx): Node {
           </div>
         ) : (
           <ul class="suggest-list store-list nearby-list" aria-label="近くのお店">
+            {/* ポイント率のタグは出さない。お店を選んでもらい履歴を貯める（詳細設計 31.2.2） */}
             {items.map((it) => {
-              const tags = highlightTags(mi, owned, it.storeId);
               return (
                 <li>
                   <button class="suggest-item nearby-item" data-store={it.storeId} onClick={() => { session = null; void ctx.selectStore(it.storeId); }}>
                     <span>{it.label}</span>
                     <small class="nearby-dist">約{it.distanceM}m</small>
-                    {tags.length > 0 && <small class="tags">{tags.map((t) => <em class="tag">{t}</em>)}</small>}
                   </button>
                 </li>
               );
